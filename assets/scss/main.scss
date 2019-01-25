@@ -1,0 +1,467 @@
+@import "~assets/scss/_variables.scss";
+@import "~assets/scss/_browsers.scss";
+.page-enter-active, .page-leave-active {
+  transition: opacity .5s;
+}
+.page-enter, .page-leave-to {
+  opacity: 0;
+}
+
+*{
+	box-sizing: border-box;
+}
+
+html, body{
+	width: 100%;
+  	height: 100%;
+  	background: $colorBlueSuperLight;
+}
+
+body {
+  background-color: $backgroundColor;
+  color:$colorBlueSea;
+  margin: 0;
+  font-family: "montserratregular";
+}
+
+.bolder{
+	font-family: "montserratbold";
+}
+
+a{
+	color:$colorBlue;
+}
+
+#__nuxt{
+	width: 100%;
+	height: 100%;
+	#__layout{
+		width: 100%;
+		height: 100%;
+		#app{
+			width: 100%;
+			height: 100%;
+		}
+	}
+}
+
+.page{
+	width: 100%;
+	height: 100%;
+	position: relative;
+	text-align: center;
+	.page_main{
+		display: inline-block;
+		vertical-align: top;
+		width: 100%;
+		max-width: 1000px;
+		padding-top: 50px;
+		.main_head{
+			.head_backbt{
+                position: absolute;
+                left: 40px;
+                top: 10px;
+                font-size: 12px;
+                font-family: "montserratitalic";
+                text-decoration: none;
+                color: #fff;
+                &:after{
+                    content: "";
+                    position: absolute;
+                    right: 100%;
+                    top: 50%;
+                    @include transform(translate(0, -50%));
+                    margin-right: 0px;
+                    width: 30px;
+                    height: 30px;
+                    background: url("/images/global/icon-btn-back-white.svg") no-repeat center center;
+                }
+            }
+            .head_link{
+                position: absolute;
+                right: 50px;
+                top: 10px;
+                color: #fff;
+                cursor: pointer;
+                &:after{
+                    content: "";
+                    position: absolute;
+                    left: 100%;
+                    top: 50%;
+                    @include transform(translate(0, -50%));
+                    margin-left: 6px;
+                    width: 32px;
+                    height: 24px;
+                    border-radius: 10px;
+                    background: url("/images/global/icon-btn_download_data-white.svg") no-repeat center center $colorRed;
+                }
+            }
+		}
+	}
+}
+
+.appmodal_cache{
+	position: fixed;
+	left: 0px;
+	top: 0px;
+	width: 100%;
+	height: 100%;
+	z-index: 100;
+	background: rgba(20,158,157,0.7);
+	display: none;
+	&.displayed{
+		display: block;
+	}
+}
+
+.appmodal{
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	width: 90%;
+	max-width: 970px;
+	@include transform(translate(-50%, -50%));
+	background: #fff;
+	z-index: 200;
+	.appmodal_head{
+		height: 60px;
+		width: 100%;
+		background: #2F2F2F;
+		color: #fff;
+		line-height: 60px;
+		font-size: 16px;
+		font-family: "montserratbold";
+		text-align: left;
+		padding: 0px 20px;
+		position: relative;
+		.appmodal_closebt{
+			position: absolute;
+			right: 0px;
+			top: 50%;
+			@include transform(translate(0, -50%));
+			font-size: 24px;
+			color: #fff;
+			cursor: pointer;
+			background: url("/images/global/icon-close_box-white.svg") no-repeat 0 0;
+			background-size: 100% 100%;
+			width: 60px;
+			height: 60px;
+		}
+	}
+	.appmodal_content{
+		height: 497px;
+		width: 100%;
+		.selector{
+			position: relative !important;
+			left: 0px !important;
+			height: 497px !important;
+		}
+	}
+}
+
+.selector{
+	display: inline-block;
+	vertical-align: top;
+	position: absolute;
+	@include transition((all), 0.3s, ease-in-out);
+	&:before{
+		content:"";
+		position: absolute;
+		z-index: 1;
+		left: 50%;
+		top: 408px;
+		@include transform(translate(-50%, -50%));
+		width: 0px;
+		border-radius: 10000px;
+		height: 0px;
+		background:#fff;
+		@include transition((all), 0s, ease-in-out);
+	}
+	&[data-state="home"]{
+		@include transition((all), 0.6s, ease-in-out);
+	}
+	&[data-state="home"], &[data-state="shrinked"]{
+		width: 318px;
+		height: 526px;
+		z-index: 5;
+		color: #fff;
+		overflow: hidden;
+		&[data-selector="geography"]{
+			background: $colorGreen;
+			left:10px;
+			top: 0px;
+			.homecontent_picto{
+				background: url("/images/illus/illu-countries.svg") no-repeat 0 0;
+				background-size: 100% 100%;
+				width: 190px;
+				height: 190px;
+			}
+		}
+		&[data-selector="indicator"]{
+			background: $colorRed;
+			left:340px;
+			top: 0px;
+			.homecontent_picto{
+				background: url("/images/illus/illu-indicators.svg") no-repeat 0 0;
+				background-size: 100% 100%;
+				width: 190px;
+				height: 190px;
+			}
+		}
+		&[data-selector="network"]{
+			background: $colorOrange;
+			left:670px;
+			top: 0px;
+			.homecontent_picto{
+				background: url("/images/illus/illu-arbor.svg") no-repeat 0 0;
+				background-size: 100% 100%;
+				width: 190px;
+				height: 190px;
+			}
+		}
+
+		&:hover{
+			z-index: 6;
+			@include transform(scale(1.05));
+			&[data-state="home"]{
+				&:before{
+					width: 1200px;
+					height: 1200px;
+					@include transition((all), 0.6s, ease-in-out);
+				}
+			}
+			&[data-selector="geography"]{
+				color: $colorGreen;
+				.selector_homecontent{
+					.homecontent_expandbt{
+						color: $colorGreen;
+						border-color: $colorGreen;
+					}
+				}
+				&[data-state="shrinked"]{
+					background:$colorGreen !important;
+					color: #fff !important;
+					.homecontent_expandbt{
+						color: #fff !important;
+						border-color: #fff !important;
+						&:hover{
+							border-color: #2F2F2F !important;
+						}
+					}
+				}
+			}
+			&[data-selector="indicator"]{
+				color: $colorRed;
+				.selector_homecontent{
+					.homecontent_picto{
+
+					}
+					.homecontent_expandbt{
+						color: $colorRed;
+						border-color: $colorRed;
+					}
+				}
+				&[data-state="shrinked"]{
+					background:$colorRed !important;
+					color: #fff !important;
+					.homecontent_expandbt{
+						color: #fff !important;
+						border-color: #fff !important;
+						&:hover{
+							border-color: #2F2F2F !important;
+						}
+					}
+				}
+			}
+			&[data-selector="network"]{
+				color: $colorOrange;
+				.selector_homecontent{
+					.homecontent_picto{
+
+					}
+					.homecontent_expandbt{
+						color: $colorOrange;
+						border-color: $colorOrange;
+					}
+				}
+				&[data-state="shrinked"]{
+					background:$colorOrange !important;
+					color: #fff !important;
+					.homecontent_expandbt{
+						color: #fff !important;
+						border-color: #fff !important;
+						&:hover{
+							border-color: #2F2F2F !important;
+						}
+					}
+				}
+			}
+		}
+		.selector_homecontent{
+			position: relative;
+			width: 100%;
+			height: 100%;
+			z-index: 5;
+			.homecontent_picto{
+				position: absolute;
+				left: 50%;
+				@include transform(translate(-50%, 0));
+				top: 30px;
+			}
+			.homecontent_title{
+				font-size: 22px;
+				line-height: 26px;
+				position: absolute;
+				top: 45%;
+				left: 50%;
+				width: 90%;
+				@include transform(translate(-50%, 0));
+			}
+			.homecontent_expandbt{
+				width: 140px;
+				height: 40px;
+				font-size: 16px;
+				line-height: 30px;
+				border: 2px solid #fff;
+				border-radius: 20px;
+				background: transparent;
+				color: #fff;
+				position: absolute;
+				left: 50%;
+				@include transform(translate(-50%, 0));
+				top: 73%;
+				font-family: 'roboto_condensedbold';
+				&:hover{
+					background:#2F2F2F !important;
+					border-color: #2F2F2F !important;
+					color: #fff !important;
+				}
+			}
+			.homecontent_disclaimer{
+				position: absolute;
+				left: 50%;
+				top: 83%;
+				@include transform(translate(-50%, 0));
+				width: 90%;
+				.disclaimer_title{
+					font-family: 'montserratbold';
+				}
+				.disclaimer_text{
+					font-family: 'montserratitalic';
+					font-size: 13px;
+				}
+			}
+		}
+	}
+
+	&[data-state="shrinked"]{
+		width: 481px;
+		height: 240px;
+		color: #fff;
+
+
+		&[data-selector="geography"]{
+			left: 10px;
+			top: 537px;
+			.homecontent_picto{
+				background: url("/images/illus/illu-countries-blur.svg") no-repeat 0 0;
+				background-size: 100% 100%;
+				width: 481px;
+				height: 238px;
+				top: 50%;
+				@include transform(translate(-50%, -50%));
+			}
+		}
+		&[data-selector="indicator"]{
+			top: 537px;
+			.homecontent_picto{
+				background: url("/images/illus/illu-indicators-blur.svg") no-repeat 0 0;
+				background-size: 100% 100%;
+				width: 481px;
+				height: 238px;
+				top: 50%;
+				@include transform(translate(-50%, -50%));
+			}
+		}
+		&[data-selector="network"]{
+			left: 500px;
+			top: 537px;
+			.homecontent_picto{
+				background: url("/images/illus/illu-arbor-blur.svg") no-repeat 0 0;
+				background-size: 100% 100%;
+				width: 481px;
+				height: 238px;
+				top: 50%;
+				@include transform(translate(-50%, -50%));
+			}
+		}
+		.selector_homecontent{
+			.homecontent_title{
+				position: absolute;
+				left: 50%;
+				top: 40%;
+				@include transform(translate(-50%, -50%));
+			}
+			.homecontent_expandbt{
+				top: 60%;
+			}
+		}
+	}
+
+	&[data-state="expanded"]{
+		width: 970px;
+		height: 527px;
+		left: 10px;
+		top: 0px;
+		background: #fff;
+		&[data-selector="geography"]{
+			color: $colorGreen;
+			.expandedcontent_title{ border-color: $colorGreen; }
+		}
+		&[data-selector="indicator"]{
+			color: $colorRed;
+			.expandedcontent_title{ border-color: $colorRed; }
+		}
+		&[data-selector="network"]{
+			color: $colorOrange;
+			.expandedcontent_title{ border-color: $colorOrange; }
+		}
+		.selector_expandedcontent{
+			padding: 20px;
+			background: #fff;
+			.expandedcontent_title{
+				font-size: 22px;
+				line-height: 26px;
+				font-weight: 700;
+				text-align: left;
+				border-bottom:4px solid;
+				padding-bottom: 6px;
+			}
+		}
+	}
+}
+
+.highcharts-tooltip{
+	z-index: 1000;
+	background: #fff;
+	border-radius: 10px;
+	width: 200px;
+	path{
+		display: none;
+	}
+	span{
+		background: #fff;
+		display: block;
+		padding: 4px 10px;
+		border-radius: 10px;
+		box-shadow: 0 0 60px 0 rgba(0,93,168,0.55);
+	}
+}
+
+
+// RESPONSIVE
+
+
+@media screen and (max-width: 1200px){
+	
+}

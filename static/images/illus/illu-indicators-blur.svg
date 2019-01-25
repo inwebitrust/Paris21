@@ -1,0 +1,38 @@
+<svg id="illu-indicators-blur" xmlns="http://www.w3.org/2000/svg" width="481" height="238" viewBox="0 0 481 238">
+  <defs>
+    <filter id="blurbloc" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="1.4" />
+    </filter>
+  </defs>
+  <title>illu-indicators-blur</title>
+  <g id="illu-blur" filter="url(#blurbloc)">
+    <g>
+      <rect x="142.8293" y="146.4928" width="15" height="57.8405" fill="#ea6651"/>
+      <rect x="122.8293" y="172.998" width="15" height="31.3353" fill="#ea6651"/>
+      <rect x="162.8293" y="85.2203" width="15" height="119.1131" fill="#ea6651"/>
+      <rect x="182.8293" y="109.7214" width="15" height="94.612" fill="#ea6651"/>
+      <rect x="202.8293" y="121.7834" width="15" height="82.5499" fill="#ea6651"/>
+      <rect x="222.8293" y="64.4885" width="15" height="139.8448" fill="#ea6651"/>
+      <rect x="242.8293" y="109.7214" width="15" height="94.612" fill="#ea6651"/>
+      <rect x="262.8293" y="34.3333" width="15" height="170" fill="#ea6651"/>
+      <rect x="282.8293" y="128.5684" width="15" height="75.765" fill="#ea6651"/>
+      <rect x="302.8293" y="79.9431" width="15" height="124.3902" fill="#ea6651"/>
+      <rect x="322.8293" y="114.331" width="15" height="90.0023" fill="#ea6651"/>
+      <rect x="342.8293" y="164.0013" width="15" height="40.332" fill="#ea6651"/>
+    </g>
+    <g opacity="0.5">
+      <rect x="142.8293" y="146.4928" width="15" height="57.8405" fill="#ea6651"/>
+      <rect x="122.8293" y="172.998" width="15" height="31.3353" fill="#f7c2b9"/>
+      <rect x="162.8293" y="85.2203" width="15" height="119.1131" fill="#f2a397"/>
+      <rect x="182.8293" y="109.7214" width="15" height="94.612" fill="#f7c2b9"/>
+      <rect x="202.8293" y="121.7834" width="15" height="82.5499" fill="#f2a397"/>
+      <rect x="222.8293" y="64.4885" width="15" height="139.8448" fill="#f7c2b9"/>
+      <rect x="242.8293" y="109.7214" width="15" height="94.612" fill="#f2a397"/>
+      <rect x="262.8293" y="34.3333" width="15" height="170" fill="#ea6651"/>
+      <rect x="282.8293" y="128.5684" width="15" height="75.765" fill="#f7c2b9"/>
+      <rect x="302.8293" y="79.9431" width="15" height="124.3902" fill="#ea6651"/>
+      <rect x="322.8293" y="114.331" width="15" height="90.0023" fill="#f7c2b9"/>
+      <rect x="342.8293" y="164.0013" width="15" height="40.332" fill="#f2a397"/>
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,9 @@
+@import "~assets/scss/_variables.scss";
+@import "~assets/scss/_browsers.scss";
+
+
+@media screen and (max-width: 1300px){
+	.qualite_page .page_content .page_col[data-width="medium"]{
+		width: 340px !important;
+	}
+}

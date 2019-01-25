@@ -1,0 +1,54 @@
+$headColor: #333;
+$textColor: #2F2F2F;
+$backgroundColor: #EDEDED;
+
+$colorBlue:#0043CC;
+$colorBlueSea:#008DD2;
+$colorBlueDeepSea: #005DA8;
+$colorBlueLight: #B2E9FA;
+$colorBluelight2: #E8F8FE;
+$colorBlueSuperLight: #E5EFF6;
+$colorYellow: #FCCE00;
+
+$colorGreen: #159E9D;
+$colorRed: #EA6550;
+$colorOrange: #EC9A3A;
+
+$colorDarkRed: #B45747;
+$colorDarkGreen: #036463;
+
+@font-face {
+    font-family: 'montserratbold';
+    src: url('/fonts/montserrat-bold-webfont.woff2') format('woff2'),
+         url('/fonts/montserrat-bold-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'montserratitalic';
+    src: url('/fonts/montserrat-italic-webfont.woff2') format('woff2'),
+         url('/fonts/montserrat-italic-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'montserratregular';
+    src: url('/fonts/montserrat-regular-webfont.woff2') format('woff2'),
+         url('/fonts/montserrat-regular-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'roboto_condensedbold';
+    src: url('/fonts/robotocondensed-bold-webfont.woff') format('woff2'),
+         url('/fonts/robotocondensed-bold-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
