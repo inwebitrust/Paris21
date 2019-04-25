@@ -1,40 +1,33 @@
 <template>
-    <div class="selector" data-selector="geography" :data-state="state" :data-modaled="modaled" :data-multiple="isMultipleSelection" :data-maincolor="mainColor">
+    <div class="selector" data-selector="geography" :data-state="state" :data-modaled="modaled" :data-multiple="isMultipleSelection" :data-maincolor="mainColor" :data-mapcolor="mapColor">
 
-        <div class="selector_bucket" v-if="modaled && isMultipleSelection">
-            <div class="bucket_title">
-                My selection <span class="bucket_nb">- {{modalSelectedGeographies.length}}</span>
-                <a class="bucket_removeallbt" @click="removeAllSelected()">Remove all</a>
-            </div>
-            <div class="bucket_list">
-                <div v-for="(geoID, index) in modalSelectedGeographies" :key="index" class="list_item" @click="removeBucketGeography(geoID)">
-                    {{$store.DBGeographyObj[geoID].name}}
-                </div>
-            </div>
-            <a class="bucket_validbt" @click="validateBucket()">OK</a>
-        </div>
-
-        <div class="selector_homecontent" v-if="(state == 'home') || (state == 'shrinked')">
+        <div class="selector_homecontent" :class="((state == 'home') || (state == 'shrinked')) ? 'displayed' : ''" @click="expandSelector()">
             <div class="homecontent_picto"></div>
             <div class="homecontent_title">
-                All the statistics available on your <span class="bolder">region, country or subregion</span>
+                Statistics on your <span class="bolder">region, country or subregion</span>
             </div>
-            <button class="homecontent_expandbt" @click="expandSelector()">FIND</button>
+            <button class="homecontent_expandbt isdesktop">FIND</button>
+            <nuxt-link to="/country/" class="homecontent_expandbt ismobile" >FIND</nuxt-link>
+            <!--
             <div class="homecontent_disclaimer" v-if="(state != 'shrinked')">
                 <span class="disclaimer_title">Example : </span><br />
-                <span class="disclaimer_text">Africa, Asia-Pacific, Western Europe and others, Latin America and Caribeean, etc...</span>
+                <div class="disclaimer_text">
+                    <a href="country/2">Africa</a>, <a href="country/142">Asia</a>, <a href="country/155">Western Europe</a>, <a href="country/419">Latin America and Caribeean</a>, etc...
+                </div>
             </div>
+            -->
         </div>
 
-        <div class="selector_expandedcontent" v-if="(state == 'expanded')">
+        <div class="selector_expandedcontent" :class="(state == 'expanded') ? 'displayed' : ''">
             <div class="expandedcontent_main">
                 <div class="expandedcontent_title" v-if="!modaled">
-                    All the statistics available on your<br />
+                    <span class="smaller">Statistics on your</span><br />
                     region, country or subregion
+                    <div class="title_disclaimer">Click a country on the map</div>
                 </div>
                 <div class="geomap_modaled_title" v-if="modaled">Click a country on the map</div>
-                <div class="geography_mapcontainer">
-                    <highmapsChoropleth :mapID="mapID" :modaled="modaled" :geojsonID="'custom/world'" :areasData="computedAreasData" :hoveredArea="hoveredGeo" :specificWidth="500" :selectedCountryInput="modaledCountryInput" @selectGeoFromMap="updateGeoSelectedFromMap()" :mapZoomFactor="mapZoomFactor" :mapZoom="mapZoom" :mapZoomDefault="mapZoomDefault"></highmapsChoropleth>
+                <div class="geography_mapcontainer" :class="(state == 'expanded') ? 'displayed' : ''">
+                    <highmapsChoropleth :mapID="mapID" :mapColor="mapColor" :modaled="modaled" :geojsonID="'custom/world-robinson'" :areasData="computedAreasData" :hoveredArea="hoveredGeo" :selectedAreas="modalSelectedGeographies" :selectedCountryInput="modaledCountryInput" @selectGeoFromMap="updateGeoSelectedFromMap()" :mapZoomFactor="mapZoomFactor" :mapZoom="mapZoom" :mapZoomDefault="mapZoomDefault" :hasTooltipValues="hasTooltipValues"></highmapsChoropleth>
                 </div>
                 <div class="geography_map_legend">
                     <div class="legend_zoomblock">
@@ -51,11 +44,24 @@
                     <div class="input_label">Search a region, country, subregion...</div>
                     <a class="input_icon" :data-search="userKeyboardInput !== ''" @click="closeSearch()"></a>
                     <input type="text" id="GeographyInput" placeholder="Ex : France, Asia-Pacific, OECD…" @keyup="keyboardInput($event.target.value)" />
+                    <v-select class="mobile_selectbox" v-model="mobileSelectBoxSelected" return-object :items="mobileSelectBoxClassifs" solo>
+                        <template slot="selection" slot-scope="data">
+                            {{ data.item.value }}
+                        </template>
+                        <template slot="item" slot-scope="data">
+                            {{ data.item.value }}
+                        </template>
+                    </v-select>
                 </div>
 
+
                 <div class="geography_items">
-                    <div v-for="(geoType, indexType) in typedGeographies" :key="indexType" class="geography_type">
-                        <div class="geography_items_title">{{ geoType.name }} ({{ geoTypeKeyboardLength(geoType.listGeos) }})</div>
+                    <div v-for="(geoType, indexType) in typedGeographies" :key="indexType" class="geography_type" v-if="mobileSelectBoxSelected.id == 'all' || mobileSelectBoxSelected.id == indexType">
+                        <div class="geography_items_title">
+                            <span v-if="geoType.name == 'Regions'">Regions & groups</span>
+                            <span v-if="geoType.name != 'Regions'">{{ geoType.name }}</span>
+                            ({{ geoTypeKeyboardLength(geoType.listGeos) }})
+                        </div>
                         <div v-for="(geoItem, index) in geoType.listGeos" :key="index" class="geography_item" @mouseenter="hoveredGeo = geoItem.iso" @mouseleave="hoveredGeo = ''" :data-geoISO="geoItem.iso" :data-geoM="geoItem.m49" v-if="geoItem.keyboard" :class="(modaledCountryInput.m49 == geoItem.m49) ? 'selected' : ''">
                             <nuxt-link :to="'/country/'+geoItem.m49" class="menu_link" :data-M="geoItem.m49" v-if="!modaled || parentSelected == ''">{{ geoItem.name }}</nuxt-link>
                             <a class="item_countrylabel" @click="selectCountry(geoItem)" v-if="modaled && !isMultipleSelection && parentSelected != ''">{{ geoItem.name }}</a>
@@ -66,18 +72,35 @@
                         </div>
                     </div>
                 </div>
-
             </div>
+        </div>
+
+        <div class="selector_bucket" v-if="modaled && isMultipleSelection">
+            <div class="bucket_title">
+                My selection <span class="bucket_nb">- {{modalSelectedGeographies.length}}</span>
+                <a class="bucket_removeallbt" @click="removeAllSelected()">Remove all</a>
+            </div>
+            <div class="bucket_list">
+                <div v-for="(geoID, index) in modalSelectedGeographies" :key="index" class="list_item" @click="removeBucketGeography(geoID)">
+                    {{$store.DBGeographyObj[geoID].name}}
+                </div>
+            </div>
+            <a class="bucket_validbt" @click="validateBucket()">OK</a>
         </div>
 
     </div>
 </template>
 
 <script>
+    import Vue from 'vue'
     import * as UTILS from '~/commons/utils/index.js'
     import {_} from 'underscore'
 
     import highmapsChoropleth from '~/components/highmapsChoropleth.vue'
+
+    import Vuetify from 'vuetify'
+    Vue.use(Vuetify)
+    import 'vuetify/dist/vuetify.min.css'
 
     export default {
         components: {
@@ -131,6 +154,18 @@
                 default: function () {
                     return 'green'
                 }
+            },
+            mapColor:{
+                type:String,
+                default: function (){
+                    return 'green'
+                }
+            },
+            hasTooltipValues:{
+                type:Boolean, 
+                default: function (){
+                    return true
+                }
             }
         },
         data: function () {
@@ -146,6 +181,10 @@
                 mapZoom: 50,
                 mapZoomFactor: 1,
                 mapZoomDefault: true,
+                mobileSelectBoxClassifs: [
+                    {value:'All', id:'all'}, {value:'Regions & Groups', id:'1-regions'}, {value:'Subregions', id:'2-subregions'}, {value:'Countries', id:'3-countries'}
+                ],
+                mobileSelectBoxSelected: {value:'All', id:'all'},
             }
         },
         mounted: function () {
@@ -154,7 +193,6 @@
             if(this.$store.csvDataPromiseGeographyInComponent === undefined) {
                 this.$store.csvDataPromiseGeographyInComponent = UTILS.getAPIGeography(this.$store)
                 this.$store.csvDataPromiseGeographyInComponent.then( function(promiseCallback) {
-                    console.log('in store loaded', self.$store.DBGeography)
                     self.initAfterDataLoaded()
                 })
             } else {
@@ -164,36 +202,46 @@
         methods: {
             initAfterDataLoaded: function () {
                 var self = this
-                console.log('initAfterDataLoaded geography', this.$store.DBGeography)
                 this.DBGeography = this.$store.DBGeography
 
                 var tmpTypedGeographies = _.groupBy(this.DBGeography, function(geo){
                     return geo.type
                 })
 
-                this.typedGeographies = {}
+                this.tmpTypedGeographiesObj = {}
                 _.each(tmpTypedGeographies, function (typedObj, index) {
                     var typeName = 'Countries'
-                    if(index == 'region') typeName = 'Regions'
-                    else if (index == 'subregion') typeName = 'subregions'
+                    var indexAlpha = '3-countries'
+                    if(index == 'region'){
+                        typeName = 'Regions'
+                        indexAlpha = '1-regions'
+                    }
+                    else if (index == 'subregion'){
+                        indexAlpha = '2-subregions'
+                        typeName = 'subregions'
+                    }
 
                     var tmpGeos = typedObj
                     _.each(tmpGeos, function(geoItem){
                         geoItem.keyboard = true
                     })
-                    console.log('tmpGeos', tmpGeos)
 
-                    self.typedGeographies[typedObj] = {
+                    self.tmpTypedGeographiesObj[indexAlpha] = {
                         id: index,
                         name: typeName,
                         listGeos: tmpGeos
                     }
                 })
 
-                console.log('typedGeographies', this.typedGeographies)
+                this.typedGeographies = {}
+                this.typedGeographies['1-regions'] = this.tmpTypedGeographiesObj['1-regions']
+                this.typedGeographies['2-subregions'] = this.tmpTypedGeographiesObj['2-subregions']
+                this.typedGeographies['3-countries'] = this.tmpTypedGeographiesObj['3-countries']
+
                 this.modalSelectedGeographies = this.selectedGeographies
                 this.dataLoaded = true
-                this.updateMapAreas()
+
+                self.updateMapAreas()
             },
 
             updateMapAreas: function () {
@@ -219,7 +267,6 @@
                 })
 
                 this.computedAreasData = tmpAreas
-                console.log('initAfterDataLoaded areasData', this.computedAreasData)
             },
 
             expandSelector: function () {
@@ -288,13 +335,19 @@
             updateGeoSelectedFromMap: function () {
                 var self = this
 
-                console.log('updateGeoSelectedFromMap')
                 var geoSelected = _.find(this.DBGeography, function (geo) {
                     return geo.iso.toLowerCase() == self.selectedGeoFromMap.toLowerCase()
                 })
 
-                console.log('geoSelected', geoSelected)
-                this.$router.push('country/' + geoSelected.m49)
+                if(this.modaled && !this.isMultipleSelection && this.parentSelected != '') {
+                    this.selectCountry(geoSelected)
+                } else if(this.isMultipleSelection) {
+                    this.toggleCheckCountry(geoSelected)
+                } else {
+                    var dataPage = document.querySelector('.page').getAttribute('data-page')
+                    if(dataPage == 'country') this.$router.push(geoSelected.m49)
+                    else this.$router.push('country/' + geoSelected.m49)
+                }
             },
 
             closeSearch: function () {
@@ -327,11 +380,15 @@
         watch: {
             state: function () {
                 var self = this
+                /*console.log('watch state', this.state)
                 if(this.state == 'expanded') {
                     setTimeout(function(){
                         self.updateMapAreas()
-                    }, 10)
-                }
+                    }, 600)
+                }*/
+            },
+            mobileSelectBoxSelected: function () {
+                var self = this;
             }
         }
     }
@@ -341,14 +398,21 @@
     @import "~assets/scss/_variables.scss";
     @import "~assets/scss/_browsers.scss";
 
-    .expandedcontent_main{
-        width: 60%;
-        .geomap_modaled_title{
-            color: #8C8C8C;
-            font-family: "montserratitalic";
-            font-size: 12px;
-            border-bottom: 4px solid #EDEDED;
-            padding: 0 0 8px;
+    .selector[data-selector="geography"]{
+        .expandedcontent_main{
+            width: 610px;
+            margin-left: -20px;
+            .geomap_modaled_title{
+                color: #8C8C8C;
+                font-family: "montserratitalic";
+                font-size: 12px;
+                border-bottom: 4px solid #EDEDED;
+                padding: 0px 0 8px;
+                margin: 0 20px;
+            }
+            .expandedcontent_title{
+                margin: 0 20px;
+            }
         }
     }
 
@@ -362,6 +426,7 @@
     .geography_map_legend{
         width: 100%;
         text-align: left;
+        margin: 0 20px;
         .legend_zoomblock{
             display: inline-block;
             vertical-align: top;
@@ -393,19 +458,19 @@
                 }
                 &.zoomblock_resetbt{
                     &:after{
-                        background: url("/images/global/icon-map_center.svg") no-repeat 0 0;
+                        background: url("~/static/images/global/icon-map_center.svg") no-repeat 0 0;
                         background-size: 100% 100%;
                     }
                 }
                 &.zoomblock_zoominbt{
                     &:after{
-                        background: url("/images/global/icon-map_zoomin.svg") no-repeat 0 0;
+                        background: url("~/static/images/global/icon-map_zoomin.svg") no-repeat 0 0;
                         background-size: 100% 100%;
                     }
                 }
                 &.zoomblock_zoomoutbt{
                     &:after{
-                        background: url("/images/global/icon-map_zoomout.svg") no-repeat 0 0;
+                        background: url("~/static/images/global/icon-map_zoomout.svg") no-repeat 0 0;
                         background-size: 100% 100%;
                     }
                 }
@@ -455,38 +520,62 @@
         color: #fff;
         padding: 40px 20px;
         text-align: left;
+        &:after{
+            content:"";
+            position: absolute;
+            left: 0px;
+            bottom: 0px;
+            width:100%;
+            height: 80px;
+            pointer-events:none;
+            /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#036463+0,036463+100&0+0,1+100 */
+            background: -moz-linear-gradient(top, rgba(3,100,99,0) 0%, rgba(3,100,99,1) 100%); /* FF3.6-15 */
+            background: -webkit-linear-gradient(top, rgba(3,100,99,0) 0%,rgba(3,100,99,1) 100%); /* Chrome10-25,Safari5.1-6 */
+            background: linear-gradient(to bottom, rgba(3,100,99,0) 0%,rgba(3,100,99,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00036463', endColorstr='#036463',GradientType=0 ); /* IE6-9 */
+        }
         .sidebar_input{
             position: relative;
             .input_label{
                 font-size: 12px;
+                height: 16px;
+                line-height: 12px;
                 font-family: "montserratitalic";
             }
             #GeographyInput{
-                width: 290px;
+                width: 310px;
                 height: 35px;
-                border-radius: 10px;
+                border-radius: 5px;
                 border:0px solid;
                 margin-top: 5px;
                 font-size: 14px;
                 padding: 0 10px;
-                background: #fff;
+                background: #EDEDED;
                 color: #333;
+                outline: none;
+                &:focus{
+                    border:1px solid $colorDarkGreen;
+                }
             }
             .input_icon{
-                background:url("/images/global/icon-input_search.svg") no-repeat 0 0;
+                background:url("~/static/images/global/icon-input_search.svg") no-repeat 0 0;
                 background-size: 100% 100%;
                 width: 35px;
                 height: 35px;
                 position: absolute;
-                right: 32px;
+                right: 12px;
                 top: 20px;
                 z-index: 10;
                 cursor: pointer;
                 &[data-search="true"]{
-                    background:url("/images/global/icon-input_closesearch.svg") no-repeat 0 0;
+                    background:url("~/static/images/global/icon-input_closesearch.svg") no-repeat 0 0;
                     background-size: 100% 100%;
                 }
             }
+        }
+
+        .mobile_selectbox{
+            display: none;
         }
 
         .geography_items_title{
@@ -498,7 +587,7 @@
         }
         .geography_items{
             overflow: auto;
-            height: 380px;
+            height: 400px;
             margin-top: 10px;
             .geography_item{
                 height: 28px;
@@ -529,7 +618,14 @@
     .selector[data-selector="geography"][data-modaled="true"]{
         .geography_sidebar{
             background: #EDEDED;
-            padding: 10px 30px;
+            padding: 10px 20px;
+            &:after{
+                /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#b8b8b8+0,b8b8b8+100&0+0,1+100 */
+                background: -moz-linear-gradient(top, rgba(184,184,184,0) 0%, rgba(184,184,184,1) 100%); /* FF3.6-15 */
+                background: -webkit-linear-gradient(top, rgba(184,184,184,0) 0%,rgba(184,184,184,1) 100%); /* Chrome10-25,Safari5.1-6 */
+                background: linear-gradient(to bottom, rgba(184,184,184,0) 0%,rgba(184,184,184,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+                filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00b8b8b8', endColorstr='#b8b8b8',GradientType=0 ); /* IE6-9 */
+            }
             .sidebar_input .input_label{
                 color: #2F2F2F;
             }
@@ -556,8 +652,19 @@
                 display: inline-block;
                 vertical-align: middle;
                 margin-right: 10px;
+                position: relative;
                 &[data-selected="true"]{
                     background: #2F2F2F;
+                    &:after{
+                        content:"";
+                        position:absolute;
+                        background:url("~/static/images/global/selectbox-tick.svg") no-repeat 0 0;
+                        background-size: 100% 100%;
+                        width: 15px;
+                        height: 15px;
+                        left: -2px;
+                        top: -2px;
+                    }
                 }
             }
             .item_countrylabel{
@@ -571,9 +678,8 @@
 
     .selector_bucket{
         width: 100%;
-        position: absolute;
+        position: relative;
         left: 0px;
-        bottom: -40px;
         height: 165px;
         background: $colorDarkRed;
         z-index: 10;
@@ -622,10 +728,17 @@
                     position: absolute;
                     width: 30px;
                     height: 30px;
-                    background: url("/images/global/icon-close_box-red.svg") no-repeat 0 0;
+                    background: url("~/static/images/global/icon-close_box-red.svg") no-repeat 0 0;
                     left: -4px;
                     top: 50%;
                     @include transform(translate(0, -50%));
+                }
+                &:hover{
+                    background:$colorRed;
+                    color: #fff;
+                    &:before{
+                        background: url("~/static/images/global/icon-close_box-white.svg") no-repeat 0 0;
+                    }
                 }
             }
         }
@@ -642,18 +755,41 @@
             line-height: 40px;
             font-size: 16px;
             cursor: pointer;
+            &:hover{
+                background: $textColor;
+            }
         }
     }
 
     .selector[data-selector="geography"][data-multiple="true"]{
         .geography_sidebar .geography_items{
-            height: 290px !important;
+            //height: 290px !important;
         }
     }
 
     .selector[data-selector="geography"][data-maincolor="red"]{
         .selector_bucket .bucket_title{
             border-color: $colorRed;
+        }
+    }
+
+    .selector[data-selector="geography"][data-mapcolor="grey"]{
+        .geography_map_legend .legend_item{
+            &[data-legend="available"]{
+                &:before{ background: #8c8c8c; }
+            }
+            &[data-legend="nonavailable"]{
+                &:before{ background: #e3e3e3; }
+            }
+        }
+    }
+
+    .selector[data-selector="geography"]{
+        .selector_expandedcontent{
+            display: none;
+            &.displayed{
+                display: block;
+            }
         }
     }
 </style>

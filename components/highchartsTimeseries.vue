@@ -50,7 +50,7 @@ export default {
   data: function () {
     return {
       timeseriesHigcharts: '',
-      chartColors:['#307ABF', '#036463', '#149E9D', '#19A5CC', '#585CA3']
+      chartColors:['#307ABF', '#036463', '#149E9D', '#19A5CC', '#585CA3', "#B55CA3", "#BD7E4D", "F5992B", "#D9AD48", "#EA6651"]
     }
   },
   mounted () {
@@ -67,7 +67,10 @@ export default {
 
       var isShared = true
 
-      if(this.datavizType == 'binary' || this.datavizType == 'ordinal') this.seriesParams.max = 1
+      if(this.datavizType == 'binary' || this.datavizType == 'ordinal'){
+        this.seriesParams.max = 100
+        this.seriesParams.suffixY = '%'
+      }
 
       this.timeseriesHigcharts = new Highcharts.chart({
         chart: { renderTo: self.chartID, backgroundColor:'transparent', type: 'spline'},
@@ -83,6 +86,7 @@ export default {
           labels: {
             style: {
               color: this.seriesParams.axisColor,
+              fontSize: "12px"
             }
           }
         },
@@ -96,10 +100,10 @@ export default {
           labels: {
             style: {
               color: this.seriesParams.axisColor,
+              fontSize: "12px"
             },
             formatter:function(){
-              if(this.isLast) return this.value + '' + self.seriesParams.suffixY
-              else return this.value
+              return this.value + '' + self.seriesParams.suffixY
             }
           }
         },
@@ -117,7 +121,8 @@ export default {
           formatter: function() {
             var tooltipHTML = '<div class="tooltip_content"><div class="tooltip_year">'+this.x+'</div>'
             _.each(this.points, function(p) {
-              tooltipHTML += '<div class="tooltip_geo"><span class="geo_name" style="color:'+self.chartColors[p.colorIndex]+'">'+p.series.name+' :</span><span class="geo_value">'+p.y.toFixed(1)+'</span></div>'
+              var tooltipY = p.y.toFixed(1) + ' ' + self.seriesParams.suffixY
+              tooltipHTML += '<div class="tooltip_geo"><span class="geo_name" style="color:'+self.chartColors[p.colorIndex]+'">'+p.series.name+' :</span><span class="geo_value">'+tooltipY+'</span></div>'
             })
             tooltipHTML += '</div>'
             return tooltipHTML
@@ -134,7 +139,7 @@ export default {
               },
               marker: {
                 enabled: false
-              }
+              },
             }
         },
         series: this.timeseriesData
@@ -144,7 +149,6 @@ export default {
   },
   watch: {
     timeseriesData: function(obj){
-      console.log('watch timeseriesData', obj)
       this.updateTimeseries()
     }
   }
@@ -172,8 +176,7 @@ export default {
 .highcharts-axis-labels{
   position: relative;
   text{
-    font-size: 10px !important;
-    font-family: "SpaceGrotesk-Bold";
+    font-family: "montserratbold";
   }
 }
 

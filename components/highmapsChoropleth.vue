@@ -1,5 +1,5 @@
 <template>
-  <div class="highmaps_areas">
+  <div class="highmaps_areas" :data-mapcolor="mapColor">
     <div class="highmaps_container" :id="mapID" style="z-index:100;"></div>
   </div>
 </template>
@@ -71,10 +71,10 @@ export default {
         return false
       }
     },
-    selectedCountryInput: {
-      type: Object,
+    selectedAreas: {
+      type: Array,
       default: function () {
-        return {}
+        return []
       }
     },
     categoriesNb: {
@@ -82,14 +82,36 @@ export default {
       default: function () {
         return 5
       }
+    },
+    mapColor: {
+      type: String,
+      default: function () {
+        return 'green'
+      }
+    },
+    indicatorType: {
+      type: String,
+      default: function () {
+        return ''
+      }
+    },
+    dataClasses: {
+      type:Array,
+      default: function () {
+        return []
+      }
+    },
+    hasTooltipValues: {
+      type: Boolean,
+      default: function () {
+        return true
+      }
     }
   },
   data: function () {
     return {
       mapHighmaps: '',
       mapHighmapsBg: '',
-      mapColors: ['#F7CC3D', '#EC9A3A', '#E87D00', '#EA6651', '#B45747'],
-      dataClasses: [],
     }
   },
   mounted () {
@@ -101,10 +123,14 @@ export default {
     generateMap: function () {
       var self = this
 
+      var nullColor = '#ededed'
+      if(this.mapColor == 'green') nullColor = '#a1d8d8'
+      else if(this.mapColor == 'darkgrey') nullColor = '#8c8c8c'
+
       this.mapHighmaps = new Highcharts.mapChart({
         chart: { 
           renderTo: self.mapID,
-          spacing: [10, 10, 10, 10],
+          spacing: [0, 0, 0, 0],
           backgroundColor: 'transparent',
           animation: false,
           map: self.geojsonID,
@@ -126,8 +152,29 @@ export default {
           style: {
             width: '200px'
           },
-          formatter: function () {            
-            return '<div class="tooltip_content"><div class="tooltip_year">'+self.mapYear+'</div><div class="tooltip_geo">'+this.point.name+'</div><div class="tooltip_value" style="color:'+this.color+';">'+this.point.value.toFixed(1)+'</div></div>'
+          formatter: function () { 
+            var pointValue = 'no data'
+            if(this.point.value !== 'no data') {
+              if(self.indicatorType == 'binary') {
+                pointValue = this.point.value
+                if(pointValue == '1') pointValue = 'Yes'
+                else if(pointValue == '0') pointValue = 'No'
+              } else {
+                pointValue = this.point.value.toFixed(1)
+              }
+            }
+
+            var tooltipHTML = '<div class="tooltip_geo">'+this.point.name+'</div>'
+
+            if(self.hasTooltipValues) {
+              tooltipHTML = '<div class="tooltip_content"><div class="tooltip_year">'+self.mapYear+'</div>' + tooltipHTML
+              tooltipHTML += '<div class="tooltip_value" style="color:'+this.color+';">'+pointValue+'</div>'
+            } else {
+              tooltipHTML = '<div class="tooltip_content">' + tooltipHTML
+            }
+
+            tooltipHTML += '</div>'
+            return tooltipHTML
           }
         },
         series: [{
@@ -137,7 +184,7 @@ export default {
           data: [],
           borderColor: '#fff',
           borderWidth: 0.5,
-          nullColor: '#8C8C8C',
+          nullColor: nullColor,
           point: {
             events: {
               click: function (e) {
@@ -151,28 +198,13 @@ export default {
 
     updateMapAreas: function () {
       var areasDataCopy = JSON.parse(JSON.stringify(this.areasData))
+      var dataClassesCopy = JSON.parse(JSON.stringify(this.dataClasses))
 
-      this.maxValue = _.max(areasDataCopy, function(ad){ if(ad.value !== null) return ad.value }).value
-      this.minValue = _.min(areasDataCopy, function(ad){ if(ad.value !== null) return ad.value }).value
-
-      var splitLevel = (this.maxValue - this.minValue) / this.categoriesNb
-
-      this.dataClasses = []
-      var minCalc = this.minValue
-      var maxCalc = 0
-      for(var i= 0 ; i<this.categoriesNb ; i++) {
-        maxCalc = minCalc + splitLevel
-        this.dataClasses.push({
-          from: minCalc,
-          to: maxCalc,
-          color: this.mapColors[i]
+      if(this.indicatorType !== 'binary') {
+        this.mapHighmaps.axes[2].update({
+            dataClasses: dataClassesCopy
         })
-        minCalc = maxCalc
       }
-
-      this.mapHighmaps.axes[2].update({
-        dataClasses: this.dataClasses
-      })
 
       this.mapHighmaps.series[0].update({
         data: areasDataCopy
@@ -217,21 +249,52 @@ export default {
 
   watch: {
     areasData: function(obj){
-      console.log('areasData updated ???', this.areasData)
+      this.updateMapAreas()
+    },
+
+    dataClasses: function (obj) {
       this.updateMapAreas()
     },
 
     hoveredArea: function () {
-      var allPaths = document.querySelectorAll('#GeographyMap path')
+      var allPaths = document.querySelectorAll('#'+this.mapID+' path')
       for (var i = 0; i < allPaths.length; i++) {
         allPaths[i].setAttribute('data-hovered', 'false');
       }
 
       var geoIso2 = UTILS.countryISOMapping3To2[this.hoveredArea]
       if(geoIso2 !== undefined) {
-        var svgGeoPath = document.querySelector('#GeographyMap path.highcharts-key-' + geoIso2.toLowerCase())
+        var svgGeoPath = document.querySelector('#'+this.mapID+' path.highcharts-key-' + geoIso2.toLowerCase())
         if(svgGeoPath !== null) svgGeoPath.setAttribute("data-hovered", "true")
       }
+    },
+
+    selectedAreas: function () {
+      var self = this
+
+      var allPaths = document.querySelectorAll('#'+this.mapID+' path')
+      for (var i = 0; i < allPaths.length; i++) {
+        allPaths[i].setAttribute('data-selected', 'false');
+      }
+
+      _.each(this.selectedAreas, function(areaM49){
+        if(self.$store.DBGeographyObj[areaM49].iso !== undefined) {
+          var geoIso = self.$store.DBGeographyObj[areaM49].iso
+          var geoIso2 = UTILS.countryISOMapping3To2[geoIso]
+          if(geoIso2 !== undefined) {
+            var svgGeoPath = document.querySelector('#'+self.mapID+' path.highcharts-key-' + geoIso2.toLowerCase())
+            if(svgGeoPath !== null) svgGeoPath.setAttribute("data-selected", "true")
+          }
+        }
+      })
+      /*
+      var geoIso2 = UTILS.countryISOMapping3To2[this.hoveredArea]
+      if(geoIso2 !== undefined) {
+        var svgGeoPath = document.querySelector('#'+this.mapID+' path.highcharts-key-' + geoIso2.toLowerCase())
+        console.log('svgGeoPath', svgGeoPath)
+        if(svgGeoPath !== null) svgGeoPath.setAttribute("data-selected", "true")
+      }
+      */
     },
 
     mapZoom: function () {
@@ -270,13 +333,24 @@ export default {
     @include transform(translate(-50%, 0));
     top: 0px;
     width: 100%;
+    height: 100%;
     path{
-      &[data-hovered="true"], &:hover{
+      &[data-hovered="true"], &[data-selected="true"], &:hover{
         fill:#333 !important;
       }
     }
     .highcharts-map-navigation{
       display: none;
+    }
+  }
+
+  &[data-mapcolor="grey"]{
+    .highmaps_container{
+      path{
+        &[data-hovered="true"], &[data-selected="true"], &:hover{
+          fill:$colorRed !important;
+        }
+      }
     }
   }
 }

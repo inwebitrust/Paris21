@@ -1,24 +1,32 @@
 <template>
     <div id="Indicator" class="page" :class="(displayGeoModal) ? 'fixed' : ''" data-page="indicator">
-        <div :class="(displayGeoModal || selectedIndicator == '') ? 'displayed': ''" class="appmodal_cache" @click="displayGeoModal = false"></div>
+        <div :class="(displayGeoModal) ? 'displayed': ''" class="appmodal_cache" @click="displayGeoModal = false"></div>
         <paris21Header :page="'indicator'"></paris21Header>
 
         <div class="page_main" v-if="dataLoaded">
             <div class="main_head">
-                <div class="head_title">About {{ selectedIndicatorObj.name }}</div>
-                <nuxt-link :to="'/'" class="head_backbt">Back</nuxt-link>
+                <div class="head_title"><span class="smaller">About</span> {{ selectedIndicatorObj.name }}</div>
+                <nuxt-link :to="'/indicator/'" class="head_backbt">Back</nuxt-link>
                 <a class="head_link" @click="downloadAllCountryData('head')">Download all indicator dataset .xls</a>
-                <a id="HeadLinkFake" class="head_link_fake" download="indicator_dataset.xls"></a>
+                <a id="HeadLinkFake" class="head_link_fake" download="Statistical Capacity Monitor data download.xls"></a>
             </div>
             <div class="main_content content_map_wrapper">
                 <div class="content_disclaimer">
-                    Industrial production index indicator consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugai.
+                    {{selectedIndicatorObj.definition}}
                 </div>
-                <div class="content_map">
-                    <div class="map_title">Map of <span class="bolder">{{ selectedIndicatorObj.name }} in {{ this.indicatorLastYear }}</span></div>
-                    <div class="geography_mapcontainer">
-                        <highmapsChoropleth :mapID="'GeographyMap'" :geojsonID="'custom/world'" :areasData="computedAreasData" :mapZoomFactor="mapZoomFactor" :mapZoom="mapZoom" :mapZoomDefault="mapZoomDefault" :categoriesNb="categoriesNb"></highmapsChoropleth>
+                <div class="content_map_exporter">
+                    <div class="content_map">
+                        <div class="map_title"><span class="bolder">{{ selectedIndicatorObj.name }} in {{ this.indicatorLastYear }}</span><br /><span class="smaller">{{selectedIndicatorObj.tag}}</span></div>
+                        <div class="geography_mapcontainer">
+                            <highmapsChoropleth :mapID="'GeographyMap'" :mapColor="'darkgrey'" :geojsonID="'custom/world-robinson'" :areasData="computedAreasData" :mapZoomFactor="mapZoomFactor" :mapZoom="mapZoom" :mapZoomDefault="mapZoomDefault" :categoriesNb="categoriesNb" :indicatorType="selectedIndicatorObj.dataviz_type" :dataClasses="dataClasses"></highmapsChoropleth>
+                        </div>
                     </div>
+                    <!--
+                    <div class="map_legend">
+                        PARIS21 Statistical Capacity Monitor based on {{ selectedIndicatorObj.source }}<br />
+                        {{ selectedIndicatorObj.definition }}
+                    </div>
+                    -->
                 </div>
                 <div class="content_legend">
                     <div class="legend_row">
@@ -28,8 +36,10 @@
                             <a class="zoomblock_bt zoomblock_zoomoutbt" @click="zoomOutMap()"></a>
                         </div>
                         <div class="legend_items">
-                            <div v-for="(value, index) in categoriesNb" :key="index" class="legend_item" :data-item="value">
-                                <span class="item_text">{{value}}</span>
+                            <div v-for="(categ, index) in categoriesData" :key="index" class="legend_item" :data-item="index">
+                                <span class="item_text">
+                                    {{categ.label}}
+                                </span>
                             </div>
                             <!--<div class="legend_item" data-item="0">
                                 <span class="item_text">0</span>
@@ -51,30 +61,35 @@
                             </div>
                         </div>
                         <div class="legend_exportblock">
-                            <a class="export_bt" data-export="jpg" @click="exportMap()">.jpg</a>
+                            <a class="export_bt" data-export="jpg" @click="exportMap()">.pdf</a>
                             <a class="export_bt" data-export="xls" @click="downloadAllCountryData('head')">.xls</a>
                         </div>
                     </div>
+                    <!--
                     <div class="legend_row" data-row="2">
                         <div class="legend_disclaimer">
                             <span class="bolder">About this map</span> consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
                         </div>
                     </div>
+                    -->
                 </div>
             </div>
 
             <div class="main_content content_timeseries_wrapper">
                 <div class="timeseries_graph_wrapper">
-                    <div class="timeseries_title" v-if="timeseriesDisplayed">Evolution of <span class="bolder">{{ selectedIndicatorObj.name }}</span></div>
+                    <div class="timeseries_title" v-if="timeseriesDisplayed">Time trends: <span class="bolder">{{ selectedIndicatorObj.name }}</span></div>
                     <div class="timeseries_title" v-if="!timeseriesDisplayed"><span class="bolder">{{ selectedIndicatorObj.name }}</span> in {{timeseriesCategories[timeseriesCategories.length-1]}}</div>
+                    <div class="timeseries_unit">Unit: {{selectedIndicatorObj.tag}}</div>
                     <highchartsTimeseries :chartID="'IndicatorTimeseries'" :timeseriesData="timeseriesGeographiesData" :timeseriesCategories="timeseriesCategories" :class="(timeseriesDisplayed) ? 'displayed':''" :datavizType="selectedIndicatorObj.dataviz_type"></highchartsTimeseries>
                     <highchartsBarchart :chartID="'IndicatorBarchart'" :class="(!timeseriesDisplayed) ? 'displayed':''" :timeseriesData="timeseriesGeographiesData" :datavizType="selectedIndicatorObj.dataviz_type"></highchartsBarchart>
                 </div>
                 <div class="timeseries_legend">
-                    <a class="timeseries_addcountrybt" @click="displayGeoModal = true;">Add country</a>
+                    <a class="timeseries_addcountrybt" @click="displayGeoModal = true;">
+                        <span class="addcountrybt_label">Add country</span>
+                    </a>
                     <div class="legend_items">
-                        <div v-for="(geoID, index) in selectedGeographies" :key="index" class="legend_item" @click="removeSelectedGeography(geoID)" :data-inc="index">
-                            {{ $store.DBGeographyObj[geoID].name }}
+                        <div v-for="(geoObj, index) in timeseriesGeographiesData" :key="index" class="legend_item" @click="removeSelectedGeography(geoObj.m49)" :data-inc="index">
+                            {{ $store.DBGeographyObj[geoObj.m49].name }}
                         </div>
                     </div>
                     <div class="legend_exportblock">
@@ -86,11 +101,11 @@
 
             <div class="main_content last">
                 <div class="content_sources">
-                    <div class="content_title">Source of this indicator</div>
-                    <div class="sources_text">{{ selectedIndicatorObj.source }}</div>
+                    <div class="content_title">Indicator's source</div>
+                    <div class="sources_text" v-html="computedSource"></div>
                 </div>
                 <div class="content_related">
-                    <div class="content_title">Other related indicators</div>
+                    <div class="content_title">Related indicators</div>
                     <div class="related_links">
                         <div v-for="(relIndicator, index) in relatedIndicators" :key="index" class="relindicator_item">
                             <nuxt-link :to="'/indicator/'+relIndicator.id" class="related_link">{{ relIndicator.name }}</nuxt-link>
@@ -106,22 +121,25 @@
                 <a class="appmodal_closebt" v-if="selectedIndicator !== ''" @click="displayIndicatorModal = !displayIndicatorModal"></a>
             </div>
             <div class="appmodal_content">
-                <indicatorSelector :mainColor="'red'" :state="'expanded'" :modaled="true" :parentSelected="selectedIndicator" @selectIndicatorsFromModal="updateModaledIndicators()"></indicatorSelector>
+                <indicatorSelector :mainColor="'red'" :state="'expanded'" :modaled="true" :parentSelected="selectedIndicator" @selectIndicatorsFromModal="updateModaledIndicators()" @aboutIndicatorsModal="displayIndicatorsModal = true"></indicatorSelector>
             </div>
         </div>
 
-        <div id="GeographySelectorModal" class="appmodal" v-if="displayGeoModal">
+        <div id="GeographySelectorModal" class="appmodal" :class="(displayGeoModal) ? 'displayed' : ''">
             <div class="appmodal_head">
                 Add a country, region or subregion
-                <a class="appmodal_closebt" @click="displayGeoModal = !displayGeoModal">X</a>
+                <a class="appmodal_closebt" @click="displayGeoModal = !displayGeoModal"></a>
             </div>
             <div class="appmodal_content">
-                <geographySelector :mainColor="'red'" :mapID="'ModaledGeographyMap'" :state="'expanded'" :modaled="true" :parentSelected="'default'" :selectedGeographies="selectedGeographies" :isMultipleSelection="true" @selectGeographiesFromModal="updateModaledGeographies()"></geographySelector>
+                <geographySelector :mainColor="'red'" :mapColor="'grey'" :mapID="'ModaledGeographyMap'" :state="'expanded'" :modaled="true" :parentSelected="'default'" :selectedGeographies="selectedGeographies" :isMultipleSelection="true" @selectGeographiesFromModal="updateModaledGeographies()" :hasTooltipValues="false"></geographySelector>
             </div>
         </div>
 
+        <paris21Modal type="indicators" :displayed="displayIndicatorsModal" @closeModal="displayIndicatorsModal = false"></paris21Modal>
 
-        <paris21Footer></paris21Footer>
+        <paris21Modal type="about" :displayed="displayAboutModal" @closeModal="displayAboutModal = false"></paris21Modal>
+
+        <paris21Footer :class="(selectedIndicator == '') ? 'fixed' : ''" @aboutModal="displayAboutModal = true"></paris21Footer>
     </div>
 </template>
 
@@ -133,6 +151,7 @@ import html2canvas from 'html2canvas'
 
 import paris21Header from '~/components/paris21Header.vue'
 import paris21Footer from '~/components/paris21Footer.vue'
+import paris21Modal from '~/components/paris21Modal.vue'
 import geographySelector from '~/components/geographySelector.vue'
 import indicatorSelector from '~/components/indicatorSelector.vue'
 import highmapsChoropleth from '~/components/highmapsChoropleth.vue'
@@ -143,12 +162,22 @@ export default {
     components: {
         'paris21Header': paris21Header,
         'paris21Footer': paris21Footer,
+        'paris21Modal': paris21Modal,
         'geographySelector': geographySelector,
         'indicatorSelector': indicatorSelector,
         'highmapsChoropleth': highmapsChoropleth,
         'highchartsTimeseries': highchartsTimeseries,
         'highchartsBarchart': highchartsBarchart,
     },
+    head () {
+        return {
+          title: 'Statistical Capacity Monito',
+          meta: [
+            { hid: 'description', name: 'description', content: 'Find and explore indicators on statistical capacity' },
+            { hid: 'og:image', name: 'og:image', content: 'http://statisticalcapacitymonitor.org/images/share-img.png' }
+          ]
+        }
+      },
     asyncData: async ({ app, params, payload }) => ({
         routeParams: params
     }),
@@ -158,10 +187,11 @@ export default {
             dataLoaded: false,
             selectedIndicator: '',
             selectedIndicatorObj: {},
-            selectedGeographies: ['12', '818', '434', '504', '729'],
+            selectedGeographies: ['2', '19', '142', '150', '9'],
             displayGeoModal: false,
             indicatorGeographiesData: [],
             computedAreasData: [],
+            allAreasData: [],
             defaultYear: '2017',
             indicatorLastYear: '',
             timeseriesGeographiesData: [],
@@ -173,14 +203,18 @@ export default {
             mapZoomFactor: 1,
             mapZoomDefault: true,
             defaultCategoriesNb: 5,
-            categoriesNb: 5
+            categoriesNb: 5,
+            categoriesData: [],
+            dataClasses: [],
+            mapColors: ['#F7CC3D', '#EC9A3A', '#E87D00', '#EA6651', '#B45747'],
+            displayIndicatorsModal: false,
+            displayAboutModal: false
         }
     },
 
     mounted: function () {
         var self = this
-        console.log('routeParams', this.routeParams)
-        this.selectedIndicator = this.routeParams.pathMatch.toLowerCase()
+        this.selectedIndicator = this.routeParams.pathMatch.toLowerCase().replace('/','')
         this.loadAPIIndicators()
     },
 
@@ -249,7 +283,11 @@ export default {
             if(this.selectedIndicator != ''){
                 this.indicatorGeographiesData = this.$store.DBIndicatorItems[this.selectedIndicator].geographies
                 this.selectedIndicatorObj = this.$store.DBIndicatorsObj[this.selectedIndicator]
-                this.relatedIndicators = this.$store.DBIndicators.slice(0,10)
+
+                this.relatedIndicators = _.filter(this.$store.DBIndicators, function(ind){
+                    return ind.area == self.selectedIndicatorObj.area && ind.level == self.selectedIndicatorObj.level && ind.name !== self.selectedIndicatorObj.name
+                })
+                this.relatedIndicators = _.sample(this.relatedIndicators, 5)
 
                 var allIndicatorsYears = _.map(this.indicatorGeographiesData, function(indicGeo) {
                     var years =  _.keys(indicGeo.years)
@@ -272,26 +310,50 @@ export default {
             var self = this
             this.computedAreasData = []
 
-            _.each(this.indicatorGeographiesData, function(geoData){
-                var geoValue = undefined
-                var countryCode = UTILS.countryISOMapping3To2[geoData.iso]
-                if(geoData.years[self.indicatorLastYear] !== undefined) {
-                    geoValue = parseFloat(geoData.years[self.indicatorLastYear])
+            _.each(this.$store.DBGeography, function(geoObj){
+                var geoValue = 'no data'
+                var geoColor = '#8C8C8C'
+                var countryCode = UTILS.countryISOMapping3To2[geoObj.iso]
+
+                if(self.indicatorGeographiesData[geoObj.m49] !== undefined) {
+                    var geoData = self.indicatorGeographiesData[geoObj.m49]
+                    if(geoData.years[self.indicatorLastYear] !== undefined) {
+                        if(geoData.years[self.indicatorLastYear] !== 'Not Available') {
+                            if(self.selectedIndicatorObj.dataviz_type == 'binary') {
+                                geoValue = geoData.years[self.indicatorLastYear]
+                                if(geoValue == 'Yes' || geoValue == '1') geoColor = '#F7CC3D'
+                                else geoColor = '#EC9A3A'
+                            } else{
+                                geoValue = parseFloat(geoData.years[self.indicatorLastYear])
+                                geoColor = undefined
+                            }
+                        }
+                    }
                 }
 
-                console.log('geoValue', geoValue)
-                
-                self.computedAreasData.push({
+                if(geoObj.type == 'country'){
+                    self.computedAreasData.push({
+                        code: countryCode,
+                        m49: geoObj.m49,
+                        value: geoValue,
+                        color: geoColor
+                    })
+                }
+
+                self.allAreasData.push({
                     code: countryCode,
-                    m49: geoData.m49,
-                    value: geoValue
+                    m49: geoObj.m49,
+                    value: geoValue,
+                    color: geoColor
                 })
             })
 
-            console.log('computedAreasData', this.computedAreasData)
+            this.computeDataClasses()
+        },
 
+        computeDataClasses: function () {
             var allValues = _.map(this.computedAreasData, function(ad){return ad.value })
-            var uniqValuesNb = _.without(_.uniq(allValues), NaN).length
+            var uniqValuesNb = _.without(_.without(_.without(_.uniq(allValues), NaN), null), 'no data').length
 
             if(uniqValuesNb < this.defaultCategoriesNb) {
                 this.categoriesNb = uniqValuesNb
@@ -299,6 +361,38 @@ export default {
                 this.categoriesNb = this.defaultCategoriesNb
             }
 
+            this.categoriesData = []
+
+            if(this.selectedIndicatorObj.dataviz_type !== 'binary') {
+
+                var maxValue = _.max(this.computedAreasData, function(ad){ if(ad.value !== null) return ad.value }).value
+                var minValue = _.min(this.computedAreasData, function(ad){ if(ad.value !== null) return ad.value }).value
+
+                var splitLevel = (maxValue - minValue) / this.categoriesNb
+
+                this.dataClasses = []
+                var minCalc = minValue
+                var maxCalc = 0
+                for(var i= 0 ; i<this.categoriesNb ; i++) {
+                    maxCalc = minCalc + splitLevel
+                    if(i == this.categoriesNb - 1) maxCalc = Math.ceil(maxCalc)
+                    if(i == 0) minCalc = Math.floor(minCalc)
+                    this.dataClasses.push({
+                        from: minCalc,
+                        to: maxCalc,
+                        color: this.mapColors[i]
+                    })
+
+                    this.categoriesData.push({
+                        label: minCalc.toFixed(1) + ' - ' + maxCalc.toFixed(1)
+                    })
+                    minCalc = maxCalc
+                }
+            } else {
+                this.categoriesData = [
+                    { label: 'Yes' }, { label: 'No' }
+                ]
+            }
         },
 
         updateTimeseriesGeographiesData: function () {
@@ -307,11 +401,44 @@ export default {
             this.timeseriesGeographiesData = []
             this.timeseriesDisplayed = true
 
+            _.each(this.selectedGeographies, function(geoM49){
+                var timeseriesGeoObj = {
+                    m49:geoM49,
+                    name: self.$store.DBGeographyObj[geoM49].name,
+                    fullName: self.$store.DBGeographyObj[geoM49].name,
+                    data: []
+                }
 
+                var geoData = _.find(self.indicatorGeographiesData, function(geoData){
+                    return geoData.m49 == geoM49
+                });
+
+                if(geoData !== undefined) {
+                    var nbYearsWithData = 0
+                    _.each(self.timeseriesCategories, function (xYearCategory) {
+                        if(geoData.years[xYearCategory] !== undefined) {
+                            var yearValue = parseFloat(geoData.years[xYearCategory])
+                            if(self.selectedIndicatorObj.dataviz_type == 'binary' || self.selectedIndicatorObj.dataviz_type == 'ordinal'){
+                              yearValue = Math.round(yearValue*100)  
+                            } 
+                            timeseriesGeoObj.data.push(yearValue)
+                            nbYearsWithData += 1
+                        } else {
+                            timeseriesGeoObj.data.push(null)
+                        }
+                    })
+                }
+
+                if(nbYearsWithData < self.timeseriesMinimalYears) self.timeseriesDisplayed = false
+                self.timeseriesGeographiesData.push(timeseriesGeoObj)
+            })
+
+            /*
             _.each(this.indicatorGeographiesData, function(geoData){
                 var geoM49 = geoData.m49
                 if(_.indexOf(self.selectedGeographies, geoM49) > -1){
                     var timeseriesGeoObj = {
+                        m49:geoM49,
                         name: self.$store.DBGeographyObj[geoM49].name,
                         fullName: self.$store.DBGeographyObj[geoM49].name,
                         data: []
@@ -319,7 +446,6 @@ export default {
 
                     var nbYearsWithData = 0
                     _.each(self.timeseriesCategories, function (xYearCategory) {
-                        console.log('xYearCategory geoData', geoData.years, geoData.years[xYearCategory])
                         if(geoData.years[xYearCategory] !== undefined) {
                             timeseriesGeoObj.data.push(parseFloat(geoData.years[xYearCategory]))
                             nbYearsWithData += 1
@@ -333,6 +459,7 @@ export default {
                     self.timeseriesGeographiesData.push(timeseriesGeoObj)
                 }
             })
+            */
         },
 
         removeSelectedGeography: function (geoID) {
@@ -341,7 +468,6 @@ export default {
         },
 
         updateModaledGeographies: function () {
-            console.log('ça update ? updateModaledGeographies')
             this.displayGeoModal = false
             this.updateTimeseriesGeographiesData()
         },
@@ -375,7 +501,7 @@ export default {
           }
 
           var pdf = new jsPDF()
-          this.dlElement = document.querySelector('.content_map');
+          this.dlElement = document.querySelector('.content_map_exporter');
           this.dlElement.setAttribute("data-downloading", "true");
           var width = this.dlElement.offsetWidth;
           var height = this.dlElement.offsetHeight;
@@ -435,7 +561,7 @@ export default {
             tab_text = '<html xmlns:x="urn:schemas-microsoft-com:office:excel">'
             tab_text += '<head><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet>'
 
-            tab_text += '<x:Name>Error Messages</x:Name>'
+            tab_text += '<x:Name>Data</x:Name>'
 
             tab_text += '<x:WorksheetOptions><x:Panes></x:Panes></x:WorksheetOptions></x:ExcelWorksheet>'
             tab_text += '</x:ExcelWorksheets></x:ExcelWorkbook></xml></head><body>'
@@ -444,7 +570,7 @@ export default {
 
             tab_text += '<tr><th>Indicator</th><th>Country</th><th>Year</th><th>Data Value</th></tr>'
 
-            _.each(this.computedAreasData, function (countryObj){
+            _.each(this.allAreasData, function (countryObj){
                 var toAppend = false
                 if(contentType == 'chart') {
                     if(_.indexOf(self.selectedGeographies, countryObj.m49) > -1) toAppend = true
@@ -453,10 +579,22 @@ export default {
                 }
 
                 if(toAppend) {
-                    tab_text += '<tr><td>'+self.$store.DBIndicatorsObj[self.selectedIndicator].name+'</td><td>'+self.$store.DBGeographyObj[countryObj.m49].name+'</td><td>'+self.indicatorLastYear+'</td><td>'+countryObj.value+'</td></tr>'
+                    if(self.timeseriesDisplayed) {
+                        _.each(self.timeseriesCategories, function(categYear, indexYear){
+                            _.each(self.timeseriesGeographiesData, function(geoObj){
+                                tab_text += '<tr><td>'+self.$store.DBIndicatorsObj[self.selectedIndicator].name+'</td><td>'+geoObj.name+'</td><td>'+categYear+'</td><td>'+geoObj.data[indexYear]+'</td></tr>'
+                            })
+                        })
+                    } else {
+                        tab_text += '<tr><td>'+self.$store.DBIndicatorsObj[self.selectedIndicator].name+'</td><td>'+self.$store.DBGeographyObj[countryObj.m49].name+'</td><td>'+self.indicatorLastYear+'</td><td>'+countryObj.value+'</td></tr>'
+                    }
+                    
                 }
             })
 
+            tab_text += '<tr></tr><tr></tr><tr></tr>';
+            tab_text += '<tr><td>PARIS21 Statistical Capacity Monitor based on ' + this.selectedIndicatorObj.source + '</td></tr>';
+            tab_text += '<tr><td>' + this.selectedIndicatorObj.definition + '</td></tr>';
             tab_text = tab_text + '</table></body></html>';
 
             tab_text = tab_text.replace(/[é]/g,"&eacute;")
@@ -476,19 +614,36 @@ export default {
                     var blob = new Blob([tab_text], {
                         type: "application/csv;charset=utf-8;"
                     });
-                    navigator.msSaveBlob(blob, 'Test file.xls');
+                    navigator.msSaveBlob(blob, 'Statistical Capacity Monitor data download.xls');
                 }
             } else {
-                console.log(data_type);
-                console.log(tab_text);
                 document.querySelector('#HeadLinkFake').setAttribute('href', this.xlsLinkAttr)
                 document.querySelector('#HeadLinkFake').click()
             }
+        },
+
+        replaceLinksSO: function(text) {
+            console.log('replaceLinksSO', text)
+            if(text !== undefined) {
+                var rex = /(<a href=")?(?:https?:\/\/)?(?:(?:www)[-A-Za-z0-9+&@#\/%?=~_|$!:,.;]+\.)+[-A-Za-z0-9+&@#\/%?=~_|$!:,.;]+/ig;   
+                return text.replace(rex, function ( $0, $1 ) {
+                    if(/^https?:\/\/.+/i.test($0)) {
+                        return $1 ? $0: '<a href="'+$0+'">'+$0+'</a>';
+                    }
+                    else {
+                        return $1 ? $0: '<a href="http://'+$0+'">'+$0+'</a>';
+                    }
+                });
+            } else {
+                return ""
+            }            
         }
     },
 
     computed: {
-
+        computedSource: function (text){
+            return this.replaceLinksSO(this.selectedIndicatorObj.source)
+        }
     }
 }
 
@@ -506,13 +661,40 @@ $geosSingleColMargin: 10px;
 #Indicator{
     /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#ea6550+0,ea6550+34,e5eff6+100 */
     background: rgb(234,101,80); /* Old browsers */
-    background: -moz-linear-gradient(top, rgba(234,101,80,1) 0%, rgba(234,101,80,1) 34%, rgba(229,239,246,1) 100%); /* FF3.6-15 */
-    background: -webkit-linear-gradient(top, rgba(234,101,80,1) 0%,rgba(234,101,80,1) 34%,rgba(229,239,246,1) 100%); /* Chrome10-25,Safari5.1-6 */
-    background: linear-gradient(to bottom, rgba(234,101,80,1) 0%,rgba(234,101,80,1) 34%,rgba(229,239,246,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    background: -moz-linear-gradient(top, rgba(234,101,80,1) 0%, rgba(234,101,80,1) 30%, rgba(237,237,237,1) 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(top, rgba(234,101,80,1) 0%,rgba(237,237,237,1) 30%,rgba(237,237,237,1) 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom, rgba(234,101,80,1) 0%,rgba(237,237,237,1) 30%,rgba(237,237,237,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ea6550', endColorstr='#e5eff6',GradientType=0 ); /* IE6-9 */
+    height: auto;
+    min-height: 100%;
     &.fixed{
         overflow: hidden;
     }
+
+    #GeographyInput{
+        background: #fff !important;
+    }
+
+    #GeographySelectorModal{
+        -webkit-box-shadow: 0 20px 120px 0 rgba(180,87,91,0.8);
+        box-shadow: 0 20px 120px 0 rgba(180,87,91,0.8);
+        opacity: 0;
+        z-index: -1;
+        @include transition((opacity), 0.6s, ease-in-out);
+        &.displayed{
+            opacity: 1;
+            z-index: 10000;
+        }
+    }
+
+    .selector[data-selector="indicator"][data-modaled="true"] .indicator_sidebar:after{
+         /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#b45747+0,b45747+100&0+0,1+100 */
+        background: -moz-linear-gradient(top, rgba(180,87,71,0) 0%, rgba(180,87,71,1) 100%); /* FF3.6-15 */
+        background: -webkit-linear-gradient(top, rgba(180,87,71,0) 0%,rgba(180,87,71,1) 100%); /* Chrome10-25,Safari5.1-6 */
+        background: linear-gradient(to bottom, rgba(180,87,71,0) 0%,rgba(180,87,71,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00b45747', endColorstr='#b45747',GradientType=0 ); /* IE6-9 */
+    }
+
     .appmodal_cache{
         background: rgba(234, 120, 80, 0.7);
     }
@@ -572,10 +754,30 @@ $geosSingleColMargin: 10px;
             margin-top: 20px;
             margin-bottom: 0px;
             text-align: left;
+            &.content_map_wrapper{
+                padding: 20px 0;
+            }
             .content_disclaimer{
                 color: #3A3A3A;
                 font-size: 14px;
-                line-height: 18px;
+                line-height: 24px;
+                width: 80%;
+                margin: 10px auto;
+            }
+            .content_map_exporter{
+                width: 100%;
+                position: relative;
+                height: 600px;
+                .map_legend{
+                    font-size: 13px;
+                    color: $textColor;
+                    line-height: 16px;
+                    position: absolute;
+                    top: 548px;
+                    width: 100%;
+                    padding-left: 20px;
+                    width: 80%;
+                }
             }
             .content_map{
                 background: #E8FAFA;
@@ -584,23 +786,35 @@ $geosSingleColMargin: 10px;
                 margin-top: 20px;
                 position: relative;
                 text-align: center;
-                padding: 20px;
                 .map_title{
                     color: #2F2F2F;
                     font-size: 18px;
+                    line-height: 15px;
+                    position: relative;
+                    top: 5px;
+                    z-index: 10000;
                     font-family: "montserratregular";
                     .bolder{
                         font-family: "montserratbold";
                     }
+                    .smaller{
+                        font-size: 13px;
+                    }
                 }
                 .geography_mapcontainer{
-                    position: relative;
+                    position: absolute;
                     display: inline-block;
-                    width: 800px;
-                    margin-top: 40px;
+                    width: 100%;
+                    left: 0px;
+                    top: 30px;
+                    bottom: 0px;
                 }
             }
             &.content_timeseries_wrapper{
+                .timeseries_unit{
+                    font-size: 13px;
+                    color: #3A3A3A;
+                }
                 .timeseries_title{
                     font-size: 18px;
                     color: #3A3A3A;
@@ -634,9 +848,14 @@ $geosSingleColMargin: 10px;
                             @include transform(translate(0, -50%));
                             width: 32px;
                             height: 24px;
-                            background: url("/images/global/icon-map_zoomin-white.svg") no-repeat center center $colorRed;
+                            background: url("~/static/images/global/icon-map_zoomin-white.svg") no-repeat center center $colorRed;
                             border-radius: 20px;
                             margin-right: 8px;
+                        }
+                        &:hover{
+                            &:before{
+                                background: url("~/static/images/global/icon-map_zoomin-white.svg") no-repeat center center $textColor;
+                            }
                         }
                     }
                     .legend_items{
@@ -666,20 +885,35 @@ $geosSingleColMargin: 10px;
                                 font-family: "montserratbold";
                                 @include transform(translate(0, -50%));
                             }
-                            &[data-inc="0"], &[data-inc="5"], &[data-inc="10"]{
+                            &[data-inc="0"], &[data-inc="10"]{
                                 background: #307ABF;
                             }
-                            &[data-inc="1"], &[data-inc="6"], &[data-inc="11"]{
+                            &[data-inc="1"], &[data-inc="11"]{
                                 background: #036463;
                             }
-                            &[data-inc="2"], &[data-inc="7"], &[data-inc="12"]{
+                            &[data-inc="2"], &[data-inc="12"]{
                                 background: #149E9D;
                             }
-                            &[data-inc="3"], &[data-inc="8"], &[data-inc="13"]{
+                            &[data-inc="3"], &[data-inc="13"]{
                                 background: #19A5CC;
                             }
-                            &[data-inc="4"], &[data-inc="9"], &[data-inc="14"]{
+                            &[data-inc="4"], &[data-inc="14"]{
                                 background: #585CA3;
+                            }
+                            &[data-inc="5"], &[data-inc="15"]{
+                                background: #B55CA3;
+                            }
+                            &[data-inc="6"], &[data-inc="16"]{
+                                background: #BD7E4D;
+                            }
+                            &[data-inc="7"], &[data-inc="17"]{
+                                background: #F5992B;
+                            }
+                            &[data-inc="8"], &[data-inc="18"]{
+                                background: #D9AD48;
+                            }
+                            &[data-inc="9"], &[data-inc="19"]{
+                                background: #EA6651;
                             }
                         }
                     }
@@ -692,6 +926,9 @@ $geosSingleColMargin: 10px;
             .content_legend{
                 text-align: left;
                 color: #3A3A3A;
+                margin: -80px 20px 0;
+                background: #fff;
+                position: relative;
                 .legend_row{
                     position: relative;
                     margin-top: 20px;
@@ -727,19 +964,19 @@ $geosSingleColMargin: 10px;
                             }
                             &.zoomblock_resetbt{
                                 &:after{
-                                    background: url("/images/global/icon-map_center-white.svg") no-repeat 0 0;
+                                    background: url("~/static/images/global/icon-map_center-white.svg") no-repeat 0 0;
                                     background-size: 100% 100%;
                                 }
                             }
                             &.zoomblock_zoominbt{
                                 &:after{
-                                    background: url("/images/global/icon-map_zoomin-white.svg") no-repeat 0 0;
+                                    background: url("~/static/images/global/icon-map_zoomin-white.svg") no-repeat 0 0;
                                     background-size: 100% 100%;
                                 }
                             }
                             &.zoomblock_zoomoutbt{
                                 &:after{
-                                    background: url("/images/global/icon-map_zoomout-white.svg") no-repeat 0 0;
+                                    background: url("~/static/images/global/icon-map_zoomout-white.svg") no-repeat 0 0;
                                     background-size: 100% 100%;
                                 }
                             }
@@ -748,12 +985,13 @@ $geosSingleColMargin: 10px;
                     .legend_items{
                         margin-left: 140px;
                         text-align: left;
+                        max-width: 600px;
+                        line-height: 26px;
                         .legend_item{
                             display: inline-block;
                             vertical-align: top;
                             position: relative;
                             margin: 0 10px;
-                            width: 30px;
                             color: #2F2F2F;
                             font-size: 12px;
                             font-family: "montserratbold";
@@ -768,11 +1006,11 @@ $geosSingleColMargin: 10px;
                                 height: 20px;
                                 border-radius: 20px;
                             }
-                            &[data-item="1"]{ &:before{ background: #F7CC3D;} }
-                            &[data-item="2"]{ &:before{ background: #EC9A3A;} }
-                            &[data-item="3"]{ &:before{ background: #E87D00;} }
-                            &[data-item="4"]{ &:before{ background: #EA6651;} }
-                            &[data-item="5"]{ &:before{ background: #B45747;} }
+                            &[data-item="0"]{ &:before{ background: #F7CC3D;} }
+                            &[data-item="1"]{ &:before{ background: #EC9A3A;} }
+                            &[data-item="2"]{ &:before{ background: #E87D00;} }
+                            &[data-item="3"]{ &:before{ background: #EA6651;} }
+                            &[data-item="4"]{ &:before{ background: #B45747;} }
                             &[data-item="nodata"]{ width: 80px; &:before{ background: #8C8C8C;} }
                         }
                     }
@@ -822,16 +1060,21 @@ $geosSingleColMargin: 10px;
                             line-height: 36px;
                             border-bottom: 2px solid $colorDarkRed;
                             position: relative;
+                            padding-left: 10px;
+                            overflow: hidden;
                             &:after{
                                 content: "";
                                 position: absolute;
                                 right: 0px;
                                 top: 50%;
                                 @include transform(translate(0, -50%));
-                                background: url("/images/global/icon-chevron-white.svg") no-repeat 0 0;
+                                background: url("~/static/images/global/icon-chevron-white.svg") no-repeat 0 0;
                                 background-size: 100% 100%;
                                 width: 30px;
                                 height: 30px;
+                            }
+                            &:hover{
+                                background: $colorDarkRed;
                             }
                         }
                         .related_link{
@@ -871,12 +1114,22 @@ $geosSingleColMargin: 10px;
         }
         &[data-export="jpg"]{
             &:after{
-                background: url("/images/global/icon-btn_download_image-white.svg") no-repeat center center $colorRed;
+                background: url("~/static/images/global/icon-btn_download_image-white.svg") no-repeat center center $colorRed;
+            }
+            &:hover{
+                &:after{
+                    background: url("~/static/images/global/icon-btn_download_image-white.svg") no-repeat center center $textColor;
+                }
             }
         }
         &[data-export="xls"]{
             &:after{
-                background: url("/images/global/icon-btn_download_data-white.svg") no-repeat center center $colorRed;
+                background: url("~/static/images/global/icon-btn_download_data-white.svg") no-repeat center center $colorRed;
+            }
+            &:hover{
+                &:after{
+                    background: url("~/static/images/global/icon-btn_download_data-white.svg") no-repeat center center $textColor;
+                }
             }
         }
     }

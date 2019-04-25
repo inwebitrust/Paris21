@@ -6,7 +6,7 @@ ini_set('display_errors', 1);
 
 $INDICATORS = array();
 
-$queryIndicators = "SELECT * FROM indicators" or die("Error in the consult.." . mysqli_error($link));
+$queryIndicators = "SELECT * FROM indicators_new3 WHERE final_list = 1" or die("Error in the consult.." . mysqli_error($link));
 $resultIndicators = $link->query($queryIndicators);
 while($row = mysqli_fetch_assoc($resultIndicators)) {
     array_push($INDICATORS, $row);

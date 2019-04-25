@@ -3,26 +3,34 @@
 
     <div class="footer_content">
 
-      <a class="footer_item">
-        <span class="item_label">Paris 21 Website</span>
+      <a class="footer_item" data-item="website" href="https://paris21.org/" target="_blank">
+        <span class="item_label">Paris21 Website</span>
       </a>
 
-      <a class="footer_item">
+      <a class="footer_item" data-item="contactus" href="https://paris21.org/about-paris-21/contact" target="_blank">
         <span class="item_label">Contact Us</span>
+      </a>
+
+      <a class="footer_item" data-item="about" @click="emitAboutModal()">
+        <span class="item_label">About</span>
       </a>
 
       <div class="footer_item" data-item="findus">
         <span class="item_label" style="margin-right:4px;">Find us on</span>
-        <a class="item_sharebt" data-item="twitter"></a>
-        <a class="item_sharebt" data-item="facebook"></a>
-        <a class="item_sharebt" data-item="vimeo"></a>
-        <a class="item_sharebt" data-item="youtube"></a>
-        <a class="item_sharebt" data-item="soundcloud"></a>
+        <div class="sharebt_wrapper">
+          <a class="item_sharebt" href="https://twitter.com/ContactPARIS21" target="_blank" data-item="twitter"></a>
+          <!--<a class="item_sharebt" data-item="facebook"></a>-->
+          <a class="item_sharebt" href="https://vimeo.com/paris21secretariat" target="_blank" data-item="vimeo"></a>
+          <a class="item_sharebt" href="https://www.youtube.com/user/PARIS21OECD" target="_blank" data-item="youtube"></a>
+          <a class="item_sharebt" href="https://soundcloud.com/paris21-datatalk/" target="_blank" data-item="soundcloud"></a>
+        </div>
       </div>
 
+      <!--
       <a class="footer_item" data-item="download_all">
         <span class="item_label">Download all data .xls</span>
       </a>
+      -->
 
     </div>
     
@@ -43,7 +51,9 @@ export default {
   mounted: function () {
   },
   methods: {
-    
+    emitAboutModal: function () {
+        this.$emit('aboutModal')
+    },
   }
 }
 </script>
@@ -53,7 +63,7 @@ export default {
 @import "~assets/scss/_browsers.scss";
 
 .paris21_footer{
-  position: fixed;
+  position: relative;
   left:0px;
   width: 100%;
   bottom: 0px;
@@ -61,6 +71,9 @@ export default {
   background: #fff;
   z-index: 10;
   text-align: center;
+  &.fixed{
+    position: fixed;
+  }
   .footer_content{
     position: relative;
     text-align: center;
@@ -81,6 +94,9 @@ export default {
       cursor: pointer;
       &:hover{
         color: $colorRed;
+      }
+      .sharebt_wrapper{
+        display: inline-block;
       }
       .item_label{
         display: inline-block;
@@ -127,27 +143,27 @@ export default {
         }
         &[data-item="twitter"]{
           &:after{
-            background: url("/images/social/icon-twitter.svg") no-repeat 0 0;
+            background: url("~/static/images/social/icon-twitter.svg") no-repeat 0 0;
           }
         }
         &[data-item="facebook"]{
           &:after{
-            background: url("/images/social/icon-facebook.svg") no-repeat 0 0;
+            background: url("~/static/images/social/icon-facebook.svg") no-repeat 0 0;
           }
         }
         &[data-item="vimeo"]{
           &:after{
-            background: url("/images/social/icon-vimeo.svg") no-repeat 0 0;
+            background: url("~/static/images/social/icon-vimeo.svg") no-repeat 0 0;
           }
         }
         &[data-item="youtube"]{
           &:after{
-            background: url("/images/social/icon-youtube.svg") no-repeat 0 0;
+            background: url("~/static/images/social/icon-youtube.svg") no-repeat 0 0;
           }
         }
         &[data-item="soundcloud"]{
           &:after{
-            background: url("/images/social/icon-soundcloud.svg") no-repeat 0 0;
+            background: url("~/static/images/social/icon-soundcloud.svg") no-repeat 0 0;
           }
         }
         &:hover{
@@ -162,13 +178,13 @@ export default {
     right: 40px;
     top: 50%;
     @include transform(translate(0, -50%));
-    background: url("/images/logos/logo-wedodata.svg") no-repeat 0 0;
+    background: url("~/static/images/logos/logo-wedodata.svg") no-repeat 0 0;
     background-size: 100% 100%;
     width: 100px;
     height: 25px;
     cursor: pointer;
     &:hover{
-      background: url("/images/logos/logo-wedodata-black.svg") no-repeat 0 0;
+      background: url("~/static/images/logos/logo-wedodata-black.svg") no-repeat 0 0;
       background-size: 100% 100%;
     }
   }

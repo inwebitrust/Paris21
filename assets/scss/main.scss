@@ -14,11 +14,16 @@
 html, body{
 	width: 100%;
   	height: 100%;
-  	background: $colorBlueSuperLight;
+  	background: #dedede;
 }
 
 body {
-  background-color: $backgroundColor;
+  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#ededed+0,dedede+100 */
+	background: rgb(237,237,237); /* Old browsers */
+	background: -moz-linear-gradient(top, rgba(237,237,237,1) 0%, rgba(222,222,222,1) 100%); /* FF3.6-15 */
+	background: -webkit-linear-gradient(top, rgba(237,237,237,1) 0%,rgba(222,222,222,1) 100%); /* Chrome10-25,Safari5.1-6 */
+	background: linear-gradient(to bottom, rgba(237,237,237,1) 0%,rgba(222,222,222,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ededed', endColorstr='#dedede',GradientType=0 ); /* IE6-9 */
   color:$colorBlueSea;
   margin: 0;
   font-family: "montserratregular";
@@ -43,6 +48,10 @@ a{
 			height: 100%;
 		}
 	}
+}
+
+.ismobile{
+	display: none;
 }
 
 .page{
@@ -74,12 +83,12 @@ a{
                     margin-right: 0px;
                     width: 30px;
                     height: 30px;
-                    background: url("/images/global/icon-btn-back-white.svg") no-repeat center center;
+                    background: url("~/static/images/global/icon-btn-back-white.svg") no-repeat center center;
                 }
             }
-            .head_link{
+            .head_link, .head_link2{
                 position: absolute;
-                right: 50px;
+                right: 56px;
                 top: 10px;
                 color: #fff;
                 cursor: pointer;
@@ -93,8 +102,16 @@ a{
                     width: 32px;
                     height: 24px;
                     border-radius: 10px;
-                    background: url("/images/global/icon-btn_download_data-white.svg") no-repeat center center $colorRed;
+                    background: url("~/static/images/global/icon-btn_download_data-white.svg") no-repeat center center $colorRed;
                 }
+                &:hover{
+                    &:after{
+                        background-color: #2F2F2F;
+                    }
+                }
+            }
+            .head_link2{
+            	top: 38px;
             }
 		}
 	}
@@ -115,7 +132,7 @@ a{
 }
 
 .appmodal{
-	position: absolute;
+	position: fixed;
 	left: 50%;
 	top: 50%;
 	width: 90%;
@@ -142,19 +159,18 @@ a{
 			font-size: 24px;
 			color: #fff;
 			cursor: pointer;
-			background: url("/images/global/icon-close_box-white.svg") no-repeat 0 0;
+			background: url("~/static/images/global/icon-close_box-white.svg") no-repeat 0 0;
 			background-size: 100% 100%;
 			width: 60px;
 			height: 60px;
 		}
 	}
 	.appmodal_content{
-		height: 497px;
+		//height: 497px;
 		width: 100%;
 		.selector{
 			position: relative !important;
 			left: 0px !important;
-			height: 497px !important;
 		}
 	}
 }
@@ -177,8 +193,14 @@ a{
 		background:#fff;
 		@include transition((all), 0s, ease-in-out);
 	}
+	.selector_homecontent{
+		display: none;
+		&.displayed{
+			display: inline-block;
+		}
+	}
 	&[data-state="home"]{
-		@include transition((all), 0.6s, ease-in-out);
+		@include transition((all), 0.3s, ease-in-out);
 	}
 	&[data-state="home"], &[data-state="shrinked"]{
 		width: 318px;
@@ -191,7 +213,7 @@ a{
 			left:10px;
 			top: 0px;
 			.homecontent_picto{
-				background: url("/images/illus/illu-countries.svg") no-repeat 0 0;
+				background: url("~/static/images/illus/illu-countries.svg") no-repeat 0 0;
 				background-size: 100% 100%;
 				width: 190px;
 				height: 190px;
@@ -202,7 +224,7 @@ a{
 			left:340px;
 			top: 0px;
 			.homecontent_picto{
-				background: url("/images/illus/illu-indicators.svg") no-repeat 0 0;
+				background: url("~/static/images/illus/illu-indicators.svg") no-repeat 0 0;
 				background-size: 100% 100%;
 				width: 190px;
 				height: 190px;
@@ -213,7 +235,7 @@ a{
 			left:670px;
 			top: 0px;
 			.homecontent_picto{
-				background: url("/images/illus/illu-arbor.svg") no-repeat 0 0;
+				background: url("~/static/images/illus/illu-arbor.svg") no-repeat 0 0;
 				background-size: 100% 100%;
 				width: 190px;
 				height: 190px;
@@ -222,8 +244,9 @@ a{
 
 		&:hover{
 			z-index: 6;
-			@include transform(scale(1.05));
 			&[data-state="home"]{
+				height: 556px;
+				top: -15px;
 				&:before{
 					width: 1200px;
 					height: 1200px;
@@ -296,12 +319,21 @@ a{
 					}
 				}
 			}
+			.disclaimer_text{
+				a{
+					color: $colorGreen !important;
+				}	
+			}
 		}
 		.selector_homecontent{
 			position: relative;
 			width: 100%;
 			height: 100%;
 			z-index: 5;
+			display: none;
+			&.displayed{
+				display: block;
+			}
 			.homecontent_picto{
 				position: absolute;
 				left: 50%;
@@ -331,10 +363,14 @@ a{
 				@include transform(translate(-50%, 0));
 				top: 73%;
 				font-family: 'roboto_condensedbold';
+				text-decoration: none;
 				&:hover{
 					background:#2F2F2F !important;
 					border-color: #2F2F2F !important;
 					color: #fff !important;
+				}
+				&.ismobile{
+					line-height: 36px;
 				}
 			}
 			.homecontent_disclaimer{
@@ -349,6 +385,9 @@ a{
 				.disclaimer_text{
 					font-family: 'montserratitalic';
 					font-size: 13px;
+					a{
+						color: #fff;
+					}
 				}
 			}
 		}
@@ -364,7 +403,7 @@ a{
 			left: 10px;
 			top: 537px;
 			.homecontent_picto{
-				background: url("/images/illus/illu-countries-blur.svg") no-repeat 0 0;
+				background: url("~/static/images/illus/illu-countries-blur.svg") no-repeat 0 0;
 				background-size: 100% 100%;
 				width: 481px;
 				height: 238px;
@@ -375,7 +414,7 @@ a{
 		&[data-selector="indicator"]{
 			top: 537px;
 			.homecontent_picto{
-				background: url("/images/illus/illu-indicators-blur.svg") no-repeat 0 0;
+				background: url("~/static/images/illus/illu-indicators-blur.svg") no-repeat 0 0;
 				background-size: 100% 100%;
 				width: 481px;
 				height: 238px;
@@ -387,7 +426,7 @@ a{
 			left: 500px;
 			top: 537px;
 			.homecontent_picto{
-				background: url("/images/illus/illu-arbor-blur.svg") no-repeat 0 0;
+				background: url("~/static/images/illus/illu-arbor-blur.svg") no-repeat 0 0;
 				background-size: 100% 100%;
 				width: 481px;
 				height: 238px;
@@ -396,6 +435,10 @@ a{
 			}
 		}
 		.selector_homecontent{
+			display: none;
+			&.displayed{
+				display: inline-block;
+			}
 			.homecontent_title{
 				position: absolute;
 				left: 50%;
@@ -410,10 +453,14 @@ a{
 
 	&[data-state="expanded"]{
 		width: 970px;
-		height: 527px;
+		max-height: 527px;
 		left: 10px;
 		top: 0px;
 		background: #fff;
+		overflow: hidden;
+		&[data-modaled="true"]{
+			max-height: unset;
+		}
 		&[data-selector="geography"]{
 			color: $colorGreen;
 			.expandedcontent_title{ border-color: $colorGreen; }
@@ -429,6 +476,7 @@ a{
 		.selector_expandedcontent{
 			padding: 20px;
 			background: #fff;
+			position: relative;
 			.expandedcontent_title{
 				font-size: 22px;
 				line-height: 26px;
@@ -436,6 +484,20 @@ a{
 				text-align: left;
 				border-bottom:4px solid;
 				padding-bottom: 6px;
+				font-family: "montserratbold";
+				position: relative;
+				.smaller{
+					font-size: 18px;
+					font-family: "montserratregular";
+				}
+				.title_disclaimer{
+					position: absolute;
+					right: 0px;
+					bottom: 3px;
+					font-size: 12px;
+					color: #8C8C8C;
+					font-family: "montserratitalic";
+				}
 			}
 		}
 	}
@@ -453,15 +515,10 @@ a{
 		background: #fff;
 		display: block;
 		padding: 4px 10px;
-		border-radius: 10px;
-		box-shadow: 0 0 60px 0 rgba(0,93,168,0.55);
+		border-radius: 0px;
+		box-shadow: 0 0 60px 0 rgba(0,0,0,0.55);
 	}
 }
 
 
 // RESPONSIVE
-
-
-@media screen and (max-width: 1200px){
-	
-}

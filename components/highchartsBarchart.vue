@@ -50,7 +50,7 @@ export default {
   data: function () {
     return {
       barchartHigcharts: '',
-      chartColors:['#307ABF', '#036463', '#149E9D', '#19A5CC', '#585CA3']
+      chartColors:['#307ABF', '#036463', '#149E9D', '#19A5CC', '#585CA3', "#B55CA3", "#BD7E4D", "F5992B", "#D9AD48", "#EA6651"]
     }
   },
   mounted () {
@@ -65,18 +65,25 @@ export default {
     updateBarchart: function () {
       var self = this
 
-      if(this.datavizType == 'binary' || this.datavizType == 'ordinal') this.seriesParams.max = 1
+      if(this.datavizType == 'binary' || this.datavizType == 'ordinal'){
+        this.seriesParams.max = 100
+        this.seriesParams.suffixY = '%'
+      }
+
       var isShared = true
 
       var barchartSeriesData = []
+      console.log('timeseriesData', this.timeseriesData)
       _.each(this.timeseriesData, function(geoData, index){
         var geoValue = _.values(geoData.data)[geoData.data.length - 1]
+        if(geoValue === undefined) geoValue = 0.00001
         barchartSeriesData.push({
           name:geoData.name,
           y:geoValue,
           color:self.chartColors[index]
         })
       })
+      console.log('barchartSeriesData', barchartSeriesData)
 
       this.barchartHigcharts = new Highcharts.chart({
         chart: {
@@ -96,8 +103,7 @@ export default {
             type: 'category',
             labels: {
                 style: {
-                    fontSize: '13px',
-                    fontFamily: 'montserratregular'
+                    fontSize: '12px',
                 }
             }
         },
@@ -106,6 +112,15 @@ export default {
             max: this.seriesParams.max,
             title: {
                 text: ''
+            },
+            labels: {
+              style: {
+                color: this.seriesParams.axisColor,
+                fontSize: "12px"
+              },
+              formatter:function(){
+                return this.value.toFixed(1) + ' ' + self.seriesParams.suffixY
+              }
             }
         },
         legend: {
@@ -121,11 +136,15 @@ export default {
         series: [{
             name: 'Population',
             data: barchartSeriesData,
+            connectNulls:true,
             dataLabels: {
                 enabled: true,
                 color: '#2F2F2F',
                 align: 'center',
-                format: '{point.y:.1f}', // one decimal
+                formatter: function () {
+                  if(this.y == 0.00001) return 'no data'
+                  else return this.y.toFixed(1) + ' ' + self.seriesParams.suffixY
+                },
                 y: 0, // 10 pixels down from the top
                 style: {
                     fontSize: '13px',
@@ -139,7 +158,6 @@ export default {
   },
   watch: {
     timeseriesData: function(obj){
-      console.log('watch updateBarchart', obj)
       this.updateBarchart()
     }
   }
@@ -168,8 +186,7 @@ export default {
 .highcharts-axis-labels{
   position: relative;
   text{
-    font-size: 10px !important;
-    font-family: "SpaceGrotesk-Bold";
+    font-family: "montserratbold";
   }
 }
 

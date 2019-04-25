@@ -2,8 +2,833 @@
 @import "~assets/scss/_browsers.scss";
 
 
-@media screen and (max-width: 1300px){
-	.qualite_page .page_content .page_col[data-width="medium"]{
-		width: 340px !important;
+@media screen and (max-width:980px){
+
+	.ismobile{
+		display: inline-block !important;
+	}
+	.isdesktop{
+		display: none !important;
+	}
+
+	.selector[data-state="expanded"]{
+		max-height: none;
+		overflow: auto;
+	}
+
+	.page .page_main .main_head .head_link2{
+		display: none !important;
+	}
+
+	#Indicator .page_main .main_content .content_map_exporter{
+		height: 370px !important;
+	}
+
+	#Indicator .page_main .main_content .content_map .map_title{
+		width: 90%;
+		position: relative;
+		left: 5%;
+		line-height: 18px !important;
+	}
+
+	#Indicator .page_main .main_content.content_timeseries_wrapper .timeseries_legend .legend_items .legend_item{
+		white-space: nowrap;
+		width: auto !important;
+		max-width: none !important;
+	}
+
+	.selector[data-selector="indicator"] .selector_expandedcontent .expandedcontent_main .indicators_aboutbt{
+		left: 50%;
+		@include transform(translate(-50%, 0));
+		top: 200px;
+		color: #fff;
+		width: 160px;
+		bottom: auto !important;
+		right: auto !important;
+		margin-left: -10px !important;
+		color: #fff !important;
+		&:before{
+			border-radius: 20px;
+			background: url("~/static/images/global/icon-info-red.svg") #fff no-repeat center 0 !important;
+        	background-size: 100% 100%;
+		}
+	}
+
+	.paris21_modalwrapper .paris21_modal{
+		width: 100% !important;
+		height: 100% !important;
+		overflow: auto !important;
+		.modal_title{
+			padding-top: 30px !important;
+			margin-top: 0px !important;
+			.modal_closebt{
+				top: 0px !important;
+				right: 0px !important;
+			}
+		}
+		.modal_content{
+			height: auto !important;
+			margin: 20px !important;
+			.content_image{
+				width: 300px !important;
+				height: 300px !important;
+			}
+		}
+	}
+
+	#Home .selector{
+		height: 238px !important;
+	}
+
+	#Home .selector[data-state="expanded"][data-selector="indicator"], #Home .selector[data-state="expanded"][data-selector="indicator"] .indicator_sidebar{
+		min-height: auto !important;
+	}
+
+	#Home .selector[data-selector="geography"] .selector_expandedcontent, #Home .selector[data-selector="indicator"] .selector_expandedcontent{
+		display: none !important;
+	}
+
+	#Home .selector[data-selector="geography"], #Home .selector[data-selector="indicator"]{
+		width: 318px !important;
+		color: #fff !important;
+	}
+	#Home .selector[data-selector="geography"] .selector_homecontent, #Home .selector[data-selector="indicator"] .selector_homecontent{
+		display: inline-block !important;
+		position: relative !important;
+	    width: 100% !important;
+	    height: 100% !important;
+	    z-index: 5 !important;
+	    overflow: hidden !important;
+	    .homecontent_picto{
+	    	position: absolute !important;
+	    	left: 50% !important;
+	    }
+	    .homecontent_title{
+	    	position: absolute !important;
+	    	font-size: 22px !important;
+    		line-height: 26px !important;
+    		width: 90% !important;
+    		left: 50% !important;
+    		@include transform(translate(-50%, 0));
+	    }
+	    .homecontent_expandbt{
+	    	width: 140px;
+		    height: 40px;
+		    font-size: 16px;
+		    line-height: 30px;
+		    border: 2px solid #fff;
+		    border-radius: 20px;
+		    background: transparent;
+		    color: #fff;
+		    position: absolute;
+		    left: 50%;
+		    -webkit-transform: translate(-50%, 0);
+		    transform: translate(-50%, 0);
+		    top: 73%;
+		    font-family: 'roboto_condensedbold';
+		    text-decoration: none;
+	    }
+	}
+
+	#Home .selector[data-selector="geography"]{
+		background: #159E9D !important;
+	}
+
+	#Home .selector[data-selector="indicator"]{
+		background: #EA6550 !important;
+	}
+
+	.paris21_header{
+		.header_logo{
+			background: none !important;
+			&:after{
+				width: 60px !important;
+				height: 32px !important;
+			}
+			.logo_text{
+				left: 58px !important;
+				font-size: 12px !important;
+				line-height: 12px !important;
+				top: 16px !important;
+				width: 97px !important;
+			}
+		}
+
+		.header_menu{
+			.menu_mobile{
+				display: inline-block !important;
+			}
+			.menu_desktop{
+				display: none !important;
+			}
+			.menu_langblock{
+				margin-left: 10px !important;
+				margin-right: 20px !important;
+			}
+		}
+	}
+
+	.paris21_footer{
+		height: 260px !important;
+		z-index: 1000;
+		.footer_content{
+			top: 0px !important;
+			-webkit-transform: translate(0,0) !important;
+			transform: translate(0,0) !important;
+			.footer_item{
+				width: 100%;
+				text-align: center !important;
+				margin: 10px 0 !important;
+				.item_label{
+					&:after{
+					    content: "";
+					    position: absolute;
+					    left: 100%;
+					    top: 50%;
+					    margin-left: 6px;
+					    -webkit-transform: translate(0, -50%);
+					    transform: translate(0, -50%);
+					    width: 4px;
+					    height: 4px;
+					    background: #EA6550;
+					    border-radius: 6px;
+					}
+				}
+				.sharebt_wrapper{
+					display: block !important;
+					margin-top: 10px;
+				}
+				&[data-item="download_all"]{
+					display: none !important;
+				}
+				&[data-item="findus"]{
+					position: relative;
+				}
+				&[data-item="website"]{
+					position: relative;
+				}
+				&[data-item="contactus"]{
+					position: relative;
+				}
+			}
+		}
+		.footer_logo{
+			position: relative !important;
+			right: 0px !important;
+			top: 20px !important;
+			-webkit-transform: translate(0,0) !important;
+			transform: translate(0,0) !important;
+			display: inline-block !important; 
+		}
+	}
+
+	// HOME
+	#Home{
+		.page_main .main_title{
+			max-width: 80% !important;
+			display: inline-block !important;
+		}
+		.selector{
+			position: relative !important;
+			left: 0px !important;
+			top: 0px !important;
+			height: 238px;
+			margin: 0 0 20px;
+			&:hover{
+				&[data-state="home"]{
+					color: #fff !important;
+					height: 238px !important;
+					top: 0px !important;
+					&:before{
+						display: none !important;
+					}
+				}
+			}
+			.homecontent_picto{
+				top: 50% !important;
+				-webkit-transform: translate(-50%, -50%) !important;
+				transform: translate(-50%, -50%) !important;
+			}
+			.homecontent_title{
+				top: 25% !important;
+			}
+			.homecontent_expandbt{
+				top: 65% !important;
+				background: transparent !important;
+				border-color: #fff !important;
+				color: #fff !important;
+			}
+			.homecontent_disclaimer{
+				display: none !important;
+			}
+			&[data-selector="geography"]{
+				.homecontent_picto{
+					background: url("~/static/images/illus/illu-countries-blur.svg") no-repeat 0 0;
+					background-size: 100% 100%;
+					width: 400px;
+					height: 400px;
+				}
+			}
+			&[data-selector="indicator"]{
+				.homecontent_picto{
+					background: url("~/static/images/illus/illu-indicators-blur.svg") no-repeat 0 0;
+					background-size: 100% 100%;
+					width: 400px;
+					height: 400px;
+				}
+			}
+			&[data-selector="network"]{
+				display: none;
+			}
+		}
+		.page_main{
+			min-height: auto !important;
+			.main_blocks{
+				height: auto !important;
+			}
+		}
+	}
+
+	// COUNTRY
+	#Country{
+		&.fixed{
+			overflow: unset !important;
+		}
+		.paris21_footer{
+			display: none !important;
+		}
+		#GeographySelectorModal{
+			width: 100%;
+			background: $colorGreen !important;
+			margin-bottom: 0px !important;
+			top: 50px !important;
+			bottom: 0px !important;
+			left: 0px !important;
+			overflow: auto;
+			-webkit-transform: translate(0%, 0%) !important;
+			transform: translate(0%, 0%) !important;
+			&.nomodal{
+				margin-top: 0px !important;
+				z-index: 1000 !important;
+				.selector_expandedcontent{
+					padding: 20px !important;
+					.expandedcontent_main{
+						display: block !important;
+					}
+				}
+			}
+			.appmodal_content{
+				display: inline-block;
+				max-width: 400px;
+			}
+			.selector{
+				background: $colorGreen !important;
+				width: 100% !important;
+				.selector_expandedcontent{
+					background: $colorGreen !important;
+					padding: 0px;
+					.expandedcontent_main{
+						margin: 0 !important;
+						width: auto !important;
+						display: none;
+						.expandedcontent_title{
+							color: #fff !important;
+							font-size: 18px;
+							line-height: 20px;
+							text-align: center;
+							border: 0px solid;
+							position: relative;
+							margin-top: 150px;
+							&:before{
+								content: "";
+								position: absolute;
+								left: 50%;
+								@include transform(translate(-50%, 0));
+								bottom: 100%;
+								margin-bottom: 10px;
+								background: url("~/static/images/illus/illu-countries-mob.svg") no-repeat 0 0;
+								background-size: 100% 100%;
+								width: 230px;
+								height: 150px;
+							}
+							.smaller{
+								font-size: 14px;
+							}
+							.title_disclaimer{
+								display: none;
+							}
+						}
+					}
+				}
+			}
+			.geography_mapcontainer, .geography_map_legend{
+				display: none !important;
+			}
+			.geography_sidebar{
+				position: relative;
+				width: 100% !important;
+				padding: 20px 10px 40px !important;
+				&:after{
+					display: none;
+				}
+				.geography_items{
+					height: auto !important;
+				}
+				.sidebar_input{
+					#GeographyInput{
+						width: 100% !important;
+					}
+					.input_icon{
+						right: 0px;
+					}
+				}
+				.mobile_selectbox{
+					display: inline-block !important;
+					width: 100%;
+					height: 40px;
+					border-radius: 10px;
+					margin-top: 10px;
+					.v-input__control{
+						min-height: auto !important;
+						border-radius: 10px !important;
+						.v-input__slot{
+							border-radius: 10px !important;
+						}
+					}
+				}
+			}
+		}
+		.page_main{
+			.main_head{
+				padding-left: 80px !important;
+				margin-top: 10px !important;
+				.head_backbt{
+					left: 30px !important;
+				}
+				.head_link{
+					display: none !important;
+				}
+				.head_title{
+					font-size: 14px !important;
+					font-family: "montserratregular" !important;
+					.bolder{
+						font-size: 18px !important;
+						font-family: "montserratbold" !important;
+						display: block;
+					}
+				}
+				.head_cartridge{
+					display: none;
+				}
+			}
+			.main_content{
+				background: transparent !important;
+				.content_head{
+					position: fixed !important;
+					bottom: 0px !important;
+					left: 0px !important;
+					top: auto !important;
+					-webkit-box-shadow: 0 0 40px 0 rgba(0,0,0,0.5);
+					box-shadow: 0 0 40px 0 rgba(0,0,0,0.5);
+					.head_geos{
+						width: 100% !important;
+						padding: 4px 20px 0px !important;
+						margin-top: 0px !important;
+						.geos_col{
+							width: 21% !important;
+							margin: 0 2% !important;
+							font-size: 12px !important;
+							line-height: 14px !important;
+							&.geos_col_country{
+								&:before{
+									display: none;
+								}
+							}
+							&:before{
+								top: 44px !important;
+							}
+							&:after{
+								content: "";
+								position: absolute;
+								left: 50%;
+								@include transform(translate(-50%, 0));
+								top: -18px;
+								width: 0;
+								height: 0;
+								border-style: solid;
+								border-width: 0 15px 15px 15px;
+								border-color: transparent transparent #fff transparent;
+							}
+						}
+					}
+					.head_menus{
+						display: none !important;
+					}
+				}
+				.content_main{
+					margin-top: 0px !important;
+				}
+				.classif_item{
+					margin-bottom: 30px !important;
+					.classif_col[data-col="1"]{
+						width: 100% !important;
+						height: 50px;
+						background: $colorDarkGreen;
+						border-radius: 20px 20px 0 0;
+						position: relative;
+						.classif_key{
+							position: absolute;
+							left: 0%;
+							top: 50%;
+							@include transform(translate(0%, -50%));
+							color: #fff;
+							width: 100%;
+							text-align: center;
+							padding: 10px;
+							&:before{
+								position: absolute;
+								left: 0px;
+								top: 50%;
+								@include transform(translate(0%, -50%));
+							}
+						}
+					}
+					.classif_col[data-col="2"]{
+						width: 100% !important;
+						&:before{
+							display: none;
+						}
+						.indicator_item{
+							margin: 0 !important;
+							height: auto !important;
+							.indicator_desc{
+								width: 100% !important;
+							}
+							.indicator_geovalues{
+								width: 100% !important;
+								.geovalues_col{
+									width: 21%;
+									margin: 0 2%;
+									height: 70px !important;
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+
+	#Indicator{
+		.paris21_footer{
+			position: relative !important;
+		}
+		#IndicatorSelectorModal{
+			width: 100%;
+			background: $colorRed !important;
+			margin-bottom: 0px !important;
+			position: relative !important;
+			left: 0px !important;
+			top: 0px !important;
+			width: 100% !important;
+			-webkit-transform: translate(0%, 0%) !important;
+			transform: translate(0%, 0%) !important;
+			padding-top: 30px;
+			&.nomodal{
+				margin-top: 50px !important;
+			}
+			.selector{
+				background: $colorRed !important;
+				width: 100% !important;
+				overflow: unset !important;
+				.selector_expandedcontent{
+					background: $colorRed !important;
+					height: auto !important;
+					.expandedcontent_main{
+						margin: 0 !important;
+						padding: 20px 20px 0 !important;
+						width: auto !important;
+						background: $colorRed !important;
+						.expandedcontent_title{
+							color: #fff !important;
+							font-size: 18px;
+							line-height: 20px;
+							text-align: center;
+							border: 0px solid;
+							position: relative;
+							margin-top: 150px;
+							&:before{
+								content: "";
+								position: absolute;
+								left: 50%;
+								@include transform(translate(-50%, 0));
+								bottom: 100%;
+								margin-bottom: 0px;
+								background: url("~/static/images/illus/illu-indicators-mob.svg") no-repeat 0 0;
+								background-size: 100% 100%;
+								width: 230px;
+								height: 150px;
+							}
+							.smaller{
+								font-size: 14px;
+							}
+							.title_disclaimer{
+								display: none;
+							}
+						}
+					}
+				}
+				.indicator_input{
+					text-align: center;
+					margin-top: 40px;
+					.input_icon{
+						left: auto !important;
+						right: 0px;
+					}
+					.input_searchlabel{
+						color: #fff;
+					}
+					#IndicatorInput{
+						width: 100%;
+					}
+				}
+				.indicators_classifs{
+					.indicators_classif{
+						display: none;
+					}
+					.mobile_selectbox{
+						display: inline-block !important;
+						width: 100%;
+						height: 40px;
+						border-radius: 10px;
+						margin-top: 10px;
+						.v-input__control{
+							min-height: auto !important;
+							border-radius: 10px !important;
+							.v-input__slot{
+								border-radius: 10px !important;
+							}
+						}
+					}
+				}
+			}
+			.indicator_sidebar{
+				position: relative;
+				width: 100% !important;
+				padding: 0 20px 20px !important;
+				margin-top: 10px;
+				&:after{
+					display: none;
+				}
+				.sidebar_panel{
+					padding: 0px 20px 30px;
+					position: relative;
+					display: none;
+					&.displayed{
+						display: inline-block;
+					}
+					.sidebar_title{
+						display: none;
+					}
+				}
+				.indicators_list{
+					height: auto !important;
+					overflow: unset !important;
+					margin-top: 10px;
+				}
+			}
+		}
+
+		.page_main{
+			.main_head{
+				margin-top: 20px !important;
+				padding-left: 90px !important;
+				margin-bottom: 20px !important;
+				.head_title{
+					font-size: 18px !important;
+					line-height: 22px !important;
+					.smaller{
+						display: block;
+						font-size: 14px;
+						font-family: "montserratregular";
+					}
+				}
+				.head_link{
+					display: none;
+				}
+			}
+		}
+
+		.main_content{
+			margin: 0px 20px 0px !important;
+			.content_disclaimer{
+				margin: 0 auto !important;
+			}
+			.content_map{
+				height: 287px !important;
+				.map_title{
+					top: 10px !important;
+				}
+			}
+			.content_legend{
+				.legend_row{
+					.legend_zoomblock{
+						display: none !important;
+					}
+					.legend_items{
+						margin-left: -20px !important;
+					}
+					.legend_exportblock{
+						display: none !important;
+					}
+					&[data-row="2"]{
+						display: none !important;
+					}
+				}
+			}
+			&.content_timeseries_wrapper{
+				padding: 10px !important;
+				.timeseries_legend{
+					height: auto !important;
+					.timeseries_addcountrybt{
+						position: relative !important;
+						display: inline-block;
+						-webkit-transform: translate(0%, 0%) !important;
+						transform: translate(0%, 0%) !important;
+						.addcountrybt_label{
+							display: none;
+						}
+					}
+					.legend_items{
+						position: relative !important;
+						margin-left: 60px !important;
+						padding-left: 10px !important;
+						-webkit-transform: translate(0%, 0%) !important;
+						transform: translate(0%, 0%) !important;
+						max-width: 240px;
+						.legend_item{
+							max-width: 100px;
+						}
+					}
+					.legend_exportblock{
+						display: none !important;
+					}
+				}
+			}
+			&.last{
+				text-align: left !important;
+				padding: 0px !important;
+				.content_sources{
+					margin: 20px 0 0 !important;
+					width: 100% !important;
+				}
+				.content_related{
+					margin: 20px 0 40px !important;
+					width: 100% !important;
+				}
+			}
+		}
+
+
+		#GeographySelectorModal{
+			width: 100%;
+			background: #EDEDED !important;
+			margin-bottom: 0px !important;
+			position: fixed !important;
+			left: 0% !important;
+			top: 50px !important;
+			overflow: hidden !important;
+			bottom: 0px !important;
+			-webkit-transform: translate(0%, 0%) !important;
+			transform: translate(0%, 0%) !important;
+			&.nomodal{
+				margin-top: 50px !important;
+				z-index: 1000 !important;
+			}
+			.appmodal_head{
+				background: none;
+				height: 40px;
+				line-height: 40px;
+				color: $textColor;
+				.appmodal_closebt{
+					background: url("~/static/images/global/icon-close_box.svg") !important;
+				}
+			}
+			.appmodal_content{
+				position: absolute !important;
+				left: 0px;
+				top: 40px;
+				bottom: 0px;
+				width: 100%;
+			}
+			.selector{
+				background: #EDEDED !important;
+				width: 100% !important;
+				height: 100% !important;
+				.selector_expandedcontent{
+					height: 100% !important;
+					padding: 0 !important;
+					.expandedcontent_main{
+						margin: 0 !important;
+						width: auto !important;
+						display: none !important;
+						.expandedcontent_title{
+							color: #fff !important;
+							font-size: 18px;
+							line-height: 20px;
+							text-align: center;
+							border: 0px solid;
+							position: relative;
+							margin-top: 150px;
+							&:before{
+								content: "";
+								position: absolute;
+								left: 50%;
+								@include transform(translate(-50%, 0));
+								bottom: 100%;
+								margin-bottom: 10px;
+								background: url("~/static/images/illus/illu-countries-mob.svg") no-repeat 0 0;
+								background-size: 100% 100%;
+								width: 230px;
+								height: 150px;
+							}
+							.smaller{
+								font-size: 14px;
+							}
+							.title_disclaimer{
+								display: none;
+							}
+						}
+					}
+				}
+			}
+			.geography_mapcontainer, .geography_map_legend{
+				display: none !important;
+			}
+			.geography_sidebar{
+				position: absolute !important;
+				top: 0px;
+				overflow: auto !important;
+				bottom: 160px !important;
+				height: auto !important;
+				width: 100% !important;
+				padding: 10px 20px 20px !important;
+				&:after{
+					display: none;
+				}
+				.geography_items{
+					height: auto !important;
+				}
+				.sidebar_input #GeographyInput{
+					width: 285px !important;
+				}
+			}
+			.selector_bucket{
+				position: fixed !important;
+				bottom: 0px;
+				left: 0px;
+				//height: 60px !important;
+			}
+		}
 	}
 }

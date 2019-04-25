@@ -6,7 +6,7 @@ ini_set('display_errors', 1);
 
 $GEOBASE = array();
 
-$queryGeobase = "SELECT * FROM geobase_new" or die("Error in the consult.." . mysqli_error($link));
+$queryGeobase = "SELECT * FROM geobase_2019" or die("Error in the consult.." . mysqli_error($link));
 $resultGeobase = $link->query($queryGeobase);
 while($row = mysqli_fetch_assoc($resultGeobase)) {
     array_push($GEOBASE, $row);

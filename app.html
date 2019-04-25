@@ -2,16 +2,30 @@
 <!--[if IE 9]><html lang="en-US" class="lt-ie9 ie9" {{ HTML_ATTRS }}><![endif]-->
 <!--[if (gt IE 9)|!(IE)]><!--><html {{ HTML_ATTRS }}><!--<![endif]-->
   <head>
-    {{ HEAD }}
+    <title>Statistical Capacity Monitor</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta property="og:title" content="Statistical Capacity Monitor"/>
+    <meta property="og:image" content="http://statisticalcapacitymonitor.org/images/share-img.png">
+    <meta property="og:description" content="Find and explore indicators on statistical capacity">
     <link href="/images/favicon.ico" rel="shortcut icon" type="image/x-icon"/>
     <link href='https://fonts.googleapis.com/css?family=Material+Icons' rel="stylesheet">
+    {{ HEAD }}
   </head>
   <body {{ BODY_ATTRS }}>
     {{ APP }}
     <div></div>
 
+    <!-- /paris21/ -->
     <script src="/highcharts.js" language="javascript"></script>
     <script src="/highmaps-modulemap.js" language="javascript"></script>
     <script src="/highmaps-worldjson.js" language="javascript"></script>
+    <script src="/d3.v4.min.js" language="javascript"></script>
+    
+    <!--
+    <script src="/paris21/highcharts.js" language="javascript"></script>
+    <script src="/paris21/highmaps-modulemap.js" language="javascript"></script>
+    <script src="/paris21/highmaps-worldjson.js" language="javascript"></script>
+    <script src="/paris21/d3.v4.min.js" language="javascript"></script>
+    -->
   </body>
 </html>
