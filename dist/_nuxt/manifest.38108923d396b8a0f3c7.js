@@ -91,7 +91,7 @@
 /******/ 		if (__webpack_require__.nc) {
 /******/ 			script.setAttribute("nonce", __webpack_require__.nc);
 /******/ 		}
-/******/ 		script.src = __webpack_require__.p + "" + ({"0":"pages/indicator/_","1":"pages/index","2":"pages/country/_","3":"pages/report/index","4":"layouts/default"}[chunkId]||chunkId) + "." + {"0":"e4ef6927fe3f79fbba83","1":"8bb8ea8b8d1a3085db2a","2":"28d0acc1011c1b81692e","3":"cf7341749b430ba567f1","4":"abf76da557858c4f89e2"}[chunkId] + ".js";
+/******/ 		script.src = __webpack_require__.p + "" + ({"0":"pages/indicator/_","1":"pages/index","2":"pages/country/_","3":"pages/report/index","4":"layouts/default"}[chunkId]||chunkId) + "." + {"0":"1ca82d45f3838c3c21d2","1":"8bb8ea8b8d1a3085db2a","2":"28d0acc1011c1b81692e","3":"cf7341749b430ba567f1","4":"abf76da557858c4f89e2"}[chunkId] + ".js";
 /******/ 		var timeout = setTimeout(onScriptComplete, 120000);
 /******/ 		script.onerror = script.onload = onScriptComplete;
 /******/ 		function onScriptComplete() {

@@ -30882,6 +30882,8 @@ var _this = this;
 
             tab_text += '<tr><th>Indicator</th><th>Country</th><th>Year</th><th>Data Value</th></tr>';
 
+            var lastYear = self.timeseriesCategories[self.timeseriesCategories.length - 1];
+            //var tmpDatas = this.allAreasData.slice(150, 500);
             __WEBPACK_IMPORTED_MODULE_3_underscore__["_"].each(this.allAreasData, function (countryObj) {
                 var toAppend = false;
                 if (contentType == 'chart') {
@@ -30891,15 +30893,16 @@ var _this = this;
                 }
 
                 if (toAppend) {
-                    if (self.timeseriesDisplayed) {
-                        __WEBPACK_IMPORTED_MODULE_3_underscore__["_"].each(self.timeseriesCategories, function (categYear, indexYear) {
-                            __WEBPACK_IMPORTED_MODULE_3_underscore__["_"].each(self.timeseriesGeographiesData, function (geoObj) {
-                                tab_text += '<tr><td>' + self.$store.DBIndicatorsObj[self.selectedIndicator].name + '</td><td>' + geoObj.name + '</td><td>' + categYear + '</td><td>' + geoObj.data[indexYear] + '</td></tr>';
-                            });
-                        });
+                    /*if(self.timeseriesDisplayed) {
+                        _.each(self.timeseriesCategories, function(categYear, indexYear){
+                            _.each(self.timeseriesGeographiesData, function(geoObj){
+                                tab_text += '<tr><td>'+self.$store.DBIndicatorsObj[self.selectedIndicator].name+'</td><td>'+geoObj.name+'</td><td>'+categYear+'</td><td>'+geoObj.data[lastYear]+'</td></tr>'
+                            })
+                        })
                     } else {
-                        tab_text += '<tr><td>' + self.$store.DBIndicatorsObj[self.selectedIndicator].name + '</td><td>' + self.$store.DBGeographyObj[countryObj.m49].name + '</td><td>' + self.indicatorLastYear + '</td><td>' + countryObj.value + '</td></tr>';
-                    }
+                        tab_text += '<tr><td>'+self.$store.DBIndicatorsObj[self.selectedIndicator].name+'</td><td>'+self.$store.DBGeographyObj[countryObj.m49].name+'</td><td>'+self.indicatorLastYear+'</td><td>'+countryObj.value+'</td></tr>'
+                    }*/
+                    tab_text += '<tr><td>' + self.$store.DBIndicatorsObj[self.selectedIndicator].name + '</td><td>' + self.$store.DBGeographyObj[countryObj.m49].name + '</td><td>' + self.indicatorLastYear + '</td><td>' + countryObj.value + '</td></tr>';
                 }
             });
 
@@ -30929,7 +30932,6 @@ var _this = this;
         },
 
         replaceLinksSO: function replaceLinksSO(text) {
-            console.log('replaceLinksSO', text);
             if (text !== undefined) {
                 var rex = /(<a href=")?(?:https?:\/\/)?(?:(?:www)[-A-Za-z0-9+&@#\/%?=~_|$!:,.;]+\.)+[-A-Za-z0-9+&@#\/%?=~_|$!:,.;]+/ig;
                 return text.replace(rex, function ($0, $1) {
