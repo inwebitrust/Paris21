@@ -7,7 +7,7 @@
             <div class="main_head">
                 <div class="head_title"><span class="smaller">About</span> {{ selectedIndicatorObj.name }}</div>
                 <nuxt-link :to="'/indicator/'" class="head_backbt">Back</nuxt-link>
-                <a class="head_link" @click="downloadAllCountryData('head')">Download all indicator dataset .xls</a>
+                <!--<a class="head_link" @click="downloadAllCountryData('head')">Download all indicator dataset .xls</a>-->
                 <a id="HeadLinkFake" class="head_link_fake" download="Statistical Capacity Monitor data download.xls"></a>
             </div>
             <div class="main_content content_map_wrapper">
@@ -554,7 +554,7 @@ export default {
 
         downloadAllCountryData: function (contentType) {
             var self = this;
-            
+
             var tab_text = ''
             var data_type = 'data:application/vnd.ms-excel'
 

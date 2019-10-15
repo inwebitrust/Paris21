@@ -696,18 +696,6 @@ var render = function() {
                   { staticClass: "head_backbt", attrs: { to: "/indicator/" } },
                   [_vm._v("Back")]
                 ),
-                _c(
-                  "a",
-                  {
-                    staticClass: "head_link",
-                    on: {
-                      click: function($event) {
-                        _vm.downloadAllCountryData("head")
-                      }
-                    }
-                  },
-                  [_vm._v("Download all indicator dataset .xls")]
-                ),
                 _c("a", {
                   staticClass: "head_link_fake",
                   attrs: {
