@@ -1,6 +1,8 @@
 <?php
 require_once("config.php");
 
+filter_var($_GET["geoIDSList"], FILTER_SANITIZE_STRING);
+
 $idsArray = explode(',',$_GET['geoIDSList']);
 $GEOITEMSDATA = array();
 

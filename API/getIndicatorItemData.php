@@ -1,6 +1,7 @@
 <?php
 require_once("config.php");
 
+filter_var($_GET["indicatorID"], FILTER_SANITIZE_STRING);
 
 $INDICATORITEMDATA = array();
 
@@ -16,5 +17,4 @@ $RESULTS = array(
 );
 
 echo json_encode($RESULTS);
-
 ?>

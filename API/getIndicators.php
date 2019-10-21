@@ -1,9 +1,6 @@
 <?php
 require_once("config.php");
 
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
-
 $INDICATORS = array();
 
 $queryIndicators = "SELECT * FROM indicators_new3 WHERE final_list = 1" or die("Error in the consult.." . mysqli_error($link));
