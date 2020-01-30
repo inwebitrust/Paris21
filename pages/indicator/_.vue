@@ -18,7 +18,7 @@
                     <div class="content_map">
                         <div class="map_title"><span class="bolder">{{ selectedIndicatorObj.name }} in {{ this.indicatorLastYear }}</span><br /><span class="smaller">{{selectedIndicatorObj.tag}}</span></div>
                         <div class="geography_mapcontainer">
-                            <highmapsChoropleth :mapID="'GeographyMap'" :mapColor="'darkgrey'" :geojsonID="'custom/world-robinson'" :areasData="computedAreasData" :mapZoomFactor="mapZoomFactor" :mapZoom="mapZoom" :mapZoomDefault="mapZoomDefault" :categoriesNb="categoriesNb" :indicatorType="selectedIndicatorObj.dataviz_type" :dataClasses="dataClasses"></highmapsChoropleth>
+                            <highmapsChoropleth :mapID="'GeographyMap'" :mapYear="indicatorLastYear" :mapColor="'darkgrey'" :geojsonID="'custom/world-robinson'" :areasData="computedAreasData" :mapZoomFactor="mapZoomFactor" :mapZoom="mapZoom" :mapZoomDefault="mapZoomDefault" :categoriesNb="categoriesNb" :indicatorType="selectedIndicatorObj.dataviz_type" :indicatorID="selectedIndicatorObj.id" :dataClasses="dataClasses"></highmapsChoropleth>
                         </div>
                     </div>
                     <!--
@@ -208,7 +208,7 @@ export default {
             dataClasses: [],
             mapColors: ['#F7CC3D', '#EC9A3A', '#E87D00', '#EA6651', '#B45747'],
             displayIndicatorsModal: false,
-            displayAboutModal: false
+            displayAboutModal: false,
         }
     },
 
@@ -284,13 +284,22 @@ export default {
                 this.indicatorGeographiesData = this.$store.DBIndicatorItems[this.selectedIndicator].geographies
                 this.selectedIndicatorObj = this.$store.DBIndicatorsObj[this.selectedIndicator]
 
+                if(this.selectedIndicatorObj.datasource == "worldbank") {
+                    this.selectedGeographies = ['76', '643', '840', '156', '250']
+                }
+
                 this.relatedIndicators = _.filter(this.$store.DBIndicators, function(ind){
                     return ind.area == self.selectedIndicatorObj.area && ind.level == self.selectedIndicatorObj.level && ind.name !== self.selectedIndicatorObj.name
                 })
                 this.relatedIndicators = _.sample(this.relatedIndicators, 5)
 
                 var allIndicatorsYears = _.map(this.indicatorGeographiesData, function(indicGeo) {
-                    var years =  _.keys(indicGeo.years)
+                    var years =  []
+                    _.each(indicGeo.years, function (yearValue, yearIndex) {
+                        if(yearValue !== "") {
+                            years.push(yearIndex)
+                        }
+                    });
                     return years
                 });
 
@@ -352,8 +361,15 @@ export default {
         },
 
         computeDataClasses: function () {
-            var allValues = _.map(this.computedAreasData, function(ad){return ad.value })
-            var uniqValuesNb = _.without(_.without(_.without(_.uniq(allValues), NaN), null), 'no data').length
+            var self = this;
+
+            var areasWithData = _.filter(this.computedAreasData, function (ad) {
+                var bool = (!isNaN(ad.value) && ad.value !== null && ad.value !== 'no data')
+                return bool
+            });
+
+            var uniqValuesNb = _.uniq(_.map(areasWithData, function(ad){return ad.value; }));
+            console.log("uniqValuesNb", uniqValuesNb)
 
             if(uniqValuesNb < this.defaultCategoriesNb) {
                 this.categoriesNb = uniqValuesNb
@@ -363,15 +379,50 @@ export default {
 
             this.categoriesData = []
 
+            var foundSpecificIndicator = _.find(UTILS.specificIndicators, function (indic) {
+                return self.selectedIndicatorObj.id == indic.id;
+            })
+
+            console.log("foundSpecificIndicator", foundSpecificIndicator)
+
             if(this.selectedIndicatorObj.dataviz_type !== 'binary') {
 
-                var maxValue = _.max(this.computedAreasData, function(ad){ if(ad.value !== null) return ad.value }).value
-                var minValue = _.min(this.computedAreasData, function(ad){ if(ad.value !== null) return ad.value }).value
+                console.log("areasWithData", areasWithData)
 
-                var splitLevel = (maxValue - minValue) / this.categoriesNb
+                var sortedAreas = _.sortBy(areasWithData, function (ad) {
+                    return ad.value
+                });
+
+                console.log("sortedAreas", sortedAreas)
+
+                var maxValue = sortedAreas[sortedAreas.length-1].value
+
+                var realMax = 1
+
+                while(maxValue > realMax) {
+                    if(maxValue < realMax*2) {
+                        realMax = realMax*2; 
+                        break;
+                    } else if(maxValue < realMax*5) {
+                        realMax = realMax*5; 
+                        break;
+                    } else if(maxValue < realMax*10) {
+                        realMax = realMax*10; 
+                        break;
+                    } else{
+                        realMax = realMax*10;
+                    }
+                }
+
+                console.log("max value and real max", maxValue, realMax)
+
+                var deciamlDisplayed = 1;
+                if(realMax >= 10) deciamlDisplayed = 0;
+                var splitLevel = realMax / this.categoriesNb
+                //var splitLevel =  Math.ceil(maxValue/this.categoriesNb)*this.categoriesNb;
 
                 this.dataClasses = []
-                var minCalc = minValue
+                var minCalc = 0
                 var maxCalc = 0
                 for(var i= 0 ; i<this.categoriesNb ; i++) {
                     maxCalc = minCalc + splitLevel
@@ -384,15 +435,21 @@ export default {
                     })
 
                     this.categoriesData.push({
-                        label: minCalc.toFixed(1) + ' - ' + maxCalc.toFixed(1)
+                        label: minCalc.toFixed(deciamlDisplayed) + ' - ' + maxCalc.toFixed(deciamlDisplayed)
                     })
                     minCalc = maxCalc
+                }
+
+                if(foundSpecificIndicator !== undefined) {
+                    this.categoriesData = foundSpecificIndicator.labels;
                 }
             } else {
                 this.categoriesData = [
                     { label: 'Yes' }, { label: 'No' }
                 ]
             }
+
+            console.log("categoriesData", this.categoriesData)
         },
 
         updateTimeseriesGeographiesData: function () {

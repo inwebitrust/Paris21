@@ -95,6 +95,12 @@ export default {
         return ''
       }
     },
+    indicatorID: {
+      type: String,
+      default: function () {
+        return ''
+      }
+    },
     dataClasses: {
       type:Array,
       default: function () {
@@ -153,6 +159,7 @@ export default {
             width: '200px'
           },
           formatter: function () { 
+            var that = this
             var pointValue = 'no data'
             if(this.point.value !== 'no data') {
               if(self.indicatorType == 'binary') {
@@ -160,11 +167,30 @@ export default {
                 if(pointValue == '1') pointValue = 'Yes'
                 else if(pointValue == '0') pointValue = 'No'
               } else {
-                pointValue = this.point.value.toFixed(1)
+                var foundSpecificIndicator = _.find(UTILS.specificIndicators, function (indic) {
+                  return self.indicatorID == indic.id;
+                })
+                if(foundSpecificIndicator !== undefined) {
+                  var foundValue = _.find(foundSpecificIndicator.labels, function (lb) {
+                    console.log(lb.value, that.point.value, that.point)
+                    return lb.value == that.point.value.toFixed(1);
+                  });
+
+                  if(foundValue !== undefined) {
+                    pointValue = foundValue.label
+                  } else {
+                    pointValue = this.point.value.toFixed(1)
+                  }
+                } else {
+                  pointValue = this.point.value.toFixed(1)
+                }
               }
             }
 
             var tooltipHTML = '<div class="tooltip_geo">'+this.point.name+'</div>'
+            console.log("indicatorID", self.indicatorID);
+
+            
 
             if(self.hasTooltipValues) {
               tooltipHTML = '<div class="tooltip_content"><div class="tooltip_year">'+self.mapYear+'</div>' + tooltipHTML

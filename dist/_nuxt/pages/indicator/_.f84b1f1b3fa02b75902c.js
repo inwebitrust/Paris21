@@ -736,6 +736,7 @@ var render = function() {
                       _c("highmapsChoropleth", {
                         attrs: {
                           mapID: "GeographyMap",
+                          mapYear: _vm.indicatorLastYear,
                           mapColor: "darkgrey",
                           geojsonID: "custom/world-robinson",
                           areasData: _vm.computedAreasData,
@@ -744,6 +745,7 @@ var render = function() {
                           mapZoomDefault: _vm.mapZoomDefault,
                           categoriesNb: _vm.categoriesNb,
                           indicatorType: _vm.selectedIndicatorObj.dataviz_type,
+                          indicatorID: _vm.selectedIndicatorObj.id,
                           dataClasses: _vm.dataClasses
                         }
                       })
@@ -30580,13 +30582,22 @@ var _this = this;
                 this.indicatorGeographiesData = this.$store.DBIndicatorItems[this.selectedIndicator].geographies;
                 this.selectedIndicatorObj = this.$store.DBIndicatorsObj[this.selectedIndicator];
 
+                if (this.selectedIndicatorObj.datasource == "worldbank") {
+                    this.selectedGeographies = ['76', '643', '840', '156', '250'];
+                }
+
                 this.relatedIndicators = __WEBPACK_IMPORTED_MODULE_3_underscore__["_"].filter(this.$store.DBIndicators, function (ind) {
                     return ind.area == self.selectedIndicatorObj.area && ind.level == self.selectedIndicatorObj.level && ind.name !== self.selectedIndicatorObj.name;
                 });
                 this.relatedIndicators = __WEBPACK_IMPORTED_MODULE_3_underscore__["_"].sample(this.relatedIndicators, 5);
 
                 var allIndicatorsYears = __WEBPACK_IMPORTED_MODULE_3_underscore__["_"].map(this.indicatorGeographiesData, function (indicGeo) {
-                    var years = __WEBPACK_IMPORTED_MODULE_3_underscore__["_"].keys(indicGeo.years);
+                    var years = [];
+                    __WEBPACK_IMPORTED_MODULE_3_underscore__["_"].each(indicGeo.years, function (yearValue, yearIndex) {
+                        if (yearValue !== "") {
+                            years.push(yearIndex);
+                        }
+                    });
                     return years;
                 });
 
@@ -30651,10 +30662,17 @@ var _this = this;
         },
 
         computeDataClasses: function computeDataClasses() {
-            var allValues = __WEBPACK_IMPORTED_MODULE_3_underscore__["_"].map(this.computedAreasData, function (ad) {
-                return ad.value;
+            var self = this;
+
+            var areasWithData = __WEBPACK_IMPORTED_MODULE_3_underscore__["_"].filter(this.computedAreasData, function (ad) {
+                var bool = !isNaN(ad.value) && ad.value !== null && ad.value !== 'no data';
+                return bool;
             });
-            var uniqValuesNb = __WEBPACK_IMPORTED_MODULE_3_underscore__["_"].without(__WEBPACK_IMPORTED_MODULE_3_underscore__["_"].without(__WEBPACK_IMPORTED_MODULE_3_underscore__["_"].without(__WEBPACK_IMPORTED_MODULE_3_underscore__["_"].uniq(allValues), NaN), null), 'no data').length;
+
+            var uniqValuesNb = __WEBPACK_IMPORTED_MODULE_3_underscore__["_"].uniq(__WEBPACK_IMPORTED_MODULE_3_underscore__["_"].map(areasWithData, function (ad) {
+                return ad.value;
+            }));
+            console.log("uniqValuesNb", uniqValuesNb);
 
             if (uniqValuesNb < this.defaultCategoriesNb) {
                 this.categoriesNb = uniqValuesNb;
@@ -30664,19 +30682,50 @@ var _this = this;
 
             this.categoriesData = [];
 
+            var foundSpecificIndicator = __WEBPACK_IMPORTED_MODULE_3_underscore__["_"].find(__WEBPACK_IMPORTED_MODULE_2__commons_utils_index_js__["g" /* specificIndicators */], function (indic) {
+                return self.selectedIndicatorObj.id == indic.id;
+            });
+
+            console.log("foundSpecificIndicator", foundSpecificIndicator);
+
             if (this.selectedIndicatorObj.dataviz_type !== 'binary') {
 
-                var maxValue = __WEBPACK_IMPORTED_MODULE_3_underscore__["_"].max(this.computedAreasData, function (ad) {
-                    if (ad.value !== null) return ad.value;
-                }).value;
-                var minValue = __WEBPACK_IMPORTED_MODULE_3_underscore__["_"].min(this.computedAreasData, function (ad) {
-                    if (ad.value !== null) return ad.value;
-                }).value;
+                console.log("areasWithData", areasWithData);
 
-                var splitLevel = (maxValue - minValue) / this.categoriesNb;
+                var sortedAreas = __WEBPACK_IMPORTED_MODULE_3_underscore__["_"].sortBy(areasWithData, function (ad) {
+                    return ad.value;
+                });
+
+                console.log("sortedAreas", sortedAreas);
+
+                var maxValue = sortedAreas[sortedAreas.length - 1].value;
+
+                var realMax = 1;
+
+                while (maxValue > realMax) {
+                    if (maxValue < realMax * 2) {
+                        realMax = realMax * 2;
+                        break;
+                    } else if (maxValue < realMax * 5) {
+                        realMax = realMax * 5;
+                        break;
+                    } else if (maxValue < realMax * 10) {
+                        realMax = realMax * 10;
+                        break;
+                    } else {
+                        realMax = realMax * 10;
+                    }
+                }
+
+                console.log("max value and real max", maxValue, realMax);
+
+                var deciamlDisplayed = 1;
+                if (realMax >= 10) deciamlDisplayed = 0;
+                var splitLevel = realMax / this.categoriesNb;
+                //var splitLevel =  Math.ceil(maxValue/this.categoriesNb)*this.categoriesNb;
 
                 this.dataClasses = [];
-                var minCalc = minValue;
+                var minCalc = 0;
                 var maxCalc = 0;
                 for (var i = 0; i < this.categoriesNb; i++) {
                     maxCalc = minCalc + splitLevel;
@@ -30689,13 +30738,19 @@ var _this = this;
                     });
 
                     this.categoriesData.push({
-                        label: minCalc.toFixed(1) + ' - ' + maxCalc.toFixed(1)
+                        label: minCalc.toFixed(deciamlDisplayed) + ' - ' + maxCalc.toFixed(deciamlDisplayed)
                     });
                     minCalc = maxCalc;
+                }
+
+                if (foundSpecificIndicator !== undefined) {
+                    this.categoriesData = foundSpecificIndicator.labels;
                 }
             } else {
                 this.categoriesData = [{ label: 'Yes' }, { label: 'No' }];
             }
+
+            console.log("categoriesData", this.categoriesData);
         },
 
         updateTimeseriesGeographiesData: function updateTimeseriesGeographiesData() {
@@ -33430,6 +33485,7 @@ if (false) {(function () {
 "use strict";
 /* unused harmony export countryISOMapping2To3 */
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return countryISOMapping3To2; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "g", function() { return specificIndicators; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return getAPIIndicators; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return getAPIGeography; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return getAPIGeoItemData; });
@@ -33447,6 +33503,8 @@ if (false) {(function () {
 
 
 
+// get indicators table
+// GLOBAL VAR : $store.DBClassifIndicators - $store.DBIndicators - $store.DBIndicatorsObj
 var getAPIIndicators = function () {
   var _ref = __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_asyncToGenerator___default()( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee($store) {
     var config, randNb;
@@ -33535,11 +33593,9 @@ var self = this;
 
 var countryISOMapping3To2 = { AFG: "AF", ALA: "AX", ALB: "AL", DZA: "DZ", ASM: "AS", AND: "AD", AGO: "AO", AIA: "AI", ATA: "AQ", ATG: "AG", ARG: "AR", ARM: "AM", ABW: "AW", AUS: "AU", AUT: "AT", AZE: "AZ", BHS: "BS", BHR: "BH", BGD: "BD", BRB: "BB", BLR: "BY", BEL: "BE", BLZ: "BZ", BEN: "BJ", BMU: "BM", BTN: "BT", BOL: "BO", BIH: "BA", BWA: "BW", BVT: "BV", BRA: "BR", VGB: "VG", IOT: "IO", BRN: "BN", BGR: "BG", BFA: "BF", BDI: "BI", KHM: "KH", CMR: "CM", CAN: "CA", CPV: "CV", CYM: "KY", CAF: "CF", TCD: "TD", CHL: "CL", CHN: "CN", HKG: "HK", MAC: "MO", CXR: "CX", CCK: "CC", COL: "CO", COM: "KM", COG: "CG", COD: "CD", COK: "CK", CRI: "CR", CIV: "CI", HRV: "HR", CUB: "CU", CYP: "CY", CZE: "CZ", DNK: "DK", DJI: "DJ", DMA: "DM", DOM: "DO", ECU: "EC", EGY: "EG", SLV: "SV", GNQ: "GQ", ERI: "ER", EST: "EE", ETH: "ET", FLK: "FK", FRO: "FO", FJI: "FJ", FIN: "FI", FRA: "FR", GUF: "GF", PYF: "PF", ATF: "TF", GAB: "GA", GMB: "GM", GEO: "GE", DEU: "DE", GHA: "GH", GIB: "GI", GRC: "GR", GRL: "GL", GRD: "GD", GLP: "GP", GUM: "GU", GTM: "GT", GGY: "GG", GIN: "GN", GNB: "GW", GUY: "GY", HTI: "HT", HMD: "HM", VAT: "VA", HND: "HN", HUN: "HU", ISL: "IS", IND: "IN", IDN: "ID", IRN: "IR", IRQ: "IQ", IRL: "IE", IMN: "IM", ISR: "IL", ITA: "IT", JAM: "JM", JPN: "JP", JEY: "JE", JOR: "JO", KAZ: "KZ", KEN: "KE", KIR: "KI", PRK: "KP", KOR: "KR", KWT: "KW", KGZ: "KG", LAO: "LA", LVA: "LV", LBN: "LB", LSO: "LS", LBR: "LR", LBY: "LY", LIE: "LI", LTU: "LT", LUX: "LU", MKD: "MK", MDG: "MG", MWI: "MW", MYS: "MY", MDV: "MV", MLI: "ML", MLT: "MT", MHL: "MH", MTQ: "MQ", MRT: "MR", MUS: "MU", MYT: "YT", MEX: "MX", FSM: "FM", MDA: "MD", MCO: "MC", MNG: "MN", MNE: "ME", MSR: "MS", MAR: "MA", MOZ: "MZ", MMR: "MM", NAM: "NA", NRU: "NR", NPL: "NP", NLD: "NL", ANT: "AN", NCL: "NC", NZL: "NZ", NIC: "NI", NER: "NE", NGA: "NG", NIU: "NU", NFK: "NF", MNP: "MP", NOR: "NO", OMN: "OM", PAK: "PK", PLW: "PW", PSE: "PS", PAN: "PA", PNG: "PG", PRY: "PY", PER: "PE", PHL: "PH", PCN: "PN", POL: "PL", PRT: "PT", PRI: "PR", QAT: "QA", REU: "RE", ROU: "RO", RUS: "RU", RWA: "RW", BLM: "BL", SHN: "SH", KNA: "KN", LCA: "LC", MAF: "MF", SPM: "PM", VCT: "VC", WSM: "WS", SMR: "SM", STP: "ST", SAU: "SA", SEN: "SN", SRB: "RS", SYC: "SC", SLE: "SL", SGP: "SG", SVK: "SK", SVN: "SI", SLB: "SB", SOM: "SO", ZAF: "ZA", SGS: "GS", SSD: "SS", ESP: "ES", LKA: "LK", SDN: "SD", SUR: "SR", SJM: "SJ", SWZ: "SZ", SWE: "SE", CHE: "CH", SYR: "SY", TWN: "TW", TJK: "TJ", TZA: "TZ", THA: "TH", TLS: "TL", TGO: "TG", TKL: "TK", TON: "TO", TTO: "TT", TUN: "TN", TUR: "TR", TKM: "TM", TCA: "TC", TUV: "TV", UGA: "UG", UKR: "UA", ARE: "AE", GBR: "GB", USA: "US", UMI: "UM", URY: "UY", UZB: "UZ", VUT: "VU", VEN: "VE", VNM: "VN", VIR: "VI", WLF: "WF", ESH: "EH", YEM: "YE", ZMB: "ZM", ZWE: "ZW" };
 
-var countryISOMapping2To3 = { AF: 'AFG', AX: 'ALA', AL: 'ALB', DZ: 'DZA', AS: 'ASM', AD: 'AND', AO: 'AGO', AI: 'AIA', AQ: 'ATA', AG: 'ATG', AR: 'ARG', AM: 'ARM', AW: 'ABW', AU: 'AUS', AT: 'AUT', AZ: 'AZE', BS: 'BHS', BH: 'BHR', BD: 'BGD', BB: 'BRB', BY: 'BLR', BE: 'BEL', BZ: 'BLZ', BJ: 'BEN', BM: 'BMU', BT: 'BTN', BO: 'BOL', BA: 'BIH', BW: 'BWA', BV: 'BVT', BR: 'BRA', VG: 'VGB', IO: 'IOT', BN: 'BRN', BG: 'BGR', BF: 'BFA', BI: 'BDI', KH: 'KHM', CM: 'CMR', CA: 'CAN', CV: 'CPV', KY: 'CYM', CF: 'CAF', TD: 'TCD', CL: 'CHL', CN: 'CHN', HK: 'HKG', MO: 'MAC', CX: 'CXR', CC: 'CCK', CO: 'COL', KM: 'COM', CG: 'COG', CD: 'COD', CK: 'COK', CR: 'CRI', CI: 'CIV', HR: 'HRV', CU: 'CUB', CY: 'CYP', CZ: 'CZE', DK: 'DNK', DJ: 'DJI', DM: 'DMA', DO: 'DOM', EC: 'ECU', EG: 'EGY', SV: 'SLV', GQ: 'GNQ', ER: 'ERI', EE: 'EST', ET: 'ETH', FK: 'FLK', FO: 'FRO', FJ: 'FJI', FI: 'FIN', FR: 'FRA', GF: 'GUF', PF: 'PYF', TF: 'ATF', GA: 'GAB', GM: 'GMB', GE: 'GEO', DE: 'DEU', GH: 'GHA', GI: 'GIB', GR: 'GRC', GL: 'GRL', GD: 'GRD', GP: 'GLP', GU: 'GUM', GT: 'GTM', GG: 'GGY', GN: 'GIN', GW: 'GNB', GY: 'GUY', HT: 'HTI', HM: 'HMD', VA: 'VAT', HN: 'HND', HU: 'HUN', IS: 'ISL', IN: 'IND', ID: 'IDN', IR: 'IRN', IQ: 'IRQ', IE: 'IRL', IM: 'IMN', IL: 'ISR', IT: 'ITA', JM: 'JAM', JP: 'JPN', JE: 'JEY', JO: 'JOR', KZ: 'KAZ', KE: 'KEN', KI: 'KIR', KP: 'PRK', KR: 'KOR', KW: 'KWT', KG: 'KGZ', LA: 'LAO', LV: 'LVA', LB: 'LBN', LS: 'LSO', LR: 'LBR', LY: 'LBY', LI: 'LIE', LT: 'LTU', LU: 'LUX', MK: 'MKD', MG: 'MDG', MW: 'MWI', MY: 'MYS', MV: 'MDV', ML: 'MLI', MT: 'MLT', MH: 'MHL', MQ: 'MTQ', MR: 'MRT', MU: 'MUS', YT: 'MYT', MX: 'MEX', FM: 'FSM', MD: 'MDA', MC: 'MCO', MN: 'MNG', ME: 'MNE', MS: 'MSR', MA: 'MAR', MZ: 'MOZ', MM: 'MMR', NA: 'NAM', NR: 'NRU', NP: 'NPL', NL: 'NLD', AN: 'ANT', NC: 'NCL', NZ: 'NZL', NI: 'NIC', NE: 'NER', NG: 'NGA', NU: 'NIU', NF: 'NFK', MP: 'MNP', NO: 'NOR', OM: 'OMN', PK: 'PAK', PW: 'PLW', PS: 'PSE', PA: 'PAN', PG: 'PNG', PY: 'PRY', PE: 'PER', PH: 'PHL', PN: 'PCN', PL: 'POL', PT: 'PRT', PR: 'PRI', QA: 'QAT', RE: 'REU', RO: 'ROU', RU: 'RUS', RW: 'RWA', BL: 'BLM', SH: 'SHN', KN: 'KNA', LC: 'LCA', MF: 'MAF', PM: 'SPM', VC: 'VCT', WS: 'WSM', SM: 'SMR', ST: 'STP', SA: 'SAU', SN: 'SEN', RS: 'SRB', SC: 'SYC', SL: 'SLE', SG: 'SGP', SK: 'SVK', SI: 'SVN', SB: 'SLB', SO: 'SOM', ZA: 'ZAF', GS: 'SGS', SS: 'SSD', ES: 'ESP', LK: 'LKA', SD: 'SDN', SR: 'SUR', SJ: 'SJM', SZ: 'SWZ', SE: 'SWE', CH: 'CHE', SY: 'SYR', TW: 'TWN', TJ: 'TJK', TZ: 'TZA', TH: 'THA', TL: 'TLS', TG: 'TGO', TK: 'TKL', TO: 'TON', TT: 'TTO', TN: 'TUN', TR: 'TUR', TM: 'TKM', TC: 'TCA', TV: 'TUV', UG: 'UGA', UA: 'UKR', AE: 'ARE', GB: 'GBR', US: 'USA', UM: 'UMI', UY: 'URY', UZ: 'UZB', VU: 'VUT', VE: 'VEN', VN: 'VNM', VI: 'VIR', WF: 'WLF', EH: 'ESH', YE: 'YEM', ZM: 'ZMB', ZW: 'ZWE'
+var countryISOMapping2To3 = { AF: 'AFG', AX: 'ALA', AL: 'ALB', DZ: 'DZA', AS: 'ASM', AD: 'AND', AO: 'AGO', AI: 'AIA', AQ: 'ATA', AG: 'ATG', AR: 'ARG', AM: 'ARM', AW: 'ABW', AU: 'AUS', AT: 'AUT', AZ: 'AZE', BS: 'BHS', BH: 'BHR', BD: 'BGD', BB: 'BRB', BY: 'BLR', BE: 'BEL', BZ: 'BLZ', BJ: 'BEN', BM: 'BMU', BT: 'BTN', BO: 'BOL', BA: 'BIH', BW: 'BWA', BV: 'BVT', BR: 'BRA', VG: 'VGB', IO: 'IOT', BN: 'BRN', BG: 'BGR', BF: 'BFA', BI: 'BDI', KH: 'KHM', CM: 'CMR', CA: 'CAN', CV: 'CPV', KY: 'CYM', CF: 'CAF', TD: 'TCD', CL: 'CHL', CN: 'CHN', HK: 'HKG', MO: 'MAC', CX: 'CXR', CC: 'CCK', CO: 'COL', KM: 'COM', CG: 'COG', CD: 'COD', CK: 'COK', CR: 'CRI', CI: 'CIV', HR: 'HRV', CU: 'CUB', CY: 'CYP', CZ: 'CZE', DK: 'DNK', DJ: 'DJI', DM: 'DMA', DO: 'DOM', EC: 'ECU', EG: 'EGY', SV: 'SLV', GQ: 'GNQ', ER: 'ERI', EE: 'EST', ET: 'ETH', FK: 'FLK', FO: 'FRO', FJ: 'FJI', FI: 'FIN', FR: 'FRA', GF: 'GUF', PF: 'PYF', TF: 'ATF', GA: 'GAB', GM: 'GMB', GE: 'GEO', DE: 'DEU', GH: 'GHA', GI: 'GIB', GR: 'GRC', GL: 'GRL', GD: 'GRD', GP: 'GLP', GU: 'GUM', GT: 'GTM', GG: 'GGY', GN: 'GIN', GW: 'GNB', GY: 'GUY', HT: 'HTI', HM: 'HMD', VA: 'VAT', HN: 'HND', HU: 'HUN', IS: 'ISL', IN: 'IND', ID: 'IDN', IR: 'IRN', IQ: 'IRQ', IE: 'IRL', IM: 'IMN', IL: 'ISR', IT: 'ITA', JM: 'JAM', JP: 'JPN', JE: 'JEY', JO: 'JOR', KZ: 'KAZ', KE: 'KEN', KI: 'KIR', KP: 'PRK', KR: 'KOR', KW: 'KWT', KG: 'KGZ', LA: 'LAO', LV: 'LVA', LB: 'LBN', LS: 'LSO', LR: 'LBR', LY: 'LBY', LI: 'LIE', LT: 'LTU', LU: 'LUX', MK: 'MKD', MG: 'MDG', MW: 'MWI', MY: 'MYS', MV: 'MDV', ML: 'MLI', MT: 'MLT', MH: 'MHL', MQ: 'MTQ', MR: 'MRT', MU: 'MUS', YT: 'MYT', MX: 'MEX', FM: 'FSM', MD: 'MDA', MC: 'MCO', MN: 'MNG', ME: 'MNE', MS: 'MSR', MA: 'MAR', MZ: 'MOZ', MM: 'MMR', NA: 'NAM', NR: 'NRU', NP: 'NPL', NL: 'NLD', AN: 'ANT', NC: 'NCL', NZ: 'NZL', NI: 'NIC', NE: 'NER', NG: 'NGA', NU: 'NIU', NF: 'NFK', MP: 'MNP', NO: 'NOR', OM: 'OMN', PK: 'PAK', PW: 'PLW', PS: 'PSE', PA: 'PAN', PG: 'PNG', PY: 'PRY', PE: 'PER', PH: 'PHL', PN: 'PCN', PL: 'POL', PT: 'PRT', PR: 'PRI', QA: 'QAT', RE: 'REU', RO: 'ROU', RU: 'RUS', RW: 'RWA', BL: 'BLM', SH: 'SHN', KN: 'KNA', LC: 'LCA', MF: 'MAF', PM: 'SPM', VC: 'VCT', WS: 'WSM', SM: 'SMR', ST: 'STP', SA: 'SAU', SN: 'SEN', RS: 'SRB', SC: 'SYC', SL: 'SLE', SG: 'SGP', SK: 'SVK', SI: 'SVN', SB: 'SLB', SO: 'SOM', ZA: 'ZAF', GS: 'SGS', SS: 'SSD', ES: 'ESP', LK: 'LKA', SD: 'SDN', SR: 'SUR', SJ: 'SJM', SZ: 'SWZ', SE: 'SWE', CH: 'CHE', SY: 'SYR', TW: 'TWN', TJ: 'TJK', TZ: 'TZA', TH: 'THA', TL: 'TLS', TG: 'TGO', TK: 'TKL', TO: 'TON', TT: 'TTO', TN: 'TUN', TR: 'TUR', TM: 'TKM', TC: 'TCA', TV: 'TUV', UG: 'UGA', UA: 'UKR', AE: 'ARE', GB: 'GBR', US: 'USA', UM: 'UMI', UY: 'URY', UZ: 'UZB', VU: 'VUT', VE: 'VEN', VN: 'VNM', VI: 'VIR', WF: 'WLF', EH: 'ESH', YE: 'YEM', ZM: 'ZMB', ZW: 'ZWE' };
 
-  // get indicators table
-  // GLOBAL VAR : $store.DBClassifIndicators - $store.DBIndicators - $store.DBIndicatorsObj
-};function getAPIGeography($store) {
+var specificIndicators = [{ id: 96, labels: [{ value: "0.0", label: "no" }, { value: "0.5", label: "last 10 years" }, { value: "1.0", label: "within last 5 years" }] }, { id: 10, labels: [{ value: "0.0", label: "never" }, { value: "0.3", label: "once" }, { value: "0.7", label: "at least 6 times" }, { value: "1.0", label: "annually" }] }, { id: 36, labels: [{ value: "0.0", label: "never" }, { value: "0.3", label: "once" }, { value: "0.7", label: "at least 6 times" }, { value: "1.0", label: "annually" }] }, { id: 40, labels: [{ value: "0.0", label: "never" }, { value: "0.3", label: "once" }, { value: "0.7", label: "at least 6 times" }, { value: "1.0", label: "annually" }] }, { id: 46, labels: [{ value: "0.0", label: "never" }, { value: "0.3", label: "once" }, { value: "0.7", label: "at least 6 times" }, { value: "1.0", label: "annually" }] }, { id: 57, labels: [{ value: "0.0", label: "never" }, { value: "0.3", label: "once" }, { value: "0.7", label: "at least 6 times" }, { value: "1.0", label: "annually" }] }, { id: 92, labels: [{ value: "0.0", label: "never" }, { value: "0.3", label: "once" }, { value: "0.7", label: "at least 6 times" }, { value: "1.0", label: "annually" }] }, { id: 99, labels: [{ value: "0.0", label: "never" }, { value: "0.3", label: "once" }, { value: "0.7", label: "at least 6 times" }, { value: "1.0", label: "annually" }] }, { id: 7, labels: [{ value: "0.0", label: "not adopted" }, { value: "1.0", label: "adopted" }] }];function getAPIGeography($store) {
   // console.log('domains.auth.getUserInfos')
   var config = {
     headers: {
@@ -33602,9 +33658,8 @@ function getAPIGeoItemData($store, geoID) {
     var tmpArray = response.data;
 
     var geographies = {};
-    var indicatorsObj = {};
 
-    __WEBPACK_IMPORTED_MODULE_4_underscore__["_"].each(tmpArray.geoItemsData, function (indicatorRow) {
+    __WEBPACK_IMPORTED_MODULE_4_underscore__["_"].each(tmpArray.geoItemsDataCSV, function (indicatorRow) {
       if (geographies[indicatorRow.m49] === undefined) {
         geographies[indicatorRow.m49] = {
           m49: indicatorRow.m49,
@@ -33622,6 +33677,24 @@ function getAPIGeoItemData($store, geoID) {
       if (geographies[indicatorRow.m49].indicators[indicatorRow.indicator_id].years[indicatorRow.year] === undefined) {
         geographies[indicatorRow.m49].indicators[indicatorRow.indicator_id].years[indicatorRow.year] = indicatorRow.value.replace(",", ".");
       }
+    });
+
+    __WEBPACK_IMPORTED_MODULE_4_underscore__["_"].each(tmpArray.geoItemsDataWB, function (indicatorRow) {
+      if (geographies[indicatorRow.m49] === undefined) {
+        geographies[indicatorRow.m49] = {
+          m49: indicatorRow.m49,
+          indicators: {}
+        };
+      }
+
+      if (geographies[indicatorRow.m49].indicators[indicatorRow.indicator_id] === undefined) {
+        geographies[indicatorRow.m49].indicators[indicatorRow.indicator_id] = {
+          id: indicatorRow.indicator_id,
+          years: {}
+        };
+      }
+
+      geographies[indicatorRow.m49].indicators[indicatorRow.indicator_id].years[indicatorRow.year] = indicatorRow.value.replace(",", ".");
     });
 
     __WEBPACK_IMPORTED_MODULE_4_underscore__["_"].each(geographies, function (geoObj, geoM49) {
@@ -33674,6 +33747,8 @@ function getAPIIndicatorItemData($store, indicatorID) {
       id: indicatorID,
       geographies: datavaluesObj
     };
+
+    console.log("DBIndicatorItems", $store.DBIndicatorItems);
 
     return true;
   }).catch(function (err) {
@@ -36612,6 +36687,12 @@ module.exports = "data:image/svg+xml;base64,PHN2ZyBpZD0iaWNvbi1idG5fcmVzZXQiIHht
         return '';
       }
     },
+    indicatorID: {
+      type: String,
+      default: function _default() {
+        return '';
+      }
+    },
     dataClasses: {
       type: Array,
       default: function _default() {
@@ -36670,17 +36751,35 @@ module.exports = "data:image/svg+xml;base64,PHN2ZyBpZD0iaWNvbi1idG5fcmVzZXQiIHht
             width: '200px'
           },
           formatter: function formatter() {
+            var that = this;
             var pointValue = 'no data';
             if (this.point.value !== 'no data') {
               if (self.indicatorType == 'binary') {
                 pointValue = this.point.value;
                 if (pointValue == '1') pointValue = 'Yes';else if (pointValue == '0') pointValue = 'No';
               } else {
-                pointValue = this.point.value.toFixed(1);
+                var foundSpecificIndicator = __WEBPACK_IMPORTED_MODULE_2_underscore__["_"].find(__WEBPACK_IMPORTED_MODULE_3__commons_utils_index_js__["g" /* specificIndicators */], function (indic) {
+                  return self.indicatorID == indic.id;
+                });
+                if (foundSpecificIndicator !== undefined) {
+                  var foundValue = __WEBPACK_IMPORTED_MODULE_2_underscore__["_"].find(foundSpecificIndicator.labels, function (lb) {
+                    console.log(lb.value, that.point.value, that.point);
+                    return lb.value == that.point.value.toFixed(1);
+                  });
+
+                  if (foundValue !== undefined) {
+                    pointValue = foundValue.label;
+                  } else {
+                    pointValue = this.point.value.toFixed(1);
+                  }
+                } else {
+                  pointValue = this.point.value.toFixed(1);
+                }
               }
             }
 
             var tooltipHTML = '<div class="tooltip_geo">' + this.point.name + '</div>';
+            console.log("indicatorID", self.indicatorID);
 
             if (self.hasTooltipValues) {
               tooltipHTML = '<div class="tooltip_content"><div class="tooltip_year">' + self.mapYear + '</div>' + tooltipHTML;

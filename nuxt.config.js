@@ -89,6 +89,6 @@ module.exports = {
     base : '/compass_nuxt/dist/'
   }*/
   router : {
-    //base : '/paris21/'
+    base : '/paris21/'
   }
 }

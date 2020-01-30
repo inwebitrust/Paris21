@@ -1515,7 +1515,7 @@ var setContext = function () {
               store: _context3.t2,
               payload: _context3.t3,
               error: _context3.t4,
-              base: '/',
+              base: '/paris21/',
               env: _context3.t5
             };
 
@@ -2158,7 +2158,7 @@ var scrollBehavior = function scrollBehavior(to, from, savedPosition) {
 function createRouter() {
   return new __WEBPACK_IMPORTED_MODULE_2_vue_router__["default"]({
     mode: 'history',
-    base: '/',
+    base: '/paris21/',
     linkActiveClass: 'nuxt-link-active',
     linkExactActiveClass: 'nuxt-link-exact-active',
     scrollBehavior: scrollBehavior,
