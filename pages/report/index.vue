@@ -10,8 +10,8 @@
       </div>
     </div>
 
-    <paris21Modal type="about" :displayed="displayAboutModal" @closeModal="displayAboutModal = false"></paris21Modal>
-    <paris21Footer @aboutModal="displayAboutModal = true"></paris21Footer>
+    <paris21Modal type="privacy" :displayed="displayPrivacyModal" @closeModal="displayPrivacyModal = false"></paris21Modal>
+    <paris21Footer @privacyModal="displayPrivacyModal = true"></paris21Footer>
   </div>
 </template>
 
@@ -39,7 +39,7 @@ export default {
   data: function () {
     return {
       selectorExpanded:'',
-      displayAboutModal: false
+      displayPrivacyModal: false
     }
   },
   mounted: function () {

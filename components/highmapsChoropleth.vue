@@ -145,6 +145,7 @@ export default {
         colorAxis: {
           dataClasses: this.dataClasses
         },
+        colors:['#F7CC3D', '#EC9A3A', '#E87D00', '#EA6651', '#B45747'],
         mapNavigation: { enabled: true },
         title: { text: '' },
         legend: { enabled: false },
@@ -166,13 +167,14 @@ export default {
                 pointValue = this.point.value
                 if(pointValue == '1') pointValue = 'Yes'
                 else if(pointValue == '0') pointValue = 'No'
+              } else if(self.indicatorType == 'text'){
+                pointValue = this.point.value
               } else {
                 var foundSpecificIndicator = _.find(UTILS.specificIndicators, function (indic) {
                   return self.indicatorID == indic.id;
                 })
                 if(foundSpecificIndicator !== undefined) {
                   var foundValue = _.find(foundSpecificIndicator.labels, function (lb) {
-                    console.log(lb.value, that.point.value, that.point)
                     return lb.value == that.point.value.toFixed(1);
                   });
 
@@ -188,9 +190,6 @@ export default {
             }
 
             var tooltipHTML = '<div class="tooltip_geo">'+this.point.name+'</div>'
-            console.log("indicatorID", self.indicatorID);
-
-            
 
             if(self.hasTooltipValues) {
               tooltipHTML = '<div class="tooltip_content"><div class="tooltip_year">'+self.mapYear+'</div>' + tooltipHTML

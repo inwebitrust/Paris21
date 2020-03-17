@@ -44,30 +44,100 @@
       </div>
     </div>
 
-    <div class="paris21_modal" v-if="type == 'about'">
+    <div class="paris21_modal" v-if="type == 'privacy'">
       <div class="modal_title">
-        About <span class="bolder">the Statistical Capacity Monitor</span>
+        Privacy Statement</span>
         <a class="modal_closebt" @click="closeModal()"></a>
       </div>
       <div class="modal_content">
         <p style="margin-top: 10px;">
-          The implementation of the 2030 Agenda has brought attention to the new skills and practices that national statistical systems (NSS) will need to develop to meet the unprecedented demand for data and statistics.  
+          PARIS21 is committed to protecting the privacy and accuracy of confidential information to the extent possible, subject to provisions of state and federal law. 
         </p>
         <p>
-          As a recognised priority for most actors in the development and data community, understanding the needs and progress in statistical capacity through more accessible information remains a pending task. 
+          <span class="bolder">Concerned about privacy? We are too.</span><br />
+          Although there are many applications and websites that collect information and other statistics about their users,  we do not collect any personal information about you when you visit this web site. 
         </p>
         <p>
-          The PARIS21 Statistical Capacity Monitor features existing and innovative indicators on statistical capacity and capacity development to support countries, donors and service providers to tailor capacity development programmes in statistics.
-        </p>  
-        <p>
-          The Monitor provides access to an extensive, and evolving, battery of indicators on statistical capacity that will offer a clearer landscape of where countries stand in different areas of capacity. It facilitates country and regional comparisons across multiple dimensions of statistical capacity, presenting trends in key drivers (including funding and legislation) and periodically proposing new indicators that can inform our understanding of capacity.
+          <span class="bolder">What happens if the privacy statement changes?</span><br />
+          This Privacy Statement was last revised on 20.02.2020. We may change this Privacy Statement at any time and for any reason. We encourage you to review this Privacy Statement each time you visit the web site.<br />
+          If we decide to make a significant change to our Privacy Statement, we will post a notice on the homepage of our web site for a period of time after the change is made. 
         </p>
         <p>
-          The Monitor aims to contribute to better match the supply and demand of programmes, enhance donors’ coordination in the provision of capacity development and build on our collective knowledge of what capacity means. The platform will support the PARIS21 <span class="bolder">Statistical Capacity Development Outlook</span> (forthcoming).
+          <span class="bolder">What about privacy on other web sites?</span><br />
+          This web site may contain links to other web sites. Some of those web sites may be operated by by third parties. We provide the links for your convenience, but we do not review, control, or monitor the privacy practices of web sites operated by others. <br />
+          We are not responsible for the performance of web sites operated by third parties or for your business dealings with them. Therefore, whenever you leave this web site we recommend that you review each web site's privacy practices and make your own conclusions regarding the adequacy of these practices.
         </p>
         <p>
-          <span class="bolder" style="color:#4ba4a1">The PARIS21 team</span>
+          <span class="bolder">How to contact us</span><br />
+          If you have questions or comments about this Privacy Statement, <a href="https://paris21.org/about-paris-21/contact" target="_blank">contact us</a>.
         </p>
+      </div>
+    </div>
+
+    <div class="paris21_modal" v-if="type == 'download'">
+      <div class="modal_title">
+        <span class="bolder">Download</span>
+        <a class="modal_closebt" @click="closeModal()"></a>
+      </div>
+      <div class="modal_content" data-type="download">
+
+        <div class="download_item">
+          <div class="item_title">DATASET</div>
+          <div class="item_text">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          </div>
+          <a class="download_bt" href="http://ocde.wedodata.fr/paris21_admin/API/file.csv" target="_blank">Download (.csv)</a>
+        </div>
+
+        <div class="download_item">
+          <div class="item_title">CODEBOOK</div>
+          <div class="item_text">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          </div>
+          <a class="download_bt" href="/data/codebook.xlsx" target="_blank">Download (.xls)</a>
+        </div>
+
+        <div class="download_item">
+          <div class="item_title">METHODOLOGY</div>
+          <div class="item_text">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          </div>
+          <a class="download_bt" href="/data/PARIS21_Indicators_Methodological_Notes.xlsx" target="_blank">Download (.xls)</a>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="paris21_modal" v-if="type == 'moreinfo'">
+      <div class="modal_title">
+        <span class="bolder">{{indicatorLabel}}</span>
+        <a class="modal_closebt" @click="closeModal()"></a>
+      </div>
+      <div class="modal_content" data-type="moreinfo">
+        <div class="content_block" v-if="methodoInfos.interpretation !== undefined && methodoInfos.interpretation !== ''">
+          <div class="block_title">Interpretation</div>
+          <div class="block_text" v-html="methodoInfos.interpretation"></div>
+        </div>
+        <div class="content_block" v-if="methodoInfos.collection !== undefined && methodoInfos.collection !== ''">
+          <div class="block_title">Collection method</div>
+          <div class="block_text" v-html="methodoInfos.collection"></div>
+        </div>
+        <div class="content_block" v-if="methodoInfos.calculation !== undefined && methodoInfos.calculation !== ''">
+          <div class="block_title">Calculation method</div>
+          <div class="block_text" v-html="methodoInfos.calculation"></div>
+        </div>
+        <div class="content_block" v-if="methodoInfos.aggregation !== undefined && methodoInfos.aggregation !== ''">
+          <div class="block_title">Aggregation rule</div>
+          <div class="block_text" v-html="methodoInfos.aggregation"></div>
+        </div>
+        <div class="content_block" v-if="methodoInfos.data !== undefined && methodoInfos.data !== ''">
+          <div class="block_title">Data</div>
+          <div class="block_text" v-html="methodoInfos.data"></div>
+        </div>
+        <div class="content_block" v-if="methodoInfos.references !== undefined && methodoInfos.references != ''">
+          <div class="block_title">References</div>
+          <div class="block_text" v-html="methodoInfos.references"></div>
+        </div>
       </div>
     </div>
     
@@ -87,7 +157,19 @@ export default {
     type: {
       type: String,
       default: function () {
-        return 'about'
+        return 'privacy'
+      }
+    },
+    indicatorLabel: {
+      type: String,
+      default: function () {
+        return ''
+      }
+    },
+    methodoInfos: {
+      type: Object,
+      default: function () {
+        return {}
       }
     }
   },
@@ -188,7 +270,48 @@ export default {
       .bolder{
         font-family: "montserratbold";
       }
+      .content_block{
+        text-align: left;
+        .block_title{
+          font-weight: 700;
+          font-size: 18px;
+          line-height: 24px;
+        }
+      }
     }
+
+    .modal_content[data-type="download"]{
+      text-align: left;
+      .download_item{
+        margin-bottom: 30px;
+        .item_title{
+          color: $colorRed;
+          font-size: 20px;
+        }
+        .item_text{
+          font-family: "montserratbold";
+          font-size: 12px;
+          margin-top: 4px;
+          line-height: 14px;
+        }
+        .download_bt{
+          margin-top: 8px;
+          background:$colorRed;
+          display: inline-block;
+          vertical-align: top;
+          width: 150px;
+          height: 24px;
+          line-height: 24px;
+          border-radius: 24px;
+          font-family: "roboto_condensedbold";
+          color: #fff;
+          text-align: center;
+          text-decoration: none;
+          text-transform: uppercase;
+        }
+      }
+    }
+    
   }
 }
 

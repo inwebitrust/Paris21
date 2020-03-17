@@ -12,6 +12,8 @@
           <nuxt-link to="/country/" class="menu_link" :class="(page == 'country') ? 'selected' : ''">Countries</nuxt-link>
           <nuxt-link to="/indicator/" class="menu_link chipped" :class="(page == 'indicator') ? 'selected' : ''">Indicators</nuxt-link>
           <nuxt-link to="/report" class="menu_link chipped" :class="(page == 'report') ? 'selected' : ''">Outlook</nuxt-link>
+          <nuxt-link to="/about" class="menu_link chipped" :class="(page == 'about') ? 'selected' : ''">About</nuxt-link>
+          <a @click="emitDownloadModal()" class="menu_link chipped">Download</a>
         </div>
         <div class="menu_mobile">
           <div class="menu_link" @click="mobileMenuActivated = !mobileMenuActivated">Menu</div>
@@ -55,7 +57,15 @@ export default {
   methods: {
     clickLogo: function () {
       if(this.page == 'home') location.reload()
-    }
+    },
+
+    emitAboutModal: function () {
+      this.$emit('aboutModal')
+    },
+
+    emitDownloadModal: function () {
+      this.$emit('downloadModal')
+    },
   }
 }
 </script>
@@ -149,6 +159,7 @@ export default {
           color: #fff;
           margin: 0 14px;
           font-size: 12px;
+          cursor: pointer;
           &:before, &:after{
             display: none;
           }
@@ -160,6 +171,7 @@ export default {
       vertical-align: top;
       margin: 0 25px;
       color: #222;
+      cursor: pointer;
       text-decoration: none;
       text-transform: uppercase;
       font-family: "roboto_condensedbold";

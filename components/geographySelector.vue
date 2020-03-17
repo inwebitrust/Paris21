@@ -18,18 +18,18 @@
             -->
         </div>
 
-        <div class="selector_expandedcontent" :class="(state == 'expanded') ? 'displayed' : ''">
+        <div class="selector_expandedcontent" :class="(state == 'expanded' || state == 'soloregion' || state == 'multiregion') ? 'displayed' : ''">
             <div class="expandedcontent_main">
-                <div class="expandedcontent_title" v-if="!modaled">
+                <div class="expandedcontent_title" v-if="!modaled && hasMap">
                     <span class="smaller">Statistics on your</span><br />
                     region, country or subregion
                     <div class="title_disclaimer">Click a country on the map</div>
                 </div>
-                <div class="geomap_modaled_title" v-if="modaled">Click a country on the map</div>
-                <div class="geography_mapcontainer" :class="(state == 'expanded') ? 'displayed' : ''">
+                <div class="geomap_modaled_title" v-if="modaled && hasMap">Click a country on the map</div>
+                <div class="geography_mapcontainer" :class="(state == 'expanded') ? 'displayed' : ''" v-if="hasMap">
                     <highmapsChoropleth :mapID="mapID" :mapColor="mapColor" :modaled="modaled" :geojsonID="'custom/world-robinson'" :areasData="computedAreasData" :hoveredArea="hoveredGeo" :selectedAreas="modalSelectedGeographies" :selectedCountryInput="modaledCountryInput" @selectGeoFromMap="updateGeoSelectedFromMap()" :mapZoomFactor="mapZoomFactor" :mapZoom="mapZoom" :mapZoomDefault="mapZoomDefault" :hasTooltipValues="hasTooltipValues"></highmapsChoropleth>
                 </div>
-                <div class="geography_map_legend">
+                <div class="geography_map_legend" v-if="hasMap">
                     <div class="legend_zoomblock">
                         <a class="zoomblock_bt zoomblock_resetbt" @click="zoomZeroMap()"></a>
                         <a class="zoomblock_bt zoomblock_zoominbt" @click="zoomInMap()"></a>
@@ -43,7 +43,7 @@
                 <div class="sidebar_input">
                     <div class="input_label">Search a region, country, subregion...</div>
                     <a class="input_icon" :data-search="userKeyboardInput !== ''" @click="closeSearch()"></a>
-                    <input type="text" id="GeographyInput" placeholder="Ex : France, Asia-Pacific, OECD…" @keyup="keyboardInput($event.target.value)" />
+                    <input type="text" id="GeographyInput" placeholder="Ex : Colombia, Africa, Fragile…" @keyup="keyboardInput($event.target.value)" />
                     <v-select class="mobile_selectbox" v-model="mobileSelectBoxSelected" return-object :items="mobileSelectBoxClassifs" solo>
                         <template slot="selection" slot-scope="data">
                             {{ data.item.value }}
@@ -56,7 +56,7 @@
 
 
                 <div class="geography_items">
-                    <div v-for="(geoType, indexType) in typedGeographies" :key="indexType" class="geography_type" v-if="mobileSelectBoxSelected.id == 'all' || mobileSelectBoxSelected.id == indexType">
+                    <div v-for="(geoType, indexType) in typedGeographies" :data-type="indexType" :key="indexType" class="geography_type" v-if="(mobileSelectBoxSelected.id == 'all' || mobileSelectBoxSelected.id == indexType) && ((indicatorType == 'ordinal' && (indexType == '3-countries')) || (indicatorType !== 'ordinal'))">
                         <div class="geography_items_title">
                             <span v-if="geoType.name == 'Regions'">Regions & groups</span>
                             <span v-if="geoType.name != 'Regions'">{{ geoType.name }}</span>
@@ -166,6 +166,18 @@
                 default: function (){
                     return true
                 }
+            },
+            hasMap:{
+                type:Boolean, 
+                default: function (){
+                    return true
+                }
+            },
+            indicatorType:{
+                type:String,
+                default: function () {
+                    return ''
+                }
             }
         },
         data: function () {
@@ -190,20 +202,25 @@
         mounted: function () {
             var self = this
 
-            if(this.$store.csvDataPromiseGeographyInComponent === undefined) {
-                this.$store.csvDataPromiseGeographyInComponent = UTILS.getAPIGeography(this.$store)
-                this.$store.csvDataPromiseGeographyInComponent.then( function(promiseCallback) {
-                    self.initAfterDataLoaded()
-                })
-            } else {
-                this.initAfterDataLoaded()
-            }
+            this.loadGeography();
         },
         methods: {
+            loadGeography: function () {
+                var self = this;
+                if(this.$store.csvDataPromiseGeographyInComponent === undefined || this.DBGeography.length == 0) {
+                    this.$store.csvDataPromiseGeographyInComponent = UTILS.getAPIGeography(this.$store)
+                    this.$store.csvDataPromiseGeographyInComponent.then( function(promiseCallback) {
+                        self.DBGeography = self.$store.DBGeography
+                        self.initAfterDataLoaded()
+                    })
+                } else {
+                    this.initAfterDataLoaded()
+                }
+            },
+
             initAfterDataLoaded: function () {
                 var self = this
-                this.DBGeography = this.$store.DBGeography
-
+                
                 var tmpTypedGeographies = _.groupBy(this.DBGeography, function(geo){
                     return geo.type
                 })
@@ -236,7 +253,7 @@
                 this.typedGeographies = {}
                 this.typedGeographies['1-regions'] = this.tmpTypedGeographiesObj['1-regions']
                 this.typedGeographies['2-subregions'] = this.tmpTypedGeographiesObj['2-subregions']
-                this.typedGeographies['3-countries'] = this.tmpTypedGeographiesObj['3-countries']
+                if(this.state != "soloregion" && this.state != "multiregion") this.typedGeographies['3-countries'] = this.tmpTypedGeographiesObj['3-countries']
 
                 this.modalSelectedGeographies = this.selectedGeographies
                 this.dataLoaded = true
@@ -274,8 +291,13 @@
             },
 
             selectCountry: function (geoItem) {
-                this.$parent.modaledCountry = geoItem
-                this.$emit('selectCountryFromModal')
+                if(this.state == "soloregion") {
+                    this.$parent.selectedOrdinalRegionSolo = geoItem.m49
+                    this.$emit('selectOrdinalSoloGeoFromModal')
+                } else {
+                    this.$parent.modaledCountry = geoItem
+                    this.$emit('selectCountryFromModal')
+                }
             },
 
             isGeographySelected: function(geoItem) {
@@ -300,8 +322,13 @@
             },
 
             validateBucket: function () {
-                this.$parent.selectedGeographies = this.modalSelectedGeographies
-                this.$emit('selectGeographiesFromModal')
+                if(this.state == 'multiregion') {
+                    this.$parent.selectedOrdinalRegions = this.modalSelectedGeographies
+                    this.$emit('selectOrdinalGeoFromModal')
+                } else {
+                    this.$parent.selectedGeographies = this.modalSelectedGeographies
+                    this.$emit('selectGeographiesFromModal')
+                }
             },
 
             keyboardInput: function (keybaordValue) {
@@ -389,6 +416,9 @@
             },
             mobileSelectBoxSelected: function () {
                 var self = this;
+            },
+            selectedGeographies: function () {
+                this.loadGeography();
             }
         }
     }
@@ -413,6 +443,26 @@
             .expandedcontent_title{
                 margin: 0 20px;
             }
+        }
+    }
+
+    .selector[data-state="soloregion"][data-modaled="true"], .selector[data-state="multiregion"][data-modaled="true"]{
+        width: 100%;
+        .geography_sidebar{
+            position: relative;
+            width: 100%;
+            padding: 10px 20px 30px !important;
+            .sidebar_input{
+                #GeographyInput{
+                    width: 100%;
+                }
+            }
+        }
+    }
+
+    .selector[data-state="soloregion"][data-modaled="true"]{
+        .selector_bucket{
+            display: none;
         }
     }
 

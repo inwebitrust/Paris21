@@ -1,16 +1,16 @@
 <template>
     <div id="Country" class="page" :class="(displayGeoModal || displayIndicatorModal || selectedCountry == '') ? 'fixed' : ''" data-page="country">
         <div class="appmodal_cache" :class="(displayGeoModal || displayIndicatorModal) ? 'displayed': ''" @click="displayGeoModal = false; displayIndicatorModal = false"></div>
-        <paris21Header :page="'country'"></paris21Header>
+        <paris21Header :page="'country'" @aboutModal="displayAboutModal = true" @downloadModal="displayDownloadModal = true"></paris21Header>
 
         <div class="page_main" v-if="selectedCountry !== ''">
             <div class="main_head">
                 <div class="head_title"><span class="bolder">{{ countryName }}</span></div>
                 <div class="head_cartridge">
                     <div class="cartridge_col">
-                        <div class="cartridge_pib" v-if="lastGDPAvailable != ''">GDP per capita : {{lastGDPAvailable}} $</div>
-                        <div class="cartridge_pop" v-if="lastPopAvailable != ''">Population : {{lastPopAvailable}}</div>
-                        <a class="cartridge_website_link" v-if="NSOWebsite != ''" :href="NSOWebsite" target="_blank">NSO Website</a>
+                        <div class="cartridge_pib" v-if="lastGDPAvailable != ''  && (countryObj.subregion !== '' && countryObj.region !== '')">GDP per capita : {{lastGDPAvailable}} $</div>
+                        <div class="cartridge_pop" v-if="lastPopAvailable != ''  && (countryObj.subregion !== '' && countryObj.region !== '')">Population : {{lastPopAvailable}}</div>
+                        <a class="cartridge_website_link" v-if="NSOWebsite != ''  && (countryObj.subregion !== '' && countryObj.region !== '')" :href="NSOWebsite" target="_blank">NSO Website</a>
                     </div>
                     <div class="cartridge_col" data-col="2" v-if="dataLoaded && (countryObj.subregion !== '' && countryObj.region !== '')">
                         <div class="cartridge_incgroup">Income group : {{lastIncomeGroup}} </div>
@@ -67,12 +67,12 @@
                                 <div class="indicator_geovalues">
                                     <div class="geovalues_col">
                                         <div class="geovalues_col_content">
-                                            <geovaluesTableCell :refYear="computeRefYear(indicatorItem.id)" :indicatorData="$store.DBGeoItems[selectedCountry].indicators[indicatorItem.id]" :indicatorID="indicatorItem.id" :comparedCountries="dynamicComparedCountries" :dataType="indicatorItem.dataviz_type" :isReferring="true" :geoType="countryObj.type"></geovaluesTableCell>
+                                            <geovaluesTableCell :refYear="computeRefYear(indicatorItem.id)" :indicatorData="$store.DBGeoItems[selectedCountry].indicators[indicatorItem.id]" :indicatorID="indicatorItem.id" :comparedCountries="dynamicComparedCountries" :dataType="indicatorItem.dataviz_type" :isReferring="true" :geoType="countryObj.type" :geoID="selectedCountry" :geoLabel="countryName" :geoGroups="$store.DBGeoGroups"></geovaluesTableCell>
                                         </div>
                                     </div>
                                     <div class="geovalues_col" v-if="comparedCountries[0] !== undefined">
                                         <div class="geovalues_col_content" v-if="$store.DBGeoItems[comparedCountries[0].m49] !== undefined">
-                                            <geovaluesTableCell :refYear="computeRefYear(indicatorItem.id)" :indicatorData="$store.DBGeoItems[comparedCountries[0].m49].indicators[indicatorItem.id]" :indicatorID="indicatorItem.id" :comparedCountries="dynamicComparedCountries" :dataType="indicatorItem.dataviz_type" :isReferring="false" :geoType="comparedCountries[0].type"></geovaluesTableCell>
+                                            <geovaluesTableCell :refYear="computeRefYear(indicatorItem.id)" :indicatorData="$store.DBGeoItems[comparedCountries[0].m49].indicators[indicatorItem.id]" :indicatorID="indicatorItem.id" :comparedCountries="dynamicComparedCountries" :dataType="indicatorItem.dataviz_type" :isReferring="false" :geoType="comparedCountries[0].type" :geoID="comparedCountries[0].m49" :geoLabel="comparedCountries[0].name" :geoGroups="$store.DBGeoGroups"></geovaluesTableCell>
                                         </div>
                                         <div class="geovalues_col_content" v-if="$store.DBGeoItems[comparedCountries[0].m49] == undefined">
                                             <div class="geovaluestable_cell">
@@ -84,7 +84,7 @@
                                     </div>
                                     <div class="geovalues_col" v-if="comparedCountries[1] !== undefined">
                                         <div class="geovalues_col_content" v-if="$store.DBGeoItems[comparedCountries[1].m49] !== undefined">
-                                            <geovaluesTableCell :refYear="computeRefYear(indicatorItem.id)" :indicatorData="$store.DBGeoItems[comparedCountries[1].m49].indicators[indicatorItem.id]" :indicatorID="indicatorItem.id" :comparedCountries="dynamicComparedCountries" :dataType="indicatorItem.dataviz_type" :isReferring="false" :geoType="comparedCountries[1].type"></geovaluesTableCell>
+                                            <geovaluesTableCell :refYear="computeRefYear(indicatorItem.id)" :indicatorData="$store.DBGeoItems[comparedCountries[1].m49].indicators[indicatorItem.id]" :indicatorID="indicatorItem.id" :comparedCountries="dynamicComparedCountries" :dataType="indicatorItem.dataviz_type" :isReferring="false" :geoType="comparedCountries[1].type" :geoID="comparedCountries[1].m49" :geoLabel="comparedCountries[1].name" :geoGroups="$store.DBGeoGroups"></geovaluesTableCell>
                                         </div>
                                         <div class="geovalues_col_content" v-if="$store.DBGeoItems[comparedCountries[1].m49] == undefined">
                                             <div class="geovaluestable_cell">
@@ -96,7 +96,7 @@
                                     </div>
                                     <div class="geovalues_col" v-if="comparedCountries[2] !== undefined">
                                         <div class="geovalues_col_content" v-if="$store.DBGeoItems[comparedCountries[2].m49] !== undefined">
-                                            <geovaluesTableCell :refYear="computeRefYear(indicatorItem.id)" :indicatorData="$store.DBGeoItems[comparedCountries[2].m49].indicators[indicatorItem.id]" :indicatorID="indicatorItem.id" :comparedCountries="dynamicComparedCountries" :dataType="indicatorItem.dataviz_type" :isReferring="false" :geoType="comparedCountries[2].type"></geovaluesTableCell>
+                                            <geovaluesTableCell :refYear="computeRefYear(indicatorItem.id)" :indicatorData="$store.DBGeoItems[comparedCountries[2].m49].indicators[indicatorItem.id]" :indicatorID="indicatorItem.id" :comparedCountries="dynamicComparedCountries" :dataType="indicatorItem.dataviz_type" :isReferring="false" :geoType="comparedCountries[2].type" :geoID="comparedCountries[2].m49" :geoLabel="comparedCountries[2].name" :geoGroups="$store.DBGeoGroups"></geovaluesTableCell>
                                         </div>
                                         <div class="geovalues_col_content" v-if="$store.DBGeoItems[comparedCountries[2].m49] == undefined">
                                             <div class="geovaluestable_cell">
@@ -137,6 +137,8 @@
         <paris21Modal type="indicators" :displayed="displayIndicatorsModal" @closeModal="displayIndicatorsModal = false"></paris21Modal>
 
         <paris21Modal type="about" :displayed="displayAboutModal" @closeModal="displayAboutModal = false"></paris21Modal>
+
+        <paris21Modal type="download" :displayed="displayDownloadModal" @closeModal="displayDownloadModal = false"></paris21Modal>
 
         <paris21Footer @aboutModal="displayAboutModal = true"></paris21Footer>
     </div>
@@ -200,7 +202,8 @@ export default {
             NSOWebsite: '',
             lastIncomeGroup: '',
             displayIndicatorsModal: false,
-            displayAboutModal: false
+            displayAboutModal: false,
+            displayDownloadModal: false
         }
     },
 
@@ -220,10 +223,23 @@ export default {
             if(this.$store.csvDataPromiseIndicators === undefined) {
                 this.$store.csvDataPromiseIndicators = UTILS.getAPIIndicators(this.$store)
                 this.$store.csvDataPromiseIndicators.then( function(promiseCallback) {
-                    self.loadAPIGeography()
+                    self.loadGeoGroups()
                 })
             } else {
-                this.loadAPIGeography()
+                this.loadGeoGroups()
+            }
+        },
+
+        loadGeoGroups: function () {
+            var self = this
+
+            if(this.$store.geoGroupsPromise === undefined) {
+                this.$store.geoGroupsPromise = UTILS.getGeoGroups(this.$store)
+                this.$store.geoGroupsPromise.then( function(promiseCallback) {
+                    self.loadAPIGeography();
+                })
+            } else {
+                this.loadAPIGeography();
             }
         },
 
@@ -243,6 +259,7 @@ export default {
         loadAPIGeoItems: function () {
             if(this.selectedCountry !== ''){
                 this.comparedCountries = []
+
                 if(this.$store.DBGeographyObj[this.selectedCountry].subregion !== '' && this.$store.DBGeographyObj[this.selectedCountry].type !== 'subregion') {
                     this.comparedCountries.push({
                         name: this.$store.DBGeographyObj[this.selectedCountry].subregion,
@@ -293,6 +310,7 @@ export default {
         },
 
         updatePage: function () {
+            console.log("DBGeoItems", this.$store.DBGeoItems);
             if(this.selectedCountry !== ''){
                 this.dataLoaded = true
                 this.DBClassifIndicators = this.$store.DBClassifIndicators
@@ -304,15 +322,21 @@ export default {
                     })
                 }
 
+                console.log("ici", this.selectedCountry, this.$store.DBGeoItems);
+
                 var allPopulations = this.$store.DBGeoItems[this.selectedCountry].indicators[94]
                 if(allPopulations !== undefined) {
-                    var tmpPop = _.values(allPopulations.years)[_.size(allPopulations.years)-1]
+                    var yearsValues = _.without(allPopulations.years, "");
+                    var tmpPop = yearsValues[yearsValues.length - 1]
                     this.lastPopAvailable = numberFormat(parseInt(tmpPop, 10), 0, '', ' ')
                 }
 
+                console.log("after")
+
                 var allGDPS = this.$store.DBGeoItems[this.selectedCountry].indicators[35]
                 if(allGDPS !== undefined) {
-                    var tmpGDP = _.values(allGDPS.years)[_.size(allGDPS.years)-1]
+                    var gdpValues = _.without(allGDPS.years, "");
+                    var tmpGDP = gdpValues[gdpValues.length-1]
                     this.lastGDPAvailable = numberFormat(parseInt(tmpGDP, 10), 0, '', ' ')
                 }
 
@@ -396,21 +420,62 @@ export default {
 
             tab_text += "<table border='1px'>"
 
-            tab_text += '<tr><th>Country</th><th>Indicator</th><th>Year</th><th>Data Value</th></tr>'
+            tab_text += '<tr><th>Country</th><th>Indicator</th><th>Year</th><th>Data Value</th><th>Data Aggregate</th></tr>'
 
             if(contentType == 'head') {
                 _.each(this.$store.DBGeoItems[this.selectedCountry].indicators, function (ind){
                     var indKeys = _.keys(ind.years)
                     var indValue = _.values(ind.years)[indKeys.length - 1]
+                    if(self.$store.DBIndicatorsObj[ind.id] !== undefined) {
+                        if(self.$store.DBIndicatorsObj[ind.id].dataviz_type == 'ordinal') {
+                            var foundSpecificIndicator = _.find(UTILS.specificIndicators, function (indic) {
+                              return ind.id == indic.id;
+                            })
+                            if(foundSpecificIndicator !== undefined) {
+                                var specificLabelsObj = {}
+                                _.each(foundSpecificIndicator.labels, function(indicLabel){
+                                    specificLabelsObj[indicLabel.value] = indicLabel;
+                                })
+                            }
+                            //if is country
+                            if(self.$store.DBGeographyObj[self.selectedCountry].country != '') {
+                                var countryValue = (parseFloat(indValue)).toFixed(1)
+                                indValue = countryValue
+                                if(indValue == undefined || indValue == "") indValue = "no data"
+                                tab_text += '<tr><td>'+self.$store.DBGeographyObj[self.selectedCountry].name+'<td>'+self.$store.DBIndicatorsObj[ind.id].name+'</td><td>'+indKeys[indKeys.length-1]+'</td><td>'+indValue+'</td><td></td></tr>'
+                            } else {
+                                var JSONYearData = JSON.parse(indValue.replace('"."', '","'));
+                                var labelizedObj = {};
+                                _.each(JSONYearData, function (objData){
+                                    var countryValue = (parseFloat(objData.value)).toFixed(1)
+                                    labelizedObj[specificLabelsObj[countryValue].label] = {
+                                        "nb": objData.nb
+                                    }
+                                });
 
-                    tab_text += '<tr><td>'+self.$store.DBGeographyObj[self.selectedCountry].name+'<td>'+self.$store.DBIndicatorsObj[ind.id].name+'</td><td>'+indKeys[indKeys.length-1]+'</td><td>'+indValue+'</td></tr>'
+                                _.each(labelizedObj, function (objData, objIndex){
+                                    tab_text += '<tr><td>'+self.$store.DBGeographyObj[self.selectedCountry].name+'<td>'+self.$store.DBIndicatorsObj[ind.id].name+'</td><td>'+indKeys[indKeys.length-1]+'</td><td>'+objIndex+'</td><td>'+objData.nb+'</td></tr>'
+                                })
+                            } 
+                        } else {
+                            if(indValue == undefined || indValue == "") indValue = "no data"
+                            tab_text += '<tr><td>'+self.$store.DBGeographyObj[self.selectedCountry].name+'<td>'+self.$store.DBIndicatorsObj[ind.id].name+'</td><td>'+indKeys[indKeys.length-1]+'</td><td>'+indValue+'</td><td></td></tr>'
+                        }  
+                    }
                 })
             } else {
                 var allCountriesM49 = _.union([this.selectedCountry], _.map(this.comparedCountries, function(cc){ return cc.m49;}) )
                 _.each(this.selectedIndicators, function (selInd) {
 
                     var inc = 0;
-                    var refYear = '';
+                    console.log("selInd", selInd)
+                    
+                    var refYear = null
+                    var selectedCountryIndicatorData = self.$store.DBGeoItems[self.selectedCountry].indicators[selInd]
+                    if (selectedCountryIndicatorData !== undefined && selectedCountryIndicatorData.years !== undefined) {
+                        refYear = UTILS.getLastKeyFromObj(self.$store.DBGeoItems[self.selectedCountry].indicators[selInd], 'years', 'float');
+                    }
+
                     _.each(allCountriesM49, function(countryM49){
                         var indValue = ''
 
@@ -418,17 +483,51 @@ export default {
                             var indicatorData = self.$store.DBGeoItems[countryM49].indicators[selInd]
                             
                             if (indicatorData !== undefined && indicatorData.years !== undefined) {
-                                if(inc == 0) {
-                                    var indKeys = _.keys(indicatorData.years)
-                                    indValue = _.values(indicatorData.years)[indKeys.length - 1]
-                                    refYear = indKeys[indKeys.length-1]
-                                } else {
-                                    indValue = indicatorData.years[refYear]
+
+                                if(refYear == null) refYear = _.keys(indicatorData.years)[_.size(indicatorData.years)-1]
+                                indValue = indicatorData.years[refYear]
+                                console.log("indicatorData", indicatorData, indValue)
+
+                                if(indValue == undefined || indValue == ""){
+                                    indValue = "no data";
+                                    tab_text += '<tr><td>'+self.$store.DBGeographyObj[countryM49].name+'</td><td>'+self.$store.DBIndicatorsObj[selInd].name+'</td><td>'+refYear+'</td><td>'+indValue+'</td><td></td></tr>'
+                                } else if(self.$store.DBIndicatorsObj[indicatorData.id].dataviz_type == 'ordinal') {
+                                    var foundSpecificIndicator = _.find(UTILS.specificIndicators, function (indic) {
+                                      return indicatorData.id == indic.id;
+                                    })
+                                    if(foundSpecificIndicator !== undefined) {
+                                        var specificLabelsObj = {}
+                                        _.each(foundSpecificIndicator.labels, function(indicLabel){
+                                            specificLabelsObj[indicLabel.value] = indicLabel;
+                                        })
+                                    }
+                                    //if is country
+                                    if(self.$store.DBGeographyObj[countryM49].country != '') {
+                                        var countryValue = (parseFloat(indValue)).toFixed(1)
+                                        indValue = specificLabelsObj[countryValue].label
+                                    } else {
+                                        var JSONYearData = JSON.parse(indValue.replace('"."', '","'));
+                                        var labelizedObj = {};
+                                        _.each(JSONYearData, function (objData){
+                                            var countryValue = (parseFloat(objData.value)).toFixed(1)
+                                            labelizedObj[specificLabelsObj[countryValue].label] = {
+                                                "nb": objData.nb
+                                            }
+                                        });
+                                        indValue = JSON.stringify(labelizedObj)
+                                    } 
+                                    //End Specific ordinal
+                                    _.each(labelizedObj, function (objData, objIndex){
+                                        tab_text += '<tr><td>'+self.$store.DBGeographyObj[countryM49].name+'</td><td>'+self.$store.DBIndicatorsObj[selInd].name+'</td><td>'+refYear+'</td><td>'+objIndex+'</td><td>'+objData.nb+'</td></tr>'
+                                    })
+                                    
+                                } else {
+                                    tab_text += '<tr><td>'+self.$store.DBGeographyObj[countryM49].name+'</td><td>'+self.$store.DBIndicatorsObj[selInd].name+'</td><td>'+refYear+'</td><td>'+indValue+'</td><td></td></tr>'
                                 }
+                                
+                                
                             }        
                         }
-
-                        tab_text += '<tr><td>'+self.$store.DBGeographyObj[countryM49].name+'</td><td>'+self.$store.DBIndicatorsObj[selInd].name+'</td><td>'+refYear+'</td><td>'+indValue+'</td></tr>'
 
                         inc += 1
                     })
@@ -671,6 +770,7 @@ $geosSingleColMargin: 10px;
                     left: 50%;
                     top: 50px;
                     width: 1000px;
+                    z-index: 1000000;
                     @include transform(translate(-50%, 0));
                 }
                 .head_menus{
@@ -775,6 +875,11 @@ $geosSingleColMargin: 10px;
                                 border-radius: 0;
                                 margin-bottom: 26px;
                             }
+                            &:hover{
+                                &:before{
+                                    background-color: transparent;
+                                }
+                            }
                         }
                         &:hover{
                             &:before{
@@ -859,7 +964,7 @@ $geosSingleColMargin: 10px;
                     }
                 }
                 .indicator_item{
-                    height: 80px;
+                    height: 120px;
                     padding: 0px;
                     margin: 0 10px;
                     background: #fff;
@@ -910,9 +1015,13 @@ $geosSingleColMargin: 10px;
                             vertical-align: top;
                             line-height: 50px;
                             height: 100%;
+                            position: relative;
+                            &:hover{
+                                z-index: 100000;
+                            }
                             .geovalues_col_content{
                                 width: 100%;
-                                height: 100%;
+                                height: 70%;
                             }
                         }
                     }

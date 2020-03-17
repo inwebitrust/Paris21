@@ -48,6 +48,7 @@ module.exports = {
       extend(config, ctx) {
         config.plugins = config.plugins.filter((plugin) => plugin.constructor.name !== 'UglifyJsPlugin')
           // Run ESLint on save
+          /*
           if (ctx.isDev && ctx.isClient) {
               config.module.rules.push({
                   enforce: "pre",
@@ -55,11 +56,12 @@ module.exports = {
                   loader: "eslint-loader",
                   exclude: /(node_modules)/,
                   options: {
-                      formatter: require('eslint-friendly-formatter'),
+                      //formatter: require('eslint-friendly-formatter'),
                       emitWarning: true
                   }
               })
           }
+          */
 
           if (ctx.isClient) {
             config.entry.vendor.push('babel-polyfill')
@@ -78,7 +80,10 @@ module.exports = {
     ]
   },
   env: {
-    title: process.env.APP_TITLE || 'NUxtjs template'
+    title: process.env.APP_TITLE || 'NUxtjs template',
+    CONFIG_APP: {
+      api_url: "https://ocde.wedodata.fr/paris21_api/"
+    }
   },
   mode: 'spa',
   /* router: {
@@ -89,6 +94,6 @@ module.exports = {
     base : '/compass_nuxt/dist/'
   }*/
   router : {
-    base : '/paris21/'
+    //base : '/paris21/'
   }
 }

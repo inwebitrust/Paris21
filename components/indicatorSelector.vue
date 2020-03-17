@@ -206,6 +206,9 @@
                 this.initialIndicators = JSON.parse(JSON.stringify(this.selectedIndicators))
                 this.modalSelectedIndicators = this.selectedIndicators
                 this.DBIndicators = this.$store.DBIndicators
+                this.DBIndicators = _.filter(this.DBIndicators, function (indic){
+                    return (indic.id !== "94" && indic.id !== "35")
+                })
                 this.DBKeyIndicators = this.$store.DBKeyIndicators
                 this.DBClassifIndicators = this.$store.DBClassifIndicators
                 this.reinitDisplayedClassifIndicators()
@@ -284,8 +287,6 @@
                       items: indicator.items
                   })
                 })
-
-                console.log('reinitDisplayedClassifIndicators', self.displayedClassifIndicators)
             },
 
             closeSearching:function () {
@@ -389,7 +390,6 @@
             },
 
             selectedIndicators: function () {
-                console.log('watch selectedIndicators')
                 this.modalSelectedIndicators = this.selectedIndicators
             }
         }

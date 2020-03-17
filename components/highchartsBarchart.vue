@@ -45,22 +45,38 @@ export default {
           suffixY:''
         }
       }
+    },
+    indicatorID: {
+      type: String,
+      default: function () {
+        return ''
+      }
+    },
+    indicatorLastYear: {
+      type: String,
+      default: function () {
+        return ''
+      }
+    },
+    geoGroups:{
+      type: Array,
+      default: function () {
+        return []
+      }
     }
   },
   data: function () {
     return {
       barchartHigcharts: '',
-      chartColors:['#307ABF', '#036463', '#149E9D', '#19A5CC', '#585CA3', "#B55CA3", "#BD7E4D", "F5992B", "#D9AD48", "#EA6651"]
+      chartColors:['#307ABF', '#036463', '#149E9D', '#19A5CC', '#585CA3', "#B55CA3", "#BD7E4D", "F5992B", "#D9AD48", "#EA6651"],
+      availableDataForRegions: {},
+      regionItems: []
     }
   },
   mounted () {
     var self = this
-    this.generateChart()
   },
   methods: {
-    generateChart: function () {
-      var self = this
-    },
 
     updateBarchart: function () {
       var self = this
@@ -73,17 +89,17 @@ export default {
       var isShared = true
 
       var barchartSeriesData = []
-      console.log('timeseriesData', this.timeseriesData)
       _.each(this.timeseriesData, function(geoData, index){
         var geoValue = _.values(geoData.data)[geoData.data.length - 1]
         if(geoValue === undefined) geoValue = 0.00001
         barchartSeriesData.push({
           name:geoData.name,
           y:geoValue,
+          m49:geoData.m49,
+          geoType:geoData.geoType,
           color:self.chartColors[index]
         })
       })
-      console.log('barchartSeriesData', barchartSeriesData)
 
       this.barchartHigcharts = new Highcharts.chart({
         chart: {
@@ -143,9 +159,24 @@ export default {
                 align: 'center',
                 formatter: function () {
                   if(this.y == 0.00001) return 'no data'
-                  else return this.y.toFixed(1) + ' ' + self.seriesParams.suffixY
+                  else {
+                    if(this.point.geoType == 'country'){
+                      return this.y.toFixed(1) + ' ' + self.seriesParams.suffixY
+                    }
+                    else {
+                      var outOfString = '';
+                      var regionM49 = this.point.m49;
+                      var foundGeoGroup = _.find(self.geoGroups, function (geoData){
+                        return geoData["1"] == regionM49;
+                      });
+
+                      if(self.availableDataForRegions[regionM49] !== undefined && foundGeoGroup !== undefined) outOfString = self.availableDataForRegions[regionM49] + ' out of ' + foundGeoGroup.count;
+                      return this.y.toFixed(1) + ' ' + self.seriesParams.suffixY + '<br /><span class="smaller">'+outOfString+'</span>'
+                    }
+                  }
                 },
-                y: 0, // 10 pixels down from the top
+                y: 0, // 10 pixels down from the top,
+                useHTML:true,
                 style: {
                     fontSize: '13px',
                     fontFamily: 'montserratregular'
@@ -154,11 +185,37 @@ export default {
         }]
 
       });
+    },
+
+    getAvailableDataForRegion: function (inc) {
+      var self = this;
+
+      var geoItem = this.regionItems[inc];
+
+      if(geoItem !== undefined) {
+        axios.get(process.env.CONFIG_APP.api_url + 'getAvailableData.php?indicatorID='+self.indicatorID+'&year='+self.indicatorLastYear+'&geoType='+geoItem.geoType+'&geoID='+geoItem.m49)
+          .then(response => {
+            self.availableDataForRegions[geoItem.m49] = response.data
+            self.getAvailableDataForRegion(inc+1)
+        })
+      } else {
+        this.updateBarchart()
+      }
     }
   },
   watch: {
     timeseriesData: function(obj){
-      this.updateBarchart()
+      var self = this;
+      this.regionItems = _.filter(this.timeseriesData, function (geoItem) {
+        return geoItem.geoType !== "country"
+      })
+
+      if(this.regionItems.length > 0) {
+        this.availableDataForRegions = {};
+        this.getAvailableDataForRegion(0)
+      } else {
+        self.updateBarchart();
+      }
     }
   }
 }
@@ -180,6 +237,12 @@ export default {
     .highcharts-yaxis-grid{
       stroke-dasharray:3px;
     }
+  }
+  .highcharts-label{
+    text-align: center;
+  }
+  .smaller{
+    font-size: 10px;
   }
 }
 

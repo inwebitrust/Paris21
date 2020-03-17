@@ -15,7 +15,7 @@ while($row = mysqli_fetch_array($resultExtractions)) {
 }
 
 
-$queryIndicator = "SELECT datasource FROM indicators_jan2020 WHERE id = ".$_GET["indicatorID"];
+$queryIndicator = "SELECT datasource FROM indicators_mar2020 WHERE id = ".$_GET["indicatorID"];
 $resultIndicator = $link->query($queryIndicator);
 while($row = mysqli_fetch_array($resultIndicator)) {
     if($row["datasource"] == "worldbank") $DATADB = $WORLDBANKDB;

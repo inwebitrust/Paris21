@@ -13,11 +13,12 @@ var specificIndicators = [
     {id:96, labels:[{value:"0.0", label: "no"}, {value:"0.5", label: "last 10 years"}, {value:"1.0", label: "within last 5 years"}]},
     {id:10, labels:[{value:"0.0", label: "never"}, {value:"0.3", label: "once"}, {value:"0.7", label: "at least 6 times"}, {value:"1.0", label:"annually"}]},
     {id:36, labels:[{value:"0.0", label: "never"}, {value:"0.3", label: "once"}, {value:"0.7", label: "at least 6 times"}, {value:"1.0", label:"annually"}]},
-    {id:40, labels:[{value:"0.0", label: "never"}, {value:"0.3", label: "once"}, {value:"0.7", label: "at least 6 times"}, {value:"1.0", label:"annually"}]},
+    {id:40, labels:[{value:"0.0", label: "no"}, {value:"0.5", label: "last 10 years"}, {value:"1.0", label:"within last 5 years"}]},
     {id:46, labels:[{value:"0.0", label: "never"}, {value:"0.3", label: "once"}, {value:"0.7", label: "at least 6 times"}, {value:"1.0", label:"annually"}]},
     {id:57, labels:[{value:"0.0", label: "never"}, {value:"0.3", label: "once"}, {value:"0.7", label: "at least 6 times"}, {value:"1.0", label:"annually"}]},
     {id:92, labels:[{value:"0.0", label: "never"}, {value:"0.3", label: "once"}, {value:"0.7", label: "at least 6 times"}, {value:"1.0", label:"annually"}]},
     {id:99, labels:[{value:"0.0", label: "never"}, {value:"0.3", label: "once"}, {value:"0.7", label: "at least 6 times"}, {value:"1.0", label:"annually"}]},
+    {id:150, labels:[{value:"Low income", label: "Low income", inc:0}, {value:"Lower middle income", label: "Lower middle income", inc:1}, {value:"Upper middle income", label: "Upper middle income", inc:2}, {value:"High income", label:"High income", inc:3}]},
     {id:7, labels:[{value:"0.0", label: "not adopted"}, {value:"1.0", label: "adopted"}]}
 ];
 
@@ -32,7 +33,7 @@ async function getAPIIndicators ($store) {
   }
 
   var randNb = Math.round(Math.random()*1000000)
-  return axios.get('https://ocde.wedodata.fr/paris21_api/getIndicators.php?rand='+randNb, config)
+  return axios.get(process.env.CONFIG_APP.api_url + 'getIndicators.php?rand=', config)
     .then(response => {
       var tmpArray = response.data
 
@@ -67,6 +68,11 @@ async function getAPIIndicators ($store) {
         else if(classifKey == 'Use') classifAlpha = 4
         else if(classifKey == 'Investment') classifAlpha = 5
         else if(classifKey == 'Planning') classifAlpha = 1
+
+        classifItems = _.filter(classifItems, function (indic){
+            return (indic.id !== "94" && indic.id !== "35")
+        })
+
         var classif = {
           key: classifKey,
           alpha: classifAlpha,
@@ -97,8 +103,7 @@ function getAPIGeography ($store) {
     }
   }
 
-  var randNb = Math.round(Math.random()*1000000)
-  return axios.get('https://ocde.wedodata.fr/paris21_api/getGeography.php?rand='+randNb, config)
+  return axios.get(process.env.CONFIG_APP.api_url + 'getGeography.php?rand=', config)
     .then(response => {
       var tmpArray = response.data
 
@@ -150,8 +155,76 @@ function getAPIGeoItemData ($store, geoID) {
   if($store.DBGeographyObj[geoID].region_code !== '' && $store.DBGeoItems[$store.DBGeographyObj[geoID].region_code] === undefined) geosIDSList.push($store.DBGeographyObj[geoID].region_code)
   if($store.DBGeoItems['1'] === undefined) geosIDSList.push('1')
 
-  var randNb = Math.round(Math.random()*1000000)
-  return axios.get('https://ocde.wedodata.fr/paris21_api/getGeoItemData.php?geoIDSList='+geosIDSList+'&rand='+randNb, config)
+  return axios.get(process.env.CONFIG_APP.api_url + 'getGeoItemData.php?geoIDSList='+geosIDSList, config)
+    .then(response => {
+      var tmpArray = response.data
+
+      var geographies = {}
+
+      _.each(tmpArray.geoItemsDataCSV, function (indicatorRow) {
+        if(geographies[indicatorRow.m49] === undefined) {
+          geographies[indicatorRow.m49] = {
+            m49: indicatorRow.m49,
+            indicators:{}
+          }
+        }
+
+        if(geographies[indicatorRow.m49].indicators[indicatorRow.indicator_id] === undefined) {
+          geographies[indicatorRow.m49].indicators[indicatorRow.indicator_id] = {
+            id: indicatorRow.indicator_id,
+            years: {}
+          }
+        }
+
+        if(geographies[indicatorRow.m49].indicators[indicatorRow.indicator_id].years[indicatorRow.year] === undefined) {
+          geographies[indicatorRow.m49].indicators[indicatorRow.indicator_id].years[indicatorRow.year] = indicatorRow.value.replace(",",".");
+        }
+      })
+
+      _.each(tmpArray.geoItemsDataWB, function (indicatorRow) {
+        if(geographies[indicatorRow.m49] === undefined) {
+          geographies[indicatorRow.m49] = {
+            m49: indicatorRow.m49,
+            indicators:{}
+          }
+        }
+
+        if(geographies[indicatorRow.m49].indicators[indicatorRow.indicator_id] === undefined) {
+          geographies[indicatorRow.m49].indicators[indicatorRow.indicator_id] = {
+            id: indicatorRow.indicator_id,
+            years: {}
+          }
+        }
+
+        geographies[indicatorRow.m49].indicators[indicatorRow.indicator_id].years[indicatorRow.year] = indicatorRow.value.replace(",",".");
+      })
+
+      _.each(geographies, function(geoObj, geoM49){
+        $store.DBGeoItems[geoM49] = {
+          m49: geoM49,
+          indicators: geoObj.indicators
+        }
+      })
+
+      return true
+    })
+    .catch(err => {
+      console.log('Une erreur est survenue', err)
+      return null
+    })
+}
+
+
+//get datavalues tabe for all geographies
+function getAPIGeoItemsData ($store) {
+  // console.log('domains.auth.getUserInfos')
+  const config = {
+    headers: {
+      // 'authorization': 'Bearer ' + token
+    }
+  }
+
+  return axios.get(process.env.CONFIG_APP.api_url + 'getGeoItemsData.php', config)
     .then(response => {
       var tmpArray = response.data
 
@@ -219,8 +292,7 @@ function getAPIIndicatorItemData ($store, indicatorID) {
     }
   }
 
-  var randNb = Math.round(Math.random()*1000000)
-  return axios.get('https://ocde.wedodata.fr/paris21_api/getIndicatorItemData.php?indicatorID='+indicatorID+'&rand='+randNb, config)
+  return axios.get(process.env.CONFIG_APP.api_url + 'getIndicatorItemData.php?indicatorID='+indicatorID, config)
     .then(response => {
       var tmpArray = response.data
 
@@ -247,9 +319,6 @@ function getAPIIndicatorItemData ($store, indicatorID) {
         id: indicatorID,
         geographies: datavaluesObj
       }
-
-      console.log("DBIndicatorItems", $store.DBIndicatorItems);
-
       return true
     })
     .catch(err => {
@@ -257,6 +326,49 @@ function getAPIIndicatorItemData ($store, indicatorID) {
       return null
     })
 }
+
+
+//get datavalues tabe for given indicatorID
+function getGeoGroups ($store, indicatorID) {
+  // console.log('domains.auth.getUserInfos')
+  const config = {
+    headers: {
+      // 'authorization': 'Bearer ' + token
+    }
+  }
+
+  var randNb = Math.round(Math.random()*1000000)
+  return axios.get(process.env.CONFIG_APP.api_url + 'getGeoGroups.php', config)
+    .then(response => {
+      $store.DBGeoGroups = response.data;
+      return true
+    })
+    .catch(err => {
+      console.log('Une erreur est survenue', err)
+      return null
+    })
+}
+
+function getIndicatorsMethodo ($store) {
+  // console.log('domains.auth.getUserInfos')
+  const config = {
+    headers: {
+      // 'authorization': 'Bearer ' + token
+    }
+  }
+
+  var randNb = Math.round(Math.random()*1000000)
+  return axios.get(process.env.CONFIG_APP.api_url + 'getIndicatorsMethodo.php', config)
+    .then(response => {
+      $store.DBIndicatorsMethodo = response.data;
+      return true
+    })
+    .catch(err => {
+      console.log('Une erreur est survenue', err)
+      return null
+    })
+}
+
 
 function csvToArray (csvString) {
   // The array we're going to build
@@ -303,6 +415,9 @@ export {
   getAPIIndicators,
   getAPIGeography,
   getAPIGeoItemData,
+  getAPIGeoItemsData,
   getLastKeyFromObj,
-  getAPIIndicatorItemData
+  getAPIIndicatorItemData,
+  getGeoGroups,
+  getIndicatorsMethodo
 }

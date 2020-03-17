@@ -11,8 +11,8 @@
         <span class="item_label">Contact Us</span>
       </a>
 
-      <a class="footer_item" data-item="about" @click="emitAboutModal()">
-        <span class="item_label">About</span>
+      <a class="footer_item" data-item="privacy" @click="emitPrivacyModal()">
+        <span class="item_label">Privacy</span>
       </a>
 
       <div class="footer_item" data-item="findus">
@@ -51,8 +51,8 @@ export default {
   mounted: function () {
   },
   methods: {
-    emitAboutModal: function () {
-        this.$emit('aboutModal')
+    emitPrivacyModal: function () {
+        this.$emit('privacyModal')
     },
   }
 }
