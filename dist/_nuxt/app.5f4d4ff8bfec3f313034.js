@@ -1498,7 +1498,7 @@ var setContext = function () {
             _context3.t2 = app.store;
             _context3.t3 = context.payload;
             _context3.t4 = context.error;
-            _context3.t5 = { "title": "NUxtjs template", "CONFIG_APP": { "api_url": "https://ocde.wedodata.fr/paris21_api/" } };
+            _context3.t5 = { "title": "NUxtjs template", "CONFIG_APP": { "api_url": "https://ocde.wedodata.fr/paris21_api/", "datafile_url": "https://ocde.wedodata.fr/paris21_admin/API/file.csv" } };
             app.context = {
               get isServer() {
                 console.warn('context.isServer has been deprecated, please use process.server instead.');

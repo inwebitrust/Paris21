@@ -1,4 +1,168 @@
-webpackJsonp([2],{
+webpackJsonp([1],{
+
+/***/ "+ptz":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    { staticClass: "page", attrs: { id: "Home", "data-page": "home" } },
+    [
+      _c("paris21Header", {
+        attrs: { page: "home" },
+        on: {
+          downloadModal: function($event) {
+            _vm.displayDownloadModal = true
+          }
+        }
+      }),
+      _c("div", { staticClass: "page_main" }, [
+        _c("div", { staticClass: "main_wrapper" }, [
+          _vm._m(0),
+          _c(
+            "div",
+            {
+              staticClass: "main_blocks",
+              attrs: { "data-selector-expanded": _vm.selectorExpanded }
+            },
+            [
+              _c("geographySelector", {
+                attrs: {
+                  state:
+                    _vm.selectorExpanded === ""
+                      ? "home"
+                      : _vm.selectorExpanded == "geography"
+                      ? "expanded"
+                      : "shrinked",
+                  hasTooltipValues: false
+                }
+              }),
+              _c("indicatorSelector", {
+                attrs: {
+                  state:
+                    _vm.selectorExpanded === ""
+                      ? "home"
+                      : _vm.selectorExpanded == "indicator"
+                      ? "expanded"
+                      : "shrinked"
+                },
+                on: {
+                  aboutIndicatorsModal: function($event) {
+                    _vm.displayIndicatorsModal = true
+                  }
+                }
+              }),
+              _c("networkSelector2", {
+                attrs: {
+                  state:
+                    _vm.selectorExpanded === ""
+                      ? "home"
+                      : _vm.selectorExpanded == "network"
+                      ? "expanded"
+                      : "shrinked"
+                }
+              })
+            ],
+            1
+          ),
+          _c(
+            "div",
+            { staticClass: "home_block", attrs: { "data-block": "about" } },
+            [
+              _c("div", { staticClass: "block_subtitle" }, [_vm._v("About")]),
+              _c("div", { staticClass: "block_title" }, [
+                _vm._v("Statistical Capacity Monitor")
+              ]),
+              _c("nuxt-link", {
+                staticClass: "block_bt",
+                attrs: { to: "/about" }
+              })
+            ],
+            1
+          ),
+          _c(
+            "div",
+            { staticClass: "home_block", attrs: { "data-block": "download" } },
+            [
+              _c("div", { staticClass: "block_subtitle" }, [
+                _vm._v("Download")
+              ]),
+              _c("div", { staticClass: "block_title" }, [
+                _vm._v("Dataset, codebook and methodology")
+              ]),
+              _c("a", {
+                staticClass: "block_bt",
+                on: {
+                  click: function($event) {
+                    _vm.displayDownloadModal = true
+                  }
+                }
+              })
+            ]
+          )
+        ])
+      ]),
+      _c("paris21Modal", {
+        attrs: { type: "indicators", displayed: _vm.displayIndicatorsModal },
+        on: {
+          closeModal: function($event) {
+            _vm.displayIndicatorsModal = false
+          }
+        }
+      }),
+      _c("paris21Modal", {
+        attrs: { type: "privacy", displayed: _vm.displayPrivacyModal },
+        on: {
+          closeModal: function($event) {
+            _vm.displayPrivacyModal = false
+          }
+        }
+      }),
+      _c("paris21Modal", {
+        attrs: { type: "download", displayed: _vm.displayDownloadModal },
+        on: {
+          closeModal: function($event) {
+            _vm.displayDownloadModal = false
+          }
+        }
+      }),
+      _c("paris21Footer", {
+        on: {
+          privacyModal: function($event) {
+            _vm.displayPrivacyModal = true
+          }
+        }
+      })
+    ],
+    1
+  )
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("h1", { staticClass: "main_title" }, [
+      _vm._v("\n        Find and explore indicators "),
+      _c("span", { staticClass: "bolder" }, [_vm._v("on statistical capacity")])
+    ])
+  }
+]
+render._withStripped = true
+var esExports = { render: render, staticRenderFns: staticRenderFns }
+/* harmony default export */ __webpack_exports__["a"] = (esExports);
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-2a183b29", esExports)
+  }
+}
+
+/***/ }),
 
 /***/ "/9xw":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -71,7 +235,29 @@ var render = function() {
                 }
               })
             ]),
-            _vm._m(2)
+            _c(
+              "div",
+              {
+                staticClass: "modal_content",
+                attrs: { "data-type": "download" }
+              },
+              [
+                _c("div", { staticClass: "download_item" }, [
+                  _c("div", { staticClass: "item_title" }, [_vm._v("DATASET")]),
+                  _c("div", { staticClass: "item_text" }),
+                  _c(
+                    "a",
+                    {
+                      staticClass: "download_bt",
+                      attrs: { href: _vm.datafileURL, target: "_blank" }
+                    },
+                    [_vm._v("Download (.csv)")]
+                  )
+                ]),
+                _vm._m(2),
+                _vm._m(3)
+              ]
+            )
           ])
         : _vm._e(),
       _vm.type == "moreinfo"
@@ -362,66 +548,38 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      { staticClass: "modal_content", attrs: { "data-type": "download" } },
-      [
-        _c("div", { staticClass: "download_item" }, [
-          _c("div", { staticClass: "item_title" }, [_vm._v("DATASET")]),
-          _c("div", { staticClass: "item_text" }, [
-            _vm._v(
-              "\n          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.\n        "
-            )
-          ]),
-          _c(
-            "a",
-            {
-              staticClass: "download_bt",
-              attrs: {
-                href: "http://ocde.wedodata.fr/paris21_admin/API/file.csv",
-                target: "_blank"
-              }
-            },
-            [_vm._v("Download (.csv)")]
-          )
-        ]),
-        _c("div", { staticClass: "download_item" }, [
-          _c("div", { staticClass: "item_title" }, [_vm._v("CODEBOOK")]),
-          _c("div", { staticClass: "item_text" }, [
-            _vm._v(
-              "\n          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.\n        "
-            )
-          ]),
-          _c(
-            "a",
-            {
-              staticClass: "download_bt",
-              attrs: { href: "/data/codebook.xlsx", target: "_blank" }
-            },
-            [_vm._v("Download (.xls)")]
-          )
-        ]),
-        _c("div", { staticClass: "download_item" }, [
-          _c("div", { staticClass: "item_title" }, [_vm._v("METHODOLOGY")]),
-          _c("div", { staticClass: "item_text" }, [
-            _vm._v(
-              "\n          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.\n        "
-            )
-          ]),
-          _c(
-            "a",
-            {
-              staticClass: "download_bt",
-              attrs: {
-                href: "/data/PARIS21_Indicators_Methodological_Notes.xlsx",
-                target: "_blank"
-              }
-            },
-            [_vm._v("Download (.xls)")]
-          )
-        ])
-      ]
-    )
+    return _c("div", { staticClass: "download_item" }, [
+      _c("div", { staticClass: "item_title" }, [_vm._v("CODEBOOK")]),
+      _c("div", { staticClass: "item_text" }),
+      _c(
+        "a",
+        {
+          staticClass: "download_bt",
+          attrs: { href: "/data/codebook.xlsx", target: "_blank" }
+        },
+        [_vm._v("Download (.xls)")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "download_item" }, [
+      _c("div", { staticClass: "item_title" }, [_vm._v("METHODOLOGY")]),
+      _c("div", { staticClass: "item_text" }),
+      _c(
+        "a",
+        {
+          staticClass: "download_bt",
+          attrs: {
+            href: "/data/PARIS21_Indicators_Methodological_Notes.xlsx",
+            target: "_blank"
+          }
+        },
+        [_vm._v("Download (.xls)")]
+      )
+    ])
   }
 ]
 render._withStripped = true
@@ -469,6 +627,64 @@ if (false) {
 
 /***/ }),
 
+/***/ "/TYz":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_babelrc_false_cacheDirectory_false_presets_env_modules_false_targets_browsers_1_last_2_versions_not_ie_8_stage_2_plugins_transform_vue_jsx_transform_runtime_node_modules_vue_loader_lib_selector_type_script_index_0_index_vue__ = __webpack_require__("PigY");
+/* empty harmony namespace reexport */
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_2a183b29_hasScoped_false_transformToRequire_video_src_source_src_object_src_embed_src_preserveWhitespace_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_index_vue__ = __webpack_require__("+ptz");
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__("a2iW")
+}
+var normalizeComponent = __webpack_require__("VU/8")
+/* script */
+
+
+/* template */
+
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __WEBPACK_IMPORTED_MODULE_0__babel_loader_babelrc_false_cacheDirectory_false_presets_env_modules_false_targets_browsers_1_last_2_versions_not_ie_8_stage_2_plugins_transform_vue_jsx_transform_runtime_node_modules_vue_loader_lib_selector_type_script_index_0_index_vue__["a" /* default */],
+  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_2a183b29_hasScoped_false_transformToRequire_video_src_source_src_object_src_embed_src_preserveWhitespace_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_index_vue__["a" /* default */],
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "pages/index.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-2a183b29", Component.options)
+  } else {
+    hotAPI.reload("data-v-2a183b29", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+/* harmony default export */ __webpack_exports__["default"] = (Component.exports);
+
+
+/***/ }),
+
 /***/ "/Wdd":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -485,340 +701,67 @@ exports.push([module.i, "@font-face{font-family:montserratbold;src:url(" + escap
 
 /***/ }),
 
-/***/ "/gHq":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_underscore__ = __webpack_require__("rdLu");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_underscore___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_underscore__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_axios__ = __webpack_require__("mtWM");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_axios__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__commons_utils_index_js__ = __webpack_require__("ZBxL");
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-
-
-var numberFormat = __webpack_require__("UeOF");
-
-
-
-/* harmony default export */ __webpack_exports__["a"] = ({
-  props: {
-    indicatorData: {
-      type: Object,
-      default: function _default() {
-        return {};
-      }
-    },
-    comparedCountries: {
-      type: Array,
-      default: function _default() {
-        return {};
-      }
-    },
-    indicatorID: {
-      type: String,
-      default: function _default() {
-        return '';
-      }
-    },
-    dataType: {
-      type: String,
-      default: function _default() {
-        return '';
-      }
-    },
-    refYear: {
-      type: String,
-      default: function _default() {
-        return '';
-      }
-    },
-    isReferring: {
-      type: Boolean,
-      default: function _default() {
-        return false;
-      }
-    },
-    geoType: {
-      type: String,
-      default: function _default() {
-        return 'country';
-      }
-    },
-    geoID: {
-      type: String,
-      default: function _default() {
-        return '';
-      }
-    },
-    geoLabel: {
-      type: String,
-      default: function _default() {
-        return '';
-      }
-    },
-    geoGroups: {
-      type: Array,
-      default: function _default() {
-        return [];
-      }
-    }
-  },
-
-  data: function data() {
-    return {
-      defaultMaxPctHeight: 70,
-      computedRefYear: null,
-      availableData: '',
-      availableDataNoBR: '',
-      totalNB: 0,
-      ordinalRegionArray: '',
-      foundSpecificIndicator: '',
-      specificLabelsObj: {},
-      ordinalColors: ['#F7CC3D', '#EC9A3A', '#E87D00', '#EA6651', '#B45747'],
-      overOrdinalBarchart: false
-    };
-  },
-
-  mounted: function mounted() {
-    var self = this;
-
-    this.foundSpecificIndicator = __WEBPACK_IMPORTED_MODULE_0_underscore__["_"].find(__WEBPACK_IMPORTED_MODULE_2__commons_utils_index_js__["i" /* specificIndicators */], function (indic) {
-      return self.indicatorID == indic.id;
-    });
-    if (this.foundSpecificIndicator !== undefined) {
-      __WEBPACK_IMPORTED_MODULE_0_underscore__["_"].each(this.foundSpecificIndicator.labels, function (indicLabel) {
-        self.specificLabelsObj[indicLabel.value] = indicLabel;
-      });
-    }
-
-    if (this.refYear == null) {
-      this.setRefYearToLastAvailable();
-    } else {
-      this.computedRefYear = this.refYear;
-    }
-    this.getAvailableData();
-  },
-
-  methods: {
-    setRefYearToLastAvailable: function setRefYearToLastAvailable() {
-      if (this.indicatorData.years !== undefined) {
-        this.computedRefYear = __WEBPACK_IMPORTED_MODULE_0_underscore__["_"].keys(this.indicatorData.years)[__WEBPACK_IMPORTED_MODULE_0_underscore__["_"].size(this.indicatorData.years) - 1];
-      }
-    },
-
-    getAvailableData: function getAvailableData() {
-      var self = this;
-      if (this.geoType !== "country") {
-        __WEBPACK_IMPORTED_MODULE_1_axios___default.a.get({"api_url":"https://ocde.wedodata.fr/paris21_api/"}.api_url + 'getAvailableData.php?indicatorID=' + this.indicatorID + '&year=' + this.computedRefYear + '&geoType=' + this.geoType + '&geoID=' + this.geoID).then(function (response) {
-          var totalNB = parseInt(response.data, 10);
-          var pctValue = parseFloat(self.dataValue);
-          var pctNB = Math.round(totalNB * (pctValue / 100));
-          self.totalNB = totalNB;
-
-          if (self.indicatorData.years !== undefined && self.indicatorData.years[self.computedRefYear] !== undefined) {
-            var dataValue = self.indicatorData.years[self.computedRefYear];
-            if (dataValue != '') {
-              if (dataValue.charAt(0) == '{') {
-                dataValue = dataValue.replace('"."', '","');
-                var ordinalRegionObj = JSON.parse(dataValue);
-                self.ordinalRegionArray = [];
-
-                __WEBPACK_IMPORTED_MODULE_0_underscore__["_"].each(self.specificLabelsObj, function (obj) {
-                  var foundRegionObj = __WEBPACK_IMPORTED_MODULE_0_underscore__["_"].find(ordinalRegionObj, function (regObj) {
-                    return parseFloat(regObj.value).toFixed(1) == obj.value;
-                  });
-                  if (foundRegionObj !== undefined) {
-                    self.ordinalRegionArray.push(foundRegionObj);
-                  } else {
-                    self.ordinalRegionArray.push({ "value": obj.value, "nb": 0 });
-                  }
-                });
-
-                var totalWithValues = 0;
-                __WEBPACK_IMPORTED_MODULE_0_underscore__["_"].each(self.ordinalRegionArray, function (regionObj) {
-                  totalWithValues += regionObj.nb;
-                });
-                pctNB = totalWithValues;
-                self.ordinalRegionArray.push({ "value": "nodata", "nb": self.totalNB - totalWithValues });
-              }
-            } else {
-              self.ordinalRegionArray = 'no data';
-            }
-          }
-
-          var foundGeoGroup = __WEBPACK_IMPORTED_MODULE_0_underscore__["_"].find(self.geoGroups, function (geoData) {
-            return geoData["1"] == self.geoID;
-          });
-
-          if (self.dataType == "bar graph") {
-            self.availableData = totalNB + " countries<br />out of " + foundGeoGroup.count;
-            self.availableDataNoBR = totalNB + " countries out of " + foundGeoGroup.count;
-          } else {
-            self.availableData = totalNB + " countries<br />out of " + foundGeoGroup.count;
-            self.availableDataNoBR = totalNB + " countries out of " + foundGeoGroup.count;
-          }
-        });
-      }
-    }
-  },
-
-  computed: {
-    dataValue: function dataValue() {
-      var dataValue = 'no data';
-      if (this.indicatorData !== undefined && this.indicatorData.years !== undefined) {
-        dataValue = this.indicatorData.years[this.computedRefYear];
-        if (dataValue !== 'Not Available') {
-          if (this.dataType == 'binary' && this.geoType == 'country') {
-            if (dataValue == '1') return 'yes';else return 'no';
-          } else if (this.dataType == 'ordinal' && this.geoType != 'country') {
-            //waiting for available data
-
-          } else {
-            if (dataValue !== '') {
-              dataValue = parseFloat(dataValue);
-
-              if (this.dataType == 'ordinal' && this.geoType == 'country') {
-                dataValue = dataValue.toFixed(1);
-
-                var incFound = 0;
-                __WEBPACK_IMPORTED_MODULE_0_underscore__["_"].each(this.foundSpecificIndicator.labels, function (labelData, index) {
-                  if (labelData.value == dataValue) incFound = index;
-                });
-
-                var backgroundColor = this.ordinalColors[0];
-                if (this.ordinalColors[incFound] !== undefined) backgroundColor = this.ordinalColors[incFound];
-
-                dataValue = '<span class="ordinalsingle_circle" style="background:' + backgroundColor + ';"></span><br /><span class="ordinalsingle_label">' + this.specificLabelsObj[dataValue].label + '</span>';
-              } else {
-                if (this.dataType == 'binary' && this.geoType != 'country') {
-                  dataValue = dataValue * 100;
-                }
-
-                if (dataValue <= 1) dataValue = numberFormat(dataValue, 1, '.', '&nbsp;');else if (dataValue > 100) dataValue = numberFormat(dataValue, 0, '.', '&nbsp;');else dataValue = numberFormat(dataValue, 1, '.', '&nbsp;');
-              }
-            } else {
-              dataValue = 'no data';
-            }
-          }
-        } else {
-          dataValue = 'Not Available';
-        }
-      }
-      return dataValue;
-    },
-
-    hasNoData: function hasNoData() {
-      var hasNoData = true;
-      if (this.indicatorData !== undefined && this.indicatorData.years !== undefined) {
-        hasNoData = false;
-        if (this.indicatorData.years[this.computedRefYear] === undefined) {
-          hasNoData = true;
-        } else {
-          if (this.indicatorData.years[this.computedRefYear] == 'Not Available') hasNoData = true;
-          if (this.dataType !== 'binary' && this.indicatorData.years[this.computedRefYear] == '') hasNoData = true;
-        }
-      } else {}
-      return hasNoData;
-    },
-
-    computedBarHeight: function computedBarHeight() {
-      var self = this;
-
-      var indicatorValue = 0;
-
-      if (this.indicatorData !== undefined && this.indicatorData.years !== undefined && this.indicatorData.years[this.computedRefYear]) {
-        indicatorValue = parseFloat(this.indicatorData.years[this.computedRefYear]);
-      }
-
-      //console.log('computedBarHeight', 'indicatorValue', indicatorValue)
-
-      var maxVal = indicatorValue;
-      __WEBPACK_IMPORTED_MODULE_0_underscore__["_"].each(this.comparedCountries, function (co) {
-        if (self.$store.DBGeoItems[co] !== undefined && self.$store.DBGeoItems[co].indicators !== undefined && self.$store.DBGeoItems[co].indicators[self.indicatorID] !== undefined && self.$store.DBGeoItems[co].indicators[self.indicatorID].years[self.computedRefYear] !== undefined) {
-          var comparedValue = parseFloat(self.$store.DBGeoItems[co].indicators[self.indicatorID].years[self.computedRefYear]);
-          if (comparedValue > maxVal) {
-            maxVal = comparedValue;
-          }
-        }
-      });
-
-      var computedHeight = indicatorValue * this.defaultMaxPctHeight / maxVal;
-      return computedHeight;
-    }
-  },
-
-  watch: {
-    refYear: function refYear() {
-      if (this.refYear == null) {
-        this.setRefYearToLastAvailable();
-      } else {
-        this.computedRefYear = this.refYear;
-      }
-    }
-  }
-});
-
-/***/ }),
-
 /***/ "/o2x":
 /***/ (function(module, exports) {
 
 module.exports = "data:image/svg+xml;base64,PHN2ZyBpZD0iaWNvbi1pbnB1dF9zZWFyY2giIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgdmlld0JveD0iMCAwIDM1IDM1Ij4KICA8dGl0bGU+aWNvbi1pbnB1dF9zZWFyY2g8L3RpdGxlPgogIDxnPgogICAgPGNpcmNsZSBjeD0iMTYuOTg0MyIgY3k9IjE2LjI0MTUiIHI9IjUuNzEwNSIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMmYyZjJmIiBzdHJva2UtbWl0ZXJsaW1pdD0iMTAiIHN0cm9rZS13aWR0aD0iMiIvPgogICAgPGxpbmUgeDE9IjIxLjIyMTIiIHkxPSIyMC40NzgzIiB4Mj0iMjUuMjczOCIgeTI9IjI0LjUzMDkiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzJmMmYyZiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbWl0ZXJsaW1pdD0iMTAiIHN0cm9rZS13aWR0aD0iMiIvPgogIDwvZz4KPC9zdmc+Cg=="
+
+/***/ }),
+
+/***/ "1pl9":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_babelrc_false_cacheDirectory_false_presets_env_modules_false_targets_browsers_1_last_2_versions_not_ie_8_stage_2_plugins_transform_vue_jsx_transform_runtime_node_modules_vue_loader_lib_selector_type_script_index_0_networkSelector2_vue__ = __webpack_require__("VJd/");
+/* unused harmony namespace reexport */
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_49182860_hasScoped_false_transformToRequire_video_src_source_src_object_src_embed_src_preserveWhitespace_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_networkSelector2_vue__ = __webpack_require__("VOTh");
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__("cOIw")
+}
+var normalizeComponent = __webpack_require__("VU/8")
+/* script */
+
+
+/* template */
+
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __WEBPACK_IMPORTED_MODULE_0__babel_loader_babelrc_false_cacheDirectory_false_presets_env_modules_false_targets_browsers_1_last_2_versions_not_ie_8_stage_2_plugins_transform_vue_jsx_transform_runtime_node_modules_vue_loader_lib_selector_type_script_index_0_networkSelector2_vue__["a" /* default */],
+  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_49182860_hasScoped_false_transformToRequire_video_src_source_src_object_src_embed_src_preserveWhitespace_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_networkSelector2_vue__["a" /* default */],
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "components/networkSelector2.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-49182860", Component.options)
+  } else {
+    hotAPI.reload("data-v-49182860", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+/* harmony default export */ __webpack_exports__["a"] = (Component.exports);
+
 
 /***/ }),
 
@@ -829,44 +772,17 @@ module.exports = "data:image/svg+xml;base64,PHN2ZyBpZD0iaWNvbi1tYXBfY2VudGVyIiB4
 
 /***/ }),
 
-/***/ "1yM6":
-/***/ (function(module, exports, __webpack_require__) {
-
-/**
- * _s.prune: a more elegant version of truncate
- * prune extra chars, never leaving a half-chopped word.
- * @author github.com/rwz
- */
-var makeString = __webpack_require__("cPFj");
-var rtrim = __webpack_require__("DwCi");
-
-module.exports = function prune(str, length, pruneStr) {
-  str = makeString(str);
-  length = ~~length;
-  pruneStr = pruneStr != null ? String(pruneStr) : '...';
-
-  if (str.length <= length) return str;
-
-  var tmpl = function(c) {
-      return c.toUpperCase() !== c.toLowerCase() ? 'A' : ' ';
-    },
-    template = str.slice(0, length + 1).replace(/.(?=\W*\w*$)/g, tmpl); // 'Hello, world' -> 'HellAA AAAAA'
-
-  if (template.slice(template.length - 2).match(/\w\w/))
-    template = template.replace(/\s*\S+$/, '');
-  else
-    template = rtrim(template.slice(0, template.length - 1));
-
-  return (template + pruneStr).length > str.length ? str : str.slice(0, template.length) + pruneStr;
-};
-
-
-/***/ }),
-
 /***/ "22pi":
 /***/ (function(module, exports) {
 
 module.exports = "data:image/svg+xml;base64,PHN2ZyBpZD0iaWNvbi1tYXBfem9vbWluIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMCAzMCI+CiAgPHRpdGxlPmljb24tbWFwX3pvb21pbjwvdGl0bGU+CiAgPGc+CiAgICA8bGluZSB4MT0iMjAuNSIgeTE9IjE1IiB4Mj0iOS41IiB5Mj0iMTUiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzJmMmYyZiIgc3Ryb2tlLW1pdGVybGltaXQ9IjEwIiBzdHJva2Utd2lkdGg9IjMiLz4KICAgIDxsaW5lIHgxPSIxNSIgeTE9IjIwLjUiIHgyPSIxNSIgeTI9IjkuNSIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMmYyZjJmIiBzdHJva2UtbWl0ZXJsaW1pdD0iMTAiIHN0cm9rZS13aWR0aD0iMyIvPgogIDwvZz4KPC9zdmc+Cg=="
+
+/***/ }),
+
+/***/ "2asr":
+/***/ (function(module, exports) {
+
+module.exports = "data:image/svg+xml;base64,PHN2ZyBpZD0iYXJyb3ctcmlnaHQiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjIwIiBoZWlnaHQ9IjIwIiB2aWV3Qm94PSIwIDAgMjAgMjAiPgogIDx0aXRsZT5hcnJvdy1yaWdodDwvdGl0bGU+CiAgPHBhdGggZD0iTTkuNDU1LDMuMjI3YS43NjQuNzY0LDAsMCwxLDEuMDg3LDBsNi4yMzIsNi4yMjhhLjc2Ni43NjYsMCwwLDEsMCwxLjA4N2wtNi4yMzIsNi4yMzFhLjc2NC43NjQsMCwwLDEtMS4wODcsMGwtLjcxMS0uNzExYS43Ny43NywwLDAsMSwuMDEzLTEuMWwzLjg2My0zLjY4SDMuNzY5QS43NjguNzY4LDAsMCwxLDMsMTAuNTEzVjkuNDg3YS43NjguNzY4LDAsMCwxLC43NjktLjc2OWg4Ljg1TDguNzU3LDUuMDM4YS43NjUuNzY1LDAsMCwxLS4wMTMtMS4xWiIgZmlsbD0iI2ZmZiIvPgo8L3N2Zz4K"
 
 /***/ }),
 
@@ -27679,7 +27595,7 @@ exports = module.exports = __webpack_require__("FZ+f")(false);
 
 
 // module
-exports.push([module.i, "@font-face{font-family:montserratbold;src:url(" + escape(__webpack_require__("KoCO")) + ") format(\"woff2\"),url(" + escape(__webpack_require__("cqiT")) + ") format(\"woff\");font-weight:400;font-style:normal}@font-face{font-family:montserratitalic;src:url(" + escape(__webpack_require__("hPgA")) + ") format(\"woff2\"),url(" + escape(__webpack_require__("hnDx")) + ") format(\"woff\");font-weight:400;font-style:normal}@font-face{font-family:montserratregular;src:url(" + escape(__webpack_require__("UBI+")) + ") format(\"woff2\"),url(" + escape(__webpack_require__("dL9s")) + ") format(\"woff\");font-weight:400;font-style:normal}@font-face{font-family:roboto_condensedbold;src:url(" + escape(__webpack_require__("CCFM")) + ") format(\"woff2\"),url(" + escape(__webpack_require__("CCFM")) + ") format(\"woff\");font-weight:400;font-style:normal}.selector[data-selector=geography] .expandedcontent_main[data-v-337df650]{width:610px;margin-left:-20px}.selector[data-selector=geography] .expandedcontent_main .geomap_modaled_title[data-v-337df650]{color:#8c8c8c;font-family:montserratitalic;font-size:12px;border-bottom:4px solid #ededed;padding:0 0 8px;margin:0 20px}.selector[data-selector=geography] .expandedcontent_main .expandedcontent_title[data-v-337df650]{margin:0 20px}.selector[data-state=multiregion][data-modaled=true][data-v-337df650],.selector[data-state=soloregion][data-modaled=true][data-v-337df650]{width:100%}.selector[data-state=multiregion][data-modaled=true] .geography_sidebar[data-v-337df650],.selector[data-state=soloregion][data-modaled=true] .geography_sidebar[data-v-337df650]{position:relative;width:100%;padding:10px 20px 30px!important}.selector[data-state=multiregion][data-modaled=true] .geography_sidebar .sidebar_input #GeographyInput[data-v-337df650],.selector[data-state=soloregion][data-modaled=true] .geography_sidebar .sidebar_input #GeographyInput[data-v-337df650]{width:100%}.selector[data-state=soloregion][data-modaled=true] .selector_bucket[data-v-337df650]{display:none}.geography_mapcontainer[data-v-337df650]{width:100%;height:400px;z-index:1;position:relative}.geography_map_legend[data-v-337df650]{width:100%;text-align:left;margin:0 20px}.geography_map_legend .legend_zoomblock[data-v-337df650]{display:inline-block;vertical-align:top;border-top:3px solid #ededed;margin-right:20px;padding-top:4px;position:relative}.geography_map_legend .legend_zoomblock .zoomblock_bt[data-v-337df650]{width:30px;height:30px;border-radius:3px;display:inline-block;vertical-align:top;margin:0 3px;color:#fff;line-height:30px;text-align:center;font-size:20px;cursor:pointer;position:relative}.geography_map_legend .legend_zoomblock .zoomblock_bt[data-v-337df650]:after{position:absolute;left:50%;top:50%;-webkit-transform:translate(-50%,-50%);transform:translate(-50%,-50%);content:\"\";width:30px;height:30px}.geography_map_legend .legend_zoomblock .zoomblock_bt.zoomblock_resetbt[data-v-337df650]:after{background:url(" + escape(__webpack_require__("1vtK")) + ") no-repeat 0 0;background-size:100% 100%}.geography_map_legend .legend_zoomblock .zoomblock_bt.zoomblock_zoominbt[data-v-337df650]:after{background:url(" + escape(__webpack_require__("22pi")) + ") no-repeat 0 0;background-size:100% 100%}.geography_map_legend .legend_zoomblock .zoomblock_bt.zoomblock_zoomoutbt[data-v-337df650]:after{background:url(" + escape(__webpack_require__("DcNZ")) + ") no-repeat 0 0;background-size:100% 100%}.geography_map_legend .legend_item[data-v-337df650]{display:inline-block;vertical-align:top;color:#8c8c8c;font-family:montserratitalic;font-size:12px;border-top:3px solid #ededed;padding-top:10px;padding-left:26px;position:relative;height:30px}.geography_map_legend .legend_item[data-v-337df650]:before{content:\"\";position:absolute;left:10px;top:18px;-webkit-transform:translateY(-50%);transform:translateY(-50%);width:10px;height:10px;border-radius:10px}.geography_map_legend .legend_item[data-legend=available][data-v-337df650]:before{background:#149e9d}.geography_map_legend .legend_item[data-legend=nonavailable][data-v-337df650]:before{background:#a1d8d8}.geography_sidebar[data-v-337df650]{position:absolute;right:0;top:0;height:100%;width:360px;background:#159e9d;color:#fff;padding:40px 20px;text-align:left}.geography_sidebar[data-v-337df650]:after{content:\"\";position:absolute;left:0;bottom:0;width:100%;height:80px;pointer-events:none;background:-webkit-gradient(linear,left top,left bottom,from(rgba(3,100,99,0)),to(#036463));background:linear-gradient(180deg,rgba(3,100,99,0) 0,#036463);filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=\"rgba(0, 3, 100, 0.38824)\",endColorstr=\"#036463\",GradientType=0)}.geography_sidebar .sidebar_input[data-v-337df650]{position:relative}.geography_sidebar .sidebar_input .input_label[data-v-337df650]{font-size:12px;height:16px;line-height:12px;font-family:montserratitalic}.geography_sidebar .sidebar_input #GeographyInput[data-v-337df650]{width:310px;height:35px;border-radius:5px;border:0 solid;margin-top:5px;font-size:14px;padding:0 10px;background:#ededed;color:#333;outline:none}.geography_sidebar .sidebar_input #GeographyInput[data-v-337df650]:focus{border:1px solid #036463}.geography_sidebar .sidebar_input .input_icon[data-v-337df650]{background:url(" + escape(__webpack_require__("/o2x")) + ") no-repeat 0 0;background-size:100% 100%;width:35px;height:35px;position:absolute;right:12px;top:20px;z-index:10;cursor:pointer}.geography_sidebar .sidebar_input .input_icon[data-search=true][data-v-337df650]{background:url(" + escape(__webpack_require__("clEq")) + ") no-repeat 0 0;background-size:100% 100%}.geography_sidebar .mobile_selectbox[data-v-337df650]{display:none}.geography_sidebar .geography_items_title[data-v-337df650]{color:#036463;font-size:16px;font-family:montserratbold;text-transform:capitalize;margin-top:10px}.geography_sidebar .geography_items[data-v-337df650]{overflow:auto;height:400px;margin-top:10px}.geography_sidebar .geography_items .geography_item[data-v-337df650]{height:28px;line-height:28px;padding:0 10px;position:relative;cursor:pointer;overflow:hidden}.geography_sidebar .geography_items .geography_item a.menu_link[data-v-337df650]{color:#fff;text-decoration:none;display:inline-block;width:100%}.geography_sidebar .geography_items .geography_item[data-v-337df650]:hover{background:#2f2f2f}.geography_sidebar .geography_items .geography_item.selected[data-v-337df650]{background:#ea6550}.geography_sidebar .geography_items .geography_item.selected .item_countrylabel[data-v-337df650]{color:#fff!important}.selector[data-selector=geography][data-modaled=true] .geography_sidebar[data-v-337df650]{background:#ededed;padding:10px 20px}.selector[data-selector=geography][data-modaled=true] .geography_sidebar[data-v-337df650]:after{background:-webkit-gradient(linear,left top,left bottom,from(hsla(0,0%,72%,0)),to(#b8b8b8));background:linear-gradient(180deg,hsla(0,0%,72%,0) 0,#b8b8b8);filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=\"rgba(0, 184, 184, 0.72157)\",endColorstr=\"#b8b8b8\",GradientType=0)}.selector[data-selector=geography][data-modaled=true] .geography_sidebar .sidebar_input .input_label[data-v-337df650]{color:#2f2f2f}.selector[data-selector=geography][data-modaled=true] .geography_sidebar .geography_items_title[data-v-337df650]{color:#8c8c8c}.selector[data-selector=geography][data-modaled=true] .geography_sidebar .geography_items .geography_item[data-v-337df650],.selector[data-selector=geography][data-modaled=true] .geography_sidebar .geography_items .geography_item a[data-v-337df650]{color:#2f2f2f}.selector[data-selector=geography][data-modaled=true] .geography_sidebar .geography_items .geography_item[data-v-337df650]:hover{background:#ea6550;color:#fff}.selector[data-selector=geography][data-modaled=true] .geography_sidebar .item_checkbox[data-v-337df650]{width:15px;height:15px;border-radius:2px;border:2px solid #2f2f2f;display:inline-block;vertical-align:middle;margin-right:10px;position:relative}.selector[data-selector=geography][data-modaled=true] .geography_sidebar .item_checkbox[data-selected=true][data-v-337df650]{background:#2f2f2f}.selector[data-selector=geography][data-modaled=true] .geography_sidebar .item_checkbox[data-selected=true][data-v-337df650]:after{content:\"\";position:absolute;background:url(" + escape(__webpack_require__("lXyD")) + ") no-repeat 0 0;background-size:100% 100%;width:15px;height:15px;left:-2px;top:-2px}.selector[data-selector=geography][data-modaled=true] .geography_sidebar .item_countrylabel[data-v-337df650]{display:inline-block;vertical-align:top;width:90%;height:100%}.selector_bucket[data-v-337df650]{width:100%;position:relative;left:0;height:165px;background:#b45747;z-index:10;padding:14px 30px}.selector_bucket .bucket_title[data-v-337df650]{font-size:22px;font-family:montserratbold;text-align:left;color:#fff;position:relative}.selector_bucket .bucket_title .bucket_nb[data-v-337df650]{font-family:montserratregular}.selector_bucket .bucket_title .bucket_removeallbt[data-v-337df650]{right:30px;top:50%;-webkit-transform:translateY(-50%);transform:translateY(-50%);position:absolute;font-family:montserratitalic;font-size:12px;color:#fff;cursor:pointer}.selector_bucket .bucket_list[data-v-337df650]{margin-top:10px;text-align:left;width:80%;height:95px;overflow:auto}.selector_bucket .bucket_list .list_item[data-v-337df650]{background:#fff;padding:4px;display:inline-block;vertical-align:top;border-radius:5px;height:20px;line-height:18px;color:#2f2f2f;margin:2px;padding:0 10px 0 20px;position:relative;cursor:pointer}.selector_bucket .bucket_list .list_item[data-v-337df650]:before{content:\"\";position:absolute;width:30px;height:30px;background:url(" + escape(__webpack_require__("yCj6")) + ") no-repeat 0 0;left:-4px;top:50%;-webkit-transform:translateY(-50%);transform:translateY(-50%)}.selector_bucket .bucket_list .list_item[data-v-337df650]:hover{background:#ea6550;color:#fff}.selector_bucket .bucket_list .list_item[data-v-337df650]:hover:before{background:url(" + escape(__webpack_require__("Dhuc")) + ") no-repeat 0 0}.selector_bucket .bucket_validbt[data-v-337df650]{position:absolute;right:20px;bottom:20px;background:#ea6550;border-radius:20px;width:90px;height:40px;color:#fff;font-family:montserratbold;line-height:40px;font-size:16px;cursor:pointer}.selector_bucket .bucket_validbt[data-v-337df650]:hover{background:#2f2f2f}.selector[data-selector=geography][data-maincolor=red] .selector_bucket .bucket_title[data-v-337df650]{border-color:#ea6550}.selector[data-selector=geography][data-mapcolor=grey] .geography_map_legend .legend_item[data-legend=available][data-v-337df650]:before{background:#8c8c8c}.selector[data-selector=geography][data-mapcolor=grey] .geography_map_legend .legend_item[data-legend=nonavailable][data-v-337df650]:before{background:#e3e3e3}.selector[data-selector=geography] .selector_expandedcontent[data-v-337df650]{display:none}.selector[data-selector=geography] .selector_expandedcontent.displayed[data-v-337df650]{display:block}", ""]);
+exports.push([module.i, "@font-face{font-family:montserratbold;src:url(" + escape(__webpack_require__("KoCO")) + ") format(\"woff2\"),url(" + escape(__webpack_require__("cqiT")) + ") format(\"woff\");font-weight:400;font-style:normal}@font-face{font-family:montserratitalic;src:url(" + escape(__webpack_require__("hPgA")) + ") format(\"woff2\"),url(" + escape(__webpack_require__("hnDx")) + ") format(\"woff\");font-weight:400;font-style:normal}@font-face{font-family:montserratregular;src:url(" + escape(__webpack_require__("UBI+")) + ") format(\"woff2\"),url(" + escape(__webpack_require__("dL9s")) + ") format(\"woff\");font-weight:400;font-style:normal}@font-face{font-family:roboto_condensedbold;src:url(" + escape(__webpack_require__("CCFM")) + ") format(\"woff2\"),url(" + escape(__webpack_require__("CCFM")) + ") format(\"woff\");font-weight:400;font-style:normal}.selector[data-selector=geography] .expandedcontent_main[data-v-337df650]{width:610px;margin-left:-20px}.selector[data-selector=geography] .expandedcontent_main .geomap_modaled_title[data-v-337df650]{color:#8c8c8c;font-family:montserratitalic;font-size:12px;border-bottom:4px solid #ededed;padding:0 0 8px;margin:0 20px}.selector[data-selector=geography] .expandedcontent_main .expandedcontent_title[data-v-337df650]{margin:0 20px}.selector[data-state=multiregion][data-modaled=true][data-v-337df650],.selector[data-state=soloregion][data-modaled=true][data-v-337df650]{width:100%}.selector[data-state=multiregion][data-modaled=true] .geography_sidebar[data-v-337df650],.selector[data-state=soloregion][data-modaled=true] .geography_sidebar[data-v-337df650]{position:relative;width:100%;padding:10px 20px 30px!important}.selector[data-state=multiregion][data-modaled=true] .geography_sidebar .sidebar_input #GeographyInput[data-v-337df650],.selector[data-state=soloregion][data-modaled=true] .geography_sidebar .sidebar_input #GeographyInput[data-v-337df650]{width:100%}.selector[data-state=soloregion][data-modaled=true] .selector_bucket[data-v-337df650]{display:none}.geography_mapcontainer[data-v-337df650]{width:100%;height:400px;z-index:1;position:relative}.geography_map_legend[data-v-337df650]{width:100%;text-align:left;margin:0 20px}.geography_map_legend .legend_zoomblock[data-v-337df650]{display:inline-block;vertical-align:top;border-top:3px solid #ededed;margin-right:20px;padding-top:4px;position:relative}.geography_map_legend .legend_zoomblock .zoomblock_bt[data-v-337df650]{width:30px;height:30px;border-radius:3px;display:inline-block;vertical-align:top;margin:0 3px;color:#fff;line-height:30px;text-align:center;font-size:20px;cursor:pointer;position:relative}.geography_map_legend .legend_zoomblock .zoomblock_bt[data-v-337df650]:after{position:absolute;left:50%;top:50%;-webkit-transform:translate(-50%,-50%);transform:translate(-50%,-50%);content:\"\";width:30px;height:30px}.geography_map_legend .legend_zoomblock .zoomblock_bt.zoomblock_resetbt[data-v-337df650]:after{background:url(" + escape(__webpack_require__("1vtK")) + ") no-repeat 0 0;background-size:100% 100%}.geography_map_legend .legend_zoomblock .zoomblock_bt.zoomblock_zoominbt[data-v-337df650]:after{background:url(" + escape(__webpack_require__("22pi")) + ") no-repeat 0 0;background-size:100% 100%}.geography_map_legend .legend_zoomblock .zoomblock_bt.zoomblock_zoomoutbt[data-v-337df650]:after{background:url(" + escape(__webpack_require__("DcNZ")) + ") no-repeat 0 0;background-size:100% 100%}.geography_map_legend .legend_item[data-v-337df650]{display:inline-block;vertical-align:top;color:#8c8c8c;font-family:montserratitalic;font-size:12px;border-top:3px solid #ededed;padding-top:10px;padding-left:26px;position:relative;height:30px}.geography_map_legend .legend_item[data-v-337df650]:before{content:\"\";position:absolute;left:10px;top:18px;-webkit-transform:translateY(-50%);transform:translateY(-50%);width:10px;height:10px;border-radius:10px}.geography_map_legend .legend_item[data-legend=available][data-v-337df650]:before{background:#149e9d}.geography_map_legend .legend_item[data-legend=nonavailable][data-v-337df650]:before{background:#a1d8d8}.geography_sidebar[data-v-337df650]{position:absolute;right:0;top:0;height:100%;width:360px;background:#159e9d;color:#fff;padding:30px 20px 40px;text-align:left}.geography_sidebar[data-v-337df650]:after{content:\"\";position:absolute;left:0;bottom:0;width:100%;height:80px;pointer-events:none;background:-webkit-gradient(linear,left top,left bottom,from(rgba(3,100,99,0)),to(#036463));background:linear-gradient(180deg,rgba(3,100,99,0) 0,#036463);filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=\"rgba(0, 3, 100, 0.38824)\",endColorstr=\"#036463\",GradientType=0)}.geography_sidebar .sidebar_input[data-v-337df650]{position:relative}.geography_sidebar .sidebar_input .input_disclaimer[data-v-337df650]{font-size:11px}.geography_sidebar .sidebar_input .input_disclaimer a[data-v-337df650]{color:#fff}.geography_sidebar .sidebar_input .input_label[data-v-337df650]{font-size:13px;height:16px;margin-top:10px;line-height:12px;font-family:montserratitalic}.geography_sidebar .sidebar_input #GeographyInput[data-v-337df650]{width:310px;height:35px;border-radius:5px;border:0 solid;margin-top:2px;font-size:14px;padding:0 10px;background:#ededed;color:#333;outline:none}.geography_sidebar .sidebar_input #GeographyInput[data-v-337df650]:focus{border:1px solid #036463}.geography_sidebar .sidebar_input .input_icon[data-v-337df650]{background:url(" + escape(__webpack_require__("/o2x")) + ") no-repeat 0 0;background-size:100% 100%;width:35px;height:35px;position:absolute;right:12px;top:40px;z-index:10;cursor:pointer}.geography_sidebar .sidebar_input .input_icon[data-search=true][data-v-337df650]{background:url(" + escape(__webpack_require__("clEq")) + ") no-repeat 0 0;background-size:100% 100%}.geography_sidebar .mobile_selectbox[data-v-337df650]{display:none}.geography_sidebar .geography_items_title[data-v-337df650]{color:#036463;font-size:16px;font-family:montserratbold;text-transform:capitalize;margin-top:10px}.geography_sidebar .geography_items[data-v-337df650]{overflow:auto;height:400px;margin-top:10px}.geography_sidebar .geography_items .geography_item[data-v-337df650]{height:28px;line-height:28px;padding:0 10px;position:relative;cursor:pointer;overflow:hidden}.geography_sidebar .geography_items .geography_item a.menu_link[data-v-337df650]{color:#fff;text-decoration:none;display:inline-block;width:100%}.geography_sidebar .geography_items .geography_item[data-v-337df650]:hover{background:#2f2f2f}.geography_sidebar .geography_items .geography_item.selected[data-v-337df650]{background:#ea6550}.geography_sidebar .geography_items .geography_item.selected .item_countrylabel[data-v-337df650]{color:#fff!important}.selector[data-selector=geography][data-modaled=true] .geography_sidebar[data-v-337df650]{background:#ededed;padding:10px 20px}.selector[data-selector=geography][data-modaled=true] .geography_sidebar[data-v-337df650]:after{background:-webkit-gradient(linear,left top,left bottom,from(hsla(0,0%,72%,0)),to(#b8b8b8));background:linear-gradient(180deg,hsla(0,0%,72%,0) 0,#b8b8b8);filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=\"rgba(0, 184, 184, 0.72157)\",endColorstr=\"#b8b8b8\",GradientType=0)}.selector[data-selector=geography][data-modaled=true] .geography_sidebar .sidebar_input .input_disclaimer[data-v-337df650],.selector[data-selector=geography][data-modaled=true] .geography_sidebar .sidebar_input .input_disclaimer a[data-v-337df650],.selector[data-selector=geography][data-modaled=true] .geography_sidebar .sidebar_input .input_label[data-v-337df650],.selector[data-selector=geography][data-modaled=true] .geography_sidebar .sidebar_input .input_label a[data-v-337df650]{color:#2f2f2f}.selector[data-selector=geography][data-modaled=true] .geography_sidebar .geography_items_title[data-v-337df650]{color:#8c8c8c}.selector[data-selector=geography][data-modaled=true] .geography_sidebar .geography_items .geography_item[data-v-337df650],.selector[data-selector=geography][data-modaled=true] .geography_sidebar .geography_items .geography_item a[data-v-337df650]{color:#2f2f2f}.selector[data-selector=geography][data-modaled=true] .geography_sidebar .geography_items .geography_item[data-v-337df650]:hover{background:#ea6550;color:#fff}.selector[data-selector=geography][data-modaled=true] .geography_sidebar .item_checkbox[data-v-337df650]{width:15px;height:15px;border-radius:2px;border:2px solid #2f2f2f;display:inline-block;vertical-align:middle;margin-right:10px;position:relative}.selector[data-selector=geography][data-modaled=true] .geography_sidebar .item_checkbox[data-selected=true][data-v-337df650]{background:#2f2f2f}.selector[data-selector=geography][data-modaled=true] .geography_sidebar .item_checkbox[data-selected=true][data-v-337df650]:after{content:\"\";position:absolute;background:url(" + escape(__webpack_require__("lXyD")) + ") no-repeat 0 0;background-size:100% 100%;width:15px;height:15px;left:-2px;top:-2px}.selector[data-selector=geography][data-modaled=true] .geography_sidebar .item_countrylabel[data-v-337df650]{display:inline-block;vertical-align:top;width:90%;height:100%}.selector_bucket[data-v-337df650]{width:100%;position:relative;left:0;height:165px;background:#b45747;z-index:10;padding:14px 30px}.selector_bucket .bucket_title[data-v-337df650]{font-size:22px;font-family:montserratbold;text-align:left;color:#fff;position:relative}.selector_bucket .bucket_title .bucket_nb[data-v-337df650]{font-family:montserratregular}.selector_bucket .bucket_title .bucket_removeallbt[data-v-337df650]{right:30px;top:50%;-webkit-transform:translateY(-50%);transform:translateY(-50%);position:absolute;font-family:montserratitalic;font-size:12px;color:#fff;cursor:pointer}.selector_bucket .bucket_list[data-v-337df650]{margin-top:10px;text-align:left;width:80%;height:95px;overflow:auto}.selector_bucket .bucket_list .list_item[data-v-337df650]{background:#fff;padding:4px;display:inline-block;vertical-align:top;border-radius:5px;height:20px;line-height:18px;color:#2f2f2f;margin:2px;padding:0 10px 0 20px;position:relative;cursor:pointer}.selector_bucket .bucket_list .list_item[data-v-337df650]:before{content:\"\";position:absolute;width:30px;height:30px;background:url(" + escape(__webpack_require__("yCj6")) + ") no-repeat 0 0;left:-4px;top:50%;-webkit-transform:translateY(-50%);transform:translateY(-50%)}.selector_bucket .bucket_list .list_item[data-v-337df650]:hover{background:#ea6550;color:#fff}.selector_bucket .bucket_list .list_item[data-v-337df650]:hover:before{background:url(" + escape(__webpack_require__("Dhuc")) + ") no-repeat 0 0}.selector_bucket .bucket_validbt[data-v-337df650]{position:absolute;right:20px;bottom:20px;background:#ea6550;border-radius:20px;width:90px;height:40px;color:#fff;font-family:montserratbold;line-height:40px;font-size:16px;cursor:pointer}.selector_bucket .bucket_validbt[data-v-337df650]:hover{background:#2f2f2f}.selector[data-selector=geography][data-maincolor=red] .selector_bucket .bucket_title[data-v-337df650]{border-color:#ea6550}.selector[data-selector=geography][data-mapcolor=grey] .geography_map_legend .legend_item[data-legend=available][data-v-337df650]:before{background:#8c8c8c}.selector[data-selector=geography][data-mapcolor=grey] .geography_map_legend .legend_item[data-legend=nonavailable][data-v-337df650]:before{background:#e3e3e3}.selector[data-selector=geography] .selector_expandedcontent[data-v-337df650]{display:none}.selector[data-selector=geography] .selector_expandedcontent.displayed[data-v-337df650]{display:block}", ""]);
 
 // exports
 
@@ -27700,10 +27616,13 @@ module.exports = "data:image/svg+xml;base64,PHN2ZyBpZD0iaWNvbi1wbGFubmluZyIgeG1s
 
 /***/ }),
 
-/***/ "5uV0":
-/***/ (function(module, exports) {
+/***/ "5zde":
+/***/ (function(module, exports, __webpack_require__) {
 
-module.exports = "data:image/svg+xml;base64,PHN2ZyBpZD0iaWNvbi1idG5fZWRpdCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB2aWV3Qm94PSIwIDAgMjQgMjQiPgogIDx0aXRsZT5pY29uLWJ0bl9lZGl0PC90aXRsZT4KICA8cGF0aCBkPSJNMTIuNzcwNiw3LjcyOTVhLjMzOS4zMzksMCwwLDEsLjI0NjEtLjEwOTQuMjU5MS4yNTkxLDAsMCwxLC4yMTg4LjEwOTRsMy4wMzUyLDMuMDM1MmEuMjYuMjYsMCwwLDEsLjEwOTQuMjE4OC4zNDA4LjM0MDgsMCwwLDEtLjEwOTQuMjQ2MUw5LjEwNjUsMTguMzkzNWwtMy4zMzU5LjYwMTZhLjY3NjcuNjc2NywwLDAsMS0uNzY1Ni0uNzY1NmwuNjAxNi0zLjMzNTlaTTcuNDExMiwxNi41ODg4VjE1LjI3NjNINi40MjY4bC0uMzI4MSwxLjc1Ljg3NS44NzUsMS43NS0uMzI4MXYtLjk4NDRabS45ODQ0LTIuMjk2OWEuMzk2NS4zOTY1LDAsMCwwLC41NDY5LDBsNC4yMTA5LTQuMjEwOWEuMzg2Ny4zODY3LDAsMCwwLS41NDY5LS41NDY5TDguMzk1NiwxMy43NDUxYS4zOTY1LjM5NjUsMCwwLDAsMCwuNTQ2OVpNMTguNjIyMSw4Ljg3NzlhMS4zMiwxLjMyLDAsMCwwLDAtMS44NTk0TDE2Ljk4MTUsNS4zNzc5YTEuMzIsMS4zMiwwLDAsMC0xLjg1OTQsMEwxMy44NjQzLDYuNjM1N2EuMzQwOC4zNDA4LDAsMCwwLS4xMDk0LjI0NjEuMjYuMjYsMCwwLDAsLjEwOTQuMjE4OGwzLjAzNTIsMy4wMzUyYS4yNTkxLjI1OTEsMCwwLDAsLjIxODguMTA5NC4zMzkuMzM5LDAsMCwwLC4yNDYxLS4xMDk0WiIgZmlsbD0iI2ZmZiIvPgo8L3N2Zz4K"
+__webpack_require__("zQR9");
+__webpack_require__("qyJz");
+module.exports = __webpack_require__("FeBl").Array.from;
+
 
 /***/ }),
 
@@ -27724,33 +27643,6 @@ if(false) {
  if(!content.locals) {
    module.hot.accept("!!../node_modules/css-loader/index.js?{\"sourceMap\":false,\"minimize\":true,\"importLoaders\":1,\"alias\":{\"/assets\":\"/Applications/MAMP/htdocs/OCDE_Paris21/assets\",\"/static\":\"/Applications/MAMP/htdocs/OCDE_Paris21/static\"}}!../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-7926f863\",\"scoped\":false,\"hasInlineConfig\":true}!../node_modules/sass-loader/lib/loader.js?{\"sourceMap\":false}!../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./indicatorSelector.vue", function() {
      var newContent = require("!!../node_modules/css-loader/index.js?{\"sourceMap\":false,\"minimize\":true,\"importLoaders\":1,\"alias\":{\"/assets\":\"/Applications/MAMP/htdocs/OCDE_Paris21/assets\",\"/static\":\"/Applications/MAMP/htdocs/OCDE_Paris21/static\"}}!../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-7926f863\",\"scoped\":false,\"hasInlineConfig\":true}!../node_modules/sass-loader/lib/loader.js?{\"sourceMap\":false}!../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./indicatorSelector.vue");
-     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-     update(newContent);
-   });
- }
- // When the module is disposed, remove the <style> tags
- module.hot.dispose(function() { update(); });
-}
-
-/***/ }),
-
-/***/ "6yHB":
-/***/ (function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__("D9yl");
-if(typeof content === 'string') content = [[module.i, content, '']];
-if(content.locals) module.exports = content.locals;
-// add the styles to the DOM
-var update = __webpack_require__("rjj0")("af8c1188", content, false, {"sourceMap":false});
-// Hot Module Replacement
-if(false) {
- // When the styles change, update the <style> tags
- if(!content.locals) {
-   module.hot.accept("!!../../node_modules/css-loader/index.js?{\"sourceMap\":false,\"minimize\":true,\"importLoaders\":1,\"alias\":{\"/assets\":\"/Applications/MAMP/htdocs/OCDE_Paris21/assets\",\"/static\":\"/Applications/MAMP/htdocs/OCDE_Paris21/static\"}}!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-102ebe06\",\"scoped\":false,\"hasInlineConfig\":true}!../../node_modules/sass-loader/lib/loader.js?{\"sourceMap\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./_.vue", function() {
-     var newContent = require("!!../../node_modules/css-loader/index.js?{\"sourceMap\":false,\"minimize\":true,\"importLoaders\":1,\"alias\":{\"/assets\":\"/Applications/MAMP/htdocs/OCDE_Paris21/assets\",\"/static\":\"/Applications/MAMP/htdocs/OCDE_Paris21/static\"}}!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-102ebe06\",\"scoped\":false,\"hasInlineConfig\":true}!../../node_modules/sass-loader/lib/loader.js?{\"sourceMap\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./_.vue");
      if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
      update(newContent);
    });
@@ -27845,228 +27737,26 @@ if (false) {(function () {
 
 /***/ }),
 
-/***/ "8Ipu":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    {
-      staticClass: "geovaluestable_cell",
-      attrs: { "data-type": _vm.dataType, "data-referring": _vm.isReferring }
-    },
-    [
-      _c("div", { staticClass: "cell_value" }, [
-        _vm.hasNoData
-          ? _c("div", { staticClass: "cell_value_nodata" }, [_vm._v("-")])
-          : _vm._e(),
-        !_vm.hasNoData &&
-        (_vm.dataType !== "binary" || _vm.geoType != "country") &&
-        (_vm.dataType !== "ordinal" && _vm.geoType !== "country")
-          ? _c("div", { staticClass: "cell_value_histo" }, [
-              _c(
-                "div",
-                {
-                  staticClass: "histo_bar",
-                  style: { height: _vm.computedBarHeight + "%" },
-                  attrs: { "data-value": _vm.dataValue }
-                },
-                [
-                  _c("div", { staticClass: "bar_value" }, [
-                    _c("span", {
-                      staticClass: "bar_value_html",
-                      domProps: { innerHTML: _vm._s(_vm.dataValue) }
-                    }),
-                    _vm.dataType == "binary" && _vm.geoType != "country"
-                      ? _c("span", { staticClass: "value_unit" }, [
-                          _vm._v(" %")
-                        ])
-                      : _vm._e()
-                  ])
-                ]
-              )
-            ])
-          : _vm._e(),
-        !_vm.hasNoData && _vm.dataType == "binary" && _vm.geoType == "country"
-          ? _c("div", { staticClass: "cell_value_binary" }, [
-              _vm.geoType == "country"
-                ? _c(
-                    "div",
-                    {
-                      staticClass: "binary_value",
-                      attrs: { "data-binary": _vm.dataValue }
-                    },
-                    [_vm._v(_vm._s(_vm.dataValue))]
-                  )
-                : _vm._e()
-            ])
-          : _vm._e(),
-        !_vm.hasNoData &&
-        _vm.geoType != "country" &&
-        _vm.dataType == "ordinal" &&
-        _vm.ordinalRegionArray != ""
-          ? _c("div", { staticClass: "cell_value_ordinal" }, [
-              _c(
-                "div",
-                {
-                  staticClass: "ordinal_barchart",
-                  on: {
-                    mouseover: function($event) {
-                      _vm.overOrdinalBarchart = true
-                    },
-                    mouseleave: function($event) {
-                      _vm.overOrdinalBarchart = false
-                    }
-                  }
-                },
-                _vm._l(_vm.ordinalRegionArray, function(ordinalObj, index) {
-                  return _c("div", {
-                    staticClass: "barchart_subbar",
-                    style: {
-                      height: (ordinalObj.nb / _vm.totalNB) * 100 + "%",
-                      "background-color": _vm.ordinalColors[index]
-                    },
-                    attrs: { "data-value": ordinalObj.value }
-                  })
-                }),
-                0
-              ),
-              _vm.overOrdinalBarchart
-                ? _c(
-                    "div",
-                    { staticClass: "ordinal_tooltip" },
-                    [
-                      _c("div", { staticClass: "tooltip_year" }, [
-                        _vm._v(_vm._s(_vm.computedRefYear))
-                      ]),
-                      _c("div", { staticClass: "tooltip_geo" }, [
-                        _vm._v(_vm._s(_vm.geoLabel))
-                      ]),
-                      _c("div", {
-                        staticClass: "tooltip_available",
-                        domProps: { innerHTML: _vm._s(_vm.availableDataNoBR) }
-                      }),
-                      _vm._l(_vm.ordinalRegionArray, function(
-                        ordinalObj,
-                        index
-                      ) {
-                        return _vm.foundSpecificIndicator == undefined
-                          ? _c("div", { staticClass: "tooltip_item" }, [
-                              _vm._v(
-                                "\n          " + _vm._s(ordinalObj.value) + " "
-                              ),
-                              _c("span", { staticClass: "item_value" }, [
-                                _vm._v(
-                                  _vm._s(
-                                    (ordinalObj.nb / _vm.totalNB) * 100 + "%"
-                                  )
-                                )
-                              ])
-                            ])
-                          : _vm._e()
-                      }),
-                      _vm._l(_vm.ordinalRegionArray, function(
-                        ordinalObj,
-                        index
-                      ) {
-                        return _vm.foundSpecificIndicator != undefined
-                          ? _c("div", { staticClass: "tooltip_item" }, [
-                              _vm.specificLabelsObj[
-                                parseFloat(ordinalObj.value).toFixed(1)
-                              ] !== undefined
-                                ? _c("div", { staticClass: "item_wdata" }, [
-                                    _vm._v(
-                                      "\n            " +
-                                        _vm._s(
-                                          _vm.specificLabelsObj[
-                                            parseFloat(
-                                              ordinalObj.value
-                                            ).toFixed(1)
-                                          ].label
-                                        ) +
-                                        " "
-                                    ),
-                                    _c("span", { staticClass: "item_value" }, [
-                                      _vm._v(
-                                        _vm._s(
-                                          parseFloat(
-                                            (ordinalObj.nb / _vm.totalNB) * 100
-                                          ).toFixed(0) + "%"
-                                        )
-                                      )
-                                    ]),
-                                    _c("span", {
-                                      staticClass: "item_chip",
-                                      style: {
-                                        "background-color":
-                                          _vm.ordinalColors[index]
-                                      }
-                                    })
-                                  ])
-                                : _vm._e(),
-                              _vm.specificLabelsObj[
-                                parseFloat(ordinalObj.value).toFixed(1)
-                              ] === undefined
-                                ? _c("div", { staticClass: "item_nodata" }, [
-                                    _vm._v("\n              No data "),
-                                    _c("span", { staticClass: "item_value" }, [
-                                      _vm._v(
-                                        _vm._s(
-                                          parseFloat(
-                                            (ordinalObj.nb / _vm.totalNB) * 100
-                                          ).toFixed(0) + "%"
-                                        )
-                                      )
-                                    ]),
-                                    _c("span", { staticClass: "item_chip" })
-                                  ])
-                                : _vm._e()
-                            ])
-                          : _vm._e()
-                      })
-                    ],
-                    2
-                  )
-                : _vm._e()
-            ])
-          : _vm._e(),
-        !_vm.hasNoData && _vm.geoType == "country" && _vm.dataType == "ordinal"
-          ? _c("div", {
-              staticClass: "cell_value_ordinal_single",
-              domProps: { innerHTML: _vm._s(_vm.dataValue) }
-            })
-          : _vm._e(),
-        !_vm.hasNoData
-          ? _c("div", {
-              staticClass: "cell_value_available",
-              domProps: { innerHTML: _vm._s(_vm.availableData) }
-            })
-          : _vm._e()
-      ])
-    ]
-  )
-}
-var staticRenderFns = []
-render._withStripped = true
-var esExports = { render: render, staticRenderFns: staticRenderFns }
-/* harmony default export */ __webpack_exports__["a"] = (esExports);
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-c58c4450", esExports)
-  }
-}
-
-/***/ }),
-
 /***/ "9H+E":
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__.p + "img/icon-info.dbe94f7.svg";
+
+/***/ }),
+
+/***/ "9b4D":
+/***/ (function(module, exports, __webpack_require__) {
+
+var escape = __webpack_require__("kxFB");
+exports = module.exports = __webpack_require__("FZ+f")(false);
+// imports
+
+
+// module
+exports.push([module.i, "@font-face{font-family:montserratbold;src:url(" + escape(__webpack_require__("KoCO")) + ") format(\"woff2\"),url(" + escape(__webpack_require__("cqiT")) + ") format(\"woff\");font-weight:400;font-style:normal}@font-face{font-family:montserratitalic;src:url(" + escape(__webpack_require__("hPgA")) + ") format(\"woff2\"),url(" + escape(__webpack_require__("hnDx")) + ") format(\"woff\");font-weight:400;font-style:normal}@font-face{font-family:montserratregular;src:url(" + escape(__webpack_require__("UBI+")) + ") format(\"woff2\"),url(" + escape(__webpack_require__("dL9s")) + ") format(\"woff\");font-weight:400;font-style:normal}@font-face{font-family:roboto_condensedbold;src:url(" + escape(__webpack_require__("CCFM")) + ") format(\"woff2\"),url(" + escape(__webpack_require__("CCFM")) + ") format(\"woff\");font-weight:400;font-style:normal}.selector[data-selector=network][data-state=expanded]{height:527px}.selector[data-selector=network] .selector_expandedcontent{display:none;height:100%;padding:0}.selector[data-selector=network] .selector_expandedcontent.displayed{display:block}.selector[data-selector=network] .expandedcontent_menu{width:35%;height:100%;background:#fff;display:inline-block;vertical-align:top;-webkit-box-shadow:10px 0 50px 4px rgba(0,0,0,.2);box-shadow:10px 0 50px 4px rgba(0,0,0,.2);padding:20px}.selector[data-selector=network] .expandedcontent_menu .expandedcontent_title .smaller{font-size:18px;font-family:montserratregular}.selector[data-selector=network] .expandedcontent_menu .expandedcontent_subtitle{font-family:montserratregular;font-size:12px;color:#2f2f2f;text-align:left;margin-top:6px}.selector[data-selector=network] .expandedcontent_menu .expandedcontent_subtitle a{color:#2f2f2f;text-decoration:none;font-family:montserratbold;border-bottom:2px solid #ec9a3a}.selector[data-selector=network] .expandedcontent_menu .menu_levels{margin-top:20px;text-align:left}.selector[data-selector=network] .expandedcontent_menu .menu_levels .menu_level{display:inline-block;vertical-align:top;width:150px;height:30px;line-height:26px;color:#ec9a3a;text-align:center;cursor:pointer;border:2px solid #ec9a3a;border-radius:20px;margin:5px 0;font-size:16px;text-transform:uppercase;font-family:roboto_condensedbold}.selector[data-selector=network] .expandedcontent_menu .menu_levels .menu_level.selected{background:#ec9a3a;color:#fff}.selector[data-selector=network] .expandedcontent_menu .menu_levels .menu_level.notselected{color:#8c8c8c;border-color:#8c8c8c}.selector[data-selector=network] .expandedcontent_menu .menu_levels .menu_level:hover{color:#2f2f2f;border-color:#2f2f2f}.selector[data-selector=network] .expandedcontent_menu .menu_disclaimer{margin-top:20px;color:#8c8c8c;font-family:montserratitalic;font-size:11px;line-height:14px;text-align:left;width:140px;position:relative;text-indent:18px}.selector[data-selector=network] .expandedcontent_menu .menu_disclaimer .bolder{font-weight:700}.selector[data-selector=network] .expandedcontent_menu .menu_disclaimer:before{content:\"\";position:absolute;left:0;top:0;background:url(" + escape(__webpack_require__("SygT")) + ") no-repeat 0 0;background-size:100% 100%;width:14px;height:14px}.selector[data-selector=network] .expandedcontent_menu .menu_area{background:#ec9a3a;padding:14px;text-align:left;margin-top:20px;max-height:190px}.selector[data-selector=network] .expandedcontent_menu .menu_area .area_title{color:#fff;font-size:16px;font-weight:\"montserratbold\";text-transform:capitalize;border-bottom:3px solid #fff;padding-bottom:4px;position:relative}.selector[data-selector=network] .expandedcontent_menu .menu_area .area_title .area_closebt{position:absolute;right:-20px;top:-20px;background:url(" + escape(__webpack_require__("Dhuc")) + ") no-repeat 0 0;background-size:100% 100%;width:40px;height:40px;cursor:pointer;display:block}.selector[data-selector=network] .expandedcontent_menu .menu_area .area_text{color:#fff;font-size:12px;line-height:16px;margin-top:10px;max-height:115px;overflow:auto}.selector[data-selector=network] .expandedcontent_menu .menu_classif{background:#ea6550;padding:20px;text-align:left;margin-top:20px;position:relative}.selector[data-selector=network] .expandedcontent_menu .menu_classif .classif_title{font-size:16px;font-family:montserratbold;line-height:22px;border-bottom:3px solid #fff;padding-bottom:6px;color:#fff;position:relative;text-transform:capitalize}.selector[data-selector=network] .expandedcontent_menu .menu_classif .classif_title .title_closebt{position:absolute;right:0;top:50%;-webkit-transform:translateY(-50%);transform:translateY(-50%);background:url(" + escape(__webpack_require__("Ehvn")) + ") no-repeat 0 0;background-size:100% 100%;width:30px;height:30px;cursor:pointer;display:block}.selector[data-selector=network] .expandedcontent_menu .menu_classif .classif_indicators{position:relative;height:320px;overflow:auto;width:100%;margin-top:14px}.selector[data-selector=network] .expandedcontent_menu .menu_classif .classif_indicators .indicator{height:40px;line-height:40px;border-bottom:2px solid #b45747;color:#fff;text-decoration:none;display:block;padding:0 20px 0 10px;position:relative;overflow:hidden}.selector[data-selector=network] .expandedcontent_menu .menu_classif .classif_indicators .indicator:hover{background:#b45747}.selector[data-selector=network] .expandedcontent_menu .menu_classif .classif_indicators .indicator:after{content:\"\";position:absolute;right:0;top:50%;-webkit-transform:translateY(-50%);transform:translateY(-50%);background:url(" + escape(__webpack_require__("BN1d")) + ") no-repeat 0 0;background-size:100% 100%;width:30px;height:30px}.selector[data-selector=network] .expandedcontent_main{width:65%;height:100%;display:inline-block;vertical-align:top;position:relative}.selector[data-selector=network] .svg-container{position:relative;width:100%;height:100%}.selector[data-selector=network] .svg-container svg{width:100%;height:100%}.selector[data-selector=network] .svg-container svg .svgCircle{fill:#fff;cursor:pointer;stroke-width:2px;stroke:#ec9a3a}.selector[data-selector=network] .svg-container svg .svgCircle[data-type=classif]{fill:url(#grad1);stroke:#b45747}.selector[data-selector=network] .svg-container svg .svgCircle[data-selected=true]{fill:#ec9a3a;stroke:#ec9a3a!important}.selector[data-selector=network] .svg-container svg .svgCircle[data-highlighting=delighted]{stroke:#b8b8b8}.selector[data-selector=network] .svg-container svg .svgCircle[data-highlighting=delighted][data-type=classif]{fill:url(#grad2);stroke:#8c8c8c}.selector[data-selector=network] .svg-container svg .svgCircle[data-type=root]{stroke:#a15e14!important}.selector[data-selector=network] .svg-container svg .svgRect{display:none}.selector[data-selector=network] .svg-container svg .svgRect.displayed{display:block}.selector[data-selector=network] .svg-container svg .svgText{fill:#fff;text-transform:capitalize}.selector[data-selector=network] .svg-container svg .svgText.displayed{display:block}.selector[data-selector=network] .svg-container svg .svgText[data-type=area]{fill:#333}.selector[data-selector=network] .svg-container svg .svgLine{stroke:#b8b8b8}.selector[data-selector=network] .svg-container svg .svgLine[data-highlighting=highlighted]{stroke:#ec9a3a;stroke-width:3px}.selector[data-selector=network] label{display:block}.links line{stroke:#ec9a3a;stroke-opacity:.6}.nodes circle{stroke:#ec9a3a;stroke-width:2px}.selector[data-selector=network][data-after-computerects=true] .svgText{display:none!important}.selector[data-selector=network][data-after-computerects=true] .svgText.displayed{display:block!important}", ""]);
+
+// exports
+
 
 /***/ }),
 
@@ -28135,22 +27825,6 @@ module.exports = __webpack_require__.p + "img/icon-production-grey.fc62242.svg";
 
 /***/ }),
 
-/***/ "D9yl":
-/***/ (function(module, exports, __webpack_require__) {
-
-var escape = __webpack_require__("kxFB");
-exports = module.exports = __webpack_require__("FZ+f")(false);
-// imports
-
-
-// module
-exports.push([module.i, "@font-face{font-family:montserratbold;src:url(" + escape(__webpack_require__("KoCO")) + ") format(\"woff2\"),url(" + escape(__webpack_require__("cqiT")) + ") format(\"woff\");font-weight:400;font-style:normal}@font-face{font-family:montserratitalic;src:url(" + escape(__webpack_require__("hPgA")) + ") format(\"woff2\"),url(" + escape(__webpack_require__("hnDx")) + ") format(\"woff\");font-weight:400;font-style:normal}@font-face{font-family:montserratregular;src:url(" + escape(__webpack_require__("UBI+")) + ") format(\"woff2\"),url(" + escape(__webpack_require__("dL9s")) + ") format(\"woff\");font-weight:400;font-style:normal}@font-face{font-family:roboto_condensedbold;src:url(" + escape(__webpack_require__("CCFM")) + ") format(\"woff2\"),url(" + escape(__webpack_require__("CCFM")) + ") format(\"woff\");font-weight:400;font-style:normal}#Country{background:#159e9d;background:-webkit-gradient(linear,left top,left bottom,from(#159e9d),to(#e5eff6));background:linear-gradient(180deg,#159e9d 0,#e5eff6);filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=\"#159e9d\",endColorstr=\"#e5eff6\",GradientType=0);height:auto;min-height:100%}#Country #IndicatorSelectorModal{z-index:10000;-webkit-box-shadow:0 20px 120px 0 rgba(3,100,99,.8);box-shadow:0 20px 120px 0 rgba(3,100,99,.8)}#Country #IndicatorSelectorModal .sidebar_panel{background:#ededed!important}#Country #GeographySelectorModal,#Country #IndicatorSelectorModal{-webkit-box-shadow:0 20px 120px 0 rgba(3,100,99,.8);box-shadow:0 20px 120px 0 rgba(3,100,99,.8);opacity:0;z-index:-1;-webkit-transition-property:opacity;transition-property:opacity;-webkit-transition-duration:.6s;transition-duration:.6s;-webkit-transition-timing-function:ease-in-out;transition-timing-function:ease-in-out;-webkit-transition-delay:0s;transition-delay:0s}#Country #GeographySelectorModal.displayed,#Country #IndicatorSelectorModal.displayed{opacity:1;z-index:10000}#Country #GeographySelectorModal.nomodal,#Country #IndicatorSelectorModal.nomodal{position:relative;-webkit-box-shadow:none;box-shadow:none;-webkit-transform:translate(0);transform:translate(0);left:0;top:0;display:inline-block;margin-top:140px;margin-bottom:80px}#Country #GeographySelectorModal .selector[data-modaled=true] #GeographyInput,#Country #IndicatorSelectorModal .selector[data-modaled=true] #GeographyInput{background:#fff!important}#Country.fixed{overflow:hidden}#Country .page_main .main_head{text-align:left;padding-left:160px;position:relative;font-size:12px;font-family:montserratbold;margin-top:80px}#Country .page_main .main_head .head_title{color:#fff;font-size:22px}#Country .page_main .main_head .head_cartridge{color:#036463;font-family:montserratbold;font-size:12px;line-height:18px}#Country .page_main .main_head .head_cartridge .cartridge_col{display:inline-block;vertical-align:top;width:188px;height:56px;position:relative;margin-top:10px}#Country .page_main .main_head .head_cartridge .cartridge_col:nth-child(2):before{content:\"\";width:2px;height:100%;background:#036463;position:absolute;right:100%;top:0}#Country .page_main .main_head .head_cartridge .cartridge_col:nth-child(2){padding-left:20px;width:300px}#Country .page_main .main_head .head_cartridge .cartridge_website_link{color:#fff}#Country .page_main .main_content{background:#fff;padding:20px;margin-top:20px;margin-bottom:140px;min-height:400px;position:relative}#Country .page_main .main_content .content_nodata{text-align:center;margin-top:100px}#Country .page_main .main_content .content_nodata .nodata_wrapper .nodata_title{font-family:montserratbold;font-size:14px;color:#2f2f2f}#Country .page_main .main_content .content_nodata .nodata_wrapper .nodata_bt{background:#ea6550;color:#fff;padding:10px 20px;text-transform:uppercase;font-size:18px;cursor:pointer;margin-top:10px;border-radius:20px;display:inline-block;font-family:roboto_condensedbold}#Country .page_main .main_content .content_head{text-align:left;position:absolute;left:0;top:0;width:100%;height:100px;z-index:5;background:#fff}#Country .page_main .main_content .content_head[data-fixed=true]{position:fixed;left:50%;top:50px;width:1000px;z-index:1000000;-webkit-transform:translate(-50%);transform:translate(-50%)}#Country .page_main .main_content .content_head .head_menus{display:inline-block;vertical-align:top;margin-left:172px;width:327px;border-bottom:2px solid #2f2f2f;color:#2f2f2f;padding:10px 0;margin-top:20px}#Country .page_main .main_content .content_head .head_menus .indlist_bt{font-family:montserratitalic;font-size:20px;color:#2f2f2f;display:block;position:relative;padding-left:40px;cursor:pointer}#Country .page_main .main_content .content_head .head_menus .indlist_bt:after{content:\"\";position:absolute;left:0;top:50%;-webkit-transform:translateY(-50%);transform:translateY(-50%);width:32px;height:24px;border-radius:12px;background:url(" + escape(__webpack_require__("5uV0")) + ") no-repeat 50% #ea6550}#Country .page_main .main_content .content_head .head_menus .indlist_bt:hover:after{background-color:#2f2f2f}#Country .page_main .main_content .content_head .head_menus .dataset_link{color:#2f2f2f;display:block;position:relative;margin-top:10px;padding-left:40px;cursor:pointer}#Country .page_main .main_content .content_head .head_menus .dataset_link:after{content:\"\";position:absolute;left:0;top:50%;-webkit-transform:translateY(-50%);transform:translateY(-50%);width:32px;height:24px;border-radius:12px;background:url(" + escape(__webpack_require__("fUGn")) + ") no-repeat 50% #ea6550}#Country .page_main .main_content .content_head .head_menus .dataset_link:hover:after{background-color:#2f2f2f}#Country .page_main .main_content .content_head .head_geos{display:inline-block;vertical-align:top;width:400px;padding-top:16px;margin-top:20px}#Country .page_main .main_content .content_head .head_geos .geos_col{font-size:14px;line-height:18px;padding-top:5px;color:#8c8c8c;display:inline-block;vertical-align:top;width:80px;text-align:center;margin:0 10px;cursor:pointer;position:relative}#Country .page_main .main_content .content_head .head_geos .geos_col:before{content:\"\";position:absolute;left:50%;bottom:100%;width:32px;height:24px;border-radius:12px;-webkit-transform:translate(-50%);transform:translate(-50%);background:url(" + escape(__webpack_require__("5uV0")) + ") no-repeat 50% #ea6550}#Country .page_main .main_content .content_head .head_geos .geos_col.geos_col_country{font-size:14px;color:#036463;font-family:montserratbold}#Country .page_main .main_content .content_head .head_geos .geos_col.geos_col_country:before{width:0;height:0;border-style:solid;border-width:10px 10px 0;border-color:#036463 transparent transparent;background:transparent;border-radius:0;margin-bottom:26px}#Country .page_main .main_content .content_head .head_geos .geos_col.geos_col_country:hover:before{background-color:transparent}#Country .page_main .main_content .content_head .head_geos .geos_col:hover:before{background-color:#2f2f2f}#Country .page_main .main_content .content_main{margin-top:100px}#Country .page_main .main_content .classif_item{margin-bottom:40px;text-align:left}#Country .page_main .main_content .classif_item .classif_col{display:inline-block;vertical-align:top;position:relative}#Country .page_main .main_content .classif_item .classif_col[data-col=\"1\"]{width:15%}#Country .page_main .main_content .classif_item .classif_col[data-col=\"2\"]{width:80%}#Country .page_main .main_content .classif_item .classif_col[data-col=\"2\"]:before{content:\"\";width:2px;height:100%;background:#036463;position:absolute;right:100%;top:0}#Country .page_main .main_content .classif_item .classif_key{font-size:14px;color:#2f2f2f;font-family:montserratbold;text-align:right;padding:28px 14px 0 0;position:relative}#Country .page_main .main_content .classif_item .classif_key:before{content:\"\";position:absolute;right:0;bottom:4px;width:60px;height:60px}#Country .page_main .main_content .classif_item .classif_key[data-fixed=true]{position:fixed;right:50%;top:150px;-webkit-transform:translate(-336px);transform:translate(-336px);z-index:10}#Country .page_main .main_content .classif_item .classif_key[data-classif=Production]:before{background:url(" + escape(__webpack_require__("kDsM")) + ") no-repeat 0 0}#Country .page_main .main_content .classif_item .classif_key[data-classif=Dissemination]:before{background:url(" + escape(__webpack_require__("RQjM")) + ") no-repeat 0 0}#Country .page_main .main_content .classif_item .classif_key[data-classif=Use]:before{background:url(" + escape(__webpack_require__("az8e")) + ") no-repeat 0 0}#Country .page_main .main_content .classif_item .classif_key[data-classif=Investment]:before{background:url(" + escape(__webpack_require__("dYj/")) + ") no-repeat 0 0}#Country .page_main .main_content .classif_item .classif_key[data-classif=Planning]:before{background:url(" + escape(__webpack_require__("Gez8")) + ") no-repeat 0 0}#Country .page_main .main_content .classif_item .indicator_item{height:120px;padding:0;margin:0 10px;background:#fff;border-bottom:1px dotted #b8b8b8}#Country .page_main .main_content .classif_item .indicator_item.iskey:nth-child(2n){background:#f6fdfd}#Country .page_main .main_content .classif_item .indicator_item.iskey:nth-child(odd){background:#e8fafa}#Country .page_main .main_content .classif_item .indicator_item .indicator_desc{width:327px;display:inline-block;vertical-align:top;margin-top:10px;padding:0 10px;position:relative}#Country .page_main .main_content .classif_item .indicator_item .indicator_desc .indicator_tooltip{position:absolute;right:100%;top:50%;-webkit-transform:translateY(-50%);transform:translateY(-50%);background:#2f2f2f;width:140px;padding:10px;color:#fff;font-size:12px;display:none;text-align:center;font-family:montserratitalic}#Country .page_main .main_content .classif_item .indicator_item .indicator_desc:hover .indicator_tooltip{display:block}#Country .page_main .main_content .classif_item .indicator_item .indicator_geovalues{width:400px;display:inline-block;vertical-align:top;height:100%}#Country .page_main .main_content .classif_item .indicator_item .indicator_geovalues .geovalues_col{text-align:center;width:80px;margin:0 10px;display:inline-block;vertical-align:top;line-height:50px;height:100%;position:relative}#Country .page_main .main_content .classif_item .indicator_item .indicator_geovalues .geovalues_col:hover{z-index:100000}#Country .page_main .main_content .classif_item .indicator_item .indicator_geovalues .geovalues_col .geovalues_col_content{width:100%;height:70%}#Country .page_main .main_content .classif_item .indicator_item .indicator_keytag{color:#159e9d;font-family:montserratitalic;font-size:10px;position:relative;padding-left:13px}#Country .page_main .main_content .classif_item .indicator_item .indicator_keytag:before{content:\"\";position:absolute;background:url(" + escape(__webpack_require__("LpND")) + ") no-repeat 0 0;background-size:100% 100%;width:9px;height:9px;left:0;top:50%;-webkit-transform:translateY(-50%);transform:translateY(-50%)}#Country .page_main .main_content .classif_item .indicator_item .indicator_name{font-size:14px;color:#2f2f2f;font-family:montserratbold;text-decoration:none}#Country .page_main .main_content .classif_item .indicator_item .indicator_unit{font-size:12px;color:#8c8c8c}", ""]);
-
-// exports
-
-
-/***/ }),
-
 /***/ "DSiB":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -28162,39 +27836,6 @@ module.exports = __webpack_require__.p + "img/icon-production-white.640e19b.svg"
 /***/ (function(module, exports) {
 
 module.exports = "data:image/svg+xml;base64,PHN2ZyBpZD0iaWNvbi1tYXBfem9vbW91dCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB2aWV3Qm94PSIwIDAgMzAgMzAiPgogIDx0aXRsZT5pY29uLW1hcF96b29tb3V0PC90aXRsZT4KICA8bGluZSB4MT0iMjAuNSIgeTE9IjE1IiB4Mj0iOS41IiB5Mj0iMTUiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzJmMmYyZiIgc3Ryb2tlLW1pdGVybGltaXQ9IjEwIiBzdHJva2Utd2lkdGg9IjMiLz4KPC9zdmc+Cg=="
-
-/***/ }),
-
-/***/ "DwCi":
-/***/ (function(module, exports, __webpack_require__) {
-
-var makeString = __webpack_require__("cPFj");
-var defaultToWhiteSpace = __webpack_require__("XZ3a");
-var nativeTrimRight = String.prototype.trimRight;
-
-module.exports = function rtrim(str, characters) {
-  str = makeString(str);
-  if (!characters && nativeTrimRight) return nativeTrimRight.call(str);
-  characters = defaultToWhiteSpace(characters);
-  return str.replace(new RegExp(characters + '+$'), '');
-};
-
-
-/***/ }),
-
-/***/ "FNm0":
-/***/ (function(module, exports, __webpack_require__) {
-
-var escape = __webpack_require__("kxFB");
-exports = module.exports = __webpack_require__("FZ+f")(false);
-// imports
-
-
-// module
-exports.push([module.i, "@font-face{font-family:montserratbold;src:url(" + escape(__webpack_require__("KoCO")) + ") format(\"woff2\"),url(" + escape(__webpack_require__("cqiT")) + ") format(\"woff\");font-weight:400;font-style:normal}@font-face{font-family:montserratitalic;src:url(" + escape(__webpack_require__("hPgA")) + ") format(\"woff2\"),url(" + escape(__webpack_require__("hnDx")) + ") format(\"woff\");font-weight:400;font-style:normal}@font-face{font-family:montserratregular;src:url(" + escape(__webpack_require__("UBI+")) + ") format(\"woff2\"),url(" + escape(__webpack_require__("dL9s")) + ") format(\"woff\");font-weight:400;font-style:normal}@font-face{font-family:roboto_condensedbold;src:url(" + escape(__webpack_require__("CCFM")) + ") format(\"woff2\"),url(" + escape(__webpack_require__("CCFM")) + ") format(\"woff\");font-weight:400;font-style:normal}.geovaluestable_cell,.geovaluestable_cell .cell_value{height:100%;position:relative}.geovaluestable_cell .cell_value_available{position:absolute;left:50%;-webkit-transform:translate(-50%);transform:translate(-50%);top:100%;width:110%;color:#333;line-height:14px;font-size:11px}.geovaluestable_cell .cell_value_nodata{color:#8c8c8c;font-size:15px;font-family:montserratbold;position:relative;width:80px;height:20px;line-height:20px;display:inline-block;position:absolute;left:50%;top:50%;-webkit-transform:translate(-50%,-50%);transform:translate(-50%,-50%)}.geovaluestable_cell .cell_value_histo{text-align:center;height:100%;display:inline-block;vertical-align:bottom;position:relative}.geovaluestable_cell .cell_value_histo .histo_bar{width:20px;height:20px;display:inline-block;vertical-align:bottom;background:#159e9d;position:absolute;left:50%;bottom:0;-webkit-transform:translate(-50%);transform:translate(-50%)}.geovaluestable_cell .cell_value_histo .histo_bar .bar_value{font-size:15px;height:20px;line-height:20px;font-family:montserratbold;color:#159e9d;position:absolute;left:50%;-webkit-transform:translate(-50%);transform:translate(-50%);bottom:100%;margin-bottom:2px;white-space:nowrap}.geovaluestable_cell .cell_value_binary .binary_value{position:absolute;left:50%;top:50%;-webkit-transform:translate(-50%,-50%);transform:translate(-50%,-50%);font-family:montserratbold;font-size:15px;height:18px;line-height:18px}.geovaluestable_cell .cell_value_binary .binary_value:before{content:\"\";position:absolute;right:100%;top:0;margin-right:4px;width:18px;height:22px}.geovaluestable_cell .cell_value_binary .binary_value[data-binary=yes]{color:#159e9d}.geovaluestable_cell .cell_value_binary .binary_value[data-binary=yes]:before{background:url(" + escape(__webpack_require__("wsHT")) + ") no-repeat 0 0;background-size:100% 100%}.geovaluestable_cell .cell_value_binary .binary_value[data-binary=no]{color:#ec9a3a}.geovaluestable_cell .cell_value_binary .binary_value[data-binary=no]:before{background:url(" + escape(__webpack_require__("Pp4L")) + ") no-repeat 0 0;background-size:100% 100%}.geovaluestable_cell .cell_value_ordinal{text-align:center;position:relative;height:100%;width:100%;z-index:1000}.geovaluestable_cell .cell_value_ordinal .ordinal_barchart{width:20px;height:100%;cursor:pointer;display:inline-block;position:absolute;left:50%;-webkit-transform:translate(-50%);transform:translate(-50%);bottom:0}.geovaluestable_cell .cell_value_ordinal .ordinal_barchart .barchart_subbar{width:100%}.geovaluestable_cell .cell_value_ordinal .ordinal_barchart .barchart_subbar[data-value=nodata]{background:#8c8c8c!important}.geovaluestable_cell .cell_value_ordinal .ordinal_tooltip{position:absolute;left:100%;top:50%;-webkit-box-shadow:0 0 10px 10px rgba(0,0,0,.4);box-shadow:0 0 10px 10px rgba(0,0,0,.4);-webkit-transform:translateY(-50%);transform:translateY(-50%);padding:10px;text-align:left;background:#fff;color:#2f2f2f;line-height:20px;min-width:200px;-webkit-box-shadow:0 0 10px 4px rgba(0,0,0,.4);box-shadow:0 0 10px 4px rgba(0,0,0,.4)}.geovaluestable_cell .cell_value_ordinal .ordinal_tooltip .tooltip_year{font-family:montserratitalic;font-size:12px}.geovaluestable_cell .cell_value_ordinal .ordinal_tooltip .tooltip_geo{font-family:montserratbold;font-size:12px}.geovaluestable_cell .cell_value_ordinal .ordinal_tooltip .tooltip_available{font-family:montserratbold;color:#8c8c8c;font-size:10px}.geovaluestable_cell .cell_value_ordinal .ordinal_tooltip .tooltip_item{display:block;font-size:12px;position:relative;padding-left:20px}.geovaluestable_cell .cell_value_ordinal .ordinal_tooltip .tooltip_item .item_chip{width:14px;height:14px;border-radius:14px;display:inline-block;position:absolute;left:0;top:50%;background:#8c8c8c;-webkit-transform:translateY(-50%);transform:translateY(-50%)}.geovaluestable_cell .cell_value_ordinal .ordinal_tooltip .tooltip_item .item_wdata:first-letter{text-transform:capitalize}.geovaluestable_cell .cell_value_ordinal .ordinal_tooltip .tooltip_item .item_value{font-family:montserratbold}.geovaluestable_cell .cell_value_ordinal_single{line-height:20px;padding-top:30px}.geovaluestable_cell .cell_value_ordinal_single .ordinalsingle_circle{display:inline-block;width:20px;height:20px;border-radius:20px;background:#ccc}.geovaluestable_cell .cell_value_ordinal_single .ordinalsingle_label{color:#2f2f2f;font-family:montserratbold;font-size:14px}.geovaluestable_cell[data-referring=true] .cell_value_histo .histo_bar{background:#036463}.geovaluestable_cell[data-referring=true] .cell_value_histo .histo_bar .bar_value{color:#036463}", ""]);
-
-// exports
-
 
 /***/ }),
 
@@ -28227,891 +27868,38 @@ module.exports = function cleanDiacritics(str) {
 
 /***/ }),
 
-/***/ "GQap":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    {
-      staticClass: "page",
-      class:
-        _vm.displayGeoModal ||
-        _vm.displayIndicatorModal ||
-        _vm.selectedCountry == ""
-          ? "fixed"
-          : "",
-      attrs: { id: "Country", "data-page": "country" }
-    },
-    [
-      _c("div", {
-        staticClass: "appmodal_cache",
-        class:
-          _vm.displayGeoModal || _vm.displayIndicatorModal ? "displayed" : "",
-        on: {
-          click: function($event) {
-            _vm.displayGeoModal = false
-            _vm.displayIndicatorModal = false
-          }
-        }
-      }),
-      _c("paris21Header", {
-        attrs: { page: "country" },
-        on: {
-          aboutModal: function($event) {
-            _vm.displayAboutModal = true
-          },
-          downloadModal: function($event) {
-            _vm.displayDownloadModal = true
-          }
-        }
-      }),
-      _vm.selectedCountry !== ""
-        ? _c("div", { staticClass: "page_main" }, [
-            _c(
-              "div",
-              { staticClass: "main_head" },
-              [
-                _c("div", { staticClass: "head_title" }, [
-                  _c("span", { staticClass: "bolder" }, [
-                    _vm._v(_vm._s(_vm.countryName))
-                  ])
-                ]),
-                _c("div", { staticClass: "head_cartridge" }, [
-                  _c("div", { staticClass: "cartridge_col" }, [
-                    _vm.lastGDPAvailable != "" &&
-                    (_vm.countryObj.subregion !== "" &&
-                      _vm.countryObj.region !== "")
-                      ? _c("div", { staticClass: "cartridge_pib" }, [
-                          _vm._v(
-                            "GDP per capita : " +
-                              _vm._s(_vm.lastGDPAvailable) +
-                              " $"
-                          )
-                        ])
-                      : _vm._e(),
-                    _vm.lastPopAvailable != "" &&
-                    (_vm.countryObj.subregion !== "" &&
-                      _vm.countryObj.region !== "")
-                      ? _c("div", { staticClass: "cartridge_pop" }, [
-                          _vm._v("Population : " + _vm._s(_vm.lastPopAvailable))
-                        ])
-                      : _vm._e(),
-                    _vm.NSOWebsite != "" &&
-                    (_vm.countryObj.subregion !== "" &&
-                      _vm.countryObj.region !== "")
-                      ? _c(
-                          "a",
-                          {
-                            staticClass: "cartridge_website_link",
-                            attrs: { href: _vm.NSOWebsite, target: "_blank" }
-                          },
-                          [_vm._v("NSO Website")]
-                        )
-                      : _vm._e()
-                  ]),
-                  _vm.dataLoaded &&
-                  (_vm.countryObj.subregion !== "" &&
-                    _vm.countryObj.region !== "")
-                    ? _c(
-                        "div",
-                        {
-                          staticClass: "cartridge_col",
-                          attrs: { "data-col": "2" }
-                        },
-                        [
-                          _c("div", { staticClass: "cartridge_incgroup" }, [
-                            _vm._v(
-                              "Income group : " +
-                                _vm._s(_vm.lastIncomeGroup) +
-                                " "
-                            )
-                          ]),
-                          _c("div", { staticClass: "cartridge_subregion" }, [
-                            _vm._v(
-                              "Subregion : " +
-                                _vm._s(_vm.countryObj.subregion) +
-                                " "
-                            )
-                          ])
-                        ]
-                      )
-                    : _vm._e()
-                ]),
-                _c(
-                  "nuxt-link",
-                  { staticClass: "head_backbt", attrs: { to: "/country/" } },
-                  [_vm._v("Back")]
-                ),
-                _c(
-                  "a",
-                  {
-                    staticClass: "head_link",
-                    on: {
-                      click: function($event) {
-                        _vm.downloadAllCountryData("head")
-                      }
-                    }
-                  },
-                  [_vm._v("Download country dataset")]
-                ),
-                _c("a", {
-                  staticClass: "head_link_fake",
-                  attrs: {
-                    id: "HeadLinkFake",
-                    download: "Statistical Capacity Monitor data download.xls"
-                  }
-                }),
-                _vm.selectedIndicators.length > 0
-                  ? _c(
-                      "a",
-                      {
-                        staticClass: "head_link2",
-                        on: {
-                          click: function($event) {
-                            _vm.downloadAllCountryData("content")
-                          }
-                        }
-                      },
-                      [_vm._v("Download your selection")]
-                    )
-                  : _vm._e(),
-                _c("a", {
-                  attrs: {
-                    id: "ContentLinkFake",
-                    href: _vm.xlsLinkAttr,
-                    download: "Statistical Capacity Monitor data download.xls"
-                  }
-                })
-              ],
-              1
-            ),
-            _vm.dataLoaded
-              ? _c("div", { staticClass: "main_content" }, [
-                  _c("div", { staticClass: "content_head" }, [
-                    _c("div", { staticClass: "head_menus" }, [
-                      _c(
-                        "a",
-                        {
-                          staticClass: "indlist_bt",
-                          on: {
-                            click: function($event) {
-                              _vm.displayIndicatorModal = true
-                            }
-                          }
-                        },
-                        [_vm._v("Indicators list")]
-                      )
-                    ]),
-                    _c("div", { staticClass: "head_geos" }, [
-                      _c("div", { staticClass: "geos_col geos_col_country" }, [
-                        _vm._v(
-                          _vm._s(
-                            _vm.$store.DBGeographyObj[_vm.selectedCountry].name
-                          )
-                        )
-                      ]),
-                      _vm.comparedCountries[0] !== undefined
-                        ? _c("div", {
-                            staticClass: "geos_col",
-                            domProps: {
-                              innerHTML: _vm._s(
-                                _vm.prunify(_vm.comparedCountries[0].name)
-                              )
-                            },
-                            on: {
-                              click: function($event) {
-                                _vm.comparedGeoColSelected = 0
-                                _vm.displayGeoModal = true
-                                _vm.modaledCountryInput =
-                                  _vm.comparedCountries[0]
-                              }
-                            }
-                          })
-                        : _vm._e(),
-                      _vm.comparedCountries[1] !== undefined
-                        ? _c("div", {
-                            staticClass: "geos_col",
-                            domProps: {
-                              innerHTML: _vm._s(
-                                _vm.prunify(_vm.comparedCountries[1].name)
-                              )
-                            },
-                            on: {
-                              click: function($event) {
-                                _vm.comparedGeoColSelected = 1
-                                _vm.displayGeoModal = true
-                                _vm.modaledCountryInput =
-                                  _vm.comparedCountries[1]
-                              }
-                            }
-                          })
-                        : _vm._e(),
-                      _vm.comparedCountries[2] !== undefined
-                        ? _c("div", {
-                            staticClass: "geos_col",
-                            domProps: {
-                              innerHTML: _vm._s(
-                                _vm.prunify(_vm.comparedCountries[2].name)
-                              )
-                            },
-                            on: {
-                              click: function($event) {
-                                _vm.comparedGeoColSelected = 2
-                                _vm.displayGeoModal = true
-                                _vm.modaledCountryInput =
-                                  _vm.comparedCountries[2]
-                              }
-                            }
-                          })
-                        : _vm._e()
-                    ])
-                  ]),
-                  _vm.selectedIndicators.length == 0
-                    ? _c("div", { staticClass: "content_nodata" }, [
-                        _c("div", { staticClass: "nodata_wrapper" }, [
-                          _c("div", { staticClass: "nodata_title" }, [
-                            _vm._v("You have no indicators selected")
-                          ]),
-                          _c(
-                            "a",
-                            {
-                              staticClass: "nodata_bt",
-                              on: {
-                                click: function($event) {
-                                  _vm.displayIndicatorModal = true
-                                }
-                              }
-                            },
-                            [_vm._v("Add Indicators")]
-                          )
-                        ])
-                      ])
-                    : _vm._e(),
-                  _c(
-                    "div",
-                    { staticClass: "content_main" },
-                    _vm._l(_vm.DBClassifIndicators, function(
-                      classifItem,
-                      classifIndex
-                    ) {
-                      return _vm.hasSelectedIndicators(classifItem.items)
-                        ? _c(
-                            "div",
-                            { key: classifIndex, staticClass: "classif_item" },
-                            [
-                              _c(
-                                "div",
-                                {
-                                  staticClass: "classif_col",
-                                  attrs: { "data-col": "1" }
-                                },
-                                [
-                                  _c(
-                                    "div",
-                                    {
-                                      staticClass: "classif_key",
-                                      attrs: { "data-classif": classifItem.key }
-                                    },
-                                    [_vm._v(_vm._s(classifItem.key))]
-                                  )
-                                ]
-                              ),
-                              _c(
-                                "div",
-                                {
-                                  staticClass: "classif_col",
-                                  attrs: {
-                                    "data-col": "2",
-                                    "data-classif": classifItem.key
-                                  }
-                                },
-                                _vm._l(classifItem.items, function(
-                                  indicatorItem,
-                                  indicatorIndex
-                                ) {
-                                  return _vm.isIndicatorSelected(indicatorItem)
-                                    ? _c(
-                                        "div",
-                                        {
-                                          key: indicatorIndex,
-                                          staticClass: "indicator_item",
-                                          class:
-                                            indicatorItem.key_indicator == "1"
-                                              ? "iskey"
-                                              : "",
-                                          attrs: { "data-id": indicatorItem.id }
-                                        },
-                                        [
-                                          _c(
-                                            "div",
-                                            { staticClass: "indicator_desc" },
-                                            [
-                                              indicatorItem.key_indicator == "1"
-                                                ? _c(
-                                                    "div",
-                                                    {
-                                                      staticClass:
-                                                        "indicator_keytag"
-                                                    },
-                                                    [_vm._v("Key indicator")]
-                                                  )
-                                                : _vm._e(),
-                                              _c(
-                                                "nuxt-link",
-                                                {
-                                                  staticClass: "indicator_name",
-                                                  attrs: {
-                                                    to:
-                                                      "/indicator/" +
-                                                      indicatorItem.id
-                                                  }
-                                                },
-                                                [
-                                                  _vm._v(
-                                                    "\n                                    " +
-                                                      _vm._s(
-                                                        indicatorItem.name
-                                                      ) +
-                                                      "\n                                "
-                                                  )
-                                                ]
-                                              ),
-                                              _c(
-                                                "div",
-                                                {
-                                                  staticClass: "indicator_unit"
-                                                },
-                                                [
-                                                  _vm._v(
-                                                    _vm._s(indicatorItem.tag)
-                                                  )
-                                                ]
-                                              ),
-                                              _c(
-                                                "div",
-                                                {
-                                                  staticClass:
-                                                    "indicator_tooltip"
-                                                },
-                                                [
-                                                  _vm._v(
-                                                    "\n                                    Click to view indicator page\n                                "
-                                                  )
-                                                ]
-                                              )
-                                            ],
-                                            1
-                                          ),
-                                          _c(
-                                            "div",
-                                            {
-                                              staticClass: "indicator_geovalues"
-                                            },
-                                            [
-                                              _c(
-                                                "div",
-                                                {
-                                                  staticClass: "geovalues_col"
-                                                },
-                                                [
-                                                  _c(
-                                                    "div",
-                                                    {
-                                                      staticClass:
-                                                        "geovalues_col_content"
-                                                    },
-                                                    [
-                                                      _c("geovaluesTableCell", {
-                                                        attrs: {
-                                                          refYear: _vm.computeRefYear(
-                                                            indicatorItem.id
-                                                          ),
-                                                          indicatorData:
-                                                            _vm.$store
-                                                              .DBGeoItems[
-                                                              _vm
-                                                                .selectedCountry
-                                                            ].indicators[
-                                                              indicatorItem.id
-                                                            ],
-                                                          indicatorID:
-                                                            indicatorItem.id,
-                                                          comparedCountries:
-                                                            _vm.dynamicComparedCountries,
-                                                          dataType:
-                                                            indicatorItem.dataviz_type,
-                                                          isReferring: true,
-                                                          geoType:
-                                                            _vm.countryObj.type,
-                                                          geoID:
-                                                            _vm.selectedCountry,
-                                                          geoLabel:
-                                                            _vm.countryName,
-                                                          geoGroups:
-                                                            _vm.$store
-                                                              .DBGeoGroups
-                                                        }
-                                                      })
-                                                    ],
-                                                    1
-                                                  )
-                                                ]
-                                              ),
-                                              _vm.comparedCountries[0] !==
-                                              undefined
-                                                ? _c(
-                                                    "div",
-                                                    {
-                                                      staticClass:
-                                                        "geovalues_col"
-                                                    },
-                                                    [
-                                                      _vm.$store.DBGeoItems[
-                                                        _vm.comparedCountries[0]
-                                                          .m49
-                                                      ] !== undefined
-                                                        ? _c(
-                                                            "div",
-                                                            {
-                                                              staticClass:
-                                                                "geovalues_col_content"
-                                                            },
-                                                            [
-                                                              _c(
-                                                                "geovaluesTableCell",
-                                                                {
-                                                                  attrs: {
-                                                                    refYear: _vm.computeRefYear(
-                                                                      indicatorItem.id
-                                                                    ),
-                                                                    indicatorData:
-                                                                      _vm.$store
-                                                                        .DBGeoItems[
-                                                                        _vm
-                                                                          .comparedCountries[0]
-                                                                          .m49
-                                                                      ]
-                                                                        .indicators[
-                                                                        indicatorItem
-                                                                          .id
-                                                                      ],
-                                                                    indicatorID:
-                                                                      indicatorItem.id,
-                                                                    comparedCountries:
-                                                                      _vm.dynamicComparedCountries,
-                                                                    dataType:
-                                                                      indicatorItem.dataviz_type,
-                                                                    isReferring: false,
-                                                                    geoType:
-                                                                      _vm
-                                                                        .comparedCountries[0]
-                                                                        .type,
-                                                                    geoID:
-                                                                      _vm
-                                                                        .comparedCountries[0]
-                                                                        .m49,
-                                                                    geoLabel:
-                                                                      _vm
-                                                                        .comparedCountries[0]
-                                                                        .name,
-                                                                    geoGroups:
-                                                                      _vm.$store
-                                                                        .DBGeoGroups
-                                                                  }
-                                                                }
-                                                              )
-                                                            ],
-                                                            1
-                                                          )
-                                                        : _vm._e(),
-                                                      _vm.$store.DBGeoItems[
-                                                        _vm.comparedCountries[0]
-                                                          .m49
-                                                      ] == undefined
-                                                        ? _c(
-                                                            "div",
-                                                            {
-                                                              staticClass:
-                                                                "geovalues_col_content"
-                                                            },
-                                                            [_vm._m(0, true)]
-                                                          )
-                                                        : _vm._e()
-                                                    ]
-                                                  )
-                                                : _vm._e(),
-                                              _vm.comparedCountries[1] !==
-                                              undefined
-                                                ? _c(
-                                                    "div",
-                                                    {
-                                                      staticClass:
-                                                        "geovalues_col"
-                                                    },
-                                                    [
-                                                      _vm.$store.DBGeoItems[
-                                                        _vm.comparedCountries[1]
-                                                          .m49
-                                                      ] !== undefined
-                                                        ? _c(
-                                                            "div",
-                                                            {
-                                                              staticClass:
-                                                                "geovalues_col_content"
-                                                            },
-                                                            [
-                                                              _c(
-                                                                "geovaluesTableCell",
-                                                                {
-                                                                  attrs: {
-                                                                    refYear: _vm.computeRefYear(
-                                                                      indicatorItem.id
-                                                                    ),
-                                                                    indicatorData:
-                                                                      _vm.$store
-                                                                        .DBGeoItems[
-                                                                        _vm
-                                                                          .comparedCountries[1]
-                                                                          .m49
-                                                                      ]
-                                                                        .indicators[
-                                                                        indicatorItem
-                                                                          .id
-                                                                      ],
-                                                                    indicatorID:
-                                                                      indicatorItem.id,
-                                                                    comparedCountries:
-                                                                      _vm.dynamicComparedCountries,
-                                                                    dataType:
-                                                                      indicatorItem.dataviz_type,
-                                                                    isReferring: false,
-                                                                    geoType:
-                                                                      _vm
-                                                                        .comparedCountries[1]
-                                                                        .type,
-                                                                    geoID:
-                                                                      _vm
-                                                                        .comparedCountries[1]
-                                                                        .m49,
-                                                                    geoLabel:
-                                                                      _vm
-                                                                        .comparedCountries[1]
-                                                                        .name,
-                                                                    geoGroups:
-                                                                      _vm.$store
-                                                                        .DBGeoGroups
-                                                                  }
-                                                                }
-                                                              )
-                                                            ],
-                                                            1
-                                                          )
-                                                        : _vm._e(),
-                                                      _vm.$store.DBGeoItems[
-                                                        _vm.comparedCountries[1]
-                                                          .m49
-                                                      ] == undefined
-                                                        ? _c(
-                                                            "div",
-                                                            {
-                                                              staticClass:
-                                                                "geovalues_col_content"
-                                                            },
-                                                            [_vm._m(1, true)]
-                                                          )
-                                                        : _vm._e()
-                                                    ]
-                                                  )
-                                                : _vm._e(),
-                                              _vm.comparedCountries[2] !==
-                                              undefined
-                                                ? _c(
-                                                    "div",
-                                                    {
-                                                      staticClass:
-                                                        "geovalues_col"
-                                                    },
-                                                    [
-                                                      _vm.$store.DBGeoItems[
-                                                        _vm.comparedCountries[2]
-                                                          .m49
-                                                      ] !== undefined
-                                                        ? _c(
-                                                            "div",
-                                                            {
-                                                              staticClass:
-                                                                "geovalues_col_content"
-                                                            },
-                                                            [
-                                                              _c(
-                                                                "geovaluesTableCell",
-                                                                {
-                                                                  attrs: {
-                                                                    refYear: _vm.computeRefYear(
-                                                                      indicatorItem.id
-                                                                    ),
-                                                                    indicatorData:
-                                                                      _vm.$store
-                                                                        .DBGeoItems[
-                                                                        _vm
-                                                                          .comparedCountries[2]
-                                                                          .m49
-                                                                      ]
-                                                                        .indicators[
-                                                                        indicatorItem
-                                                                          .id
-                                                                      ],
-                                                                    indicatorID:
-                                                                      indicatorItem.id,
-                                                                    comparedCountries:
-                                                                      _vm.dynamicComparedCountries,
-                                                                    dataType:
-                                                                      indicatorItem.dataviz_type,
-                                                                    isReferring: false,
-                                                                    geoType:
-                                                                      _vm
-                                                                        .comparedCountries[2]
-                                                                        .type,
-                                                                    geoID:
-                                                                      _vm
-                                                                        .comparedCountries[2]
-                                                                        .m49,
-                                                                    geoLabel:
-                                                                      _vm
-                                                                        .comparedCountries[2]
-                                                                        .name,
-                                                                    geoGroups:
-                                                                      _vm.$store
-                                                                        .DBGeoGroups
-                                                                  }
-                                                                }
-                                                              )
-                                                            ],
-                                                            1
-                                                          )
-                                                        : _vm._e(),
-                                                      _vm.$store.DBGeoItems[
-                                                        _vm.comparedCountries[2]
-                                                          .m49
-                                                      ] == undefined
-                                                        ? _c(
-                                                            "div",
-                                                            {
-                                                              staticClass:
-                                                                "geovalues_col_content"
-                                                            },
-                                                            [_vm._m(2, true)]
-                                                          )
-                                                        : _vm._e()
-                                                    ]
-                                                  )
-                                                : _vm._e()
-                                            ]
-                                          )
-                                        ]
-                                      )
-                                    : _vm._e()
-                                }),
-                                0
-                              )
-                            ]
-                          )
-                        : _vm._e()
-                    }),
-                    0
-                  )
-                ])
-              : _vm._e()
-          ])
-        : _vm._e(),
-      _c(
-        "div",
-        {
-          staticClass: "appmodal",
-          class: [
-            _vm.selectedCountry == "" ? "nomodal" : "",
-            _vm.displayGeoModal || _vm.selectedCountry == "" ? "displayed" : ""
-          ],
-          attrs: { id: "GeographySelectorModal" }
-        },
-        [
-          _vm.displayGeoModal
-            ? _c("div", { staticClass: "appmodal_head" }, [
-                _vm._v(
-                  "\n            Change a country region or subregion\n            "
-                ),
-                _vm.selectedCountry != ""
-                  ? _c("a", {
-                      staticClass: "appmodal_closebt",
-                      on: {
-                        click: function($event) {
-                          _vm.displayGeoModal = !_vm.displayGeoModal
-                        }
-                      }
-                    })
-                  : _vm._e()
-              ])
-            : _vm._e(),
-          _c(
-            "div",
-            { staticClass: "appmodal_content" },
-            [
-              _c("geographySelector", {
-                attrs: {
-                  state: "expanded",
-                  modaled: _vm.displayGeoModal ? true : false,
-                  parentSelected: _vm.selectedCountry,
-                  modaledCountryInput: _vm.modaledCountryInput,
-                  mapColor: _vm.selectedCountry == "" ? "green" : "grey",
-                  hasTooltipValues: false
-                },
-                on: {
-                  selectCountryFromModal: function($event) {
-                    _vm.updateModaledCountry()
-                  }
-                }
-              })
-            ],
-            1
-          )
-        ]
-      ),
-      _c(
-        "div",
-        {
-          staticClass: "appmodal",
-          class: _vm.displayIndicatorModal ? "displayed" : "",
-          attrs: { id: "IndicatorSelectorModal" }
-        },
-        [
-          _c("div", { staticClass: "appmodal_head" }, [
-            _vm._v(
-              "\n            Edit and filter the indicators list\n            "
-            ),
-            _c("a", {
-              staticClass: "appmodal_closebt",
-              on: {
-                click: function($event) {
-                  _vm.displayIndicatorModal = !_vm.displayIndicatorModal
-                }
-              }
-            })
-          ]),
-          _c(
-            "div",
-            { staticClass: "appmodal_content" },
-            [
-              _c("indicatorSelector", {
-                attrs: {
-                  mainColor: "green",
-                  parentSelected: "default",
-                  state: "expanded",
-                  modaled: true,
-                  selectedIndicators: _vm.selectedIndicators,
-                  isMultipleSelection: true
-                },
-                on: {
-                  selectIndicatorsFromModal: function($event) {
-                    _vm.updateModaledIndicators()
-                  },
-                  aboutIndicatorsModal: function($event) {
-                    _vm.displayIndicatorsModal = true
-                  }
-                }
-              })
-            ],
-            1
-          )
-        ]
-      ),
-      _c("paris21Modal", {
-        attrs: { type: "indicators", displayed: _vm.displayIndicatorsModal },
-        on: {
-          closeModal: function($event) {
-            _vm.displayIndicatorsModal = false
-          }
-        }
-      }),
-      _c("paris21Modal", {
-        attrs: { type: "about", displayed: _vm.displayAboutModal },
-        on: {
-          closeModal: function($event) {
-            _vm.displayAboutModal = false
-          }
-        }
-      }),
-      _c("paris21Modal", {
-        attrs: { type: "download", displayed: _vm.displayDownloadModal },
-        on: {
-          closeModal: function($event) {
-            _vm.displayDownloadModal = false
-          }
-        }
-      }),
-      _c("paris21Footer", {
-        on: {
-          aboutModal: function($event) {
-            _vm.displayAboutModal = true
-          }
-        }
-      })
-    ],
-    1
-  )
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "geovaluestable_cell" }, [
-      _c("div", { staticClass: "cell_value" }, [
-        _c("div", { staticClass: "cell_value_nodata" }, [_vm._v("no data")])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "geovaluestable_cell" }, [
-      _c("div", { staticClass: "cell_value" }, [
-        _c("div", { staticClass: "cell_value_nodata" }, [_vm._v("no data")])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "geovaluestable_cell" }, [
-      _c("div", { staticClass: "cell_value" }, [
-        _c("div", { staticClass: "cell_value_nodata" }, [_vm._v("no data")])
-      ])
-    ])
-  }
-]
-render._withStripped = true
-var esExports = { render: render, staticRenderFns: staticRenderFns }
-/* harmony default export */ __webpack_exports__["a"] = (esExports);
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-102ebe06", esExports)
-  }
-}
-
-/***/ }),
-
 /***/ "Gez8":
 /***/ (function(module, exports) {
 
 module.exports = "data:image/svg+xml;base64,PHN2ZyBpZD0iaWNvbi1wbGFubmluZyIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB2aWV3Qm94PSIwIDAgNDAgNDAiPgogIDx0aXRsZT5pY29uLXBsYW5uaW5nPC90aXRsZT4KICA8cGF0aCBkPSJNMTMuMzc1LDE3QS4zNzM0LjM3MzQsMCwwLDEsMTMsMTYuNjI1VjE1LjVBMS40OTM4LDEuNDkzOCwwLDAsMSwxNC41LDE0SDE2VjEyLjM3NUEuMzczNC4zNzM0LDAsMCwxLDE2LjM3NSwxMmgxLjI1YS4zNzM0LjM3MzQsMCwwLDEsLjM3NS4zNzVWMTRoNFYxMi4zNzVBLjM3MzQuMzczNCwwLDAsMSwyMi4zNzUsMTJoMS4yNWEuMzczNC4zNzM0LDAsMCwxLC4zNzUuMzc1VjE0aDEuNUExLjQ5MzgsMS40OTM4LDAsMCwxLDI3LDE1LjV2MS4xMjVhLjM3MzQuMzczNCwwLDAsMS0uMzc1LjM3NVptMTMuMjUsMWEuMzczNC4zNzM0LDAsMCwxLC4zNzUuMzc1VjI2LjVBMS40OTM4LDEuNDkzOCwwLDAsMSwyNS41LDI4aC0xMUExLjQ5MzgsMS40OTM4LDAsMCwxLDEzLDI2LjVWMTguMzc1QS4zNzM0LjM3MzQsMCwwLDEsMTMuMzc1LDE4Wm0tMy43MTg3LDIuMTI1YS4yOTg2LjI5ODYsMCwwLDAtLjI1LS4xMjUuNDU1Ny40NTU3LDAsMCwwLS4yODEyLjA5MzhsLTMuMzEyNSwzLjMxMjVMMTcuNjI1LDIxLjkzNzVhLjMzODkuMzM4OSwwLDAsMC0uMjUtLjA5MzcuNDU1Ny40NTU3LDAsMCwwLS4yODEyLjA5MzhsLS44NzUuODc1YS4zODUuMzg1LDAsMCwwLS4xMjUuMjgxMy4yOTQ5LjI5NDksMCwwLDAsLjEyNS4yNWwyLjU2MjUsMi42MjVhLjQ1NTcuNDU1NywwLDAsMCwuMjgxMy4wOTM4LjMzODkuMzM4OSwwLDAsMCwuMjUtLjA5MzdsNC40Njg4LTQuNDM3NWEuMzg4OC4zODg4LDAsMCwwLC4xMjUtLjI4MTIuMjk3NC4yOTc0LDAsMCwwLS4xMjUtLjI1WiIgZmlsbD0iIzE1OUU5RCIvPgo8L3N2Zz4K"
+
+/***/ }),
+
+/***/ "Gu7T":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+exports.__esModule = true;
+
+var _from = __webpack_require__("c/Tr");
+
+var _from2 = _interopRequireDefault(_from);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = function (arr) {
+  if (Array.isArray(arr)) {
+    for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) {
+      arr2[i] = arr[i];
+    }
+
+    return arr2;
+  } else {
+    return (0, _from2.default)(arr);
+  }
+};
 
 /***/ }),
 
@@ -29227,13 +28015,6 @@ module.exports = __webpack_require__.p + "img/icon-production-black.c0b4bf9.svg"
 
 /***/ }),
 
-/***/ "LpND":
-/***/ (function(module, exports) {
-
-module.exports = "data:image/svg+xml;base64,PHN2ZyBpZD0iaWNvbi1rZXlfaW5kaWNhdG9yIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA5IDkiPgogIDx0aXRsZT5pY29uLWtleV9pbmRpY2F0b3I8L3RpdGxlPgogIDxwYXRoIGQ9Ik04LjU4NjksNC42NDk0QTMuMDc4NiwzLjA3ODYsMCwwLDEsNS45MDYzLDYuMTg3NWEzLjE0MTUsMy4xNDE1LDAsMCwxLS41OC0uMDUyN2wtLjQyMTkuNDc0NmEuNDAxMy40MDEzLDAsMCwxLS4zMTY0LjE0MDZoLS42NXYuNzAzMWEuNDIuNDIsMCwwLDEtLjQyMTkuNDIxOUgyLjgxMjV2LjcwMzFBLjQyLjQyLDAsMCwxLDIuMzkwNiw5SC40MjE5QS40MDY4LjQwNjgsMCwwLDEsLjEyMyw4Ljg3Ny40MDY4LjQwNjgsMCwwLDEsMCw4LjU3ODFWNy4yMDdhLjQwNjguNDA2OCwwLDAsMSwuMTIzLS4yOTg4TDIuOTcwNyw0LjA2MDVhMy4wOTY3LDMuMDk2NywwLDAsMSwuMjU0OS0yLjUyMjVBMy4wNzg2LDMuMDc4NiwwLDAsMSw1LjkwNjMsMCwzLjA3ODYsMy4wNzg2LDAsMCwxLDksMy4wOTM4LDMuMDQ1LDMuMDQ1LDAsMCwxLDguNTg2OSw0LjY0OTRaTTYuMTUyMywyLjg0NzdBLjg0MzguODQzOCwwLDAsMCw3LjU5MzgsMi4yNWEuODQzOC44NDM4LDAsMSwwLTEuNjg3NSwwQS44MTM3LjgxMzcsMCwwLDAsNi4xNTIzLDIuODQ3N1oiIGZpbGw9IiMxNDllOWQiLz4KPC9zdmc+Cg=="
-
-/***/ }),
-
 /***/ "MDBb":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -29255,10 +28036,93 @@ module.exports = "data:image/svg+xml;base64,PHN2ZyBpZD0iaWNvbi1pbnZlc3RtZW50IiB4
 
 /***/ }),
 
-/***/ "Pp4L":
-/***/ (function(module, exports) {
+/***/ "PigY":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-module.exports = "data:image/svg+xml;base64,PHN2ZyBpZD0idGljay1ub2RhdGEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgdmlld0JveD0iMCAwIDE4IDE4Ij4KICA8dGl0bGU+dGljay1ub2RhdGE8L3RpdGxlPgogIDxnPgogICAgPGxpbmUgeDE9IjQiIHkxPSIxNCIgeDI9IjE0IiB5Mj0iNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjZWM5YTNhIiBzdHJva2UtbWl0ZXJsaW1pdD0iMTAiIHN0cm9rZS13aWR0aD0iMyIvPgogICAgPGxpbmUgeDE9IjQiIHkxPSI0IiB4Mj0iMTQiIHkyPSIxNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjZWM5YTNhIiBzdHJva2UtbWl0ZXJsaW1pdD0iMTAiIHN0cm9rZS13aWR0aD0iMyIvPgogIDwvZz4KPC9zdmc+Cg=="
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_paris21Header_vue__ = __webpack_require__("mvsm");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_paris21Footer_vue__ = __webpack_require__("3wr8");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_paris21Modal_vue__ = __webpack_require__("cU99");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_geographySelector_vue__ = __webpack_require__("2p9t");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_indicatorSelector_vue__ = __webpack_require__("KKFL");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_networkSelector2_vue__ = __webpack_require__("1pl9");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+
+
+
+
+
+
+/* harmony default export */ __webpack_exports__["a"] = ({
+  components: {
+    'paris21Header': __WEBPACK_IMPORTED_MODULE_0__components_paris21Header_vue__["a" /* default */],
+    'paris21Footer': __WEBPACK_IMPORTED_MODULE_1__components_paris21Footer_vue__["a" /* default */],
+    'geographySelector': __WEBPACK_IMPORTED_MODULE_3__components_geographySelector_vue__["a" /* default */],
+    'indicatorSelector': __WEBPACK_IMPORTED_MODULE_4__components_indicatorSelector_vue__["a" /* default */],
+    'networkSelector2': __WEBPACK_IMPORTED_MODULE_5__components_networkSelector2_vue__["a" /* default */],
+    'paris21Modal': __WEBPACK_IMPORTED_MODULE_2__components_paris21Modal_vue__["a" /* default */]
+  },
+  head: function head() {
+    return {
+      title: 'Statistical Capacity Monito',
+      meta: [{ hid: 'description', name: 'description', content: 'Find and explore indicators on statistical capacity' }, { hid: 'og:image', name: 'og:image', content: 'http://statisticalcapacitymonitor.org/images/share-img.png' }]
+    };
+  },
+
+  data: function data() {
+    return {
+      selectorExpanded: '',
+      displayIndicatorsModal: false,
+      displayDownloadModal: false,
+      displayPrivacyModal: false
+    };
+  },
+  mounted: function mounted() {},
+  methods: {}
+});
 
 /***/ }),
 
@@ -29278,7 +28142,7 @@ exports = module.exports = __webpack_require__("FZ+f")(false);
 
 
 // module
-exports.push([module.i, "@font-face{font-family:montserratbold;src:url(" + escape(__webpack_require__("KoCO")) + ") format(\"woff2\"),url(" + escape(__webpack_require__("cqiT")) + ") format(\"woff\");font-weight:400;font-style:normal}@font-face{font-family:montserratitalic;src:url(" + escape(__webpack_require__("hPgA")) + ") format(\"woff2\"),url(" + escape(__webpack_require__("hnDx")) + ") format(\"woff\");font-weight:400;font-style:normal}@font-face{font-family:montserratregular;src:url(" + escape(__webpack_require__("UBI+")) + ") format(\"woff2\"),url(" + escape(__webpack_require__("dL9s")) + ") format(\"woff\");font-weight:400;font-style:normal}@font-face{font-family:roboto_condensedbold;src:url(" + escape(__webpack_require__("CCFM")) + ") format(\"woff2\"),url(" + escape(__webpack_require__("CCFM")) + ") format(\"woff\");font-weight:400;font-style:normal}.paris21_modalwrapper[data-v-7675ee04]{position:fixed;left:0;top:0;bottom:0;width:100%;display:none;z-index:1000000}.paris21_modalwrapper.displayed[data-v-7675ee04]{display:block}.paris21_modalwrapper .paris21_modalbg[data-v-7675ee04]{background:rgba(0,0,0,.6);position:absolute;left:0;top:0;width:100%;height:100%}.paris21_modalwrapper .paris21_modal[data-v-7675ee04]{position:absolute;left:50%;top:50%;-webkit-transform:translate(-50%,-50%);transform:translate(-50%,-50%);background:#fff;width:800px;height:500px;text-align:left}.paris21_modalwrapper .paris21_modal .modal_title[data-v-7675ee04]{color:#ea6550;font-size:22px;margin-top:40px;border-bottom:2px solid #ea6550;padding:0 50px 10px;position:relative}.paris21_modalwrapper .paris21_modal .modal_title .modal_closebt[data-v-7675ee04]{position:absolute;right:30px;bottom:-5px;cursor:pointer;background:url(" + escape(__webpack_require__("Ehvn")) + ") no-repeat 0 0;width:60px;height:60px}.paris21_modalwrapper .paris21_modal .modal_content[data-v-7675ee04]{color:#2f2f2f;text-align:left;margin:20px 50px;padding-right:10px;height:370px;overflow:auto;font-family:montserratregular;font-size:14px;line-height:20px;text-align:center}.paris21_modalwrapper .paris21_modal .modal_content a[data-v-7675ee04]{color:#ea6550;text-decoration:none;font-family:montserratbold;display:inline-block;border-bottom:2px solid #ea6550;line-height:16px}.paris21_modalwrapper .paris21_modal .modal_content p[data-v-7675ee04]{margin:40px 0;text-align:left}.paris21_modalwrapper .paris21_modal .modal_content .content_image[data-v-7675ee04]{background:url(" + escape(__webpack_require__("uv/c")) + ") no-repeat 0 0;background-size:100% 100%;width:350px;height:350px;display:inline-block}.paris21_modalwrapper .paris21_modal .modal_content .bolder[data-v-7675ee04]{font-family:montserratbold}.paris21_modalwrapper .paris21_modal .modal_content .content_block[data-v-7675ee04]{text-align:left}.paris21_modalwrapper .paris21_modal .modal_content .content_block .block_title[data-v-7675ee04]{font-weight:700;font-size:18px;line-height:24px}.paris21_modalwrapper .paris21_modal .modal_content[data-type=download][data-v-7675ee04]{text-align:left}.paris21_modalwrapper .paris21_modal .modal_content[data-type=download] .download_item[data-v-7675ee04]{margin-bottom:30px}.paris21_modalwrapper .paris21_modal .modal_content[data-type=download] .download_item .item_title[data-v-7675ee04]{color:#ea6550;font-size:20px}.paris21_modalwrapper .paris21_modal .modal_content[data-type=download] .download_item .item_text[data-v-7675ee04]{font-family:montserratbold;font-size:12px;margin-top:4px;line-height:14px}.paris21_modalwrapper .paris21_modal .modal_content[data-type=download] .download_item .download_bt[data-v-7675ee04]{margin-top:8px;background:#ea6550;display:inline-block;vertical-align:top;width:150px;height:24px;line-height:24px;border-radius:24px;font-family:roboto_condensedbold;color:#fff;text-align:center;text-decoration:none;text-transform:uppercase}", ""]);
+exports.push([module.i, "@font-face{font-family:montserratbold;src:url(" + escape(__webpack_require__("KoCO")) + ") format(\"woff2\"),url(" + escape(__webpack_require__("cqiT")) + ") format(\"woff\");font-weight:400;font-style:normal}@font-face{font-family:montserratitalic;src:url(" + escape(__webpack_require__("hPgA")) + ") format(\"woff2\"),url(" + escape(__webpack_require__("hnDx")) + ") format(\"woff\");font-weight:400;font-style:normal}@font-face{font-family:montserratregular;src:url(" + escape(__webpack_require__("UBI+")) + ") format(\"woff2\"),url(" + escape(__webpack_require__("dL9s")) + ") format(\"woff\");font-weight:400;font-style:normal}@font-face{font-family:roboto_condensedbold;src:url(" + escape(__webpack_require__("CCFM")) + ") format(\"woff2\"),url(" + escape(__webpack_require__("CCFM")) + ") format(\"woff\");font-weight:400;font-style:normal}.paris21_modalwrapper[data-v-7675ee04]{position:fixed;left:0;top:0;bottom:0;width:100%;display:none;z-index:1000000}.paris21_modalwrapper.displayed[data-v-7675ee04]{display:block}.paris21_modalwrapper .paris21_modalbg[data-v-7675ee04]{background:rgba(0,0,0,.6);position:absolute;left:0;top:0;width:100%;height:100%}.paris21_modalwrapper .paris21_modal[data-v-7675ee04]{position:absolute;left:50%;top:50%;-webkit-transform:translate(-50%,-50%);transform:translate(-50%,-50%);background:#fff;width:800px;height:500px;text-align:left}.paris21_modalwrapper .paris21_modal .modal_title[data-v-7675ee04]{color:#ea6550;font-size:22px;margin-top:40px;border-bottom:2px solid #ea6550;padding:0 50px 10px;position:relative}.paris21_modalwrapper .paris21_modal .modal_title .modal_closebt[data-v-7675ee04]{position:absolute;right:30px;bottom:-5px;cursor:pointer;background:url(" + escape(__webpack_require__("Ehvn")) + ") no-repeat 0 0;width:60px;height:60px}.paris21_modalwrapper .paris21_modal .modal_content[data-v-7675ee04]{color:#2f2f2f;text-align:left;margin:20px 50px;padding-right:10px;height:370px;overflow:auto;font-family:montserratregular;font-size:14px;line-height:20px;text-align:center}.paris21_modalwrapper .paris21_modal .modal_content a[data-v-7675ee04]{color:#ea6550;text-decoration:none;font-family:montserratbold;display:inline-block;border-bottom:2px solid #ea6550;line-height:16px}.paris21_modalwrapper .paris21_modal .modal_content p[data-v-7675ee04]{margin:40px 0;text-align:left}.paris21_modalwrapper .paris21_modal .modal_content .content_image[data-v-7675ee04]{background:url(" + escape(__webpack_require__("uv/c")) + ") no-repeat 0 0;background-size:100% 100%;width:350px;height:350px;display:inline-block}.paris21_modalwrapper .paris21_modal .modal_content .bolder[data-v-7675ee04]{font-family:montserratbold}.paris21_modalwrapper .paris21_modal .modal_content .content_block[data-v-7675ee04]{text-align:left}.paris21_modalwrapper .paris21_modal .modal_content .content_block .block_title[data-v-7675ee04]{font-weight:700;font-size:18px;line-height:24px}.paris21_modalwrapper .paris21_modal .modal_content .content_block .block_text[data-v-7675ee04] table{border:1px solid;border-collapse:collapse}.paris21_modalwrapper .paris21_modal .modal_content .content_block .block_text[data-v-7675ee04] td,.paris21_modalwrapper .paris21_modal .modal_content .content_block .block_text[data-v-7675ee04] th{border:1px solid;border-collapse:collapse;padding:10px}.paris21_modalwrapper .paris21_modal .modal_content[data-type=download][data-v-7675ee04]{text-align:left}.paris21_modalwrapper .paris21_modal .modal_content[data-type=download] .download_item[data-v-7675ee04]{margin-bottom:30px}.paris21_modalwrapper .paris21_modal .modal_content[data-type=download] .download_item .item_title[data-v-7675ee04]{color:#ea6550;font-size:20px}.paris21_modalwrapper .paris21_modal .modal_content[data-type=download] .download_item .item_text[data-v-7675ee04]{font-family:montserratbold;font-size:12px;margin-top:4px;line-height:14px}.paris21_modalwrapper .paris21_modal .modal_content[data-type=download] .download_item .download_bt[data-v-7675ee04]{margin-top:8px;background:#ea6550;display:inline-block;vertical-align:top;width:150px;height:24px;line-height:24px;border-radius:24px;font-family:roboto_condensedbold;color:#fff;text-align:center;text-decoration:none;text-transform:uppercase}", ""]);
 
 // exports
 
@@ -29435,6 +28299,13 @@ if (false) {
 
 /***/ }),
 
+/***/ "SygT":
+/***/ (function(module, exports) {
+
+module.exports = "data:image/svg+xml;base64,PHN2ZyBpZD0iQ2FscXVlXzEiIGRhdGEtbmFtZT0iQ2FscXVlIDEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgdmlld0JveD0iMCAwIDEzIDEzIj4KICA8dGl0bGU+ZG90LWxlZ2VuZDwvdGl0bGU+CiAgPGc+CiAgICA8cGF0aCBkPSJNNi41LDBBNi41LDYuNSwwLDEsMCwxMyw2LjUsNi41MDc1LDYuNTA3NSwwLDAsMCw2LjUsMFptMCwxMkE1LjUsNS41LDAsMSwxLDEyLDYuNSw1LjUsNS41LDAsMCwxLDYuNSwxMloiIGZpbGw9IiNiNDU3NDciLz4KICAgIDxjaXJjbGUgY3g9IjYuNSIgY3k9IjYuNSIgcj0iNCIgZmlsbD0iI2VhNjY1MSIvPgogIDwvZz4KPC9zdmc+Cg=="
+
+/***/ }),
+
 /***/ "TaeK":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -29462,6 +28333,13 @@ if(false) {
 
 /***/ }),
 
+/***/ "TvJ4":
+/***/ (function(module, exports) {
+
+module.exports = "data:image/svg+xml;base64,PHN2ZyBpZD0iYXJyb3ctcmlnaHQiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjIwIiBoZWlnaHQ9IjIwIiB2aWV3Qm94PSIwIDAgMjAgMjAiPgogIDx0aXRsZT5hcnJvdy1yaWdodDwvdGl0bGU+CiAgPHBhdGggZD0iTTkuNDU1LDMuMjI3YS43NjQuNzY0LDAsMCwxLDEuMDg3LDBsNi4yMzIsNi4yMjhhLjc2Ni43NjYsMCwwLDEsMCwxLjA4N2wtNi4yMzIsNi4yMzFhLjc2NC43NjQsMCwwLDEtMS4wODcsMGwtLjcxMS0uNzExYS43Ny43NywwLDAsMSwuMDEzLTEuMWwzLjg2My0zLjY4SDMuNzY5QS43NjguNzY4LDAsMCwxLDMsMTAuNTEzVjkuNDg3YS43NjguNzY4LDAsMCwxLC43NjktLjc2OWg4Ljg1TDguNzU3LDUuMDM4YS43NjUuNzY1LDAsMCwxLS4wMTMtMS4xWiIgZmlsbD0iIzJmMmYyZiIvPgo8L3N2Zz4K"
+
+/***/ }),
+
 /***/ "U4qs":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -29474,25 +28352,6 @@ exports = module.exports = __webpack_require__("FZ+f")(false);
 exports.push([module.i, "@font-face{font-family:montserratbold;src:url(" + escape(__webpack_require__("KoCO")) + ") format(\"woff2\"),url(" + escape(__webpack_require__("cqiT")) + ") format(\"woff\");font-weight:400;font-style:normal}@font-face{font-family:montserratitalic;src:url(" + escape(__webpack_require__("hPgA")) + ") format(\"woff2\"),url(" + escape(__webpack_require__("hnDx")) + ") format(\"woff\");font-weight:400;font-style:normal}@font-face{font-family:montserratregular;src:url(" + escape(__webpack_require__("UBI+")) + ") format(\"woff2\"),url(" + escape(__webpack_require__("dL9s")) + ") format(\"woff\");font-weight:400;font-style:normal}@font-face{font-family:roboto_condensedbold;src:url(" + escape(__webpack_require__("CCFM")) + ") format(\"woff2\"),url(" + escape(__webpack_require__("CCFM")) + ") format(\"woff\");font-weight:400;font-style:normal}.indicator_input{text-align:left;position:relative;margin-top:14px}.indicator_input #IndicatorInput{width:310px;height:35px;background:#ededed;border-radius:5px;border:0 solid;margin-top:5px;font-size:14px;padding:0 10px;color:#333;outline:none}.indicator_input #IndicatorInput:focus{border:1px solid #b45747}.indicator_input .input_closebt,.indicator_input .input_icon{position:absolute;right:10px;top:22px;font-size:20px;cursor:pointer;background:url(" + escape(__webpack_require__("Ehvn")) + ") no-repeat 0 0;background-size:100% 100%;width:40px;height:40px}.indicator_input .input_icon{background:url(" + escape(__webpack_require__("/o2x")) + ") no-repeat 0 0;background-size:100% 100%;width:35px;height:35px;top:24px;margin-left:110px;left:50%}.indicators_classifs{margin-top:20px}.indicators_classifs .mobile_selectbox{display:none}.indicators_classifs .indicators_classif{height:30px;border-bottom:1px solid #b8b8b8;height:40px;line-height:40px;text-align:left;position:relative;cursor:pointer}.indicators_classifs .indicators_classif.selected,.indicators_classifs .indicators_classif:hover{background:#159e9d}.indicators_classifs .indicators_classif.selected .classif_cardinality,.indicators_classifs .indicators_classif.selected .classif_label,.indicators_classifs .indicators_classif:hover .classif_cardinality,.indicators_classifs .indicators_classif:hover .classif_label{color:#fff}.indicators_classifs .indicators_classif.selected .classif_arrow,.indicators_classifs .indicators_classif:hover .classif_arrow{display:block}.indicators_classifs .indicators_classif.selected:after,.indicators_classifs .indicators_classif:hover:after{background:url(" + escape(__webpack_require__("zwdz")) + ") no-repeat 0 0;background-size:100% 100%}.indicators_classifs .indicators_classif[data-items-nb=\"0\"] .classif_cardinality,.indicators_classifs .indicators_classif[data-items-nb=\"0\"] .classif_label{opacity:.3}.indicators_classifs .indicators_classif[data-items-nb=\"0\"]:after{display:none}.indicators_classifs .indicators_classif[data-items-nb=\"0\"][data-classif=Production]:before{background:url(" + escape(__webpack_require__("CQPb")) + ") no-repeat 0 0!important;background-size:100% 100%}.indicators_classifs .indicators_classif[data-items-nb=\"0\"][data-classif=Dissemination]:before{background:url(" + escape(__webpack_require__("AneC")) + ") no-repeat 0 0!important;background-size:100% 100%}.indicators_classifs .indicators_classif[data-items-nb=\"0\"][data-classif=Use]:before{background:url(" + escape(__webpack_require__("AJsd")) + ") no-repeat 0 0!important;background-size:100% 100%}.indicators_classifs .indicators_classif[data-items-nb=\"0\"][data-classif=Investment]:before{background:url(" + escape(__webpack_require__("PeHp")) + ") no-repeat 0 0!important;background-size:100% 100%}.indicators_classifs .indicators_classif[data-items-nb=\"0\"][data-classif=Planning]:before{background:url(" + escape(__webpack_require__("ZaAG")) + ") no-repeat 0 0!important;background-size:100% 100%}.indicators_classifs .indicators_classif:before{left:-5px;width:40px;height:40px}.indicators_classifs .indicators_classif:after,.indicators_classifs .indicators_classif:before{content:\"\";position:absolute;top:50%;-webkit-transform:translateY(-50%);transform:translateY(-50%)}.indicators_classifs .indicators_classif:after{right:10px;width:5px;height:10px;background:url(" + escape(__webpack_require__("HVEn")) + ") no-repeat 0 0;background-size:100% 100%}.indicators_classifs .indicators_classif[data-classif=Production]:before{background:url(" + escape(__webpack_require__("kDsM")) + ") no-repeat 0 0;background-size:100% 100%}.indicators_classifs .indicators_classif[data-classif=Production].selected:before,.indicators_classifs .indicators_classif[data-classif=Production]:hover:before{background:url(" + escape(__webpack_require__("DSiB")) + ") no-repeat 0 0!important;background-size:100% 100%}.indicators_classifs .indicators_classif[data-classif=Dissemination]:before{background:url(" + escape(__webpack_require__("RQjM")) + ") no-repeat 0 0;background-size:100% 100%}.indicators_classifs .indicators_classif[data-classif=Dissemination].selected:before,.indicators_classifs .indicators_classif[data-classif=Dissemination]:hover:before{background:url(" + escape(__webpack_require__("PMd4")) + ") no-repeat 0 0!important;background-size:100% 100%}.indicators_classifs .indicators_classif[data-classif=Use]:before{background:url(" + escape(__webpack_require__("az8e")) + ") no-repeat 0 0;background-size:100% 100%}.indicators_classifs .indicators_classif[data-classif=Use].selected:before,.indicators_classifs .indicators_classif[data-classif=Use]:hover:before{background:url(" + escape(__webpack_require__("goD0")) + ") no-repeat 0 0!important;background-size:100% 100%}.indicators_classifs .indicators_classif[data-classif=Investment]:before{background:url(" + escape(__webpack_require__("dYj/")) + ") no-repeat 0 0;background-size:100% 100%}.indicators_classifs .indicators_classif[data-classif=Investment].selected:before,.indicators_classifs .indicators_classif[data-classif=Investment]:hover:before{background:url(" + escape(__webpack_require__("d3Zi")) + ") no-repeat 0 0!important;background-size:100% 100%}.indicators_classifs .indicators_classif[data-classif=Planning]:before{background:url(" + escape(__webpack_require__("Gez8")) + ") no-repeat 0 0;background-size:100% 100%}.indicators_classifs .indicators_classif[data-classif=Planning].selected:before,.indicators_classifs .indicators_classif[data-classif=Planning]:hover:before{background:url(" + escape(__webpack_require__("vt4l")) + ") no-repeat 0 0!important;background-size:100% 100%}.indicators_classifs .indicators_classif .classif_label{display:inline-block;vertical-align:top;color:#2f2f2f;font-family:montserratbold;font-size:16px;padding-left:36px}.indicators_classifs .indicators_classif .classif_cardinality{position:absolute;right:26px;top:50%;-webkit-transform:translateY(-50%);transform:translateY(-50%);color:#8c8c8c;font-size:10px;font-family:montserratitalic}.indicators_classifs .indicators_classif .classif_arrow{position:absolute;left:100%;top:0;width:0;height:0;border-style:solid;border-width:20px 0 20px 10px;border-color:transparent transparent transparent #159e9d;display:none}.indicator_sidebar{position:absolute;right:0;top:0;height:100%;width:610px;color:#fff;text-align:left}.indicator_sidebar:after{content:\"\";position:absolute;left:0;bottom:0;width:100%;height:60px;pointer-events:none;background:-webkit-gradient(linear,left top,left bottom,from(rgba(180,87,71,0)),to(#b45747));background:linear-gradient(180deg,rgba(180,87,71,0) 0,#b45747);filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=\"rgba(0, 180, 87, 0.27843)\",endColorstr=\"#b45747\",GradientType=0)}.indicator_sidebar .sidebar_panel{position:absolute;left:0;top:0;width:100%;height:100%;padding:30px 20px 140px;-webkit-transform:translate(-100%);transform:translate(-100%);-webkit-transition-property:all;transition-property:all;-webkit-transition-duration:.3s;transition-duration:.3s;-webkit-transition-timing-function:ease-in-out;transition-timing-function:ease-in-out;-webkit-transition-delay:0s;transition-delay:0s;background:#ea6550}.indicator_sidebar .sidebar_panel.displayed{-webkit-transform:translate(0);transform:translate(0)}.indicator_sidebar .sidebar_panel[data-panel=classif],.indicator_sidebar .sidebar_panel[data-panel=searching]{background:#b45747}.indicator_sidebar .sidebar_actions{position:absolute;right:24px;top:2px}.indicator_sidebar .sidebar_actions .addall_fromdisplayed_bt{display:inline-block;vertical-align:top;font-family:montserratitalic;font-size:12px;color:#2f2f2f;cursor:pointer;position:relative;margin-right:34px}.indicator_sidebar .sidebar_actions .addall_fromdisplayed_bt:after{content:\"\";position:absolute;left:100%;margin-left:4px;top:50%;-webkit-transform:translateY(-50%);transform:translateY(-50%);width:20px;height:20px;border-radius:20px;background:url(" + escape(__webpack_require__("nH3o")) + ") no-repeat 50% #ea6550;background-size:100% 100%}.indicator_sidebar .sidebar_actions .addall_fromdisplayed_bt:hover:after{background:url(" + escape(__webpack_require__("nH3o")) + ") no-repeat 50% #2f2f2f;background-size:100% 100%}.indicator_sidebar .sidebar_actions .removeall_fromdisplayed_bt{display:inline-block;vertical-align:top;font-family:montserratitalic;font-size:12px;color:#2f2f2f;cursor:pointer;position:relative}.indicator_sidebar .sidebar_actions .removeall_fromdisplayed_bt:after{content:\"\";position:absolute;left:100%;margin-left:4px;top:50%;-webkit-transform:translateY(-50%);transform:translateY(-50%);width:20px;height:20px;border-radius:20px;background:url(" + escape(__webpack_require__("Dhuc")) + ") no-repeat 50% #ea6550;background-size:100% 100%}.indicator_sidebar .sidebar_actions .removeall_fromdisplayed_bt:hover:after{background:url(" + escape(__webpack_require__("Dhuc")) + ") no-repeat 50% #2f2f2f;background-size:100% 100%}.indicator_sidebar[data-iskey=false]{background:#b45747}.indicator_sidebar[data-iskey=false] .indicators_list .indicator_item{border-color:#ea6550}.indicator_sidebar[data-iskey=false] .indicators_list .indicator_item:hover{background:#ea6550}.indicator_sidebar .sidebar_title{font-size:22px;line-height:26px;font-weight:700;text-align:left;border-bottom:4px solid;padding-bottom:6px;border-color:#159e9d;font-family:montserratregular;position:relative}.indicator_sidebar .sidebar_title:before{content:\"\";position:absolute;left:-12px;top:14px;-webkit-transform:translateY(-50%);transform:translateY(-50%);width:50px;height:50px}.indicator_sidebar .sidebar_title.paneled{padding-left:34px}.indicator_sidebar .sidebar_title[data-classif=Production]:before{background:url(" + escape(__webpack_require__("DSiB")) + ") no-repeat 0 0!important;background-size:100% 100%}.indicator_sidebar .sidebar_title[data-classif=Dissemination]:before{background:url(" + escape(__webpack_require__("PMd4")) + ") no-repeat 0 0!important;background-size:100% 100%}.indicator_sidebar .sidebar_title[data-classif=Use]:before{background:url(" + escape(__webpack_require__("goD0")) + ") no-repeat 0 0!important;background-size:100% 100%}.indicator_sidebar .sidebar_title[data-classif=Investment]:before{background:url(" + escape(__webpack_require__("d3Zi")) + ") no-repeat 0 0!important;background-size:100% 100%}.indicator_sidebar .sidebar_title[data-classif=Planning]:before{background:url(" + escape(__webpack_require__("vt4l")) + ") no-repeat 0 0!important;background-size:100% 100%}.indicator_sidebar .sidebar_title .closepanel_bt{background:url(" + escape(__webpack_require__("Dhuc")) + ") no-repeat 0 0!important;background-size:100% 100%;width:50px;height:50px;position:absolute;right:-10px;top:-10px;cursor:pointer}.indicator_sidebar .sidebar_title .bolder{font-family:montserratbold}.indicator_sidebar .indicators_list{margin-top:20px;height:400px;overflow:auto}.indicator_sidebar .indicators_list .classif_item{margin-bottom:10px}.indicator_sidebar .indicators_list .classif_item .classif_label{border-bottom:2px solid #036463;height:30px;line-height:30px;position:relative;padding-left:24px;color:#f9d1cb;font-family:montserratbold}.indicator_sidebar .indicators_list .classif_item .classif_label:before{content:\"\";position:absolute;left:-6px;top:0;width:32px;height:32px}.indicator_sidebar .indicators_list .classif_item .classif_label[data-classif=Production]:before{background:url(" + escape(__webpack_require__("DSiB")) + ") no-repeat 0 0!important;background-size:100% 100%}.indicator_sidebar .indicators_list .classif_item .classif_label[data-classif=Dissemination]:before{background:url(" + escape(__webpack_require__("PMd4")) + ") no-repeat 0 0!important;background-size:100% 100%}.indicator_sidebar .indicators_list .classif_item .classif_label[data-classif=Use]:before{background:url(" + escape(__webpack_require__("goD0")) + ") no-repeat 0 0!important;background-size:100% 100%}.indicator_sidebar .indicators_list .classif_item .classif_label[data-classif=Investment]:before{background:url(" + escape(__webpack_require__("d3Zi")) + ") no-repeat 0 0!important;background-size:100% 100%}.indicator_sidebar .indicators_list .classif_item .classif_label[data-classif=Planning]:before{background:url(" + escape(__webpack_require__("vt4l")) + ") no-repeat 0 0!important;background-size:100% 100%}.indicator_sidebar .indicators_list .indicator_item{border-bottom:2px solid #b45747;height:30px;line-height:30px;font-size:12px;padding-left:10px;cursor:pointer}.indicator_sidebar .indicators_list .indicator_item.ext_link{position:relative}.indicator_sidebar .indicators_list .indicator_item.ext_link:after{content:\"\";position:absolute;right:10px;top:50%;-webkit-transform:translateY(-50%);transform:translateY(-50%);width:30px;height:30px;background:url(" + escape(__webpack_require__("BN1d")) + ") no-repeat 0 0;background-size:100% 100%}.indicator_sidebar .indicators_list .indicator_item:hover{background:#b45747}.indicator_sidebar .indicators_list .indicator_item .item_checkbox{width:15px;height:15px;border-radius:2px;border:2px solid #2f2f2f;display:inline-block;vertical-align:middle;position:relative}.indicator_sidebar .indicators_list .indicator_item .item_checkbox:after{content:\"\";position:absolute;left:50%;top:50%;-webkit-transform:translate(-50%,-50%);transform:translate(-50%,-50%);background:url(" + escape(__webpack_require__("lXyD")) + ") no-repeat 0 0 #2f2f2f;background-size:100% 100%;width:15px;height:15px;display:none;border-radius:2px}.indicator_sidebar .indicators_list .indicator_item .item_checkbox[data-selected=true]:after{display:block}.indicator_sidebar .indicators_list .indicator_item .item_name{padding-left:10px;display:inline-block;vertical-align:top;color:#fff;width:90%;height:30px;overflow:hidden}.selector_bucket{width:100%;position:relative;left:0;bottom:0;height:165px;background:#036463;z-index:10;padding:14px 30px}.selector_bucket .bucket_title{font-size:22px;font-family:montserratbold;text-align:left;color:#fff;position:relative;border-bottom:3px solid #159e9d;padding-bottom:4px}.selector_bucket .bucket_title .bucket_nb{font-family:montserratregular}.selector_bucket .bucket_title .bucket_removeallbt{right:24px;top:50%;-webkit-transform:translateY(-50%);transform:translateY(-50%);position:absolute;font-family:montserratitalic;font-size:12px;color:#fff;cursor:pointer}.selector_bucket .bucket_title .bucket_removeallbt:after{content:\"\";position:absolute;left:100%;margin-left:6px;top:50%;-webkit-transform:translateY(-50%);transform:translateY(-50%);width:20px;height:20px;border-radius:20px;background:url(" + escape(__webpack_require__("Dhuc")) + ") no-repeat 50% #ea6550;background-size:100% 100%}.selector_bucket .bucket_title .bucket_removeallbt:hover:after{background:url(" + escape(__webpack_require__("Dhuc")) + ") no-repeat 50% #2f2f2f;background-size:100% 100%}.selector_bucket .bucket_list{margin-top:10px;text-align:left;width:80%;height:70px;overflow:auto}.selector_bucket .bucket_list .list_item{background:#fff;padding:4px;display:inline-block;vertical-align:top;border-radius:5px;height:20px;line-height:18px;color:#2f2f2f;margin:2px;padding:0 10px 0 20px;position:relative;cursor:pointer}.selector_bucket .bucket_list .list_item:before{content:\"\";position:absolute;width:30px;height:30px;background:url(" + escape(__webpack_require__("yCj6")) + ") no-repeat 50%;left:-4px;top:50%;-webkit-transform:translateY(-50%);transform:translateY(-50%)}.selector_bucket .bucket_list .list_item:hover{background:#ea6550;color:#fff}.selector_bucket .bucket_list .list_item:hover:before{background:url(" + escape(__webpack_require__("Dhuc")) + ") no-repeat 50%}.selector_bucket .bucket_validbt{position:absolute;right:20px;bottom:30px;background:#ea6550;border-radius:20px;width:90px;height:40px;color:#fff;font-family:roboto_condensedbold;line-height:40px;font-size:16px;cursor:pointer}.selector_bucket .bucket_validbt:hover{background:#2f2f2f}.selector[data-selector=indicator] .selector_expandedcontent{height:527px;background:#fff;position:relative}.selector[data-selector=indicator] .selector_expandedcontent .expandedcontent_main{width:360px;position:relative;z-index:1000;background:#fff;padding:20px}.selector[data-selector=indicator] .selector_expandedcontent .expandedcontent_main .indicators_aboutbt{position:absolute;right:60px;bottom:20px;color:#2f2f2f;font-family:montserratbold;font-size:13px;cursor:pointer}.selector[data-selector=indicator] .selector_expandedcontent .expandedcontent_main .indicators_aboutbt:before{content:\"\";position:absolute;left:100%;margin-left:6px;top:-1px;background:url(" + escape(__webpack_require__("9H+E")) + ") #ea6550 no-repeat 0 0;background-size:100% 100%;width:30px;height:20px;border-radius:20px}.selector[data-selector=indicator] .selector_expandedcontent{padding:0!important}.selector[data-selector=indicator] .selector_expandedcontent .expandedcontent_main{height:100%}.selector[data-selector=indicator][data-modaled=true] .selector_expandedcontent{padding:30px 20px 100px}.selector[data-selector=indicator][data-modaled=true] .selector_expandedcontent .expandedcontent_title{color:#2f2f2f;position:relative;border-color:#159e9d;font-family:montserratbold}.selector[data-selector=indicator][data-modaled=true] .selector_expandedcontent .expandedcontent_title .indicators_resetbt{position:absolute;right:0;top:50%;padding-right:24px;cursor:pointer;-webkit-transform:translateY(-50%);transform:translateY(-50%);color:#2f2f2f;font-size:12px;font-family:montserratitalic}.selector[data-selector=indicator][data-modaled=true] .selector_expandedcontent .expandedcontent_title .indicators_resetbt:after{content:\"\";position:absolute;right:0;top:50%;-webkit-transform:translateY(-50%);transform:translateY(-50%);background:url(" + escape(__webpack_require__("h7ps")) + ") no-repeat 50% #ea6550;background-size:100% 100%;width:20px;height:20px;border-radius:24px}.selector[data-selector=indicator][data-modaled=true] .selector_expandedcontent .expandedcontent_title .indicators_resetbt:hover:after{background:url(" + escape(__webpack_require__("h7ps")) + ") no-repeat 50% #2f2f2f;background-size:100% 100%}.selector[data-selector=indicator][data-modaled=true] .indicator_input .input_searchlabel{color:#2f2f2f;font-family:montserratitalic}.selector[data-selector=indicator][data-modaled=true] .indicators_classifs{margin-top:10px}.selector[data-selector=indicator][data-modaled=true] .indicator_sidebar{background:#ededed;color:#2f2f2f}.selector[data-selector=indicator][data-modaled=true] .indicator_sidebar .indicators_list{height:330px}.selector[data-selector=indicator][data-modaled=true] .indicator_sidebar .indicators_list .indicator_item{border-bottom:2px solid #fff}.selector[data-selector=indicator][data-modaled=true] .indicator_sidebar .indicators_list .indicator_item .item_name{color:#2f2f2f}.selector[data-selector=indicator][data-modaled=true] .indicator_sidebar .indicators_list .indicator_item:hover{background:#159e9d}.selector[data-selector=indicator][data-modaled=true] .indicator_sidebar:after{content:\"\";position:absolute;left:0;bottom:0;width:100%;height:60px;pointer-events:none;background:-webkit-gradient(linear,left top,left bottom,from(hsla(0,0%,72%,0)),to(#b8b8b8));background:linear-gradient(180deg,hsla(0,0%,72%,0) 0,#b8b8b8);filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=\"rgba(0, 184, 184, 0.72157)\",endColorstr=\"#b8b8b8\",GradientType=0)}.selector[data-selector=indicator][data-maincolor=red] .indicator_sidebar{background:#ea6550!important}.selector[data-selector=indicator][data-maincolor=red] .indicator_sidebar .sidebar_title{color:#fff!important;border-color:#fff!important}.selector[data-selector=indicator][data-maincolor=red] .indicator_sidebar .indicators_list .classif_item .classif_label{border-color:#b45747!important}.selector[data-selector=indicator][data-maincolor=red] .indicator_sidebar .indicators_list .indicator_item{color:#fff;border-color:#b45747!important}.selector[data-selector=indicator][data-maincolor=red] .indicator_sidebar .indicators_list .indicator_item:hover{background:#b45747!important}.selector[data-selector=indicator][data-maincolor=red] .indicator_sidebar .indicators_list .indicator_item .item_name{color:#fff!important}.selector[data-selector=indicator][data-maincolor=red] .indicator_sidebar[data-iskey=false]{background:#b45747!important}.selector[data-selector=indicator][data-maincolor=red] .indicator_sidebar[data-iskey=false] .indicators_list .indicator_item{border-color:#ea6550!important}.selector[data-selector=indicator][data-maincolor=red] .indicator_sidebar[data-iskey=false] .indicators_list .indicator_item:hover{background:#ea6550!important}.selector[data-selector=indicator][data-maincolor=red] .selector_expandedcontent .expandedcontent_title{border-color:#ea6550!important;color:#ea6550!important}.selector[data-selector=indicator][data-maincolor=red] .indicators_classifs .indicators_classif[data-classif=Production]:before{background:url(" + escape(__webpack_require__("JQkd")) + ") no-repeat 0 0}.selector[data-selector=indicator][data-maincolor=red] .indicators_classifs .indicators_classif[data-classif=Dissemination]:before{background:url(" + escape(__webpack_require__("m2j1")) + ") no-repeat 0 0}.selector[data-selector=indicator][data-maincolor=red] .indicators_classifs .indicators_classif[data-classif=Use]:before{background:url(" + escape(__webpack_require__("AY8D")) + ") no-repeat 0 0}.selector[data-selector=indicator][data-maincolor=red] .indicators_classifs .indicators_classif[data-classif=Investment]:before{background:url(" + escape(__webpack_require__("Bwfw")) + ") no-repeat 0 0}.selector[data-selector=indicator][data-maincolor=red] .indicators_classifs .indicators_classif[data-classif=Planning]:before{background:url(" + escape(__webpack_require__("9q/e")) + ") no-repeat 0 0}.selector[data-selector=indicator][data-maincolor=red] .indicators_classif.selected,.selector[data-selector=indicator][data-maincolor=red] .indicators_classif:hover{background:#ea6550}.selector[data-selector=indicator][data-maincolor=red] .classif_arrow{border-color:transparent transparent transparent #ea6550}#Country #IndicatorSelectorModal .selector_expandedcontent{height:457px!important}#Country .sidebar_title[data-classif=Production]:before{background:url(" + escape(__webpack_require__("L5sD")) + ") no-repeat 0 0!important;background-size:100% 100%}#Country .sidebar_title[data-classif=Dissemination]:before{background:url(" + escape(__webpack_require__("xxLu")) + ") no-repeat 0 0!important;background-size:100% 100%}#Country .sidebar_title[data-classif=Use]:before{background:url(" + escape(__webpack_require__("J9KK")) + ") no-repeat 0 0!important;background-size:100% 100%}#Country .sidebar_title[data-classif=Investment]:before{background:url(" + escape(__webpack_require__("Zjbe")) + ") no-repeat 0 0!important;background-size:100% 100%}#Country .sidebar_title[data-classif=Planning]:before{background:url(" + escape(__webpack_require__("5HTy")) + ") no-repeat 0 0!important;background-size:100% 100%}", ""]);
 
 // exports
-
-
-/***/ }),
-
-/***/ "UeOF":
-/***/ (function(module, exports) {
-
-module.exports = function numberFormat(number, dec, dsep, tsep) {
-  if (isNaN(number) || number == null) return '';
-
-  number = number.toFixed(~~dec);
-  tsep = typeof tsep == 'string' ? tsep : ',';
-
-  var parts = number.split('.'),
-    fnums = parts[0],
-    decimals = parts[1] ? (dsep || '.') + parts[1] : '';
-
-  return fnums.replace(/(\d)(?=(?:\d{3})+$)/g, '$1' + tsep) + decimals;
-};
 
 
 /***/ }),
@@ -29677,9 +28536,13 @@ module.exports = function numberFormat(number, dec, dsep, tsep) {
     }
   },
   data: function data() {
-    return {};
+    return {
+      datafileURL: ""
+    };
   },
-  mounted: function mounted() {},
+  mounted: function mounted() {
+    this.datafileURL = {"api_url":"https://ocde.wedodata.fr/paris21_api/","datafile_url":"https://ocde.wedodata.fr/paris21_admin/API/file.csv"}.datafile_url;
+  },
   methods: {
     closeModal: function closeModal() {
       this.$emit('closeModal');
@@ -29885,6 +28748,941 @@ if (false) {
 
 /***/ }),
 
+/***/ "VJd/":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_toConsumableArray__ = __webpack_require__("Gu7T");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_toConsumableArray___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_toConsumableArray__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_defineProperty__ = __webpack_require__("bOdI");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_defineProperty___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_defineProperty__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__commons_utils_index_js__ = __webpack_require__("ZBxL");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_underscore__ = __webpack_require__("rdLu");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_underscore___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_underscore__);
+
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+
+/* harmony default export */ __webpack_exports__["a"] = ({
+    props: {
+        state: {
+            type: String,
+            default: function _default() {
+                return 'home';
+            }
+        }
+    },
+    data: function data() {
+        var _ref;
+
+        return {
+            levelsTexts: {
+                'individual': 'A single human being working for the National Statistical System independent from entity, rank or position.',
+                'organization': 'A social entity (such as the National Statistical Office or a line ministry) comprised of multiple interacting individuals that are coordinated through a hierarchy of authority and responsibility to achieve an explicit, common purpose (such as statistical production).',
+                'system': 'An organized, purposeful structure consisting of interrelated and interdependent individuals, organizations or stakeholders whose activities relate to data and statistics at the regional, national and international level.'
+            },
+            graph: {
+                nodesOld: d3.range(100).map(function (i) {
+                    return { index: i, x: null, y: null };
+                }),
+                linksOld: d3.range(99).map(function (i) {
+                    return { source: Math.floor(Math.sqrt(i)), target: i + 1 };
+                }),
+                nodes: [{ index: 0, x: null, y: null, name: 'root', type: 'root' }, { index: 1, x: null, y: null, name: 'incentives', type: 'area', soloLevel: 'system', area: 'incentives', text: 'Incentives are the motives guiding behaviour at different levels in the National Statistical System. Engaging with personal motivations and career expectations can foster change and improvements in statistical production processes.' }, { index: 2, x: null, y: null, name: 'system', area: 'incentives', level: 'system', type: 'level', text: 'The structural motives guiding behaviour at different levels in the National Statistical System. For example, stakeholders` interest and political support for data and statistics actively affects available resources and a nationally enabling environment.' }, { index: 3, x: null, y: null, name: 'Stakeholders\' interest', area: 'incentives', level: 'system', type: 'classif', classif: 'Stakeholders\' interest' }, { index: 4, x: null, y: null, name: 'Legitimacy', area: 'incentives', level: 'system', type: 'classif', classif: 'Legitimacy' }, { index: 5, x: null, y: null, name: 'management', type: 'area', area: 'management', text: 'Management is the coordination and combination of skills and knowledge with various resources to produce a statistical output. Defining clear strategies, acquiring sufficient resources, and allocating tasks and responsibilities efficiently needs a sustained effort of good leadership.' }, { index: 6, x: null, y: null, name: 'system', area: 'management', type: 'level', level: 'system', text: 'The structural coordination and combination of skills and knowledge and various resources to produce a statistical output. For example, coordination mechanisms within the National Statistical System are important for knowledge sharing and collaboration between various entities following different agendas.' }, { index: 7, x: null, y: null, name: 'Advocacy strategy', area: 'management', level: 'system', type: 'classif', classif: 'Advocacy strategy' }, (_ref = { index: 8, x: null, y: null, name: 'organization', area: 'management', level: 'organization', type: 'level' }, __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_defineProperty___default()(_ref, 'level', 'organization'), __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_defineProperty___default()(_ref, 'text', 'A social entity`s coordination and combination of skills and knowledge and various resources to produce a statistical output. For example, strategic planning, monitoring and evaluation, and effective organisational design are supporting sustainable statistical outputs in National Statistical Offices.'), _ref), { index: 9, x: null, y: null, name: 'Fundraising strategies', area: 'management', level: 'organization', type: 'classif', classif: 'Fundraising strategies' }, { index: 10, x: null, y: null, name: 'politics and power', type: 'area', area: 'politics and politics', text: 'Politics & Power are the formal or informal interactions between the individuals and units of a National Statistical System. For example, workplace politics are strategic activities, attitudes or behaviours of staff members in the workplace that aim at gaining or keeping power.' }, { index: 11, x: null, y: null, name: 'system', area: 'politics and power', type: 'level', level: 'system', text: 'The structural formal and informal interactions between individuals and entities within the National Statistical System. For example, relationships with users and new data source providers are crucial to align demand- and supply-side needs, and efficiently complement official statistics using new data opportunities.' }, { index: 12, x: null, y: null, name: 'Accountability', area: 'politics and power', level: 'system', type: 'classif', classif: 'Accountability' }, { index: 13, x: null, y: null, name: 'Relationship with users', area: 'politics and power', level: 'system', type: 'classif', classif: 'Relationship with users' }, { index: 14, x: null, y: null, name: 'organization', area: 'politics and power', type: 'level', level: 'organization', text: 'An organisation’s formal and informal interactions with other entities within the National Statistical System. For example, transparency practices are highly valued in the national and international statistical community, but also lead to more scrutiny of statistical outputs and workplace politics.' }, { index: 15, x: null, y: null, name: 'Transparency', area: 'politics and power', level: 'organization', type: 'classif', classif: 'Transparency' }, { index: 16, x: null, y: null, name: 'resources', type: 'area', area: 'resources', text: 'Resources are the means (human, physical, financial, legal) required to produce a statistical output. Rapid technological change challenges physical infrastructure and workforce composition of National Statistical Systems.' }, { index: 17, x: null, y: null, name: 'system', area: 'resources', type: 'level', level: 'system', text: 'The structural means that are required to produce a statistical output. For example, the National Statistical System is embedded in a legislative and institutional setting actively fostering the adequate coordination and collaboration between individuals, entities or stakeholders.' }, { index: 18, x: null, y: null, name: 'Plans', area: 'resources', level: 'system', type: 'classif', classif: 'Plans' }, { index: 19, x: null, y: null, name: 'Legislation, Principles and Institutional setting', area: 'resources', level: 'system', type: 'classif', classif: 'Legislation, Principles and Institutional setting' }, { index: 20, x: null, y: null, name: 'Funds infrastructure', area: 'resources', level: 'system', type: 'classif', classif: 'Funds infrastructure' }, { index: 21, x: null, y: null, name: 'Existing data', area: 'resources', level: 'system', type: 'classif', classif: 'Existing data' }, { index: 22, x: null, y: null, name: 'organization', area: 'resources', type: 'level', level: 'organization', text: 'A social entity’s (such as the National Statistical Office or a line ministry) available means that are required to produce a statistical output. For example, National Statistical Offices need adequate human and financial resources to produce timely and high-quality statistics.' }, { index: 23, x: null, y: null, name: 'Budget', area: 'resources', level: 'organization', type: 'classif', classif: 'Budget' }, { index: 24, x: null, y: null, name: 'Infrastructure', area: 'resources', level: 'organization', type: 'classif', classif: 'Infrastructure' }, { index: 25, x: null, y: null, name: 'skills & knowledge', type: 'area', area: 'skills & knowledge', text: 'Skills & Knowledge are the cognitive and non-cognitive abilities (e.g. information processing, teamwork) required to perform a task related to data and statistics. The new data ecosystem requires an updated set of skills and knowledge.' }, { index: 26, x: null, y: null, name: 'organization', area: 'skills & knowledge', type: 'level', level: 'organization', text: 'The structural cognitive and non-cognitive abilities that are required to perform a task related to data and statistics. For example, data literacy and knowledge sharing are crucial structural abilities for statistical capacity development. ' }, { index: 27, x: null, y: null, name: 'Statistical production processes', area: 'skills & knowledge', level: 'organization', type: 'classif', classif: 'production' }, { index: 28, x: null, y: null, name: 'Communication', area: 'skills & knowledge', level: 'organization', type: 'classif', classif: 'Communication' }, { index: 29, x: null, y: null, name: 'Quality assurance and codes of conduct', area: 'skills & knowledge', level: 'organization', type: 'classif', classif: 'Quality assurance and codes of conduct' }, { index: 30, x: null, y: null, name: 'system', area: 'skills & knowledge', type: 'level', level: 'system', text: 'The structural cognitive and non-cognitive abilities that are required to perform a task related to data and statistics. For example, data literacy and knowledge sharing are crucial structural abilities for statistical capacity development.' }, { index: 31, x: null, y: null, name: 'Data Literacy', area: 'skills & knowledge', level: 'system', type: 'classif', classif: 'Data Literacy' }, { index: 32, x: null, y: null, name: 'Advocacy strategy', area: 'skills & knowledge', level: 'system', type: 'classif', classif: 'Advocacy strategy' }, { index: 33, x: null, y: null, name: 'Accountability', area: 'skills & knowledge', level: 'system', type: 'classif', classif: 'Accountability' }, { index: 34, x: null, y: null, name: 'Existing data', area: 'skills & knowledge', level: 'system', type: 'classif', classif: 'Existing data' }, { index: 35, x: null, y: null, name: 'Knowledge sharing', area: 'skills & knowledge', level: 'system', type: 'classif', classif: 'Knowledge sharing' }],
+                links: [{ source: 0, target: 1, area: 'incentives' }, { source: 1, target: 2, area: 'incentives', level: 'system' }, { source: 2, target: 3, area: 'incentives', level: 'system', classif: 'Stakeholders\' interest' }, { source: 2, target: 4, area: 'incentives', level: 'system', classif: 'Legitimacy' }, { source: 0, target: 5, area: 'management' }, { source: 5, target: 6, area: 'management', level: 'system' }, { source: 6, target: 7, area: 'management', level: 'system', classif: 'Advocacy strategy' }, { source: 5, target: 8, area: 'management', level: 'organization' }, { source: 8, target: 9, area: 'management', level: 'organization', classif: 'Fundraising strategies' }, { source: 0, target: 10, area: 'politics and power' }, { source: 10, target: 11, area: 'politics and power', level: 'system' }, { source: 11, target: 12, area: 'politics and power', level: 'system', classif: 'Accountability' }, { source: 11, target: 13, area: 'politics and power', level: 'system', classif: 'Relationship with users' }, { source: 10, target: 14, area: 'politics and power', level: 'organization' }, { source: 14, target: 15, area: 'politics and power', level: 'organization', classif: 'Transparency' }, { source: 0, target: 16, area: 'resources' }, { source: 16, target: 17, area: 'resources', level: 'system' }, { source: 17, target: 18, area: 'resources', level: 'system', classif: 'Plans' }, { source: 17, target: 19, area: 'resources', level: 'system', classif: 'Legislation, Principles and Institutional setting' }, { source: 17, target: 20, area: 'resources', level: 'system', classif: 'Funds infrastructure' }, { source: 17, target: 21, area: 'resources', level: 'system', classif: 'Existing data' }, { source: 16, target: 22, area: 'resources', level: 'organization' }, { source: 22, target: 23, area: 'resources', level: 'organization', classif: 'Budget' }, { source: 22, target: 24, area: 'resources', level: 'organization', classif: 'Infrastructure' }, { source: 0, target: 25, area: 'skills & knowledge' }, { source: 25, target: 26, area: 'skills & knowledge', level: 'organization' }, { source: 26, target: 27, area: 'skills & knowledge', level: 'organization', classif: 'Statistical production processes' }, { source: 26, target: 28, area: 'skills & knowledge', level: 'organization', classif: 'Communication' }, { source: 26, target: 29, area: 'skills & knowledge', level: 'organization', classif: 'Quality assurance and codes of conduct' }, { source: 25, target: 30, area: 'skills & knowledge', level: 'system' }, { source: 30, target: 31, area: 'skills & knowledge', level: 'system', classif: 'Data Literacy' }, { source: 30, target: 32, area: 'skills & knowledge', level: 'system', classif: 'Advocacy strategy' }, { source: 30, target: 33, area: 'skills & knowledge', level: 'system', classif: 'Accountability' }, { source: 30, target: 34, area: 'skills & knowledge', level: 'system', classif: 'Existing data' }, { source: 30, target: 35, area: 'skills & knowledge', level: 'system', classif: 'Knowledge sharing' }]
+            },
+            width: 630,
+            height: 527,
+            padding: 60,
+            colors: ['#2196F3', '#E91E63', '#7E57C2', '#009688', '#00BCD4', '#EF6C00', '#4CAF50', '#FF9800', '#F44336', '#CDDC39', '#9C27B0'],
+            simulation: null,
+            currentMove: null,
+            selectedLevel: '',
+            selectedClassif: '',
+            selectedArea: '',
+            selectedNode: '',
+            selectedCircle: '',
+            corresIndicators: [],
+            hoveredNodeIndex: '',
+            afterComputeRects: false
+        };
+    },
+    created: function created() {},
+
+    mounted: function mounted() {
+        var that = this;
+
+        if (this.$store.csvDataPromiseIndicators === undefined) {
+            this.$store.csvDataPromiseIndicators = __WEBPACK_IMPORTED_MODULE_2__commons_utils_index_js__["e" /* getAPIIndicators */](this.$store);
+            this.$store.csvDataPromiseIndicators.then(function (promiseCallback) {
+                that.initAfterDataLoaded();
+            });
+        } else {
+            this.initAfterDataLoaded();
+        }
+    },
+
+    computed: {
+        bounds: function bounds() {
+            return {
+                minX: Math.min.apply(Math, __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_toConsumableArray___default()(this.graph.nodes.map(function (n) {
+                    return n.x;
+                }))),
+                maxX: Math.max.apply(Math, __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_toConsumableArray___default()(this.graph.nodes.map(function (n) {
+                    return n.x;
+                }))),
+                minY: Math.min.apply(Math, __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_toConsumableArray___default()(this.graph.nodes.map(function (n) {
+                    return n.y;
+                }))),
+                maxY: Math.max.apply(Math, __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_toConsumableArray___default()(this.graph.nodes.map(function (n) {
+                    return n.y;
+                })))
+            };
+        },
+        coords: function coords() {
+            var _this = this;
+
+            return this.graph.nodes.map(function (node) {
+                return {
+                    x: _this.padding + (node.x - _this.bounds.minX) * (_this.width - 2 * _this.padding) / (_this.bounds.maxX - _this.bounds.minX),
+                    y: _this.padding + (node.y - _this.bounds.minY) * (_this.height - 2 * _this.padding) / (_this.bounds.maxY - _this.bounds.minY)
+                };
+            });
+        }
+    },
+    methods: {
+        initAfterDataLoaded: function initAfterDataLoaded() {
+            var self = this;
+            this.startSimulation();
+
+            setTimeout(function () {
+                self.computeRectsWidthFromLabel();
+            }, 100);
+        },
+
+        expandSelector: function expandSelector() {
+            this.$parent.selectorExpanded = 'network';
+        },
+
+        startSimulation: function startSimulation() {
+            this.simulation = d3.forceSimulation(this.graph.nodes).force('charge', d3.forceManyBody().strength(function (d) {
+                return -100;
+            })).force('link', d3.forceLink(this.graph.links)).force('x', d3.forceX()).force('y', d3.forceY());
+        },
+
+        drag: function drag(e) {
+            if (this.currentMove) {
+                this.currentMove.node.fx = this.currentMove.node.x - (this.currentMove.x - e.screenX) * (this.bounds.maxX - this.bounds.minX) / (this.width - 2 * this.padding);
+                this.currentMove.node.fy = this.currentMove.node.y - (this.currentMove.y - e.screenY) * (this.bounds.maxY - this.bounds.minY) / (this.height - 2 * this.padding);
+                this.currentMove.x = e.screenX;
+                this.currentMove.y = e.screenY;
+            }
+        },
+        drop: function drop() {
+            delete this.currentMove.node.fx;
+            delete this.currentMove.node.fy;
+            this.currentMove = null;
+            this.simulation.alpha(1);
+            this.simulation.restart();
+        },
+
+        computeRadius: function computeRadius(node) {
+            if (node.type == 'root') return 32;else if (node.type == 'area') return 24;else if (node.type == 'level') return 9;
+            return 7;
+        },
+        computeNodeNameFromLink: function computeNodeNameFromLink(link, way) {
+            if (link !== undefined && link.source !== undefined) {
+                if (way == 'source') {
+                    return this.graph.nodes[link.source.index].name;
+                } else {
+                    return this.graph.nodes[link.target.index].name;
+                }
+            }
+        },
+        computeLinkHighlighting: function computeLinkHighlighting(link) {
+            //selected level
+            if (this.selectedClassif == '') {
+                if (this.selectedLevel == '') {
+                    //default view
+                    return 'default';
+                } else {
+                    if (this.selectedLevel == link.level) {
+                        if (this.selectedArea == 'all') return 'highlighted';else {
+                            if (this.selectedArea == link.area) return 'highlighted';
+                            return 'delighted';
+                        }
+                    } else {
+                        if (this.selectedLevel !== '' && this.selectedClassif == '' && link.source.index == 0) {
+                            if (this.selectedArea == 'all' || this.selectedArea == link.area) return 'highlighted';
+                            return 'delighted';
+                        }
+                        return 'delighted';
+                    }
+                }
+            } else {
+                if (link.area == this.selectedNode.area && link.level === undefined) return 'highlighted';
+                if (link.area == this.selectedNode.area && link.level == this.selectedNode.level && link.classif === undefined) return 'highlighted';
+                if (link.area == this.selectedNode.area && link.level == this.selectedNode.level && link.classif === this.selectedClassif) return 'highlighted';
+            }
+
+            return 'default';
+        },
+        computeNodeHighlighting: function computeNodeHighlighting(node) {
+            //selecting level ?
+            if (this.selectedClassif == '') {
+                if (this.selectedLevel == '') {
+                    //default view
+                    return 'default';
+                } else {
+                    // level selected
+                    if (this.selectedLevel == node.level) {
+                        if (this.selectedArea == 'all') return 'highlighted';else {
+                            if (this.selectedArea == node.area) return 'highlighted';
+                            return 'delighted';
+                        }
+                    } else {
+                        return 'delighted';
+                    }
+                }
+            } else {
+                if (node.area == this.selectedNode.area && node.level === undefined) return 'highlighted';
+                if (node.area == this.selectedNode.area && node.level == this.selectedNode.level && node.classif === undefined) return 'highlighted';
+                if (node.area == this.selectedNode.area && node.level == this.selectedNode.level && node.classif === this.selectedClassif) return 'highlighted';
+                return 'delighted';
+            }
+        },
+        selectCircle: function selectCircle(node) {
+            var self = this;
+
+            if (node.index == this.selectedCircle) {
+                this.selectedClassif = '';
+                this.selectedArea = '';
+                this.selectedLevel = '';
+                this.selectedNode = '';
+                this.selectedCircle = '';
+                return true;
+            }
+
+            this.selectedNode = node;
+            this.selectedCircle = node.index;
+
+            if (node.type == 'classif') {
+                this.selectedClassif = node.name;
+                this.selectedLevel = node.level;
+                this.selectedArea = node.area;
+
+                console.log(self.selectedClassif);
+                console.log('store indic', this.$store.DBIndicators);
+                this.corresIndicators = __WEBPACK_IMPORTED_MODULE_3_underscore__["_"].filter(this.$store.DBIndicators, function (ind) {
+                    if (ind.area.toLowerCase() == self.selectedArea.toLowerCase() && ind.level.toLowerCase() == self.selectedLevel.toLowerCase() && ind.family.toLowerCase() == self.selectedClassif.toLowerCase()) {
+                        return true;
+                    }
+                    return false;
+                });
+            } else if (node.type == 'area') {
+                if (this.selectedArea == node.name) this.selectedArea = '';else this.selectedArea = node.name;
+                this.selectedClassif = '';
+            } else if (node.type == 'level') {
+                this.selectedLevel = node.level;
+                this.selectedArea = node.area;
+                this.selectedClassif = '';
+            } else {
+                this.selectedClassif = '';
+                this.selectedArea = '';
+            }
+        },
+
+        selectMenuLevel: function selectMenuLevel(level) {
+            if (this.selectedLevel != level) {
+                this.selectedLevel = level;
+                this.selectedArea = 'all';
+            } else {
+                this.selectedLevel = '';
+                this.selectedArea = '';
+            }
+        },
+
+        computeRectsWidthFromLabel: function computeRectsWidthFromLabel() {
+
+            __WEBPACK_IMPORTED_MODULE_3_underscore__["_"].each(this.graph.nodes, function (node) {
+                var $correspondingTextNode = document.querySelector('.svgText[data-index="' + node.index + '"]');
+                var $correspondingRect = document.querySelector('.svgRect[data-index="' + node.index + '"]');
+
+                var rectWidth = 100;
+                if ($correspondingTextNode !== null) {
+                    rectWidth = $correspondingTextNode.getBoundingClientRect().width + 20;
+                }
+                $correspondingRect.setAttribute('width', rectWidth);
+            });
+        },
+
+        hoverNode: function hoverNode(node) {
+            this.hoveredNodeIndex = node.index;
+        },
+
+        leaveNode: function leaveNode() {
+            this.hoveredNodeIndex = '';
+        }
+    },
+    updated: function updated() {},
+
+    watch: {
+        state: function state() {
+            var self = this;
+            console.log('change state');
+            this.afterComputeRects = false;
+            setTimeout(function () {
+                self.computeRectsWidthFromLabel();
+            }, 10);
+
+            setTimeout(function () {
+                self.afterComputeRects = true;
+            }, 100);
+        }
+    }
+});
+
+/***/ }),
+
+/***/ "VOTh":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    {
+      staticClass: "selector",
+      attrs: {
+        "data-selector": "network",
+        "data-state": _vm.state,
+        "data-after-computerects": _vm.afterComputeRects
+      }
+    },
+    [
+      _c(
+        "div",
+        {
+          staticClass: "selector_homecontent",
+          class:
+            _vm.state == "home" || _vm.state == "shrinked" ? "displayed" : "",
+          on: {
+            click: function($event) {
+              _vm.expandSelector()
+            }
+          }
+        },
+        [
+          _c("div", { staticClass: "homecontent_picto" }),
+          _vm._m(0),
+          _c("button", { staticClass: "homecontent_expandbt" }, [
+            _vm._v("EXPLORE")
+          ])
+        ]
+      ),
+      _c(
+        "div",
+        {
+          staticClass: "selector_expandedcontent",
+          class: _vm.state == "expanded" ? "displayed" : "",
+          attrs: {
+            "data-level": _vm.selectedLevel,
+            "data-classif": _vm.selectedClassif
+          }
+        },
+        [
+          _c("div", { staticClass: "expandedcontent_menu" }, [
+            _c("div", { staticClass: "expandedcontent_title" }, [
+              _vm._v(
+                "\n                Explore Capacity Development 4.0\n            "
+              )
+            ]),
+            _vm._m(1),
+            _vm.selectedClassif == ""
+              ? _c("div", { staticClass: "menu_noclassif" }, [
+                  _c("div", { staticClass: "menu_levels" }, [
+                    _c(
+                      "div",
+                      {
+                        staticClass: "menu_level",
+                        class:
+                          _vm.selectedLevel == "individual"
+                            ? "selected"
+                            : _vm.selectedLevel !== ""
+                            ? "notselected"
+                            : "",
+                        on: {
+                          click: function($event) {
+                            _vm.selectMenuLevel("individual")
+                          }
+                        }
+                      },
+                      [_vm._v("Individual")]
+                    ),
+                    _c(
+                      "div",
+                      {
+                        staticClass: "menu_level",
+                        class:
+                          _vm.selectedLevel == "organization"
+                            ? "selected"
+                            : _vm.selectedLevel !== ""
+                            ? "notselected"
+                            : "",
+                        on: {
+                          click: function($event) {
+                            _vm.selectMenuLevel("organization")
+                          }
+                        }
+                      },
+                      [_vm._v("organization")]
+                    ),
+                    _c(
+                      "div",
+                      {
+                        staticClass: "menu_level",
+                        class:
+                          _vm.selectedLevel == "system"
+                            ? "selected"
+                            : _vm.selectedLevel !== ""
+                            ? "notselected"
+                            : "",
+                        on: {
+                          click: function($event) {
+                            _vm.selectMenuLevel("system")
+                          }
+                        }
+                      },
+                      [_vm._v("system")]
+                    )
+                  ]),
+                  _vm._m(2),
+                  _vm.selectedArea !== "" || _vm.selectedLevel !== ""
+                    ? _c("div", { staticClass: "menu_area" }, [
+                        _c("div", { staticClass: "area_title" }, [
+                          _vm.selectedArea !== "" && _vm.selectedLevel == ""
+                            ? _c("span", [_vm._v(_vm._s(_vm.selectedArea))])
+                            : _vm._e(),
+                          _vm.selectedLevel !== ""
+                            ? _c("span", [
+                                _vm._v(
+                                  _vm._s(_vm.selectedArea) +
+                                    " - " +
+                                    _vm._s(_vm.selectedLevel) +
+                                    " level"
+                                )
+                              ])
+                            : _vm._e(),
+                          _c("a", {
+                            staticClass: "area_closebt",
+                            on: {
+                              click: function($event) {
+                                _vm.selectedArea = ""
+                                _vm.selectedLevel = ""
+                                _vm.selectedCircle = ""
+                              }
+                            }
+                          })
+                        ]),
+                        _vm.selectedNode !== undefined &&
+                        _vm.selectedArea !== "all"
+                          ? _c("div", { staticClass: "area_text" }, [
+                              _vm._v(
+                                "\n                        " +
+                                  _vm._s(_vm.selectedNode.text) +
+                                  "\n                    "
+                              )
+                            ])
+                          : _vm._e(),
+                        _vm.selectedNode !== undefined &&
+                        _vm.selectedArea == "all"
+                          ? _c("div", { staticClass: "area_text" }, [
+                              _vm._v(
+                                "\n                        " +
+                                  _vm._s(_vm.levelsTexts[_vm.selectedLevel]) +
+                                  "\n                    "
+                              )
+                            ])
+                          : _vm._e()
+                      ])
+                    : _vm._e()
+                ])
+              : _vm._e(),
+            _vm.selectedClassif !== ""
+              ? _c("div", { staticClass: "menu_classif" }, [
+                  _c("div", { staticClass: "classif_title" }, [
+                    _vm._v(
+                      "\n                    " +
+                        _vm._s(_vm.selectedClassif) +
+                        "\n                    "
+                    ),
+                    _c("a", {
+                      staticClass: "title_closebt",
+                      on: {
+                        click: function($event) {
+                          _vm.selectedClassif = ""
+                        }
+                      }
+                    })
+                  ]),
+                  _c(
+                    "div",
+                    { staticClass: "classif_indicators" },
+                    _vm._l(_vm.corresIndicators, function(indicator, index) {
+                      return _c(
+                        "nuxt-link",
+                        {
+                          key: index,
+                          staticClass: "indicator",
+                          attrs: { to: "/indicator/" + indicator.id }
+                        },
+                        [
+                          _c("div", { staticClass: "item_name" }, [
+                            _vm._v(_vm._s(indicator.name))
+                          ])
+                        ]
+                      )
+                    }),
+                    1
+                  )
+                ])
+              : _vm._e()
+          ]),
+          _c("div", { staticClass: "expandedcontent_main" }, [
+            _c("div", { staticClass: "svg-container" }, [
+              _vm.bounds.minX
+                ? _c(
+                    "svg",
+                    {
+                      attrs: {
+                        xmlns: "http://www.w3.org/2000/svg",
+                        width: _vm.width + "px",
+                        height: _vm.height + "px"
+                      },
+                      on: {
+                        mousemove: function($event) {
+                          _vm.drag($event)
+                        },
+                        mouseup: function($event) {
+                          _vm.drop()
+                        }
+                      }
+                    },
+                    [
+                      _c(
+                        "defs",
+                        [
+                          _c(
+                            "radialGradient",
+                            {
+                              attrs: {
+                                id: "grad1",
+                                cx: "50%",
+                                cy: "50%",
+                                r: "50%",
+                                fx: "50%",
+                                fy: "50%"
+                              }
+                            },
+                            [
+                              _c("stop", {
+                                staticStyle: {
+                                  "stop-color": "rgb(234,102,81)",
+                                  "stop-opacity": "1"
+                                },
+                                attrs: { offset: "0%" }
+                              }),
+                              _c("stop", {
+                                staticStyle: {
+                                  "stop-color": "rgb(234,102,81)",
+                                  "stop-opacity": "1"
+                                },
+                                attrs: { offset: "69%" }
+                              }),
+                              _c("stop", {
+                                staticStyle: {
+                                  "stop-color": "rgb(255,255,255)",
+                                  "stop-opacity": "1"
+                                },
+                                attrs: { offset: "70%" }
+                              }),
+                              _c("stop", {
+                                staticStyle: {
+                                  "stop-color": "rgb(255,255,255)",
+                                  "stop-opacity": "1"
+                                },
+                                attrs: { offset: "100%" }
+                              })
+                            ],
+                            1
+                          ),
+                          _c(
+                            "radialGradient",
+                            {
+                              attrs: {
+                                id: "grad2",
+                                cx: "50%",
+                                cy: "50%",
+                                r: "50%",
+                                fx: "50%",
+                                fy: "50%"
+                              }
+                            },
+                            [
+                              _c("stop", {
+                                staticStyle: {
+                                  "stop-color": "rgb(140,140,140)",
+                                  "stop-opacity": "1"
+                                },
+                                attrs: { offset: "0%" }
+                              }),
+                              _c("stop", {
+                                staticStyle: {
+                                  "stop-color": "rgb(140,140,140)",
+                                  "stop-opacity": "1"
+                                },
+                                attrs: { offset: "69%" }
+                              }),
+                              _c("stop", {
+                                staticStyle: {
+                                  "stop-color": "rgb(255,255,255)",
+                                  "stop-opacity": "1"
+                                },
+                                attrs: { offset: "70%" }
+                              }),
+                              _c("stop", {
+                                staticStyle: {
+                                  "stop-color": "rgb(255,255,255)",
+                                  "stop-opacity": "1"
+                                },
+                                attrs: { offset: "100%" }
+                              })
+                            ],
+                            1
+                          )
+                        ],
+                        1
+                      ),
+                      _vm._l(_vm.graph.links, function(link) {
+                        return _c("line", {
+                          staticClass: "svgLine",
+                          attrs: {
+                            x1: _vm.coords[link.source.index].x,
+                            y1: _vm.coords[link.source.index].y,
+                            x2: _vm.coords[link.target.index].x,
+                            y2: _vm.coords[link.target.index].y,
+                            "stroke-width": "2",
+                            "data-source": _vm.computeNodeNameFromLink(
+                              link,
+                              "source"
+                            ),
+                            "data-target": _vm.computeNodeNameFromLink(
+                              link,
+                              "target"
+                            ),
+                            "data-highlighting": _vm.computeLinkHighlighting(
+                              link
+                            )
+                          }
+                        })
+                      }),
+                      _vm._l(_vm.graph.nodes, function(node, i) {
+                        return _c("circle", {
+                          staticClass: "node svgCircle",
+                          attrs: {
+                            cx: _vm.coords[i].x,
+                            cy: _vm.coords[i].y,
+                            r: _vm.computeRadius(node),
+                            stroke: "white",
+                            "stroke-width": "1",
+                            "data-type": node.type,
+                            "data-level": node.level,
+                            "data-area": node.area,
+                            "data-index": node.index,
+                            "data-selected":
+                              node.index == _vm.selectedCircle &&
+                              node.type !== "classif" &&
+                              node.type !== "root"
+                                ? "true"
+                                : "false",
+                            "data-highlighting": _vm.computeNodeHighlighting(
+                              node
+                            )
+                          },
+                          on: {
+                            mouseover: function($event) {
+                              _vm.hoverNode(node)
+                            },
+                            mouseleave: function($event) {
+                              _vm.leaveNode()
+                            },
+                            mousedown: function($event) {
+                              _vm.currentMove = {
+                                x: $event.screenX,
+                                y: $event.screenY,
+                                node: node
+                              }
+                            },
+                            click: function($event) {
+                              _vm.selectCircle(node)
+                            }
+                          }
+                        })
+                      }),
+                      _vm._l(_vm.graph.nodes, function(node, i) {
+                        return _c("rect", {
+                          staticClass: "svgRect",
+                          class:
+                            (node.type == "area" ||
+                              _vm.hoveredNodeIndex == node.index) &&
+                            node.type !== "root"
+                              ? "displayed"
+                              : "",
+                          attrs: {
+                            x: _vm.coords[i].x - 30,
+                            y:
+                              node.type == "area"
+                                ? _vm.coords[i].y + 30
+                                : _vm.coords[i].y + 16,
+                            height: "20",
+                            rx: "15",
+                            ry: "15",
+                            "data-index": node.index,
+                            fill: node.type == "area" ? "#EDEDED" : "#333"
+                          }
+                        })
+                      }),
+                      _vm._l(_vm.graph.nodes, function(node, i) {
+                        return _c(
+                          "text",
+                          {
+                            staticClass: "svgText",
+                            class:
+                              (node.type == "area" ||
+                                _vm.hoveredNodeIndex == node.index) &&
+                              node.type !== "root"
+                                ? "displayed"
+                                : "",
+                            attrs: {
+                              x: _vm.coords[i].x - 20,
+                              y:
+                                node.type == "area"
+                                  ? _vm.coords[i].y + 45
+                                  : _vm.coords[i].y + 30,
+                              "data-index": node.index,
+                              "data-type": node.type
+                            }
+                          },
+                          [_vm._v(_vm._s(node.name))]
+                        )
+                      })
+                    ],
+                    2
+                  )
+                : _vm._e()
+            ])
+          ])
+        ]
+      )
+    ]
+  )
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "homecontent_title" }, [
+      _c("span", { staticClass: "bolder" }, [_vm._v("Find the data")]),
+      _c("br"),
+      _vm._v("\n            at the appropriate level\n        ")
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "expandedcontent_subtitle" }, [
+      _vm._v("\n                Find more information about CD 4.0 "),
+      _c("a", { attrs: { href: "", target: "_blank" } }, [_vm._v("here")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "menu_disclaimer" }, [
+      _vm._v("\n                    Click on the bubbles "),
+      _c("span", { staticClass: "bolder" }, [
+        _vm._v("at the end of the branches")
+      ]),
+      _vm._v(" to discover the family of indicators\n                ")
+    ])
+  }
+]
+render._withStripped = true
+var esExports = { render: render, staticRenderFns: staticRenderFns }
+/* harmony default export */ __webpack_exports__["a"] = (esExports);
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-49182860", esExports)
+  }
+}
+
+/***/ }),
+
 /***/ "Vajp":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -29936,665 +29734,6 @@ module.exports = function defaultToWhiteSpace(characters) {
 
 /***/ }),
 
-/***/ "YtPR":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_json_stringify__ = __webpack_require__("mvHQ");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_json_stringify___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_json_stringify__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_regenerator__ = __webpack_require__("Xxa5");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_babel_runtime_regenerator__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_asyncToGenerator__ = __webpack_require__("exGp");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_asyncToGenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_asyncToGenerator__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__commons_utils_index_js__ = __webpack_require__("ZBxL");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_underscore__ = __webpack_require__("rdLu");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_underscore___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_underscore__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_paris21Header_vue__ = __webpack_require__("mvsm");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__components_paris21Footer_vue__ = __webpack_require__("3wr8");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__components_paris21Modal_vue__ = __webpack_require__("cU99");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__components_geographySelector_vue__ = __webpack_require__("2p9t");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__components_indicatorSelector_vue__ = __webpack_require__("KKFL");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__components_geovaluesTableCell_vue__ = __webpack_require__("rkKo");
-
-
-
-
-var _this = this;
-
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-
-
-
-
-
-
-
-
-
-var prune = __webpack_require__("1yM6");
-var numberFormat = __webpack_require__("UeOF");
-
-/* harmony default export */ __webpack_exports__["a"] = ({
-    components: {
-        'paris21Header': __WEBPACK_IMPORTED_MODULE_5__components_paris21Header_vue__["a" /* default */],
-        'paris21Footer': __WEBPACK_IMPORTED_MODULE_6__components_paris21Footer_vue__["a" /* default */],
-        'paris21Modal': __WEBPACK_IMPORTED_MODULE_7__components_paris21Modal_vue__["a" /* default */],
-        'geographySelector': __WEBPACK_IMPORTED_MODULE_8__components_geographySelector_vue__["a" /* default */],
-        'geovaluesTableCell': __WEBPACK_IMPORTED_MODULE_10__components_geovaluesTableCell_vue__["a" /* default */],
-        'indicatorSelector': __WEBPACK_IMPORTED_MODULE_9__components_indicatorSelector_vue__["a" /* default */]
-    },
-    head: function head() {
-        return {
-            title: 'Statistical Capacity Monito',
-            meta: [{ hid: 'description', name: 'description', content: 'Find and explore indicators on statistical capacity' }, { hid: 'og:image', name: 'og:image', content: 'http://statisticalcapacitymonitor.org/images/share-img.png' }]
-        };
-    },
-
-    asyncData: function () {
-        var _ref = __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_asyncToGenerator___default()( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_1_babel_runtime_regenerator___default.a.mark(function _callee(_ref2) {
-            var app = _ref2.app,
-                params = _ref2.params,
-                payload = _ref2.payload;
-            return __WEBPACK_IMPORTED_MODULE_1_babel_runtime_regenerator___default.a.wrap(function _callee$(_context) {
-                while (1) {
-                    switch (_context.prev = _context.next) {
-                        case 0:
-                            return _context.abrupt('return', {
-                                routeParams: params
-                            });
-
-                        case 1:
-                        case 'end':
-                            return _context.stop();
-                    }
-                }
-            }, _callee, _this);
-        }));
-
-        return function asyncData(_x) {
-            return _ref.apply(this, arguments);
-        };
-    }(),
-    data: function data() {
-        return {
-            routeParams: '',
-            dataLoaded: false,
-            defaultCountry: '250',
-            routedCountry: '',
-            selectedCountry: '',
-            comparedCountries: [{ name: 'Subregion', m49: 'SUB' }, { name: 'Region', m49: 'REG' }, { name: 'World', m49: '1' }],
-            selectedIndicators: [],
-            DBIndicatorsObj: '',
-            DBClassifIndicators: '',
-            countryObj: {},
-            countryName: '',
-            displayGeoModal: false,
-            modaledCountry: '',
-            modaledCountryInput: {},
-            comparedGeoColSelected: 0,
-            displayIndicatorModal: false,
-            xlsLinkAttr: '',
-            lastPopAvailable: '',
-            lastGDPAvailable: '',
-            NSOWebsite: '',
-            lastIncomeGroup: '',
-            displayIndicatorsModal: false,
-            displayAboutModal: false,
-            displayDownloadModal: false
-        };
-    },
-
-    mounted: function mounted() {
-        var self = this;
-
-        this.selectedCountry = this.routeParams.pathMatch.replace('/', '');
-        this.loadAPIIndicators();
-
-        window.addEventListener('scroll', this.handleScroll);
-    },
-
-    methods: {
-        loadAPIIndicators: function loadAPIIndicators() {
-            var self = this;
-
-            if (this.$store.csvDataPromiseIndicators === undefined) {
-                this.$store.csvDataPromiseIndicators = __WEBPACK_IMPORTED_MODULE_3__commons_utils_index_js__["e" /* getAPIIndicators */](this.$store);
-                this.$store.csvDataPromiseIndicators.then(function (promiseCallback) {
-                    self.loadGeoGroups();
-                });
-            } else {
-                this.loadGeoGroups();
-            }
-        },
-
-        loadGeoGroups: function loadGeoGroups() {
-            var self = this;
-
-            if (this.$store.geoGroupsPromise === undefined) {
-                this.$store.geoGroupsPromise = __WEBPACK_IMPORTED_MODULE_3__commons_utils_index_js__["f" /* getGeoGroups */](this.$store);
-                this.$store.geoGroupsPromise.then(function (promiseCallback) {
-                    self.loadAPIGeography();
-                });
-            } else {
-                this.loadAPIGeography();
-            }
-        },
-
-        loadAPIGeography: function loadAPIGeography() {
-            var self = this;
-
-            if (this.$store.csvDataPromiseGeography === undefined) {
-                this.$store.csvDataPromiseGeography = __WEBPACK_IMPORTED_MODULE_3__commons_utils_index_js__["c" /* getAPIGeography */](this.$store);
-                this.$store.csvDataPromiseGeography.then(function (promiseCallback) {
-                    self.loadAPIGeoItems();
-                });
-            } else {
-                this.loadAPIGeoItems();
-            }
-        },
-
-        loadAPIGeoItems: function loadAPIGeoItems() {
-            if (this.selectedCountry !== '') {
-                this.comparedCountries = [];
-
-                if (this.$store.DBGeographyObj[this.selectedCountry].subregion !== '' && this.$store.DBGeographyObj[this.selectedCountry].type !== 'subregion') {
-                    this.comparedCountries.push({
-                        name: this.$store.DBGeographyObj[this.selectedCountry].subregion,
-                        m49: this.$store.DBGeographyObj[this.selectedCountry].subregion_code,
-                        type: 'subregion'
-                    });
-                }
-
-                if (this.$store.DBGeographyObj[this.selectedCountry].region !== '' && this.$store.DBGeographyObj[this.selectedCountry].type !== 'region') {
-                    this.comparedCountries.push({
-                        name: this.$store.DBGeographyObj[this.selectedCountry].region,
-                        m49: this.$store.DBGeographyObj[this.selectedCountry].region_code,
-                        type: 'region'
-                    });
-                }
-
-                this.comparedCountries.push({
-                    name: 'World',
-                    m49: '1',
-                    type: 'world'
-                });
-                this.loadGeoItemData(this.selectedCountry);
-            } else {
-                this.updatePage();
-            }
-        },
-
-        loadGeoItemData: function loadGeoItemData(geoID, modaled) {
-            var self = this;
-            //geoID = geoID.toLowerCase()
-            if (this.$store.csvDataPromiseGeoItemData === undefined) {
-                this.$store.csvDataPromiseGeoItemData = __WEBPACK_IMPORTED_MODULE_3__commons_utils_index_js__["b" /* getAPIGeoItemData */](this.$store, geoID);
-                this.$store.csvDataPromiseGeoItemData.then(function (promiseCallback) {
-                    self.$store.csvDataPromiseGeoItemData = undefined;
-                    if (modaled !== undefined && modaled) {
-                        self.updateComparisonGeos();
-                    } else {
-                        self.updatePage();
-                    }
-                });
-            } else {
-                if (modaled !== undefined && modaled) {
-                    self.updateComparisonGeos();
-                } else {
-                    self.updatePage();
-                }
-            }
-        },
-
-        updatePage: function updatePage() {
-            console.log("DBGeoItems", this.$store.DBGeoItems);
-            if (this.selectedCountry !== '') {
-                this.dataLoaded = true;
-                this.DBClassifIndicators = this.$store.DBClassifIndicators;
-                this.countryObj = this.$store.DBGeographyObj[this.selectedCountry];
-                this.countryName = this.countryObj.name;
-                if (this.selectedIndicators.length === 0) {
-                    this.selectedIndicators = __WEBPACK_IMPORTED_MODULE_4_underscore__["_"].map(this.$store.DBDefaultCPage, function (indicator) {
-                        return indicator.id;
-                    });
-                }
-
-                console.log("ici", this.selectedCountry, this.$store.DBGeoItems);
-
-                var allPopulations = this.$store.DBGeoItems[this.selectedCountry].indicators[94];
-                if (allPopulations !== undefined) {
-                    var yearsValues = __WEBPACK_IMPORTED_MODULE_4_underscore__["_"].without(allPopulations.years, "");
-                    var tmpPop = yearsValues[yearsValues.length - 1];
-                    this.lastPopAvailable = numberFormat(parseInt(tmpPop, 10), 0, '', ' ');
-                }
-
-                console.log("after");
-
-                var allGDPS = this.$store.DBGeoItems[this.selectedCountry].indicators[35];
-                if (allGDPS !== undefined) {
-                    var gdpValues = __WEBPACK_IMPORTED_MODULE_4_underscore__["_"].without(allGDPS.years, "");
-                    var tmpGDP = gdpValues[gdpValues.length - 1];
-                    this.lastGDPAvailable = numberFormat(parseInt(tmpGDP, 10), 0, '', ' ');
-                }
-
-                var allIncGroups = this.$store.DBGeoItems[this.selectedCountry].indicators[150];
-                if (allIncGroups !== undefined) {
-                    var tmpIncGroup = __WEBPACK_IMPORTED_MODULE_4_underscore__["_"].values(allIncGroups.years)[__WEBPACK_IMPORTED_MODULE_4_underscore__["_"].size(allIncGroups.years) - 1];
-                    this.lastIncomeGroup = tmpIncGroup;
-                }
-
-                var allWebsiteLinks = this.$store.DBGeoItems[this.selectedCountry].indicators[77];
-                if (allWebsiteLinks !== undefined) {
-                    var tmpLink = __WEBPACK_IMPORTED_MODULE_4_underscore__["_"].values(allWebsiteLinks.years)[__WEBPACK_IMPORTED_MODULE_4_underscore__["_"].size(allWebsiteLinks.years) - 1];
-                    this.NSOWebsite = tmpLink;
-                }
-            }
-        },
-
-        displayYearValue: function displayYearValue(geoIndicator) {
-            var dataValue = '';
-
-            if (geoIndicator !== undefined && geoIndicator.years !== undefined) {
-                var sizeValues = __WEBPACK_IMPORTED_MODULE_4_underscore__["_"].size(geoIndicator.years);
-                dataValue = __WEBPACK_IMPORTED_MODULE_4_underscore__["_"].values(geoIndicator.years)[sizeValues - 1];
-            } else dataValue = 'No Data';
-
-            return dataValue;
-        },
-
-        updateModaledCountry: function updateModaledCountry() {
-            this.displayGeoModal = false;
-            this.loadGeoItemData(this.modaledCountry.m49, true);
-        },
-
-        updateComparisonGeos: function updateComparisonGeos() {
-            this.comparedCountries[this.comparedGeoColSelected] = this.modaledCountry;
-            this.comparedCountries = JSON.parse(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_json_stringify___default()(this.comparedCountries));
-        },
-
-        computeRefYear: function computeRefYear(indicatorID) {
-            if (this.$store.DBGeoItems[this.selectedCountry] !== undefined && this.$store.DBGeoItems[this.selectedCountry].indicators[indicatorID] !== undefined) {
-                var lastValue = __WEBPACK_IMPORTED_MODULE_3__commons_utils_index_js__["h" /* getLastKeyFromObj */](this.$store.DBGeoItems[this.selectedCountry].indicators[indicatorID], 'years', 'float');
-                if (lastValue == undefined) return null;
-                return lastValue;
-            } else {
-                return null;
-            }
-        },
-
-        hasSelectedIndicators: function hasSelectedIndicators(classifItems) {
-            var itemsIDS = __WEBPACK_IMPORTED_MODULE_4_underscore__["_"].map(classifItems, function (item) {
-                return item.id;
-            });
-            var selectedFromList = __WEBPACK_IMPORTED_MODULE_4_underscore__["_"].intersection(itemsIDS, this.selectedIndicators);
-            if (selectedFromList.length > 0) return true;
-            return false;
-        },
-
-        isIndicatorSelected: function isIndicatorSelected(indicator) {
-            if (__WEBPACK_IMPORTED_MODULE_4_underscore__["_"].indexOf(this.selectedIndicators, indicator.id) > -1) {
-                return true;
-            }
-            return false;
-        },
-
-        updateModaledIndicators: function updateModaledIndicators() {
-            this.displayIndicatorModal = false;
-        },
-
-        downloadAllCountryData: function downloadAllCountryData(contentType) {
-            var self = this;
-
-            var tab_text = '';
-            var data_type = 'data:application/vnd.ms-excel';
-
-            tab_text = '<html xmlns:x="urn:schemas-microsoft-com:office:excel">';
-            tab_text += '<head><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet>';
-
-            tab_text += '<x:Name>Data</x:Name>';
-
-            tab_text += '<x:WorksheetOptions><x:Panes></x:Panes></x:WorksheetOptions></x:ExcelWorksheet>';
-            tab_text += '</x:ExcelWorksheets></x:ExcelWorkbook></xml></head><body>';
-
-            tab_text += "<table border='1px'>";
-
-            tab_text += '<tr><th>Country</th><th>Indicator</th><th>Year</th><th>Data Value</th><th>Data Aggregate</th></tr>';
-
-            if (contentType == 'head') {
-                __WEBPACK_IMPORTED_MODULE_4_underscore__["_"].each(this.$store.DBGeoItems[this.selectedCountry].indicators, function (ind) {
-                    var indKeys = __WEBPACK_IMPORTED_MODULE_4_underscore__["_"].keys(ind.years);
-                    var indValue = __WEBPACK_IMPORTED_MODULE_4_underscore__["_"].values(ind.years)[indKeys.length - 1];
-                    if (self.$store.DBIndicatorsObj[ind.id] !== undefined) {
-                        if (self.$store.DBIndicatorsObj[ind.id].dataviz_type == 'ordinal') {
-                            var foundSpecificIndicator = __WEBPACK_IMPORTED_MODULE_4_underscore__["_"].find(__WEBPACK_IMPORTED_MODULE_3__commons_utils_index_js__["i" /* specificIndicators */], function (indic) {
-                                return ind.id == indic.id;
-                            });
-                            if (foundSpecificIndicator !== undefined) {
-                                var specificLabelsObj = {};
-                                __WEBPACK_IMPORTED_MODULE_4_underscore__["_"].each(foundSpecificIndicator.labels, function (indicLabel) {
-                                    specificLabelsObj[indicLabel.value] = indicLabel;
-                                });
-                            }
-                            //if is country
-                            if (self.$store.DBGeographyObj[self.selectedCountry].country != '') {
-                                var countryValue = parseFloat(indValue).toFixed(1);
-                                indValue = countryValue;
-                                if (indValue == undefined || indValue == "") indValue = "no data";
-                                tab_text += '<tr><td>' + self.$store.DBGeographyObj[self.selectedCountry].name + '<td>' + self.$store.DBIndicatorsObj[ind.id].name + '</td><td>' + indKeys[indKeys.length - 1] + '</td><td>' + indValue + '</td><td></td></tr>';
-                            } else {
-                                var JSONYearData = JSON.parse(indValue.replace('"."', '","'));
-                                var labelizedObj = {};
-                                __WEBPACK_IMPORTED_MODULE_4_underscore__["_"].each(JSONYearData, function (objData) {
-                                    var countryValue = parseFloat(objData.value).toFixed(1);
-                                    labelizedObj[specificLabelsObj[countryValue].label] = {
-                                        "nb": objData.nb
-                                    };
-                                });
-
-                                __WEBPACK_IMPORTED_MODULE_4_underscore__["_"].each(labelizedObj, function (objData, objIndex) {
-                                    tab_text += '<tr><td>' + self.$store.DBGeographyObj[self.selectedCountry].name + '<td>' + self.$store.DBIndicatorsObj[ind.id].name + '</td><td>' + indKeys[indKeys.length - 1] + '</td><td>' + objIndex + '</td><td>' + objData.nb + '</td></tr>';
-                                });
-                            }
-                        } else {
-                            if (indValue == undefined || indValue == "") indValue = "no data";
-                            tab_text += '<tr><td>' + self.$store.DBGeographyObj[self.selectedCountry].name + '<td>' + self.$store.DBIndicatorsObj[ind.id].name + '</td><td>' + indKeys[indKeys.length - 1] + '</td><td>' + indValue + '</td><td></td></tr>';
-                        }
-                    }
-                });
-            } else {
-                var allCountriesM49 = __WEBPACK_IMPORTED_MODULE_4_underscore__["_"].union([this.selectedCountry], __WEBPACK_IMPORTED_MODULE_4_underscore__["_"].map(this.comparedCountries, function (cc) {
-                    return cc.m49;
-                }));
-                __WEBPACK_IMPORTED_MODULE_4_underscore__["_"].each(this.selectedIndicators, function (selInd) {
-
-                    var inc = 0;
-                    console.log("selInd", selInd);
-
-                    var refYear = null;
-                    var selectedCountryIndicatorData = self.$store.DBGeoItems[self.selectedCountry].indicators[selInd];
-                    if (selectedCountryIndicatorData !== undefined && selectedCountryIndicatorData.years !== undefined) {
-                        refYear = __WEBPACK_IMPORTED_MODULE_3__commons_utils_index_js__["h" /* getLastKeyFromObj */](self.$store.DBGeoItems[self.selectedCountry].indicators[selInd], 'years', 'float');
-                    }
-
-                    __WEBPACK_IMPORTED_MODULE_4_underscore__["_"].each(allCountriesM49, function (countryM49) {
-                        var indValue = '';
-
-                        if (self.$store.DBGeoItems[countryM49] !== undefined) {
-                            var indicatorData = self.$store.DBGeoItems[countryM49].indicators[selInd];
-
-                            if (indicatorData !== undefined && indicatorData.years !== undefined) {
-
-                                if (refYear == null) refYear = __WEBPACK_IMPORTED_MODULE_4_underscore__["_"].keys(indicatorData.years)[__WEBPACK_IMPORTED_MODULE_4_underscore__["_"].size(indicatorData.years) - 1];
-                                indValue = indicatorData.years[refYear];
-                                console.log("indicatorData", indicatorData, indValue);
-
-                                if (indValue == undefined || indValue == "") {
-                                    indValue = "no data";
-                                    tab_text += '<tr><td>' + self.$store.DBGeographyObj[countryM49].name + '</td><td>' + self.$store.DBIndicatorsObj[selInd].name + '</td><td>' + refYear + '</td><td>' + indValue + '</td><td></td></tr>';
-                                } else if (self.$store.DBIndicatorsObj[indicatorData.id].dataviz_type == 'ordinal') {
-                                    var foundSpecificIndicator = __WEBPACK_IMPORTED_MODULE_4_underscore__["_"].find(__WEBPACK_IMPORTED_MODULE_3__commons_utils_index_js__["i" /* specificIndicators */], function (indic) {
-                                        return indicatorData.id == indic.id;
-                                    });
-                                    if (foundSpecificIndicator !== undefined) {
-                                        var specificLabelsObj = {};
-                                        __WEBPACK_IMPORTED_MODULE_4_underscore__["_"].each(foundSpecificIndicator.labels, function (indicLabel) {
-                                            specificLabelsObj[indicLabel.value] = indicLabel;
-                                        });
-                                    }
-                                    //if is country
-                                    if (self.$store.DBGeographyObj[countryM49].country != '') {
-                                        var countryValue = parseFloat(indValue).toFixed(1);
-                                        indValue = specificLabelsObj[countryValue].label;
-                                    } else {
-                                        var JSONYearData = JSON.parse(indValue.replace('"."', '","'));
-                                        var labelizedObj = {};
-                                        __WEBPACK_IMPORTED_MODULE_4_underscore__["_"].each(JSONYearData, function (objData) {
-                                            var countryValue = parseFloat(objData.value).toFixed(1);
-                                            labelizedObj[specificLabelsObj[countryValue].label] = {
-                                                "nb": objData.nb
-                                            };
-                                        });
-                                        indValue = __WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_json_stringify___default()(labelizedObj);
-                                    }
-                                    //End Specific ordinal
-                                    __WEBPACK_IMPORTED_MODULE_4_underscore__["_"].each(labelizedObj, function (objData, objIndex) {
-                                        tab_text += '<tr><td>' + self.$store.DBGeographyObj[countryM49].name + '</td><td>' + self.$store.DBIndicatorsObj[selInd].name + '</td><td>' + refYear + '</td><td>' + objIndex + '</td><td>' + objData.nb + '</td></tr>';
-                                    });
-                                } else {
-                                    tab_text += '<tr><td>' + self.$store.DBGeographyObj[countryM49].name + '</td><td>' + self.$store.DBIndicatorsObj[selInd].name + '</td><td>' + refYear + '</td><td>' + indValue + '</td><td></td></tr>';
-                                }
-                            }
-                        }
-
-                        inc += 1;
-                    });
-                });
-            }
-
-            tab_text = tab_text + '</table></body></html>';
-
-            tab_text = tab_text.replace(/[é]/g, "&eacute;").replace(/[É]/g, "&Eacute;").replace(/[à]/g, "&agrave;").replace(/[è]/g, "&egrave;").replace(/[â]/g, "&acirc;").replace(/[Â]/g, "&Acirc;");
-
-            var ua = window.navigator.userAgent;
-            var msie = ua.indexOf("MSIE ");
-
-            this.xlsLinkAttr = data_type + ', ' + encodeURIComponent(tab_text);
-
-            if (msie > 0 || !!navigator.userAgent.match(/Trident.*rv\:11\./)) {
-                if (window.navigator.msSaveBlob) {
-                    var blob = new Blob([tab_text], {
-                        type: "application/csv;charset=utf-8;"
-                    });
-                    navigator.msSaveBlob(blob, 'Statistical Capacity Monitor data download.xls');
-                }
-            } else {
-                if (contentType == 'head') {
-                    document.querySelector('#HeadLinkFake').setAttribute('href', this.xlsLinkAttr);
-                    document.querySelector('#HeadLinkFake').click();
-                } else {
-                    document.querySelector('#ContentLinkFake').setAttribute('href', this.xlsLinkAttr);
-                    document.querySelector('#ContentLinkFake').click();
-                }
-            }
-        },
-
-        handleScroll: function handleScroll() {
-            if (window.innerWidth < 800) return false;
-
-            var $contentHead = document.querySelector('.main_content .content_head');
-            if ($contentHead === null) return true;
-
-            var viewportOffset = $contentHead.getBoundingClientRect();
-            if (window.scrollY > 190) {
-                $contentHead.setAttribute('data-fixed', 'true');
-            } else {
-                $contentHead.setAttribute('data-fixed', 'false');
-            }
-
-            var classifKeys = document.querySelectorAll('.classif_key');
-            for (var i = classifKeys.length - 1; i >= 0; i--) {
-                classifKeys[i].setAttribute('data-fixed', 'false');
-            }
-
-            var classifCols = document.querySelectorAll('.classif_col[data-col="2"]');
-            var viewportOffset = '';
-            for (var k = classifCols.length - 1; k >= 0; k--) {
-                var el = classifCols[k];
-                var dataClassif = el.getAttribute('data-classif');
-                viewportOffset = el.getBoundingClientRect();
-
-                if (viewportOffset.top < 150 && viewportOffset.top + (viewportOffset.height - 20) > 150) {
-                    var classifKeyAssociated = document.querySelector('.classif_key[data-classif="' + dataClassif + '"]');
-                    classifKeyAssociated.setAttribute('data-fixed', 'true');
-                    break;
-                }
-            }
-        },
-
-        prunify: function prunify(value) {
-            return prune(value, 16, '');
-        }
-    },
-
-    computed: {
-        dynamicComparedCountries: function dynamicComparedCountries() {
-            var m49Array = [this.selectedCountry];
-            if (this.comparedCountries[0] !== undefined) m49Array.push(this.comparedCountries[0].m49);
-            if (this.comparedCountries[1] !== undefined) m49Array.push(this.comparedCountries[1].m49);
-            if (this.comparedCountries[2] !== undefined) m49Array.push(this.comparedCountries[2].m49);
-            return m49Array;
-        }
-    }
-});
-
-/***/ }),
-
 /***/ "ZBxL":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -30638,7 +29777,7 @@ var getAPIIndicators = function () {
               }
             };
             randNb = Math.round(Math.random() * 1000000);
-            return _context.abrupt('return', __WEBPACK_IMPORTED_MODULE_3_axios___default.a.get({"api_url":"https://ocde.wedodata.fr/paris21_api/"}.api_url + 'getIndicators.php?rand=', config).then(function (response) {
+            return _context.abrupt('return', __WEBPACK_IMPORTED_MODULE_3_axios___default.a.get({"api_url":"https://ocde.wedodata.fr/paris21_api/","datafile_url":"https://ocde.wedodata.fr/paris21_admin/API/file.csv"}.api_url + 'getIndicators.php?rand=', config).then(function (response) {
               var tmpArray = response.data;
 
               $store.DBIndicators = [];
@@ -30719,7 +29858,7 @@ var countryISOMapping3To2 = { AFG: "AF", ALA: "AX", ALB: "AL", DZA: "DZ", ASM: "
 
 var countryISOMapping2To3 = { AF: 'AFG', AX: 'ALA', AL: 'ALB', DZ: 'DZA', AS: 'ASM', AD: 'AND', AO: 'AGO', AI: 'AIA', AQ: 'ATA', AG: 'ATG', AR: 'ARG', AM: 'ARM', AW: 'ABW', AU: 'AUS', AT: 'AUT', AZ: 'AZE', BS: 'BHS', BH: 'BHR', BD: 'BGD', BB: 'BRB', BY: 'BLR', BE: 'BEL', BZ: 'BLZ', BJ: 'BEN', BM: 'BMU', BT: 'BTN', BO: 'BOL', BA: 'BIH', BW: 'BWA', BV: 'BVT', BR: 'BRA', VG: 'VGB', IO: 'IOT', BN: 'BRN', BG: 'BGR', BF: 'BFA', BI: 'BDI', KH: 'KHM', CM: 'CMR', CA: 'CAN', CV: 'CPV', KY: 'CYM', CF: 'CAF', TD: 'TCD', CL: 'CHL', CN: 'CHN', HK: 'HKG', MO: 'MAC', CX: 'CXR', CC: 'CCK', CO: 'COL', KM: 'COM', CG: 'COG', CD: 'COD', CK: 'COK', CR: 'CRI', CI: 'CIV', HR: 'HRV', CU: 'CUB', CY: 'CYP', CZ: 'CZE', DK: 'DNK', DJ: 'DJI', DM: 'DMA', DO: 'DOM', EC: 'ECU', EG: 'EGY', SV: 'SLV', GQ: 'GNQ', ER: 'ERI', EE: 'EST', ET: 'ETH', FK: 'FLK', FO: 'FRO', FJ: 'FJI', FI: 'FIN', FR: 'FRA', GF: 'GUF', PF: 'PYF', TF: 'ATF', GA: 'GAB', GM: 'GMB', GE: 'GEO', DE: 'DEU', GH: 'GHA', GI: 'GIB', GR: 'GRC', GL: 'GRL', GD: 'GRD', GP: 'GLP', GU: 'GUM', GT: 'GTM', GG: 'GGY', GN: 'GIN', GW: 'GNB', GY: 'GUY', HT: 'HTI', HM: 'HMD', VA: 'VAT', HN: 'HND', HU: 'HUN', IS: 'ISL', IN: 'IND', ID: 'IDN', IR: 'IRN', IQ: 'IRQ', IE: 'IRL', IM: 'IMN', IL: 'ISR', IT: 'ITA', JM: 'JAM', JP: 'JPN', JE: 'JEY', JO: 'JOR', KZ: 'KAZ', KE: 'KEN', KI: 'KIR', KP: 'PRK', KR: 'KOR', KW: 'KWT', KG: 'KGZ', LA: 'LAO', LV: 'LVA', LB: 'LBN', LS: 'LSO', LR: 'LBR', LY: 'LBY', LI: 'LIE', LT: 'LTU', LU: 'LUX', MK: 'MKD', MG: 'MDG', MW: 'MWI', MY: 'MYS', MV: 'MDV', ML: 'MLI', MT: 'MLT', MH: 'MHL', MQ: 'MTQ', MR: 'MRT', MU: 'MUS', YT: 'MYT', MX: 'MEX', FM: 'FSM', MD: 'MDA', MC: 'MCO', MN: 'MNG', ME: 'MNE', MS: 'MSR', MA: 'MAR', MZ: 'MOZ', MM: 'MMR', NA: 'NAM', NR: 'NRU', NP: 'NPL', NL: 'NLD', AN: 'ANT', NC: 'NCL', NZ: 'NZL', NI: 'NIC', NE: 'NER', NG: 'NGA', NU: 'NIU', NF: 'NFK', MP: 'MNP', NO: 'NOR', OM: 'OMN', PK: 'PAK', PW: 'PLW', PS: 'PSE', PA: 'PAN', PG: 'PNG', PY: 'PRY', PE: 'PER', PH: 'PHL', PN: 'PCN', PL: 'POL', PT: 'PRT', PR: 'PRI', QA: 'QAT', RE: 'REU', RO: 'ROU', RU: 'RUS', RW: 'RWA', BL: 'BLM', SH: 'SHN', KN: 'KNA', LC: 'LCA', MF: 'MAF', PM: 'SPM', VC: 'VCT', WS: 'WSM', SM: 'SMR', ST: 'STP', SA: 'SAU', SN: 'SEN', RS: 'SRB', SC: 'SYC', SL: 'SLE', SG: 'SGP', SK: 'SVK', SI: 'SVN', SB: 'SLB', SO: 'SOM', ZA: 'ZAF', GS: 'SGS', SS: 'SSD', ES: 'ESP', LK: 'LKA', SD: 'SDN', SR: 'SUR', SJ: 'SJM', SZ: 'SWZ', SE: 'SWE', CH: 'CHE', SY: 'SYR', TW: 'TWN', TJ: 'TJK', TZ: 'TZA', TH: 'THA', TL: 'TLS', TG: 'TGO', TK: 'TKL', TO: 'TON', TT: 'TTO', TN: 'TUN', TR: 'TUR', TM: 'TKM', TC: 'TCA', TV: 'TUV', UG: 'UGA', UA: 'UKR', AE: 'ARE', GB: 'GBR', US: 'USA', UM: 'UMI', UY: 'URY', UZ: 'UZB', VU: 'VUT', VE: 'VEN', VN: 'VNM', VI: 'VIR', WF: 'WLF', EH: 'ESH', YE: 'YEM', ZM: 'ZMB', ZW: 'ZWE' };
 
-var specificIndicators = [{ id: 96, labels: [{ value: "0.0", label: "no" }, { value: "0.5", label: "last 10 years" }, { value: "1.0", label: "within last 5 years" }] }, { id: 10, labels: [{ value: "0.0", label: "never" }, { value: "0.3", label: "once" }, { value: "0.7", label: "at least 6 times" }, { value: "1.0", label: "annually" }] }, { id: 36, labels: [{ value: "0.0", label: "never" }, { value: "0.3", label: "once" }, { value: "0.7", label: "at least 6 times" }, { value: "1.0", label: "annually" }] }, { id: 40, labels: [{ value: "0.0", label: "no" }, { value: "0.5", label: "last 10 years" }, { value: "1.0", label: "within last 5 years" }] }, { id: 46, labels: [{ value: "0.0", label: "never" }, { value: "0.3", label: "once" }, { value: "0.7", label: "at least 6 times" }, { value: "1.0", label: "annually" }] }, { id: 57, labels: [{ value: "0.0", label: "never" }, { value: "0.3", label: "once" }, { value: "0.7", label: "at least 6 times" }, { value: "1.0", label: "annually" }] }, { id: 92, labels: [{ value: "0.0", label: "never" }, { value: "0.3", label: "once" }, { value: "0.7", label: "at least 6 times" }, { value: "1.0", label: "annually" }] }, { id: 99, labels: [{ value: "0.0", label: "never" }, { value: "0.3", label: "once" }, { value: "0.7", label: "at least 6 times" }, { value: "1.0", label: "annually" }] }, { id: 150, labels: [{ value: "Low income", label: "Low income", inc: 0 }, { value: "Lower middle income", label: "Lower middle income", inc: 1 }, { value: "Upper middle income", label: "Upper middle income", inc: 2 }, { value: "High income", label: "High income", inc: 3 }] }, { id: 7, labels: [{ value: "0.0", label: "not adopted" }, { value: "1.0", label: "adopted" }] }];function getAPIGeography($store) {
+var specificIndicators = [{ id: 1, labels: [{ value: "0.0", label: "no data" }, { value: "0.5", label: "once in last 6 years" }, { value: "1.0", label: "twice in last 6 years" }] }, { id: 96, labels: [{ value: "0.0", label: "no" }, { value: "0.5", label: "last 10 years" }, { value: "1.0", label: "within last 5 years" }] }, { id: 10, labels: [{ value: "0.0", label: "never" }, { value: "0.3", label: "once" }, { value: "0.7", label: "at least 6 times" }, { value: "1.0", label: "annually" }] }, { id: 36, labels: [{ value: "0.0", label: "never" }, { value: "0.3", label: "once" }, { value: "0.7", label: "at least 6 times" }, { value: "1.0", label: "annually" }] }, { id: 40, labels: [{ value: "0.0", label: "no" }, { value: "0.5", label: "last 10 years" }, { value: "1.0", label: "within last 5 years" }] }, { id: 46, labels: [{ value: "0.0", label: "never" }, { value: "0.3", label: "once" }, { value: "0.7", label: "at least 6 times" }, { value: "1.0", label: "annually" }] }, { id: 57, labels: [{ value: "0.0", label: "never" }, { value: "0.3", label: "once" }, { value: "0.7", label: "at least 6 times" }, { value: "1.0", label: "annually" }] }, { id: 92, labels: [{ value: "0.0", label: "never" }, { value: "0.3", label: "once" }, { value: "0.7", label: "at least 6 times" }, { value: "1.0", label: "annually" }] }, { id: 99, labels: [{ value: "0.0", label: "never" }, { value: "0.3", label: "once" }, { value: "0.7", label: "at least 6 times" }, { value: "1.0", label: "annually" }] }, { id: 150, labels: [{ value: "Low income", label: "Low income", inc: 0 }, { value: "Lower middle income", label: "Lower middle income", inc: 1 }, { value: "Upper middle income", label: "Upper middle income", inc: 2 }, { value: "High income", label: "High income", inc: 3 }] }, { id: 7, labels: [{ value: "0.0", label: "not adopted" }, { value: "1.0", label: "adopted" }] }];function getAPIGeography($store) {
   // console.log('domains.auth.getUserInfos')
   var config = {
     headers: {
@@ -30727,7 +29866,7 @@ var specificIndicators = [{ id: 96, labels: [{ value: "0.0", label: "no" }, { va
     }
   };
 
-  return __WEBPACK_IMPORTED_MODULE_3_axios___default.a.get({"api_url":"https://ocde.wedodata.fr/paris21_api/"}.api_url + 'getGeography.php?rand=', config).then(function (response) {
+  return __WEBPACK_IMPORTED_MODULE_3_axios___default.a.get({"api_url":"https://ocde.wedodata.fr/paris21_api/","datafile_url":"https://ocde.wedodata.fr/paris21_admin/API/file.csv"}.api_url + 'getGeography.php?rand=', config).then(function (response) {
     var tmpArray = response.data;
 
     var tmpGeography = [];
@@ -30776,7 +29915,7 @@ function getAPIGeoItemData($store, geoID) {
   if ($store.DBGeographyObj[geoID].region_code !== '' && $store.DBGeoItems[$store.DBGeographyObj[geoID].region_code] === undefined) geosIDSList.push($store.DBGeographyObj[geoID].region_code);
   if ($store.DBGeoItems['1'] === undefined) geosIDSList.push('1');
 
-  return __WEBPACK_IMPORTED_MODULE_3_axios___default.a.get({"api_url":"https://ocde.wedodata.fr/paris21_api/"}.api_url + 'getGeoItemData.php?geoIDSList=' + geosIDSList, config).then(function (response) {
+  return __WEBPACK_IMPORTED_MODULE_3_axios___default.a.get({"api_url":"https://ocde.wedodata.fr/paris21_api/","datafile_url":"https://ocde.wedodata.fr/paris21_admin/API/file.csv"}.api_url + 'getGeoItemData.php?geoIDSList=' + geosIDSList, config).then(function (response) {
     var tmpArray = response.data;
 
     var geographies = {};
@@ -30842,7 +29981,7 @@ function getAPIGeoItemsData($store) {
     }
   };
 
-  return __WEBPACK_IMPORTED_MODULE_3_axios___default.a.get({"api_url":"https://ocde.wedodata.fr/paris21_api/"}.api_url + 'getGeoItemsData.php', config).then(function (response) {
+  return __WEBPACK_IMPORTED_MODULE_3_axios___default.a.get({"api_url":"https://ocde.wedodata.fr/paris21_api/","datafile_url":"https://ocde.wedodata.fr/paris21_admin/API/file.csv"}.api_url + 'getGeoItemsData.php', config).then(function (response) {
     var tmpArray = response.data;
 
     var geographies = {};
@@ -30908,7 +30047,7 @@ function getAPIIndicatorItemData($store, indicatorID) {
     }
   };
 
-  return __WEBPACK_IMPORTED_MODULE_3_axios___default.a.get({"api_url":"https://ocde.wedodata.fr/paris21_api/"}.api_url + 'getIndicatorItemData.php?indicatorID=' + indicatorID, config).then(function (response) {
+  return __WEBPACK_IMPORTED_MODULE_3_axios___default.a.get({"api_url":"https://ocde.wedodata.fr/paris21_api/","datafile_url":"https://ocde.wedodata.fr/paris21_admin/API/file.csv"}.api_url + 'getIndicatorItemData.php?indicatorID=' + indicatorID, config).then(function (response) {
     var tmpArray = response.data;
 
     var datavaluesObj = {};
@@ -30951,7 +30090,7 @@ function getGeoGroups($store, indicatorID) {
   };
 
   var randNb = Math.round(Math.random() * 1000000);
-  return __WEBPACK_IMPORTED_MODULE_3_axios___default.a.get({"api_url":"https://ocde.wedodata.fr/paris21_api/"}.api_url + 'getGeoGroups.php', config).then(function (response) {
+  return __WEBPACK_IMPORTED_MODULE_3_axios___default.a.get({"api_url":"https://ocde.wedodata.fr/paris21_api/","datafile_url":"https://ocde.wedodata.fr/paris21_admin/API/file.csv"}.api_url + 'getGeoGroups.php', config).then(function (response) {
     $store.DBGeoGroups = response.data;
     return true;
   }).catch(function (err) {
@@ -30969,7 +30108,7 @@ function getIndicatorsMethodo($store) {
   };
 
   var randNb = Math.round(Math.random() * 1000000);
-  return __WEBPACK_IMPORTED_MODULE_3_axios___default.a.get({"api_url":"https://ocde.wedodata.fr/paris21_api/"}.api_url + 'getIndicatorsMethodo.php', config).then(function (response) {
+  return __WEBPACK_IMPORTED_MODULE_3_axios___default.a.get({"api_url":"https://ocde.wedodata.fr/paris21_api/","datafile_url":"https://ocde.wedodata.fr/paris21_admin/API/file.csv"}.api_url + 'getIndicatorsMethodo.php', config).then(function (response) {
     $store.DBIndicatorsMethodo = response.data;
     return true;
   }).catch(function (err) {
@@ -31034,6 +30173,49 @@ module.exports = "data:image/svg+xml;base64,PHN2ZyBpZD0iaWNvbi1pbnZlc3RtZW50IiB4
 
 /***/ }),
 
+/***/ "ZqnY":
+/***/ (function(module, exports, __webpack_require__) {
+
+var escape = __webpack_require__("kxFB");
+exports = module.exports = __webpack_require__("FZ+f")(false);
+// imports
+
+
+// module
+exports.push([module.i, "@font-face{font-family:montserratbold;src:url(" + escape(__webpack_require__("KoCO")) + ") format(\"woff2\"),url(" + escape(__webpack_require__("cqiT")) + ") format(\"woff\");font-weight:400;font-style:normal}@font-face{font-family:montserratitalic;src:url(" + escape(__webpack_require__("hPgA")) + ") format(\"woff2\"),url(" + escape(__webpack_require__("hnDx")) + ") format(\"woff\");font-weight:400;font-style:normal}@font-face{font-family:montserratregular;src:url(" + escape(__webpack_require__("UBI+")) + ") format(\"woff2\"),url(" + escape(__webpack_require__("dL9s")) + ") format(\"woff\");font-weight:400;font-style:normal}@font-face{font-family:roboto_condensedbold;src:url(" + escape(__webpack_require__("CCFM")) + ") format(\"woff2\"),url(" + escape(__webpack_require__("CCFM")) + ") format(\"woff\");font-weight:400;font-style:normal}.page_main{position:relative}.page_main .main_wrapper{position:relative;width:100%}.page_main .main_title{font-weight:400;font-size:22px;color:#2f2f2f;margin:30px 0}.page_main .main_blocks{width:100%;position:relative;height:540px;margin-bottom:10px}.page_main .main_blocks[data-selector-expanded=geography] .selector[data-selector=indicator]{left:10px}.page_main .main_blocks[data-selector-expanded=network] .selector[data-selector=indicator]{left:500px}.page_main .home_block{width:48%;background:-webkit-gradient(linear,left top,left bottom,from(#fff),to(hsla(0,0%,100%,0)));background:linear-gradient(180deg,#fff 0,hsla(0,0%,100%,0));filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=\"#ffffff\",endColorstr=\"rgb(0, 255, 255)\",GradientType=0);display:inline-block;height:159px;vertical-align:top;text-align:center;color:#2f2f2f}.page_main .home_block[data-block=about]{margin-right:2%}.page_main .home_block .block_subtitle{font-weight:300;font-size:18px;margin-top:20px}.page_main .home_block .block_title{font-size:18px;font-family:montserratbold}.page_main .home_block .block_bt{text-decoration:none;margin-top:20px;display:inline-block;vertical-align:top;width:150px;height:40px;border-radius:40px;background:#fff;line-height:36px;font-size:20px;color:#2f2f2f;border:1px solid #2f2f2f;position:relative;cursor:pointer}.page_main .home_block .block_bt:after{content:\"\";position:absolute;top:50%;left:50%;-webkit-transform:translate(-50%,-50%);transform:translate(-50%,-50%);background:url(" + escape(__webpack_require__("TvJ4")) + ");background-size:100% 100%;width:20px;height:20px}.page_main .home_block .block_bt:hover{background:#2f2f2f!important;border-color:#2f2f2f!important;color:#fff!important}.page_main .home_block .block_bt:hover:after{background:url(" + escape(__webpack_require__("2asr")) + ");background-size:100% 100%}#Home .selector[data-state=expanded][data-selector=indicator],#Home .selector[data-state=expanded][data-selector=indicator] .indicator_sidebar{min-height:526px}#Home .page_main{position:relative;min-height:920px;margin-bottom:40px}", ""]);
+
+// exports
+
+
+/***/ }),
+
+/***/ "a2iW":
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__("ZqnY");
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__("rjj0")("9e31fa18", content, false, {"sourceMap":false});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../node_modules/css-loader/index.js?{\"sourceMap\":false,\"minimize\":true,\"importLoaders\":1,\"alias\":{\"/assets\":\"/Applications/MAMP/htdocs/OCDE_Paris21/assets\",\"/static\":\"/Applications/MAMP/htdocs/OCDE_Paris21/static\"}}!../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-2a183b29\",\"scoped\":false,\"hasInlineConfig\":true}!../node_modules/sass-loader/lib/loader.js?{\"sourceMap\":false}!../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue", function() {
+     var newContent = require("!!../node_modules/css-loader/index.js?{\"sourceMap\":false,\"minimize\":true,\"importLoaders\":1,\"alias\":{\"/assets\":\"/Applications/MAMP/htdocs/OCDE_Paris21/assets\",\"/static\":\"/Applications/MAMP/htdocs/OCDE_Paris21/static\"}}!../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-2a183b29\",\"scoped\":false,\"hasInlineConfig\":true}!../node_modules/sass-loader/lib/loader.js?{\"sourceMap\":false}!../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+
 /***/ "akPR":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -31072,6 +30254,71 @@ module.exports = "data:image/svg+xml;base64,PHN2ZyBpZD0iaGVhZGVyLXNoYXBlIiB4bWxu
 /***/ (function(module, exports) {
 
 module.exports = "data:image/svg+xml;base64,PHN2ZyBpZD0iaWNvbi12YWx1YXRpb24iIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgdmlld0JveD0iMCAwIDQwIDQwIj4KICA8dGl0bGU+aWNvbi12YWx1YXRpb248L3RpdGxlPgogIDxwYXRoIGQ9Ik0xOS4wOTM4LDEyLjU2MjRhLjk0NzYuOTQ3NiwwLDAsMSwuNTQ2OS0uNSwxLjA2ODQsMS4wNjg0LDAsMCwxLC43MTg4LDAsLjk1Ljk1LDAsMCwxLC41NDY5LjVsMi4wMzEzLDQuMTI1LDQuNTYyNS42NTYzYS45NTEzLjk1MTMsMCwwLDEsLjY0MDYuMzc1LDEuMDQ3LDEuMDQ3LDAsMCwxLC4yMTg4LjY4NzUuOTYwNS45NjA1LDAsMCwxLS4yOTY5LjY1NjNMMjQuNzUsMjIuMjgxMWwuNzgxMyw0LjU2MjVhLjk5MzYuOTkzNiwwLDAsMS0uMTQwNi43MDMxLjkxODMuOTE4MywwLDAsMS0uNTc4MS40MjE5Ljk2MzQuOTYzNCwwLDAsMS0uNzE4Ny0uMDkzN0wyMCwyNS43NWwtNC4wOTM4LDIuMTI1YS45NjQuOTY0LDAsMCwxLS43MTg3LjA5MzguOTE1OC45MTU4LDAsMCwxLS41NzgxLS40MjE5Ljk4MzguOTgzOCwwLDAsMS0uMTQwNi0uNzAzMWwuNzgxMy00LjU2MjUtMy4zMTI1LTMuMjE4N2EuOTU2My45NTYzLDAsMCwxLS4yOTY5LS42NTYyLDEuMDQxNiwxLjA0MTYsMCwwLDEsLjIxODgtLjY4NzUuOTQ5Mi45NDkyLDAsMCwxLC42NDA2LS4zNzVsNC41NjI1LS42NTYyWiIgZmlsbD0iIzE1OUU5RCIvPgo8L3N2Zz4K"
+
+/***/ }),
+
+/***/ "bOdI":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+exports.__esModule = true;
+
+var _defineProperty = __webpack_require__("C4MV");
+
+var _defineProperty2 = _interopRequireDefault(_defineProperty);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = function (obj, key, value) {
+  if (key in obj) {
+    (0, _defineProperty2.default)(obj, key, {
+      value: value,
+      enumerable: true,
+      configurable: true,
+      writable: true
+    });
+  } else {
+    obj[key] = value;
+  }
+
+  return obj;
+};
+
+/***/ }),
+
+/***/ "c/Tr":
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = { "default": __webpack_require__("5zde"), __esModule: true };
+
+/***/ }),
+
+/***/ "cOIw":
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__("9b4D");
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__("rjj0")("cbe69478", content, false, {"sourceMap":false});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../node_modules/css-loader/index.js?{\"sourceMap\":false,\"minimize\":true,\"importLoaders\":1,\"alias\":{\"/assets\":\"/Applications/MAMP/htdocs/OCDE_Paris21/assets\",\"/static\":\"/Applications/MAMP/htdocs/OCDE_Paris21/static\"}}!../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-49182860\",\"scoped\":false,\"hasInlineConfig\":true}!../node_modules/sass-loader/lib/loader.js?{\"sourceMap\":false}!../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./networkSelector2.vue", function() {
+     var newContent = require("!!../node_modules/css-loader/index.js?{\"sourceMap\":false,\"minimize\":true,\"importLoaders\":1,\"alias\":{\"/assets\":\"/Applications/MAMP/htdocs/OCDE_Paris21/assets\",\"/static\":\"/Applications/MAMP/htdocs/OCDE_Paris21/static\"}}!../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-49182860\",\"scoped\":false,\"hasInlineConfig\":true}!../node_modules/sass-loader/lib/loader.js?{\"sourceMap\":false}!../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./networkSelector2.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
 
 /***/ }),
 
@@ -31262,6 +30509,7 @@ module.exports = "data:image/svg+xml;base64,PHN2ZyBpZD0iaWNvbi1pbnB1dF9jbG9zZXNl
 //
 //
 //
+//
 
 
 
@@ -31349,6 +30597,12 @@ __WEBPACK_IMPORTED_MODULE_1_vue__["default"].use(__WEBPACK_IMPORTED_MODULE_5_vue
             default: function _default() {
                 return '';
             }
+        },
+        indicatorID: {
+            type: String,
+            default: function _default() {
+                return '';
+            }
         }
     },
     data: function data() {
@@ -31422,6 +30676,14 @@ __WEBPACK_IMPORTED_MODULE_1_vue__["default"].use(__WEBPACK_IMPORTED_MODULE_5_vue
             this.typedGeographies['1-regions'] = this.tmpTypedGeographiesObj['1-regions'];
             this.typedGeographies['2-subregions'] = this.tmpTypedGeographiesObj['2-subregions'];
             if (this.state != "soloregion" && this.state != "multiregion") this.typedGeographies['3-countries'] = this.tmpTypedGeographiesObj['3-countries'];
+
+            if (this.indicatorID == "39") {
+                delete this.typedGeographies['1-regions'];
+                delete this.typedGeographies['2-subregions'];
+                this.typedGeographies['3-countries'].listGeos = __WEBPACK_IMPORTED_MODULE_3_underscore__["_"].filter(this.typedGeographies['3-countries'].listGeos, function (geo) {
+                    return geo.region == "Africa";
+                });
+            }
 
             this.modalSelectedGeographies = this.selectedGeographies;
             this.dataLoaded = true;
@@ -31607,37 +30869,26 @@ module.exports = "data:image/svg+xml;base64,PHN2ZyBpZD0iaWNvbi1pbnZlc3RtZW50IiB4
 
 /***/ }),
 
-/***/ "duaF":
-/***/ (function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__("FNm0");
-if(typeof content === 'string') content = [[module.i, content, '']];
-if(content.locals) module.exports = content.locals;
-// add the styles to the DOM
-var update = __webpack_require__("rjj0")("1d4096a8", content, false, {"sourceMap":false});
-// Hot Module Replacement
-if(false) {
- // When the styles change, update the <style> tags
- if(!content.locals) {
-   module.hot.accept("!!../node_modules/css-loader/index.js?{\"sourceMap\":false,\"minimize\":true,\"importLoaders\":1,\"alias\":{\"/assets\":\"/Applications/MAMP/htdocs/OCDE_Paris21/assets\",\"/static\":\"/Applications/MAMP/htdocs/OCDE_Paris21/static\"}}!../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-c58c4450\",\"scoped\":false,\"hasInlineConfig\":true}!../node_modules/sass-loader/lib/loader.js?{\"sourceMap\":false}!../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./geovaluesTableCell.vue", function() {
-     var newContent = require("!!../node_modules/css-loader/index.js?{\"sourceMap\":false,\"minimize\":true,\"importLoaders\":1,\"alias\":{\"/assets\":\"/Applications/MAMP/htdocs/OCDE_Paris21/assets\",\"/static\":\"/Applications/MAMP/htdocs/OCDE_Paris21/static\"}}!../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-c58c4450\",\"scoped\":false,\"hasInlineConfig\":true}!../node_modules/sass-loader/lib/loader.js?{\"sourceMap\":false}!../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./geovaluesTableCell.vue");
-     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-     update(newContent);
-   });
- }
- // When the module is disposed, remove the <style> tags
- module.hot.dispose(function() { update(); });
-}
-
-/***/ }),
-
 /***/ "f2df":
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__.p + "img/logo-wedodata-black.3907ced.svg";
+
+/***/ }),
+
+/***/ "fBQ2":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var $defineProperty = __webpack_require__("evD5");
+var createDesc = __webpack_require__("X8DO");
+
+module.exports = function (object, index, value) {
+  if (index in object) $defineProperty.f(object, index, createDesc(0, value));
+  else object[index] = value;
+};
+
 
 /***/ }),
 
@@ -32634,6 +31885,51 @@ var cleanDiacritics = __webpack_require__("FWCK");
 module.exports = function slugify(str) {
   return trim(dasherize(cleanDiacritics(str).replace(/[^\w\s-]/g, '-').toLowerCase()), '-');
 };
+
+
+/***/ }),
+
+/***/ "qyJz":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var ctx = __webpack_require__("+ZMJ");
+var $export = __webpack_require__("kM2E");
+var toObject = __webpack_require__("sB3e");
+var call = __webpack_require__("msXi");
+var isArrayIter = __webpack_require__("Mhyx");
+var toLength = __webpack_require__("QRG4");
+var createProperty = __webpack_require__("fBQ2");
+var getIterFn = __webpack_require__("3fs2");
+
+$export($export.S + $export.F * !__webpack_require__("dY0y")(function (iter) { Array.from(iter); }), 'Array', {
+  // 22.1.2.1 Array.from(arrayLike, mapfn = undefined, thisArg = undefined)
+  from: function from(arrayLike /* , mapfn = undefined, thisArg = undefined */) {
+    var O = toObject(arrayLike);
+    var C = typeof this == 'function' ? this : Array;
+    var aLen = arguments.length;
+    var mapfn = aLen > 1 ? arguments[1] : undefined;
+    var mapping = mapfn !== undefined;
+    var index = 0;
+    var iterFn = getIterFn(O);
+    var length, result, step, iterator;
+    if (mapping) mapfn = ctx(mapfn, aLen > 2 ? arguments[2] : undefined, 2);
+    // if object isn't iterable or it's array with default iterator - use simple case
+    if (iterFn != undefined && !(C == Array && isArrayIter(iterFn))) {
+      for (iterator = iterFn.call(O), result = new C(); !(step = iterator.next()).done; index++) {
+        createProperty(result, index, mapping ? call(iterator, mapfn, [step.value, index], true) : step.value);
+      }
+    } else {
+      length = toLength(O.length);
+      for (result = new C(length); length > index; index++) {
+        createProperty(result, index, mapping ? mapfn(O[index], index) : O[index]);
+      }
+    }
+    result.length = index;
+    return result;
+  }
+});
 
 
 /***/ }),
@@ -34355,63 +33651,6 @@ exports.push([module.i, "@font-face{font-family:montserratbold;src:url(" + escap
 
 /***/ }),
 
-/***/ "rkKo":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_babelrc_false_cacheDirectory_false_presets_env_modules_false_targets_browsers_1_last_2_versions_not_ie_8_stage_2_plugins_transform_vue_jsx_transform_runtime_node_modules_vue_loader_lib_selector_type_script_index_0_geovaluesTableCell_vue__ = __webpack_require__("/gHq");
-/* unused harmony namespace reexport */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_c58c4450_hasScoped_false_transformToRequire_video_src_source_src_object_src_embed_src_preserveWhitespace_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_geovaluesTableCell_vue__ = __webpack_require__("8Ipu");
-var disposed = false
-function injectStyle (ssrContext) {
-  if (disposed) return
-  __webpack_require__("duaF")
-}
-var normalizeComponent = __webpack_require__("VU/8")
-/* script */
-
-
-/* template */
-
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = injectStyle
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __WEBPACK_IMPORTED_MODULE_0__babel_loader_babelrc_false_cacheDirectory_false_presets_env_modules_false_targets_browsers_1_last_2_versions_not_ie_8_stage_2_plugins_transform_vue_jsx_transform_runtime_node_modules_vue_loader_lib_selector_type_script_index_0_geovaluesTableCell_vue__["a" /* default */],
-  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_c58c4450_hasScoped_false_transformToRequire_video_src_source_src_object_src_embed_src_preserveWhitespace_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_geovaluesTableCell_vue__["a" /* default */],
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "components/geovaluesTableCell.vue"
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-c58c4450", Component.options)
-  } else {
-    hotAPI.reload("data-v-c58c4450", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-/* harmony default export */ __webpack_exports__["a"] = (Component.exports);
-
-
-/***/ }),
-
 /***/ "twuR":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -34614,6 +33853,7 @@ var render = function() {
               "div",
               { staticClass: "sidebar_input" },
               [
+                _vm._m(1),
                 _c("div", { staticClass: "input_label" }, [
                   _vm._v("Search a region, country, subregion...")
                 ]),
@@ -34889,6 +34129,24 @@ var staticRenderFns = [
         _vm._v("region, country or subregion")
       ])
     ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "input_disclaimer" }, [
+      _vm._v("Country classifications follow the "),
+      _c(
+        "a",
+        {
+          attrs: {
+            href: "https://unstats.un.org/unsd/methodology/m49/",
+            target: "_blank"
+          }
+        },
+        [_vm._v("UN M49 classification")]
+      )
+    ])
   }
 ]
 render._withStripped = true
@@ -34919,13 +34177,6 @@ module.exports = function escapeRegExp(str) {
   return makeString(str).replace(/([.*+?^=!:${}()|[\]\/\\])/g, '\\$1');
 };
 
-
-/***/ }),
-
-/***/ "wsHT":
-/***/ (function(module, exports) {
-
-module.exports = "data:image/svg+xml;base64,PHN2ZyBpZD0idGljay1kYXRhIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxOCAxOCI+CiAgPHRpdGxlPnRpY2stZGF0YTwvdGl0bGU+CiAgPHBvbHlsaW5lIHBvaW50cz0iMi42IDguMTAzIDcuNDY0IDEyLjk2OCAxNS40IDUuMDMyIiBmaWxsPSJub25lIiBzdHJva2U9IiMxNDllOWQiIHN0cm9rZS1taXRlcmxpbWl0PSIxMCIgc3Ryb2tlLXdpZHRoPSIzIi8+Cjwvc3ZnPgo="
 
 /***/ }),
 
@@ -35025,64 +34276,6 @@ module.exports = function trim(str, characters) {
     }
   }
 });
-
-/***/ }),
-
-/***/ "zeuv":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_babelrc_false_cacheDirectory_false_presets_env_modules_false_targets_browsers_1_last_2_versions_not_ie_8_stage_2_plugins_transform_vue_jsx_transform_runtime_node_modules_vue_loader_lib_selector_type_script_index_0_vue__ = __webpack_require__("YtPR");
-/* empty harmony namespace reexport */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_102ebe06_hasScoped_false_transformToRequire_video_src_source_src_object_src_embed_src_preserveWhitespace_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_vue__ = __webpack_require__("GQap");
-var disposed = false
-function injectStyle (ssrContext) {
-  if (disposed) return
-  __webpack_require__("6yHB")
-}
-var normalizeComponent = __webpack_require__("VU/8")
-/* script */
-
-
-/* template */
-
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = injectStyle
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __WEBPACK_IMPORTED_MODULE_0__babel_loader_babelrc_false_cacheDirectory_false_presets_env_modules_false_targets_browsers_1_last_2_versions_not_ie_8_stage_2_plugins_transform_vue_jsx_transform_runtime_node_modules_vue_loader_lib_selector_type_script_index_0_vue__["a" /* default */],
-  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_102ebe06_hasScoped_false_transformToRequire_video_src_source_src_object_src_embed_src_preserveWhitespace_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_vue__["a" /* default */],
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "pages/country/_.vue"
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-102ebe06", Component.options)
-  } else {
-    hotAPI.reload("data-v-102ebe06", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-/* harmony default export */ __webpack_exports__["default"] = (Component.exports);
-
 
 /***/ }),
 

@@ -181,7 +181,7 @@
                             {{selectedIndicatorObj.methodo}}
                         </div>
                     </div>
-                    <a class="moreinfo_link" v-if="selectedIndicatorObj.datasource == 'worldbank' && selectedIndicatorObj.methodo_link !== ''" :data-source="selectedIndicatorObj.datasource" target="_blank" :href="selectedIndicatorObj.methodo_link">More information</a>
+                    <a class="moreinfo_link" v-if="selectedIndicatorObj.methodo_link !== ''" data-source="extlink" target="_blank" :href="selectedIndicatorObj.methodo_link">More information</a>
                     <a class="moreinfo_link" v-if="selectedIndicatorObj.datasource != 'worldbank' && indicatorMethodoObj !== undefined && indicatorMethodoObj.interpretation !== undefined" :data-source="selectedIndicatorObj.datasource" @click="displayMoreinfoModal = !displayMoreinfoModal">More information</a>
                 </div>
             </div>
@@ -203,7 +203,7 @@
                 <a class="appmodal_closebt" @click="displayGeoModal = !displayGeoModal"></a>
             </div>
             <div class="appmodal_content">
-                <geographySelector :mainColor="'red'" :mapColor="'grey'" :mapID="'ModaledGeographyMap'" :state="'expanded'" :modaled="true" :parentSelected="'default'" :selectedGeographies="selectedGeographies" :isMultipleSelection="true" @selectGeographiesFromModal="updateModaledGeographies()" :hasTooltipValues="false" :indicatorType="selectedIndicatorObj.dataviz_type"></geographySelector>
+                <geographySelector :mainColor="'red'" :mapColor="'grey'" :mapID="'ModaledGeographyMap'" :state="'expanded'" :modaled="true" :parentSelected="'default'" :selectedGeographies="selectedGeographies" :isMultipleSelection="true" @selectGeographiesFromModal="updateModaledGeographies()" :hasTooltipValues="false" :indicatorType="selectedIndicatorObj.dataviz_type" :indicatorID="selectedIndicator"></geographySelector>
             </div>
         </div>
 
@@ -1770,7 +1770,7 @@ $geosSingleColMargin: 10px;
                             width: 20px;
                             height: 20px;
                         }
-                        &[data-source="worldbank"]{
+                        &[data-source="extlink"]{
                             &:after{
                                display: block; 
                             }   

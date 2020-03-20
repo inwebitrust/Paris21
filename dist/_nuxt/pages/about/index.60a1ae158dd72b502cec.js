@@ -71,7 +71,29 @@ var render = function() {
                 }
               })
             ]),
-            _vm._m(2)
+            _c(
+              "div",
+              {
+                staticClass: "modal_content",
+                attrs: { "data-type": "download" }
+              },
+              [
+                _c("div", { staticClass: "download_item" }, [
+                  _c("div", { staticClass: "item_title" }, [_vm._v("DATASET")]),
+                  _c("div", { staticClass: "item_text" }),
+                  _c(
+                    "a",
+                    {
+                      staticClass: "download_bt",
+                      attrs: { href: _vm.datafileURL, target: "_blank" }
+                    },
+                    [_vm._v("Download (.csv)")]
+                  )
+                ]),
+                _vm._m(2),
+                _vm._m(3)
+              ]
+            )
           ])
         : _vm._e(),
       _vm.type == "moreinfo"
@@ -362,66 +384,38 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      { staticClass: "modal_content", attrs: { "data-type": "download" } },
-      [
-        _c("div", { staticClass: "download_item" }, [
-          _c("div", { staticClass: "item_title" }, [_vm._v("DATASET")]),
-          _c("div", { staticClass: "item_text" }, [
-            _vm._v(
-              "\n          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.\n        "
-            )
-          ]),
-          _c(
-            "a",
-            {
-              staticClass: "download_bt",
-              attrs: {
-                href: "http://ocde.wedodata.fr/paris21_admin/API/file.csv",
-                target: "_blank"
-              }
-            },
-            [_vm._v("Download (.csv)")]
-          )
-        ]),
-        _c("div", { staticClass: "download_item" }, [
-          _c("div", { staticClass: "item_title" }, [_vm._v("CODEBOOK")]),
-          _c("div", { staticClass: "item_text" }, [
-            _vm._v(
-              "\n          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.\n        "
-            )
-          ]),
-          _c(
-            "a",
-            {
-              staticClass: "download_bt",
-              attrs: { href: "/data/codebook.xlsx", target: "_blank" }
-            },
-            [_vm._v("Download (.xls)")]
-          )
-        ]),
-        _c("div", { staticClass: "download_item" }, [
-          _c("div", { staticClass: "item_title" }, [_vm._v("METHODOLOGY")]),
-          _c("div", { staticClass: "item_text" }, [
-            _vm._v(
-              "\n          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.\n        "
-            )
-          ]),
-          _c(
-            "a",
-            {
-              staticClass: "download_bt",
-              attrs: {
-                href: "/data/PARIS21_Indicators_Methodological_Notes.xlsx",
-                target: "_blank"
-              }
-            },
-            [_vm._v("Download (.xls)")]
-          )
-        ])
-      ]
-    )
+    return _c("div", { staticClass: "download_item" }, [
+      _c("div", { staticClass: "item_title" }, [_vm._v("CODEBOOK")]),
+      _c("div", { staticClass: "item_text" }),
+      _c(
+        "a",
+        {
+          staticClass: "download_bt",
+          attrs: { href: "/data/codebook.xlsx", target: "_blank" }
+        },
+        [_vm._v("Download (.xls)")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "download_item" }, [
+      _c("div", { staticClass: "item_title" }, [_vm._v("METHODOLOGY")]),
+      _c("div", { staticClass: "item_text" }),
+      _c(
+        "a",
+        {
+          staticClass: "download_bt",
+          attrs: {
+            href: "/data/PARIS21_Indicators_Methodological_Notes.xlsx",
+            target: "_blank"
+          }
+        },
+        [_vm._v("Download (.xls)")]
+      )
+    ])
   }
 ]
 render._withStripped = true
@@ -459,6 +453,49 @@ exports.push([module.i, "@font-face{font-family:montserratbold;src:url(" + escap
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_paris21Header_vue__ = __webpack_require__("mvsm");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_paris21Footer_vue__ = __webpack_require__("3wr8");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_paris21Modal_vue__ = __webpack_require__("cU99");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -697,17 +734,17 @@ var staticRenderFns = [
           ]),
           _c("p", [
             _vm._v(
-              "The Sustainable Development Goals created an unprecedented demand for better data to advance sustainable development. Yet many countries, especially low-income and fragile states, lack the statistical capacity to report on the 232 indicators in the framework."
+              "National statistics are an essential component of policy making. They provide the evidence required to improve the lives of citizens, monitor results and hold governments accountable. Recent international agreements such as the 2030 Agenda for Sustainable Development and Agenda 2063 for Africa recognise the central role of strong statistics and place a significant emphasis on goals, indicators and national reporting. "
             )
           ]),
           _c("p", [
             _vm._v(
-              "Although some countries have seen improvements in statistical capacity in recent decades, the results have not been universal. Today, a third of national statistical offices today feel that statistical capacity development programmes are not meeting their needs. Capacity development in statistics needs to move away from short-term, output-related results, towards sustainable, inclusive and co-creative approaches. "
+              "At the same time, technological advances create a wealth of new data sources, some of which have the potential to enrich national statistical systems and enable more effective and responsive policy making. Although some countries have seen improvements in statistical capacity in recent decades, the results have not been universal. Today, a third of national statistical offices feel that statistical capacity development programmes are not meeting their needs."
             )
           ]),
           _c("p", [
             _vm._v(
-              "There is an urgent need to empower countries to track their progress towards more advanced statistical capacities, and to enable donors to invest in more and better data for development. "
+              "There is an urgent need to empower countries to track their progress towards more advanced statistical capacities, and to enable donors to invest in more and better data for development. Moreover, countries should use common benchmarks to evaluate their past, ongoing or planned NSDS processes, and thus improve their data planning processes."
             )
           ]),
           _c("p", [
@@ -715,6 +752,7 @@ var staticRenderFns = [
               "PARIS21’s Statistical Capacity Monitor was launched in April 2019 to describe global, regional and national statistical capacity trends. The Monitor features around 100 indicators on statistical capacity, and an intuitive interactive interface makes geographic and sectoral comparison, benchmarking and analysis quick and simple."
             )
           ]),
+          _c("p", [_vm._v("The value-added of the platform is threefold:")]),
           _c("ul", [
             _c("li", [
               _c("span", { staticClass: "bolder" }, [_vm._v("Analysis:")]),
@@ -770,7 +808,7 @@ var staticRenderFns = [
           ]),
           _c("p", [
             _vm._v(
-              "Most of the indicators have an annual periodicity. Users can visualise the data and cross-tabulate different types of indicators. New indicators will be added and existing ones updated on an annual basis."
+              "Most of the indicators have an annual periodicity. Users can visualise the data and cross-tabulate different types of indicators."
             )
           ]),
           _c("br"),
@@ -782,6 +820,90 @@ var staticRenderFns = [
               "Anybody interested in understanding and analysing how statistical capacity changes over time, and why. "
             )
           ]),
+          _c("p", [_vm._v("Specific user groups include:")]),
+          _c(
+            "table",
+            {
+              staticClass: "about_table",
+              attrs: { cellpadding: "0", cellspacing: "0" }
+            },
+            [
+              _c("tr", [
+                _c("td", [
+                  _c("span", { staticClass: "bigger" }, [
+                    _vm._v("National Statistical Offices")
+                  ]),
+                  _c("br"),
+                  _vm._v(
+                    "\n              Statistical Authorities\n            "
+                  )
+                ]),
+                _c("td", [
+                  _c("span", { staticClass: "bigger" }, [
+                    _vm._v("Government (agencies)")
+                  ]),
+                  _c("br"),
+                  _vm._v("\n              Ministries of Planning"),
+                  _c("br"),
+                  _vm._v("\n              Ministries of Finance"),
+                  _c("br"),
+                  _vm._v(
+                    "\n              Line ministries or public agencies\n            "
+                  )
+                ]),
+                _c("td", [
+                  _c("span", { staticClass: "bigger" }, [_vm._v("Academia")]),
+                  _c("br"),
+                  _vm._v("\n              Universities"),
+                  _c("br"),
+                  _vm._v("\n              Research institutes"),
+                  _c("br"),
+                  _vm._v(
+                    "\n              Statistical training institutes\n            "
+                  )
+                ])
+              ]),
+              _c("tr", [
+                _c("td", [
+                  _c("span", { staticClass: "bigger" }, [
+                    _vm._v("Donor community")
+                  ]),
+                  _c("br"),
+                  _vm._v("\n              Multilateral organisations"),
+                  _c("br"),
+                  _vm._v("\n              Regional banks"),
+                  _c("br"),
+                  _vm._v(
+                    "\n              National Development cooperation agencies"
+                  ),
+                  _c("br"),
+                  _vm._v("\n              Private foundations\n            ")
+                ]),
+                _c("td", [
+                  _c("span", { staticClass: "bigger" }, [
+                    _vm._v("Civil Society")
+                  ]),
+                  _vm._v("\n              NGOs"),
+                  _c("br"),
+                  _vm._v("\n              Think Tanks"),
+                  _c("br"),
+                  _vm._v(
+                    "\n              Civil Society Organisations\n            "
+                  )
+                ]),
+                _c("td", [
+                  _c("span", { staticClass: "bigger" }, [_vm._v("Media")]),
+                  _c("br"),
+                  _vm._v("\n              Journalists\n            ")
+                ])
+              ]),
+              _c("tr", [
+                _c("td", { staticClass: "centered", attrs: { colspan: "3" } }, [
+                  _c("span", { staticClass: "bigger" }, [_vm._v("Citizens")])
+                ])
+              ])
+            ]
+          ),
           _c("br"),
           _c("p", [
             _c("span", { staticClass: "bolder" }, [
@@ -923,7 +1045,7 @@ var staticRenderFns = [
           _c("p", [_c("span", { staticClass: "bolder" }, [_vm._v("Updates")])]),
           _c("p", [
             _vm._v(
-              "The PARIS21 indicators will be updated on a bi-annual rhythm. For a detailed dissemination calendar, please click "
+              "New indicators will be added and existing ones updated on an annual basis. For a detailed dissemination calendar, please click "
             ),
             _c(
               "a",
@@ -944,13 +1066,20 @@ var staticRenderFns = [
           ]),
           _c("p", [
             _vm._v(
-              "PARIS21 welcomes proposals of new indicators throughout the year. The proposals can be submitted "
+              "PARIS21 welcomes proposals of new indicators throughout the year. The proposals can be submitted via "
             ),
-            _c("a", { attrs: { href: "#", target: "_blank" } }, [
-              _vm._v("here")
-            ]),
+            _c(
+              "a",
+              {
+                attrs: {
+                  href: "mailto:contact@statisticalcapacitymonitor.org",
+                  target: "_blank"
+                }
+              },
+              [_vm._v("contact@statisticalcapacitymonitor.org")]
+            ),
             _vm._v(
-              ". Submitted indicators will be reviewed and validated every month by the PARIS21 team. In case of approval, you will be contacted for further information. To be included in the Statistical Capacity Monitor, the indicator will need to pass an external validation by our Task Team. "
+              ". Submitted indicators will be reviewed and validated every month by the PARIS21 team. In case of approval, you will be contacted for further information. To be included in the Statistical Capacity Monitor, the indicator will need to pass a validation process by our team and relevant experts."
             )
           ]),
           _c("p", [
@@ -963,9 +1092,13 @@ var staticRenderFns = [
               "For any request regarding specific indicators, statistical capacity trends or content-related enquiries, please contact:"
             ),
             _c("br"),
-            _c("a", { attrs: { href: "mailto:Julia.schmidt@oecd.org" } }, [
-              _vm._v("Julia.schmidt@oecd.org")
-            ])
+            _c(
+              "a",
+              {
+                attrs: { href: "mailto:contact@statisticalcapacitymonitor.org" }
+              },
+              [_vm._v("contact@statisticalcapacitymonitor.org")]
+            )
           ])
         ])
       ])
@@ -1027,7 +1160,7 @@ exports = module.exports = __webpack_require__("FZ+f")(false);
 
 
 // module
-exports.push([module.i, "@font-face{font-family:montserratbold;src:url(" + escape(__webpack_require__("KoCO")) + ") format(\"woff2\"),url(" + escape(__webpack_require__("cqiT")) + ") format(\"woff\");font-weight:400;font-style:normal}@font-face{font-family:montserratitalic;src:url(" + escape(__webpack_require__("hPgA")) + ") format(\"woff2\"),url(" + escape(__webpack_require__("hnDx")) + ") format(\"woff\");font-weight:400;font-style:normal}@font-face{font-family:montserratregular;src:url(" + escape(__webpack_require__("UBI+")) + ") format(\"woff2\"),url(" + escape(__webpack_require__("dL9s")) + ") format(\"woff\");font-weight:400;font-style:normal}@font-face{font-family:roboto_condensedbold;src:url(" + escape(__webpack_require__("CCFM")) + ") format(\"woff2\"),url(" + escape(__webpack_require__("CCFM")) + ") format(\"woff\");font-weight:400;font-style:normal}#AboutPage .page_main{background:#fff;margin-bottom:60px}.page_title{color:#ea6550;font-size:22px;margin-top:40px;border-bottom:2px solid #ea6550;padding:0 50px 10px;position:relative}.page_content{color:#2f2f2f;margin:20px 50px;padding-right:10px;overflow:auto;font-family:montserratregular;font-size:14px;text-align:left;line-height:20px;text-align:center}.page_content a{color:#ea6550;text-decoration:none;font-family:montserratbold;display:inline-block;border-bottom:2px solid #ea6550;line-height:16px}.page_content p{margin:20px 0;text-align:left}.page_content ul{text-align:left}.page_content .content_image{background:url(" + escape(__webpack_require__("uv/c")) + ") no-repeat 0 0;background-size:100% 100%;width:350px;height:350px;display:inline-block}.page_content .bolder{font-family:montserratbold}", ""]);
+exports.push([module.i, "@font-face{font-family:montserratbold;src:url(" + escape(__webpack_require__("KoCO")) + ") format(\"woff2\"),url(" + escape(__webpack_require__("cqiT")) + ") format(\"woff\");font-weight:400;font-style:normal}@font-face{font-family:montserratitalic;src:url(" + escape(__webpack_require__("hPgA")) + ") format(\"woff2\"),url(" + escape(__webpack_require__("hnDx")) + ") format(\"woff\");font-weight:400;font-style:normal}@font-face{font-family:montserratregular;src:url(" + escape(__webpack_require__("UBI+")) + ") format(\"woff2\"),url(" + escape(__webpack_require__("dL9s")) + ") format(\"woff\");font-weight:400;font-style:normal}@font-face{font-family:roboto_condensedbold;src:url(" + escape(__webpack_require__("CCFM")) + ") format(\"woff2\"),url(" + escape(__webpack_require__("CCFM")) + ") format(\"woff\");font-weight:400;font-style:normal}#AboutPage .page_main{background:#fff;margin-bottom:60px}.page_title{color:#ea6550;font-size:22px;margin-top:40px;border-bottom:2px solid #ea6550;padding:0 50px 10px;position:relative}.page_content{color:#2f2f2f;margin:20px 50px;padding-right:10px;overflow:auto;font-family:montserratregular;font-size:14px;text-align:left;line-height:20px;text-align:center}.page_content a{color:#ea6550;text-decoration:none;font-family:montserratbold;display:inline-block;border-bottom:2px solid #ea6550;line-height:16px}.page_content p{margin:20px 0;text-align:left}.page_content ul{text-align:left}.page_content .content_image{background:url(" + escape(__webpack_require__("uv/c")) + ") no-repeat 0 0;background-size:100% 100%;width:350px;height:350px;display:inline-block}.page_content .bolder{font-family:montserratbold}.about_table,.about_table td{border:1px solid;text-align:left;border-collapse:collapse}.about_table td{padding:10px}.about_table td.centered{text-align:center}.about_table .bigger{font-weight:700;font-size:14px}", ""]);
 
 // exports
 
@@ -1050,7 +1183,7 @@ exports = module.exports = __webpack_require__("FZ+f")(false);
 
 
 // module
-exports.push([module.i, "@font-face{font-family:montserratbold;src:url(" + escape(__webpack_require__("KoCO")) + ") format(\"woff2\"),url(" + escape(__webpack_require__("cqiT")) + ") format(\"woff\");font-weight:400;font-style:normal}@font-face{font-family:montserratitalic;src:url(" + escape(__webpack_require__("hPgA")) + ") format(\"woff2\"),url(" + escape(__webpack_require__("hnDx")) + ") format(\"woff\");font-weight:400;font-style:normal}@font-face{font-family:montserratregular;src:url(" + escape(__webpack_require__("UBI+")) + ") format(\"woff2\"),url(" + escape(__webpack_require__("dL9s")) + ") format(\"woff\");font-weight:400;font-style:normal}@font-face{font-family:roboto_condensedbold;src:url(" + escape(__webpack_require__("CCFM")) + ") format(\"woff2\"),url(" + escape(__webpack_require__("CCFM")) + ") format(\"woff\");font-weight:400;font-style:normal}.paris21_modalwrapper[data-v-7675ee04]{position:fixed;left:0;top:0;bottom:0;width:100%;display:none;z-index:1000000}.paris21_modalwrapper.displayed[data-v-7675ee04]{display:block}.paris21_modalwrapper .paris21_modalbg[data-v-7675ee04]{background:rgba(0,0,0,.6);position:absolute;left:0;top:0;width:100%;height:100%}.paris21_modalwrapper .paris21_modal[data-v-7675ee04]{position:absolute;left:50%;top:50%;-webkit-transform:translate(-50%,-50%);transform:translate(-50%,-50%);background:#fff;width:800px;height:500px;text-align:left}.paris21_modalwrapper .paris21_modal .modal_title[data-v-7675ee04]{color:#ea6550;font-size:22px;margin-top:40px;border-bottom:2px solid #ea6550;padding:0 50px 10px;position:relative}.paris21_modalwrapper .paris21_modal .modal_title .modal_closebt[data-v-7675ee04]{position:absolute;right:30px;bottom:-5px;cursor:pointer;background:url(" + escape(__webpack_require__("Ehvn")) + ") no-repeat 0 0;width:60px;height:60px}.paris21_modalwrapper .paris21_modal .modal_content[data-v-7675ee04]{color:#2f2f2f;text-align:left;margin:20px 50px;padding-right:10px;height:370px;overflow:auto;font-family:montserratregular;font-size:14px;line-height:20px;text-align:center}.paris21_modalwrapper .paris21_modal .modal_content a[data-v-7675ee04]{color:#ea6550;text-decoration:none;font-family:montserratbold;display:inline-block;border-bottom:2px solid #ea6550;line-height:16px}.paris21_modalwrapper .paris21_modal .modal_content p[data-v-7675ee04]{margin:40px 0;text-align:left}.paris21_modalwrapper .paris21_modal .modal_content .content_image[data-v-7675ee04]{background:url(" + escape(__webpack_require__("uv/c")) + ") no-repeat 0 0;background-size:100% 100%;width:350px;height:350px;display:inline-block}.paris21_modalwrapper .paris21_modal .modal_content .bolder[data-v-7675ee04]{font-family:montserratbold}.paris21_modalwrapper .paris21_modal .modal_content .content_block[data-v-7675ee04]{text-align:left}.paris21_modalwrapper .paris21_modal .modal_content .content_block .block_title[data-v-7675ee04]{font-weight:700;font-size:18px;line-height:24px}.paris21_modalwrapper .paris21_modal .modal_content[data-type=download][data-v-7675ee04]{text-align:left}.paris21_modalwrapper .paris21_modal .modal_content[data-type=download] .download_item[data-v-7675ee04]{margin-bottom:30px}.paris21_modalwrapper .paris21_modal .modal_content[data-type=download] .download_item .item_title[data-v-7675ee04]{color:#ea6550;font-size:20px}.paris21_modalwrapper .paris21_modal .modal_content[data-type=download] .download_item .item_text[data-v-7675ee04]{font-family:montserratbold;font-size:12px;margin-top:4px;line-height:14px}.paris21_modalwrapper .paris21_modal .modal_content[data-type=download] .download_item .download_bt[data-v-7675ee04]{margin-top:8px;background:#ea6550;display:inline-block;vertical-align:top;width:150px;height:24px;line-height:24px;border-radius:24px;font-family:roboto_condensedbold;color:#fff;text-align:center;text-decoration:none;text-transform:uppercase}", ""]);
+exports.push([module.i, "@font-face{font-family:montserratbold;src:url(" + escape(__webpack_require__("KoCO")) + ") format(\"woff2\"),url(" + escape(__webpack_require__("cqiT")) + ") format(\"woff\");font-weight:400;font-style:normal}@font-face{font-family:montserratitalic;src:url(" + escape(__webpack_require__("hPgA")) + ") format(\"woff2\"),url(" + escape(__webpack_require__("hnDx")) + ") format(\"woff\");font-weight:400;font-style:normal}@font-face{font-family:montserratregular;src:url(" + escape(__webpack_require__("UBI+")) + ") format(\"woff2\"),url(" + escape(__webpack_require__("dL9s")) + ") format(\"woff\");font-weight:400;font-style:normal}@font-face{font-family:roboto_condensedbold;src:url(" + escape(__webpack_require__("CCFM")) + ") format(\"woff2\"),url(" + escape(__webpack_require__("CCFM")) + ") format(\"woff\");font-weight:400;font-style:normal}.paris21_modalwrapper[data-v-7675ee04]{position:fixed;left:0;top:0;bottom:0;width:100%;display:none;z-index:1000000}.paris21_modalwrapper.displayed[data-v-7675ee04]{display:block}.paris21_modalwrapper .paris21_modalbg[data-v-7675ee04]{background:rgba(0,0,0,.6);position:absolute;left:0;top:0;width:100%;height:100%}.paris21_modalwrapper .paris21_modal[data-v-7675ee04]{position:absolute;left:50%;top:50%;-webkit-transform:translate(-50%,-50%);transform:translate(-50%,-50%);background:#fff;width:800px;height:500px;text-align:left}.paris21_modalwrapper .paris21_modal .modal_title[data-v-7675ee04]{color:#ea6550;font-size:22px;margin-top:40px;border-bottom:2px solid #ea6550;padding:0 50px 10px;position:relative}.paris21_modalwrapper .paris21_modal .modal_title .modal_closebt[data-v-7675ee04]{position:absolute;right:30px;bottom:-5px;cursor:pointer;background:url(" + escape(__webpack_require__("Ehvn")) + ") no-repeat 0 0;width:60px;height:60px}.paris21_modalwrapper .paris21_modal .modal_content[data-v-7675ee04]{color:#2f2f2f;text-align:left;margin:20px 50px;padding-right:10px;height:370px;overflow:auto;font-family:montserratregular;font-size:14px;line-height:20px;text-align:center}.paris21_modalwrapper .paris21_modal .modal_content a[data-v-7675ee04]{color:#ea6550;text-decoration:none;font-family:montserratbold;display:inline-block;border-bottom:2px solid #ea6550;line-height:16px}.paris21_modalwrapper .paris21_modal .modal_content p[data-v-7675ee04]{margin:40px 0;text-align:left}.paris21_modalwrapper .paris21_modal .modal_content .content_image[data-v-7675ee04]{background:url(" + escape(__webpack_require__("uv/c")) + ") no-repeat 0 0;background-size:100% 100%;width:350px;height:350px;display:inline-block}.paris21_modalwrapper .paris21_modal .modal_content .bolder[data-v-7675ee04]{font-family:montserratbold}.paris21_modalwrapper .paris21_modal .modal_content .content_block[data-v-7675ee04]{text-align:left}.paris21_modalwrapper .paris21_modal .modal_content .content_block .block_title[data-v-7675ee04]{font-weight:700;font-size:18px;line-height:24px}.paris21_modalwrapper .paris21_modal .modal_content .content_block .block_text[data-v-7675ee04] table{border:1px solid;border-collapse:collapse}.paris21_modalwrapper .paris21_modal .modal_content .content_block .block_text[data-v-7675ee04] td,.paris21_modalwrapper .paris21_modal .modal_content .content_block .block_text[data-v-7675ee04] th{border:1px solid;border-collapse:collapse;padding:10px}.paris21_modalwrapper .paris21_modal .modal_content[data-type=download][data-v-7675ee04]{text-align:left}.paris21_modalwrapper .paris21_modal .modal_content[data-type=download] .download_item[data-v-7675ee04]{margin-bottom:30px}.paris21_modalwrapper .paris21_modal .modal_content[data-type=download] .download_item .item_title[data-v-7675ee04]{color:#ea6550;font-size:20px}.paris21_modalwrapper .paris21_modal .modal_content[data-type=download] .download_item .item_text[data-v-7675ee04]{font-family:montserratbold;font-size:12px;margin-top:4px;line-height:14px}.paris21_modalwrapper .paris21_modal .modal_content[data-type=download] .download_item .download_bt[data-v-7675ee04]{margin-top:8px;background:#ea6550;display:inline-block;vertical-align:top;width:150px;height:24px;line-height:24px;border-radius:24px;font-family:roboto_condensedbold;color:#fff;text-align:center;text-decoration:none;text-transform:uppercase}", ""]);
 
 // exports
 
@@ -1395,9 +1528,13 @@ if(false) {
     }
   },
   data: function data() {
-    return {};
+    return {
+      datafileURL: ""
+    };
   },
-  mounted: function mounted() {},
+  mounted: function mounted() {
+    this.datafileURL = {"api_url":"https://ocde.wedodata.fr/paris21_api/","datafile_url":"https://ocde.wedodata.fr/paris21_admin/API/file.csv"}.datafile_url;
+  },
   methods: {
     closeModal: function closeModal() {
       this.$emit('closeModal');

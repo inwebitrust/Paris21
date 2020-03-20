@@ -71,6 +71,7 @@ export default {
     this.foundSpecificIndicator = _.find(UTILS.specificIndicators, function (indic) {
       return self.indicatorID == indic.id;
     })
+    console.log("foundSpecificIndicator", this.foundSpecificIndicator)
     if(this.foundSpecificIndicator !== undefined) {
       _.each(this.foundSpecificIndicator.labels, function(indicLabel){
         self.specificLabelsObj[indicLabel.value] = indicLabel;
@@ -109,9 +110,12 @@ export default {
         var totalValuesPerYear = 0;
         _.each(dataObj, function (ordinalData){
           var fixedValue = parseFloat(ordinalData.value).toFixed(1)
+
+          var areaName = ordinalData.value;
+          if(self.specificLabelsObj[fixedValue] !== undefined) areaName = self.specificLabelsObj[fixedValue].label
           if(areaSeriesObj[fixedValue] == undefined) {
             areaSeriesObj[fixedValue] = {
-              name:self.specificLabelsObj[fixedValue].label,
+              name: areaName,
               data: []
             }
           }
@@ -131,9 +135,12 @@ export default {
 
       var areaSeries = [];
       var incLabel = 0;
+      console.log("areaSeriesObj", areaSeriesObj)
       _.each(this.specificLabelsObj, function (labelObj){
+        console.log("labelObj", labelObj)
         var seriesItem = areaSeriesObj[labelObj.value];
         if(seriesItem !== undefined) {
+          console.log("incLabel", incLabel, self.ordinalColors)
           seriesItem.color = self.ordinalColors[incLabel];
           areaSeries.push(seriesItem);
         }
@@ -225,9 +232,12 @@ export default {
         var totalValuesPerYear = 0;
         _.each(dataObj, function (ordinalData){
           var fixedValue = parseFloat(ordinalData.value).toFixed(1)
+          var areaName = ordinalData.value;
+          if(self.specificLabelsObj[fixedValue] !== undefined) areaName = self.specificLabelsObj[fixedValue].label
+
           if(barsSeriesObj[fixedValue] == undefined) {
             barsSeriesObj[fixedValue] = {
-              name:self.specificLabelsObj[fixedValue].label,
+              name: areaName,
               data: []
             }
           }
@@ -247,10 +257,15 @@ export default {
 
       var barsSeries = [];
       var incLabel = 0;
+      console.log("specificLabelsObj", this.specificLabelsObj)
+      console.log("barsSeriesObj", barsSeriesObj)
       _.each(this.specificLabelsObj, function (labelObj){
+        console.log("labelObj", labelObj)
         var seriesItem = barsSeriesObj[labelObj.value];
-        seriesItem.color = self.ordinalColors[incLabel];
-        barsSeries.push(seriesItem);
+        if(seriesItem !== undefined) {
+          seriesItem.color = self.ordinalColors[incLabel];
+          barsSeries.push(seriesItem);
+        }
         incLabel += 1;
       });
       barsSeries.push(barsSeriesObj["nodata"]);

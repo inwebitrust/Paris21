@@ -71,7 +71,29 @@ var render = function() {
                 }
               })
             ]),
-            _vm._m(2)
+            _c(
+              "div",
+              {
+                staticClass: "modal_content",
+                attrs: { "data-type": "download" }
+              },
+              [
+                _c("div", { staticClass: "download_item" }, [
+                  _c("div", { staticClass: "item_title" }, [_vm._v("DATASET")]),
+                  _c("div", { staticClass: "item_text" }),
+                  _c(
+                    "a",
+                    {
+                      staticClass: "download_bt",
+                      attrs: { href: _vm.datafileURL, target: "_blank" }
+                    },
+                    [_vm._v("Download (.csv)")]
+                  )
+                ]),
+                _vm._m(2),
+                _vm._m(3)
+              ]
+            )
           ])
         : _vm._e(),
       _vm.type == "moreinfo"
@@ -362,66 +384,38 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      { staticClass: "modal_content", attrs: { "data-type": "download" } },
-      [
-        _c("div", { staticClass: "download_item" }, [
-          _c("div", { staticClass: "item_title" }, [_vm._v("DATASET")]),
-          _c("div", { staticClass: "item_text" }, [
-            _vm._v(
-              "\n          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.\n        "
-            )
-          ]),
-          _c(
-            "a",
-            {
-              staticClass: "download_bt",
-              attrs: {
-                href: "http://ocde.wedodata.fr/paris21_admin/API/file.csv",
-                target: "_blank"
-              }
-            },
-            [_vm._v("Download (.csv)")]
-          )
-        ]),
-        _c("div", { staticClass: "download_item" }, [
-          _c("div", { staticClass: "item_title" }, [_vm._v("CODEBOOK")]),
-          _c("div", { staticClass: "item_text" }, [
-            _vm._v(
-              "\n          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.\n        "
-            )
-          ]),
-          _c(
-            "a",
-            {
-              staticClass: "download_bt",
-              attrs: { href: "/data/codebook.xlsx", target: "_blank" }
-            },
-            [_vm._v("Download (.xls)")]
-          )
-        ]),
-        _c("div", { staticClass: "download_item" }, [
-          _c("div", { staticClass: "item_title" }, [_vm._v("METHODOLOGY")]),
-          _c("div", { staticClass: "item_text" }, [
-            _vm._v(
-              "\n          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.\n        "
-            )
-          ]),
-          _c(
-            "a",
-            {
-              staticClass: "download_bt",
-              attrs: {
-                href: "/data/PARIS21_Indicators_Methodological_Notes.xlsx",
-                target: "_blank"
-              }
-            },
-            [_vm._v("Download (.xls)")]
-          )
-        ])
-      ]
-    )
+    return _c("div", { staticClass: "download_item" }, [
+      _c("div", { staticClass: "item_title" }, [_vm._v("CODEBOOK")]),
+      _c("div", { staticClass: "item_text" }),
+      _c(
+        "a",
+        {
+          staticClass: "download_bt",
+          attrs: { href: "/data/codebook.xlsx", target: "_blank" }
+        },
+        [_vm._v("Download (.xls)")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "download_item" }, [
+      _c("div", { staticClass: "item_title" }, [_vm._v("METHODOLOGY")]),
+      _c("div", { staticClass: "item_text" }),
+      _c(
+        "a",
+        {
+          staticClass: "download_bt",
+          attrs: {
+            href: "/data/PARIS21_Indicators_Methodological_Notes.xlsx",
+            target: "_blank"
+          }
+        },
+        [_vm._v("Download (.xls)")]
+      )
+    ])
   }
 ]
 render._withStripped = true
@@ -634,7 +628,7 @@ exports = module.exports = __webpack_require__("FZ+f")(false);
 
 
 // module
-exports.push([module.i, "@font-face{font-family:montserratbold;src:url(" + escape(__webpack_require__("KoCO")) + ") format(\"woff2\"),url(" + escape(__webpack_require__("cqiT")) + ") format(\"woff\");font-weight:400;font-style:normal}@font-face{font-family:montserratitalic;src:url(" + escape(__webpack_require__("hPgA")) + ") format(\"woff2\"),url(" + escape(__webpack_require__("hnDx")) + ") format(\"woff\");font-weight:400;font-style:normal}@font-face{font-family:montserratregular;src:url(" + escape(__webpack_require__("UBI+")) + ") format(\"woff2\"),url(" + escape(__webpack_require__("dL9s")) + ") format(\"woff\");font-weight:400;font-style:normal}@font-face{font-family:roboto_condensedbold;src:url(" + escape(__webpack_require__("CCFM")) + ") format(\"woff2\"),url(" + escape(__webpack_require__("CCFM")) + ") format(\"woff\");font-weight:400;font-style:normal}.paris21_modalwrapper[data-v-7675ee04]{position:fixed;left:0;top:0;bottom:0;width:100%;display:none;z-index:1000000}.paris21_modalwrapper.displayed[data-v-7675ee04]{display:block}.paris21_modalwrapper .paris21_modalbg[data-v-7675ee04]{background:rgba(0,0,0,.6);position:absolute;left:0;top:0;width:100%;height:100%}.paris21_modalwrapper .paris21_modal[data-v-7675ee04]{position:absolute;left:50%;top:50%;-webkit-transform:translate(-50%,-50%);transform:translate(-50%,-50%);background:#fff;width:800px;height:500px;text-align:left}.paris21_modalwrapper .paris21_modal .modal_title[data-v-7675ee04]{color:#ea6550;font-size:22px;margin-top:40px;border-bottom:2px solid #ea6550;padding:0 50px 10px;position:relative}.paris21_modalwrapper .paris21_modal .modal_title .modal_closebt[data-v-7675ee04]{position:absolute;right:30px;bottom:-5px;cursor:pointer;background:url(" + escape(__webpack_require__("Ehvn")) + ") no-repeat 0 0;width:60px;height:60px}.paris21_modalwrapper .paris21_modal .modal_content[data-v-7675ee04]{color:#2f2f2f;text-align:left;margin:20px 50px;padding-right:10px;height:370px;overflow:auto;font-family:montserratregular;font-size:14px;line-height:20px;text-align:center}.paris21_modalwrapper .paris21_modal .modal_content a[data-v-7675ee04]{color:#ea6550;text-decoration:none;font-family:montserratbold;display:inline-block;border-bottom:2px solid #ea6550;line-height:16px}.paris21_modalwrapper .paris21_modal .modal_content p[data-v-7675ee04]{margin:40px 0;text-align:left}.paris21_modalwrapper .paris21_modal .modal_content .content_image[data-v-7675ee04]{background:url(" + escape(__webpack_require__("uv/c")) + ") no-repeat 0 0;background-size:100% 100%;width:350px;height:350px;display:inline-block}.paris21_modalwrapper .paris21_modal .modal_content .bolder[data-v-7675ee04]{font-family:montserratbold}.paris21_modalwrapper .paris21_modal .modal_content .content_block[data-v-7675ee04]{text-align:left}.paris21_modalwrapper .paris21_modal .modal_content .content_block .block_title[data-v-7675ee04]{font-weight:700;font-size:18px;line-height:24px}.paris21_modalwrapper .paris21_modal .modal_content[data-type=download][data-v-7675ee04]{text-align:left}.paris21_modalwrapper .paris21_modal .modal_content[data-type=download] .download_item[data-v-7675ee04]{margin-bottom:30px}.paris21_modalwrapper .paris21_modal .modal_content[data-type=download] .download_item .item_title[data-v-7675ee04]{color:#ea6550;font-size:20px}.paris21_modalwrapper .paris21_modal .modal_content[data-type=download] .download_item .item_text[data-v-7675ee04]{font-family:montserratbold;font-size:12px;margin-top:4px;line-height:14px}.paris21_modalwrapper .paris21_modal .modal_content[data-type=download] .download_item .download_bt[data-v-7675ee04]{margin-top:8px;background:#ea6550;display:inline-block;vertical-align:top;width:150px;height:24px;line-height:24px;border-radius:24px;font-family:roboto_condensedbold;color:#fff;text-align:center;text-decoration:none;text-transform:uppercase}", ""]);
+exports.push([module.i, "@font-face{font-family:montserratbold;src:url(" + escape(__webpack_require__("KoCO")) + ") format(\"woff2\"),url(" + escape(__webpack_require__("cqiT")) + ") format(\"woff\");font-weight:400;font-style:normal}@font-face{font-family:montserratitalic;src:url(" + escape(__webpack_require__("hPgA")) + ") format(\"woff2\"),url(" + escape(__webpack_require__("hnDx")) + ") format(\"woff\");font-weight:400;font-style:normal}@font-face{font-family:montserratregular;src:url(" + escape(__webpack_require__("UBI+")) + ") format(\"woff2\"),url(" + escape(__webpack_require__("dL9s")) + ") format(\"woff\");font-weight:400;font-style:normal}@font-face{font-family:roboto_condensedbold;src:url(" + escape(__webpack_require__("CCFM")) + ") format(\"woff2\"),url(" + escape(__webpack_require__("CCFM")) + ") format(\"woff\");font-weight:400;font-style:normal}.paris21_modalwrapper[data-v-7675ee04]{position:fixed;left:0;top:0;bottom:0;width:100%;display:none;z-index:1000000}.paris21_modalwrapper.displayed[data-v-7675ee04]{display:block}.paris21_modalwrapper .paris21_modalbg[data-v-7675ee04]{background:rgba(0,0,0,.6);position:absolute;left:0;top:0;width:100%;height:100%}.paris21_modalwrapper .paris21_modal[data-v-7675ee04]{position:absolute;left:50%;top:50%;-webkit-transform:translate(-50%,-50%);transform:translate(-50%,-50%);background:#fff;width:800px;height:500px;text-align:left}.paris21_modalwrapper .paris21_modal .modal_title[data-v-7675ee04]{color:#ea6550;font-size:22px;margin-top:40px;border-bottom:2px solid #ea6550;padding:0 50px 10px;position:relative}.paris21_modalwrapper .paris21_modal .modal_title .modal_closebt[data-v-7675ee04]{position:absolute;right:30px;bottom:-5px;cursor:pointer;background:url(" + escape(__webpack_require__("Ehvn")) + ") no-repeat 0 0;width:60px;height:60px}.paris21_modalwrapper .paris21_modal .modal_content[data-v-7675ee04]{color:#2f2f2f;text-align:left;margin:20px 50px;padding-right:10px;height:370px;overflow:auto;font-family:montserratregular;font-size:14px;line-height:20px;text-align:center}.paris21_modalwrapper .paris21_modal .modal_content a[data-v-7675ee04]{color:#ea6550;text-decoration:none;font-family:montserratbold;display:inline-block;border-bottom:2px solid #ea6550;line-height:16px}.paris21_modalwrapper .paris21_modal .modal_content p[data-v-7675ee04]{margin:40px 0;text-align:left}.paris21_modalwrapper .paris21_modal .modal_content .content_image[data-v-7675ee04]{background:url(" + escape(__webpack_require__("uv/c")) + ") no-repeat 0 0;background-size:100% 100%;width:350px;height:350px;display:inline-block}.paris21_modalwrapper .paris21_modal .modal_content .bolder[data-v-7675ee04]{font-family:montserratbold}.paris21_modalwrapper .paris21_modal .modal_content .content_block[data-v-7675ee04]{text-align:left}.paris21_modalwrapper .paris21_modal .modal_content .content_block .block_title[data-v-7675ee04]{font-weight:700;font-size:18px;line-height:24px}.paris21_modalwrapper .paris21_modal .modal_content .content_block .block_text[data-v-7675ee04] table{border:1px solid;border-collapse:collapse}.paris21_modalwrapper .paris21_modal .modal_content .content_block .block_text[data-v-7675ee04] td,.paris21_modalwrapper .paris21_modal .modal_content .content_block .block_text[data-v-7675ee04] th{border:1px solid;border-collapse:collapse;padding:10px}.paris21_modalwrapper .paris21_modal .modal_content[data-type=download][data-v-7675ee04]{text-align:left}.paris21_modalwrapper .paris21_modal .modal_content[data-type=download] .download_item[data-v-7675ee04]{margin-bottom:30px}.paris21_modalwrapper .paris21_modal .modal_content[data-type=download] .download_item .item_title[data-v-7675ee04]{color:#ea6550;font-size:20px}.paris21_modalwrapper .paris21_modal .modal_content[data-type=download] .download_item .item_text[data-v-7675ee04]{font-family:montserratbold;font-size:12px;margin-top:4px;line-height:14px}.paris21_modalwrapper .paris21_modal .modal_content[data-type=download] .download_item .download_bt[data-v-7675ee04]{margin-top:8px;background:#ea6550;display:inline-block;vertical-align:top;width:150px;height:24px;line-height:24px;border-radius:24px;font-family:roboto_condensedbold;color:#fff;text-align:center;text-decoration:none;text-transform:uppercase}", ""]);
 
 // exports
 
@@ -979,9 +973,13 @@ if(false) {
     }
   },
   data: function data() {
-    return {};
+    return {
+      datafileURL: ""
+    };
   },
-  mounted: function mounted() {},
+  mounted: function mounted() {
+    this.datafileURL = {"api_url":"https://ocde.wedodata.fr/paris21_api/","datafile_url":"https://ocde.wedodata.fr/paris21_admin/API/file.csv"}.datafile_url;
+  },
   methods: {
     closeModal: function closeModal() {
       this.$emit('closeModal');

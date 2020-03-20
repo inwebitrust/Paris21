@@ -11,13 +11,13 @@ $CSVDB = "datavalues_2019";
 $WORLDBANKDB = "datavalues_worldbank_3";
 
 $datasource = "";
-$queryDatasource = "SELECT datasource FROM indicators_mar2020 WHERE id = ".$_GET["indicatorID"];
+$queryDatasource = "SELECT datasource FROM ".$DBTABLES["indicators"]." WHERE id = ".$_GET["indicatorID"];
 $result = $link->query($queryDatasource);
 while($row = mysqli_fetch_array($result)) {
     $datasource = $row["datasource"];
 }
 
-$queryExtractions = "SELECT * FROM extractions WHERE active = 1";
+$queryExtractions = "SELECT * FROM ".$DBTABLES["extractions"]." WHERE active = 1";
 $resultExtractions = $link->query($queryExtractions);
 while($row = mysqli_fetch_array($resultExtractions)) {
     if($row["source"] == "csv") $CSVDB = "datavalues_csv_".$row["id"];

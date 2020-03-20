@@ -84,15 +84,15 @@
         <div class="download_item">
           <div class="item_title">DATASET</div>
           <div class="item_text">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+            
           </div>
-          <a class="download_bt" href="http://ocde.wedodata.fr/paris21_admin/API/file.csv" target="_blank">Download (.csv)</a>
+          <a class="download_bt" :href="datafileURL" target="_blank">Download (.csv)</a>
         </div>
 
         <div class="download_item">
           <div class="item_title">CODEBOOK</div>
           <div class="item_text">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+            
           </div>
           <a class="download_bt" href="/data/codebook.xlsx" target="_blank">Download (.xls)</a>
         </div>
@@ -100,7 +100,7 @@
         <div class="download_item">
           <div class="item_title">METHODOLOGY</div>
           <div class="item_text">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+            
           </div>
           <a class="download_bt" href="/data/PARIS21_Indicators_Methodological_Notes.xlsx" target="_blank">Download (.xls)</a>
         </div>
@@ -175,9 +175,11 @@ export default {
   },
   data: function () {
     return {
+      datafileURL: ""
     }
   },
   mounted: function () {
+    this.datafileURL = process.env.CONFIG_APP.datafile_url;
   },
   methods: {
     closeModal: function() {
@@ -276,6 +278,22 @@ export default {
           font-weight: 700;
           font-size: 18px;
           line-height: 24px;
+        }
+        .block_text{
+          /deep/ table{
+            border:1px solid;
+            border-collapse: collapse;
+          }
+          /deep/ td{
+            border:1px solid;
+            border-collapse: collapse;
+            padding: 10px;
+          }
+          /deep/ th{
+            border:1px solid;
+            border-collapse: collapse;
+            padding: 10px;
+          }
         }
       }
     }

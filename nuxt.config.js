@@ -82,7 +82,8 @@ module.exports = {
   env: {
     title: process.env.APP_TITLE || 'NUxtjs template',
     CONFIG_APP: {
-      api_url: "https://ocde.wedodata.fr/paris21_api/"
+      api_url: "https://ocde.wedodata.fr/paris21_api/",
+      datafile_url: "https://ocde.wedodata.fr/paris21_admin/API/file.csv",
     }
   },
   mode: 'spa',

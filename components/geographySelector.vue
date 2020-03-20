@@ -41,6 +41,7 @@
             </div>
             <div class="geography_sidebar">
                 <div class="sidebar_input">
+                    <div class="input_disclaimer">Country classifications follow the <a href="https://unstats.un.org/unsd/methodology/m49/" target="_blank">UN M49 classification</a></div>
                     <div class="input_label">Search a region, country, subregion...</div>
                     <a class="input_icon" :data-search="userKeyboardInput !== ''" @click="closeSearch()"></a>
                     <input type="text" id="GeographyInput" placeholder="Ex : Colombia, Africa, Fragile…" @keyup="keyboardInput($event.target.value)" />
@@ -178,6 +179,12 @@
                 default: function () {
                     return ''
                 }
+            },
+            indicatorID:{
+                type:String,
+                default: function () {
+                    return ''
+                }
             }
         },
         data: function () {
@@ -254,6 +261,14 @@
                 this.typedGeographies['1-regions'] = this.tmpTypedGeographiesObj['1-regions']
                 this.typedGeographies['2-subregions'] = this.tmpTypedGeographiesObj['2-subregions']
                 if(this.state != "soloregion" && this.state != "multiregion") this.typedGeographies['3-countries'] = this.tmpTypedGeographiesObj['3-countries']
+
+                if(this.indicatorID == "39") {
+                    delete this.typedGeographies['1-regions'];
+                    delete this.typedGeographies['2-subregions'];
+                    this.typedGeographies['3-countries'].listGeos = _.filter(this.typedGeographies['3-countries'].listGeos, function (geo){
+                        return geo.region == "Africa";
+                    })
+                }
 
                 this.modalSelectedGeographies = this.selectedGeographies
                 this.dataLoaded = true
@@ -568,7 +583,7 @@
         width: 360px;
         background: $colorGreen;
         color: #fff;
-        padding: 40px 20px;
+        padding: 30px 20px 40px;
         text-align: left;
         &:after{
             content:"";
@@ -586,9 +601,16 @@
         }
         .sidebar_input{
             position: relative;
+            .input_disclaimer{
+                font-size: 11px;
+                a{
+                    color: #fff;
+                }
+            }
             .input_label{
-                font-size: 12px;
+                font-size: 13px;
                 height: 16px;
+                margin-top: 10px;
                 line-height: 12px;
                 font-family: "montserratitalic";
             }
@@ -597,7 +619,7 @@
                 height: 35px;
                 border-radius: 5px;
                 border:0px solid;
-                margin-top: 5px;
+                margin-top: 2px;
                 font-size: 14px;
                 padding: 0 10px;
                 background: #EDEDED;
@@ -614,7 +636,7 @@
                 height: 35px;
                 position: absolute;
                 right: 12px;
-                top: 20px;
+                top: 40px;
                 z-index: 10;
                 cursor: pointer;
                 &[data-search="true"]{
@@ -676,8 +698,11 @@
                 background: linear-gradient(to bottom, rgba(184,184,184,0) 0%,rgba(184,184,184,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
                 filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00b8b8b8', endColorstr='#b8b8b8',GradientType=0 ); /* IE6-9 */
             }
-            .sidebar_input .input_label{
+            .sidebar_input .input_label, .sidebar_input .input_disclaimer{
                 color: #2F2F2F;
+                a{
+                    color: #2F2F2F;
+                }
             }
             .geography_items_title{
                 color: #8C8C8C;

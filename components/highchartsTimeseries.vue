@@ -92,9 +92,14 @@ export default {
         this.seriesParams.min = 0
         this.seriesParams.suffixY = '%'
       } else if(this.datavizType == 'ordinal') {
-        yAxisCategories = _.map(this.foundSpecificIndicator.labels, function (lbl){
-          return parseFloat(lbl.value)
-        })
+        console.log("timeseriesData", this.timeseriesData)
+        if(this.foundSpecificIndicator == undefined) {
+          yAxisCategories = [0,1];
+        } else {
+          yAxisCategories = _.map(this.foundSpecificIndicator.labels, function (lbl){
+            return parseFloat(lbl.value)
+          })
+        }
         this.seriesParams.min = yAxisCategories[0];
         this.seriesParams.max = yAxisCategories[yAxisCategories.length-1];
       }
@@ -133,7 +138,9 @@ export default {
             useHTML: true,
             formatter:function(){
               if(self.datavizType == 'ordinal'){
-                return "<span class='yaxis_value'>" + self.specificLabelsObj[this.value.toFixed(1)].label + "</span>"
+                var yAxisValue = this.value;
+                if(self.specificLabelsObj[this.value.toFixed(1)] !== undefined) yAxisValue = self.specificLabelsObj[this.value.toFixed(1)].label
+                return "<span class='yaxis_value'>" + yAxisValue + "</span>"
               }
               else if(self.datavizType == 'binary'){
                 return ''

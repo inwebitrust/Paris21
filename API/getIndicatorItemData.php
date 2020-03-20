@@ -7,7 +7,7 @@ $DATADB = "datavalues_2019";
 $CSVDB = "datavalues_2019";
 $WORLDBANKDB = "datavalues_worldbank_3";
 
-$queryExtractions = "SELECT * FROM extractions WHERE active = 1";
+$queryExtractions = "SELECT * FROM ".$DBTABLES["extractions"]." WHERE active = 1";
 $resultExtractions = $link->query($queryExtractions);
 while($row = mysqli_fetch_array($resultExtractions)) {
     if($row["source"] == "csv") $CSVDB = "datavalues_csv_".$row["id"];
@@ -15,7 +15,7 @@ while($row = mysqli_fetch_array($resultExtractions)) {
 }
 
 
-$queryIndicator = "SELECT datasource FROM indicators_mar2020 WHERE id = ".$_GET["indicatorID"];
+$queryIndicator = "SELECT datasource FROM ".$DBTABLES["indicators"]." WHERE id = ".$_GET["indicatorID"];
 $resultIndicator = $link->query($queryIndicator);
 while($row = mysqli_fetch_array($resultIndicator)) {
     if($row["datasource"] == "worldbank") $DATADB = $WORLDBANKDB;

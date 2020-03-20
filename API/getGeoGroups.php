@@ -3,19 +3,19 @@ require_once("config.php");
 
 $REGION_GROUPS = array();
 
-$querySubregion = "SELECT  subregion, subregion_code, count(*) as count FROM `geobase_2019` WHERE country <> '' GROUP BY subregion";
+$querySubregion = "SELECT  subregion, subregion_code, count(*) as count FROM ".$DBTABLES["geobase"]." WHERE country <> '' GROUP BY subregion";
 $result = $link->query($querySubregion);
 while($row = mysqli_fetch_array($result)) {
     array_push($REGION_GROUPS, $row);
 }
 
-$queryRegion = "SELECT  region, region_code, count(*) as count FROM `geobase_2019` WHERE country <> '' GROUP BY region";
+$queryRegion = "SELECT  region, region_code, count(*) as count FROM ".$DBTABLES["geobase"]." WHERE country <> '' GROUP BY region";
 $result = $link->query($queryRegion);
 while($row = mysqli_fetch_array($result)) {
     array_push($REGION_GROUPS, $row);
 }
 
-$queryWorld = "SELECT count(*) as count FROM `geobase_2019` WHERE country <> ''";
+$queryWorld = "SELECT count(*) as count FROM ".$DBTABLES["geobase"]." WHERE country <> ''";
 $result = $link->query($queryWorld);
 while($row = mysqli_fetch_array($result)) {
     array_push($REGION_GROUPS, array(
@@ -25,7 +25,7 @@ while($row = mysqli_fetch_array($result)) {
     ));
 }
 
-$queryLDC = "SELECT count(*) as count FROM `geobase_2019` WHERE ldc = '1'";
+$queryLDC = "SELECT count(*) as count FROM ".$DBTABLES["geobase"]."` WHERE ldc = '1'";
 $result = $link->query($queryLDC);
 while($row = mysqli_fetch_array($result)) {
     array_push($REGION_GROUPS, array(
@@ -35,7 +35,7 @@ while($row = mysqli_fetch_array($result)) {
     ));
 }
 
-$queryLLDC = "SELECT count(*) as count FROM `geobase_2019` WHERE lldc = '1'";
+$queryLLDC = "SELECT count(*) as count FROM ".$DBTABLES["geobase"]." WHERE lldc = '1'";
 $result = $link->query($queryLLDC);
 while($row = mysqli_fetch_array($result)) {
     array_push($REGION_GROUPS, array(
@@ -45,7 +45,7 @@ while($row = mysqli_fetch_array($result)) {
     ));
 }
 
-$querySIDS = "SELECT count(*) as count FROM `geobase_2019` WHERE sids = '1'";
+$querySIDS = "SELECT count(*) as count FROM ".$DBTABLES["geobase"]." WHERE sids = '1'";
 $result = $link->query($querySIDS);
 while($row = mysqli_fetch_array($result)) {
     array_push($REGION_GROUPS, array(
@@ -55,7 +55,7 @@ while($row = mysqli_fetch_array($result)) {
     ));
 }
 
-$queryFragile = "SELECT count(*) as count FROM `geobase_2019` WHERE fragile = '1'";
+$queryFragile = "SELECT count(*) as count FROM ".$DBTABLES["geobase"]." WHERE fragile = '1'";
 $result = $link->query($queryFragile);
 while($row = mysqli_fetch_array($result)) {
     array_push($REGION_GROUPS, array(
@@ -65,7 +65,7 @@ while($row = mysqli_fetch_array($result)) {
     ));
 }
 
-$queryIncome = "SELECT income, count(*) as count FROM `geobase_2019` GROUP BY income";
+$queryIncome = "SELECT income, count(*) as count FROM ".$DBTABLES["geobase"]." GROUP BY income";
 $result = $link->query($queryIncome);
 while($row = mysqli_fetch_array($result)) {
 	if($row["income"] != "") {

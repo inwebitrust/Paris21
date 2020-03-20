@@ -7,10 +7,11 @@
         <div class="page_title">About Statistical Capacity Monitor</div>
         <div class="page_content">
           <p><span class="bolder">1. Why a Statistical Capacity Monitor? </span></p>
-          <p>The Sustainable Development Goals created an unprecedented demand for better data to advance sustainable development. Yet many countries, especially low-income and fragile states, lack the statistical capacity to report on the 232 indicators in the framework.</p>
-          <p>Although some countries have seen improvements in statistical capacity in recent decades, the results have not been universal. Today, a third of national statistical offices today feel that statistical capacity development programmes are not meeting their needs. Capacity development in statistics needs to move away from short-term, output-related results, towards sustainable, inclusive and co-creative approaches. </p>
-          <p>There is an urgent need to empower countries to track their progress towards more advanced statistical capacities, and to enable donors to invest in more and better data for development. </p>
+          <p>National statistics are an essential component of policy making. They provide the evidence required to improve the lives of citizens, monitor results and hold governments accountable. Recent international agreements such as the 2030 Agenda for Sustainable Development and Agenda 2063 for Africa recognise the central role of strong statistics and place a significant emphasis on goals, indicators and national reporting. </p>
+          <p>At the same time, technological advances create a wealth of new data sources, some of which have the potential to enrich national statistical systems and enable more effective and responsive policy making. Although some countries have seen improvements in statistical capacity in recent decades, the results have not been universal. Today, a third of national statistical offices feel that statistical capacity development programmes are not meeting their needs.</p>
+          <p>There is an urgent need to empower countries to track their progress towards more advanced statistical capacities, and to enable donors to invest in more and better data for development. Moreover, countries should use common benchmarks to evaluate their past, ongoing or planned NSDS processes, and thus improve their data planning processes.</p>
           <p>PARIS21’s Statistical Capacity Monitor was launched in April 2019 to describe global, regional and national statistical capacity trends. The Monitor features around 100 indicators on statistical capacity, and an intuitive interactive interface makes geographic and sectoral comparison, benchmarking and analysis quick and simple.</p>
+          <p>The value-added of the platform is threefold:</p>
  
           <ul>
             <li><span class="bolder">Analysis:</span> Quick understanding of regional and periodic trends in capacity development</li>
@@ -29,13 +30,55 @@
             <li><span class="bolder">Use:</span> statistical literacy, use and esteem of statistics</li>
             <li><span class="bolder">Investment:</span> devotion of resources to the statistical system</li>
           </ul>
-          <p>Most of the indicators have an annual periodicity. Users can visualise the data and cross-tabulate different types of indicators. New indicators will be added and existing ones updated on an annual basis.</p>
+          <p>Most of the indicators have an annual periodicity. Users can visualise the data and cross-tabulate different types of indicators.</p>
 
           <br />
 
           <p><span class="bolder">3. Who is it for?</span></p>
           <p>Anybody interested in understanding and analysing how statistical capacity changes over time, and why. </p>
-
+          <p>Specific user groups include:</p>
+          <table class="about_table" cellpadding="0" cellspacing="0">
+            <tr>
+              <td>
+                <span class="bigger">National Statistical Offices</span><br />
+                Statistical Authorities
+              </td>
+              <td>
+                <span class="bigger">Government (agencies)</span><br />
+                Ministries of Planning<br />
+                Ministries of Finance<br />
+                Line ministries or public agencies
+              </td>
+              <td>
+                <span class="bigger">Academia</span><br />
+                Universities<br />
+                Research institutes<br />
+                Statistical training institutes
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <span class="bigger">Donor community</span><br />
+                Multilateral organisations<br />
+                Regional banks<br />
+                National Development cooperation agencies<br />
+                Private foundations
+              </td>
+              <td>
+                <span class="bigger">Civil Society</span>
+                NGOs<br />
+                Think Tanks<br />
+                Civil Society Organisations
+              </td>
+              <td>
+                <span class="bigger">Media</span><br />
+                Journalists
+              </td>
+            </tr>
+            <tr>
+              <td colspan="3" class="centered"><span class="bigger">Citizens</span></td>
+            </tr>
+          </table>
           <br />
 
           <p><span class="bolder">4. Links to other platforms </span></p>
@@ -56,13 +99,13 @@
           <br />
           
           <p><span class="bolder">Updates</span></p>
-          <p>The PARIS21 indicators will be updated on a bi-annual rhythm. For a detailed dissemination calendar, please click <a href="/pdf/DisseminationCalendar.pdf" target="_blank">here</a>.</p>
+          <p>New indicators will be added and existing ones updated on an annual basis. For a detailed dissemination calendar, please click <a href="/pdf/DisseminationCalendar.pdf" target="_blank">here</a>.</p>
 
           <p><span class="bolder">Proposals of new indicators</span></p>
-          <p>PARIS21 welcomes proposals of new indicators throughout the year. The proposals can be submitted <a href="#" target="_blank">here</a>. Submitted indicators will be reviewed and validated every month by the PARIS21 team. In case of approval, you will be contacted for further information. To be included in the Statistical Capacity Monitor, the indicator will need to pass an external validation by our Task Team. </p>
+          <p>PARIS21 welcomes proposals of new indicators throughout the year. The proposals can be submitted via <a href="mailto:contact@statisticalcapacitymonitor.org" target="_blank">contact@statisticalcapacitymonitor.org</a>. Submitted indicators will be reviewed and validated every month by the PARIS21 team. In case of approval, you will be contacted for further information. To be included in the Statistical Capacity Monitor, the indicator will need to pass a validation process by our team and relevant experts.</p>
 
           <p><span class="bolder">Content support/ Data requests</span></p>
-          <p>For any request regarding specific indicators, statistical capacity trends or content-related enquiries, please contact:<br /><a href="mailto:Julia.schmidt@oecd.org">Julia.schmidt@oecd.org</a></p>
+          <p>For any request regarding specific indicators, statistical capacity trends or content-related enquiries, please contact:<br /><a href="mailto:contact@statisticalcapacitymonitor.org">contact@statisticalcapacitymonitor.org</a></p>
 
         </div>
       </div>
@@ -164,6 +207,24 @@ export default {
     }
     .bolder{
       font-family: "montserratbold";
+    }
+  }
+  .about_table{
+    border:1px solid;
+    text-align: left;
+    border-collapse: collapse;
+    td{
+      border:1px solid;
+      text-align: left;
+      border-collapse: collapse;
+      padding: 10px;
+      &.centered{
+        text-align: center;
+      }
+    }
+    .bigger{
+      font-weight: 700;
+      font-size: 14px;
     }
   }
   

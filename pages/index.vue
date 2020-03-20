@@ -22,7 +22,7 @@
 
         <div class="home_block" data-block="download">
           <div class="block_subtitle">Download</div>
-          <div class="block_title">Dataset, coodebook and methodology</div>
+          <div class="block_title">Dataset, codebook and methodology</div>
           <a class="block_bt" @click="displayDownloadModal = true"></a>
         </div>
 
