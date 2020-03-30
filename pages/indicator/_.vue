@@ -488,7 +488,7 @@ export default {
 
                     var allIndicatorsYears = _.map(this.indicatorGeographiesData, function(indicGeo) {
                         var years =  []
-                        if(self.$store.DBGeographyObj[indicGeo.m49].country != "") {
+                        if(self.$store.DBGeographyObj[indicGeo.m49] !== undefined && self.$store.DBGeographyObj[indicGeo.m49].country != "") {
                             _.each(indicGeo.years, function (yearValue, yearIndex) {
                                 if(yearValue !== "") {
                                     years.push(yearIndex)
