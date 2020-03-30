@@ -165,8 +165,8 @@ export default {
             if(this.point.value !== 'no data') {
               if(self.indicatorType == 'binary') {
                 pointValue = this.point.value
-                if(pointValue == '1') pointValue = 'Yes'
-                else if(pointValue == '0') pointValue = 'No'
+                if(pointValue == '1' || pointValue == 1) pointValue = 'Yes'
+                else pointValue = 'No'
               } else if(self.indicatorType == 'text'){
                 pointValue = this.point.value
               } else {
@@ -224,6 +224,8 @@ export default {
     updateMapAreas: function () {
       var areasDataCopy = JSON.parse(JSON.stringify(this.areasData))
       var dataClassesCopy = JSON.parse(JSON.stringify(this.dataClasses))
+
+      console.log("dataClasses", this.dataClasses)
 
       if(this.indicatorType !== 'binary') {
         this.mapHighmaps.axes[2].update({

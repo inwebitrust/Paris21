@@ -537,7 +537,11 @@ export default {
                         if(geoData.years[self.indicatorLastYear] !== 'Not Available') {
                             if(self.selectedIndicatorObj.dataviz_type == 'binary') {
                                 geoValue = geoData.years[self.indicatorLastYear]
-                                if(geoValue == 'Yes' || geoValue == '1') geoColor = '#F7CC3D'
+                                console.log("geoValue", geoValue, geoData.years)
+                                if(geoValue == 'Yes' || geoValue == '1' || geoValue == 1){
+                                    console.log("c est egal à 1");
+                                    geoColor = '#F7CC3D'
+                                }
                                 else geoColor = '#EC9A3A'
                             } else if(self.selectedIndicatorObj.dataviz_type == 'text'){
                                 var foundSpecificIndicator = _.find(UTILS.specificIndicators, function (indic) {

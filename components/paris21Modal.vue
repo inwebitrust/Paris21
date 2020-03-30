@@ -84,7 +84,7 @@
         <div class="download_item">
           <div class="item_title">DATASET</div>
           <div class="item_text">
-            
+            Here you can dowload the full dataset for all indicators included in the Statistical Capacity Monitor.
           </div>
           <a class="download_bt" :href="datafileURL" target="_blank">Download (.csv)</a>
         </div>
@@ -92,7 +92,7 @@
         <div class="download_item">
           <div class="item_title">CODEBOOK</div>
           <div class="item_text">
-            
+            Here you can download the codebook for all indicators included in the Statistical Capacity Monitor.
           </div>
           <a class="download_bt" href="/data/codebook.xlsx" target="_blank">Download (.xls)</a>
         </div>
@@ -100,7 +100,7 @@
         <div class="download_item">
           <div class="item_title">METHODOLOGY</div>
           <div class="item_text">
-            
+            Here you can download the extended methodology for PARIS21 indicators.
           </div>
           <a class="download_bt" href="/data/PARIS21_Indicators_Methodological_Notes.xlsx" target="_blank">Download (.xls)</a>
         </div>
