@@ -149,7 +149,11 @@ var render = function() {
               [
                 _c("div", { staticClass: "download_item" }, [
                   _c("div", { staticClass: "item_title" }, [_vm._v("DATASET")]),
-                  _c("div", { staticClass: "item_text" }),
+                  _c("div", { staticClass: "item_text" }, [
+                    _vm._v(
+                      "\n          Here you can dowload the full dataset for all indicators included in the Statistical Capacity Monitor.\n        "
+                    )
+                  ]),
                   _c(
                     "a",
                     {
@@ -455,7 +459,11 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "download_item" }, [
       _c("div", { staticClass: "item_title" }, [_vm._v("CODEBOOK")]),
-      _c("div", { staticClass: "item_text" }),
+      _c("div", { staticClass: "item_text" }, [
+        _vm._v(
+          "\n          Here you can download the codebook for all indicators included in the Statistical Capacity Monitor.\n        "
+        )
+      ]),
       _c(
         "a",
         {
@@ -472,7 +480,11 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "download_item" }, [
       _c("div", { staticClass: "item_title" }, [_vm._v("METHODOLOGY")]),
-      _c("div", { staticClass: "item_text" }),
+      _c("div", { staticClass: "item_text" }, [
+        _vm._v(
+          "\n          Here you can download the extended methodology for PARIS21 indicators.\n        "
+        )
+      ]),
       _c(
         "a",
         {
@@ -31484,7 +31496,7 @@ var _this = this;
 
                     var allIndicatorsYears = __WEBPACK_IMPORTED_MODULE_3_underscore__["_"].map(this.indicatorGeographiesData, function (indicGeo) {
                         var years = [];
-                        if (self.$store.DBGeographyObj[indicGeo.m49].country != "") {
+                        if (self.$store.DBGeographyObj[indicGeo.m49] !== undefined && self.$store.DBGeographyObj[indicGeo.m49].country != "") {
                             __WEBPACK_IMPORTED_MODULE_3_underscore__["_"].each(indicGeo.years, function (yearValue, yearIndex) {
                                 if (yearValue !== "") {
                                     years.push(yearIndex);
@@ -31537,7 +31549,11 @@ var _this = this;
                         if (geoData.years[self.indicatorLastYear] !== 'Not Available') {
                             if (self.selectedIndicatorObj.dataviz_type == 'binary') {
                                 geoValue = geoData.years[self.indicatorLastYear];
-                                if (geoValue == 'Yes' || geoValue == '1') geoColor = '#F7CC3D';else geoColor = '#EC9A3A';
+                                console.log("geoValue", geoValue, geoData.years);
+                                if (geoValue == 'Yes' || geoValue == '1' || geoValue == 1) {
+                                    console.log("c est egal à 1");
+                                    geoColor = '#F7CC3D';
+                                } else geoColor = '#EC9A3A';
                             } else if (self.selectedIndicatorObj.dataviz_type == 'text') {
                                 var foundSpecificIndicator = __WEBPACK_IMPORTED_MODULE_3_underscore__["_"].find(__WEBPACK_IMPORTED_MODULE_2__commons_utils_index_js__["i" /* specificIndicators */], function (indic) {
                                     return self.selectedIndicatorObj.id == indic.id;
@@ -38574,7 +38590,7 @@ module.exports = "data:image/svg+xml;base64,PHN2ZyBpZD0iaWNvbi1idG5fcmVzZXQiIHht
             if (this.point.value !== 'no data') {
               if (self.indicatorType == 'binary') {
                 pointValue = this.point.value;
-                if (pointValue == '1') pointValue = 'Yes';else if (pointValue == '0') pointValue = 'No';
+                if (pointValue == '1' || pointValue == 1) pointValue = 'Yes';else pointValue = 'No';
               } else if (self.indicatorType == 'text') {
                 pointValue = this.point.value;
               } else {
@@ -38632,6 +38648,8 @@ module.exports = "data:image/svg+xml;base64,PHN2ZyBpZD0iaWNvbi1idG5fcmVzZXQiIHht
     updateMapAreas: function updateMapAreas() {
       var areasDataCopy = JSON.parse(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_json_stringify___default()(this.areasData));
       var dataClassesCopy = JSON.parse(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_json_stringify___default()(this.dataClasses));
+
+      console.log("dataClasses", this.dataClasses);
 
       if (this.indicatorType !== 'binary') {
         this.mapHighmaps.axes[2].update({

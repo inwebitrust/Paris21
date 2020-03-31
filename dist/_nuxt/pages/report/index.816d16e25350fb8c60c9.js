@@ -80,7 +80,11 @@ var render = function() {
               [
                 _c("div", { staticClass: "download_item" }, [
                   _c("div", { staticClass: "item_title" }, [_vm._v("DATASET")]),
-                  _c("div", { staticClass: "item_text" }),
+                  _c("div", { staticClass: "item_text" }, [
+                    _vm._v(
+                      "\n          Here you can dowload the full dataset for all indicators included in the Statistical Capacity Monitor.\n        "
+                    )
+                  ]),
                   _c(
                     "a",
                     {
@@ -386,7 +390,11 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "download_item" }, [
       _c("div", { staticClass: "item_title" }, [_vm._v("CODEBOOK")]),
-      _c("div", { staticClass: "item_text" }),
+      _c("div", { staticClass: "item_text" }, [
+        _vm._v(
+          "\n          Here you can download the codebook for all indicators included in the Statistical Capacity Monitor.\n        "
+        )
+      ]),
       _c(
         "a",
         {
@@ -403,7 +411,11 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "download_item" }, [
       _c("div", { staticClass: "item_title" }, [_vm._v("METHODOLOGY")]),
-      _c("div", { staticClass: "item_text" }),
+      _c("div", { staticClass: "item_text" }, [
+        _vm._v(
+          "\n          Here you can download the extended methodology for PARIS21 indicators.\n        "
+        )
+      ]),
       _c(
         "a",
         {
