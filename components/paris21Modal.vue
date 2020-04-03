@@ -131,7 +131,7 @@
           <div class="block_text" v-html="methodoInfos.aggregation"></div>
         </div>
         <div class="content_block" v-if="methodoInfos.data !== undefined && methodoInfos.data !== ''">
-          <div class="block_title">Data</div>
+          <div class="block_title">Limitations</div>
           <div class="block_text" v-html="methodoInfos.data"></div>
         </div>
         <div class="content_block" v-if="methodoInfos.references !== undefined && methodoInfos.references != ''">

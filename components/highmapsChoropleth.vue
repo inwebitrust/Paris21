@@ -169,6 +169,17 @@ export default {
                 else pointValue = 'No'
               } else if(self.indicatorType == 'text'){
                 pointValue = this.point.value
+                var foundSpecificIndicator = _.find(UTILS.specificIndicators, function (indic) {
+                  return self.indicatorID == indic.id;
+                })
+                if(foundSpecificIndicator !== undefined) {
+                  var foundValue = _.find(foundSpecificIndicator.labels, function (lb) {
+                    return lb.value == that.point.value;
+                  });
+                  if(foundValue !== undefined) {
+                    pointValue = foundValue.label
+                  }
+                }
               } else {
                 var foundSpecificIndicator = _.find(UTILS.specificIndicators, function (indic) {
                   return self.indicatorID == indic.id;

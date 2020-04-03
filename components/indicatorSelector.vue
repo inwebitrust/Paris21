@@ -207,7 +207,7 @@
                 this.modalSelectedIndicators = this.selectedIndicators
                 this.DBIndicators = this.$store.DBIndicators
                 this.DBIndicators = _.filter(this.DBIndicators, function (indic){
-                    return (indic.id !== "94" && indic.id !== "35")
+                    return (indic.id !== "94" && indic.id !== "35" && indic.id !== "77")
                 })
                 this.DBKeyIndicators = this.$store.DBKeyIndicators
                 this.DBClassifIndicators = this.$store.DBClassifIndicators
@@ -239,23 +239,22 @@
 
                 if(this.searchedIndicatorTerm != '') {
                     this.isSearching = true
+                    _.each(this.DBIndicators, function(indicator) {
+                        var indicatorText = indicator.text.toLowerCase()
+
+                        if(indicatorText.split(self.searchedIndicatorTerm).length > 1) {
+                          self.searchedIndicatorsArray.push(indicator)
+                          var foundClassif = _.find(self.displayedClassifIndicators, function(classif){
+                            return classif.key == indicator.classif
+                        })
+                        foundClassif.items.push(indicator)
+                      } 
+                    })
                 }
                 else {
                     this.isSearching = false
                     this.reinitDisplayedClassifIndicators()
                 }
-
-                _.each(this.DBIndicators, function(indicator) {
-                    var indicatorText = indicator.text.toLowerCase()
-
-                    if(indicatorText.split(self.searchedIndicatorTerm).length > 1) {
-                      self.searchedIndicatorsArray.push(indicator)
-                      var foundClassif = _.find(self.displayedClassifIndicators, function(classif){
-                        return classif.key == indicator.classif
-                    })
-                    foundClassif.items.push(indicator)
-                  } 
-              })
             },
 
             highlightSearchedTerm: function (term) {
@@ -282,9 +281,12 @@
                 var self = this
                 this.displayedClassifIndicators = []
                 _.each(this.DBClassifIndicators, function(indicator){
+                    var goodIndicators = _.filter(indicator.items, function (item){
+                        return item.id !== "77";
+                    })
                     self.displayedClassifIndicators.push({
                       key: indicator.key,
-                      items: indicator.items
+                      items: goodIndicators
                   })
                 })
             },

@@ -19,7 +19,7 @@ var specificIndicators = [
     {id:57, labels:[{value:"0.0", label: "never"}, {value:"0.3", label: "once"}, {value:"0.7", label: "at least 6 times"}, {value:"1.0", label:"annually"}]},
     {id:92, labels:[{value:"0.0", label: "never"}, {value:"0.3", label: "once"}, {value:"0.7", label: "at least 6 times"}, {value:"1.0", label:"annually"}]},
     {id:99, labels:[{value:"0.0", label: "never"}, {value:"0.3", label: "once"}, {value:"0.7", label: "at least 6 times"}, {value:"1.0", label:"annually"}]},
-    {id:150, labels:[{value:"Low income", label: "Low income", inc:0}, {value:"Lower middle income", label: "Lower middle income", inc:1}, {value:"Upper middle income", label: "Upper middle income", inc:2}, {value:"High income", label:"High income", inc:3}]},
+    {id:150, labels:[{value:"9993", label: "Low income", inc:0}, {value:"9992", label: "Lower middle income", inc:1}, {value:"9999", label: "Upper middle income", inc:2}, {value:"9996", label:"High income", inc:3}]},
     {id:7, labels:[{value:"0.0", label: "not adopted"}, {value:"1.0", label: "adopted"}]}
 ];
 
@@ -71,7 +71,7 @@ async function getAPIIndicators ($store) {
         else if(classifKey == 'Planning') classifAlpha = 1
 
         classifItems = _.filter(classifItems, function (indic){
-            return (indic.id !== "94" && indic.id !== "35")
+            return (indic.id !== "94" && indic.id !== "35" || indic.id !== "77")
         })
 
         var classif = {

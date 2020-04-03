@@ -526,6 +526,7 @@ export default {
             var self = this
             this.computedAreasData = []
 
+            console.log("updateComputedAreasData");
             _.each(this.$store.DBGeography, function(geoObj){
                 var geoValue = 'no data'
                 var geoColor = '#8C8C8C'
@@ -547,11 +548,15 @@ export default {
                                 var foundSpecificIndicator = _.find(UTILS.specificIndicators, function (indic) {
                                     return self.selectedIndicatorObj.id == indic.id;
                                 })
-
+                                console.log("foundSpecificIndicator", foundSpecificIndicator)
+                                console.log("geoData", geoData.years)
+                                console.log("indicatorLastYear", self.indicatorLastYear)
                                 geoValue = geoData.years[self.indicatorLastYear]
+                                console.log("geoValue", geoValue)
                                 var findObj = _.find(foundSpecificIndicator.labels, function(lbl){
-                                    return geoValue == lbl.label
+                                    return geoValue == lbl.value
                                 });
+                                console.log("findObj", findObj)
                                 geoColor = self.mapColors[findObj.inc]
                             } else{
                                 geoValue = parseFloat(geoData.years[self.indicatorLastYear])
