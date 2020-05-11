@@ -444,8 +444,6 @@ export default {
                         self.indicatorMethodoObj = _.find(this.$store.DBIndicatorsMethodo, function (ind){
                             return ind.indicator_id == self.selectedIndicatorObj.id;
                         })
-                        console.log("self.selectedIndicatorObj", self.selectedIndicatorObj)
-                        console.log("indicatorMethodoObj", self.indicatorMethodoObj)
                     }
 
                     var tmpSelectedGeographies = [];
@@ -526,7 +524,6 @@ export default {
             var self = this
             this.computedAreasData = []
 
-            console.log("updateComputedAreasData");
             _.each(this.$store.DBGeography, function(geoObj){
                 var geoValue = 'no data'
                 var geoColor = '#8C8C8C'
@@ -538,9 +535,7 @@ export default {
                         if(geoData.years[self.indicatorLastYear] !== 'Not Available') {
                             if(self.selectedIndicatorObj.dataviz_type == 'binary') {
                                 geoValue = geoData.years[self.indicatorLastYear]
-                                console.log("geoValue", geoValue, geoData.years)
                                 if(geoValue == 'Yes' || geoValue == '1' || geoValue == 1){
-                                    console.log("c est egal à 1");
                                     geoColor = '#F7CC3D'
                                 }
                                 else geoColor = '#EC9A3A'
@@ -548,15 +543,10 @@ export default {
                                 var foundSpecificIndicator = _.find(UTILS.specificIndicators, function (indic) {
                                     return self.selectedIndicatorObj.id == indic.id;
                                 })
-                                console.log("foundSpecificIndicator", foundSpecificIndicator)
-                                console.log("geoData", geoData.years)
-                                console.log("indicatorLastYear", self.indicatorLastYear)
                                 geoValue = geoData.years[self.indicatorLastYear]
-                                console.log("geoValue", geoValue)
                                 var findObj = _.find(foundSpecificIndicator.labels, function(lbl){
                                     return geoValue == lbl.value
                                 });
-                                console.log("findObj", findObj)
                                 geoColor = self.mapColors[findObj.inc]
                             } else{
                                 geoValue = parseFloat(geoData.years[self.indicatorLastYear])
@@ -706,11 +696,14 @@ export default {
                     return geoData.m49 == geoM49
                 });
 
+                console.log("geoData", geoData)
+
                 if(geoData !== undefined) {
                     var nbYearsWithData = 0
                     _.each(self.timeseriesCategories, function (xYearCategory) {
                         if(geoData.years[xYearCategory] !== undefined) {
                             var yearValue = parseFloat(geoData.years[xYearCategory])
+                            console.log("yearValue", yearValue);
                             if(self.selectedIndicatorObj.dataviz_type == 'binary'){
                               yearValue = Math.round(yearValue*100)  
                             } 
@@ -926,10 +919,12 @@ export default {
                         tab_text += '<tr><td>'+self.$store.DBIndicatorsObj[self.selectedIndicator].name+'</td><td>'+self.$store.DBGeographyObj[countryObj.m49].name+'</td><td>'+self.indicatorLastYear+'</td><td>'+countryObj.value+'</td></tr>'
                     }*/
 
-                    if(self.timeseriesDisplayed) {
+                    if(self.timeseriesDisplayed && contentType == "chart") {
                         _.each(self.timeseriesCategories, function(categYear, indexYear){
                             _.each(self.timeseriesGeographiesData, function(geoObj){
+                                console.log("geoObj", geoObj)
                                 var countryValue = geoObj.data[indexYear]
+                                console.log("countryValue", countryValue);
                                 if(isNaN(countryValue)) countryValue = "no data";
 
                                 if(self.selectedIndicatorObj.dataviz_type == "ordinal") {

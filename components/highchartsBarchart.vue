@@ -5,6 +5,7 @@
 </template>
 
 <script>
+import * as UTILS from '~/commons/utils/index.js'
 import axios from 'axios'
 import {_} from 'underscore'
 

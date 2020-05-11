@@ -1,10 +1,17 @@
 <template>
   <div class="geovaluestable_cell" :data-type="dataType" :data-referring="isReferring">
-    <!--<div style="position:absolute">{{indicatorData}}</div>-->
     <div class="cell_value">
       <div class="cell_value_nodata" v-if="hasNoData">-</div>
 
       <div class="cell_value_histo" v-if="!hasNoData && (dataType !== 'binary' || geoType != 'country') && (dataType !== 'ordinal' && geoType !== 'country')">
+        <div class="histo_bar" :style="{height: computedBarHeight + '%'}" :data-value="dataValue">
+          <div class="bar_value">
+            <span class="bar_value_html" v-html="dataValue"></span>
+            <span class="value_unit" v-if="(dataType == 'binary' && geoType != 'country')">&nbsp;%</span></div>
+        </div>
+      </div>
+
+      <div class="cell_value_histo" v-if="!hasNoData && (dataType == 'bar graph' && geoType == 'country')">
         <div class="histo_bar" :style="{height: computedBarHeight + '%'}" :data-value="dataValue">
           <div class="bar_value">
             <span class="bar_value_html" v-html="dataValue"></span>

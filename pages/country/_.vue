@@ -13,7 +13,7 @@
                         <a class="cartridge_website_link" v-if="NSOWebsite != ''  && (countryObj.subregion !== '' && countryObj.region !== '')" :href="NSOWebsite" target="_blank">NSO Website</a>
                     </div>
                     <div class="cartridge_col" data-col="2" v-if="dataLoaded && (countryObj.subregion !== '' && countryObj.region !== '')">
-                        <div class="cartridge_incgroup">Income group : {{lastIncomeGroup}} </div>
+                        <div class="cartridge_incgroup">Income group : {{lastIncomeGroupLabel}} </div>
                         <div class="cartridge_subregion">Subregion : {{countryObj.subregion}} </div>
                     </div>
                 </div>
@@ -201,6 +201,7 @@ export default {
             lastGDPAvailable: '',
             NSOWebsite: '',
             lastIncomeGroup: '',
+            lastIncomeGroupLabel: '',
             displayIndicatorsModal: false,
             displayAboutModal: false,
             displayDownloadModal: false
@@ -344,6 +345,7 @@ export default {
                 if(allIncGroups !== undefined) {
                     var tmpIncGroup = _.values(allIncGroups.years)[_.size(allIncGroups.years)-1]
                     this.lastIncomeGroup = tmpIncGroup
+                    this.lastIncomeGroupLabel = UTILS.incomeGroupsLabels[this.lastIncomeGroup]
                 }
 
                 var allWebsiteLinks = this.$store.DBGeoItems[this.selectedCountry].indicators[77]

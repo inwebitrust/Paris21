@@ -23,6 +23,13 @@ var specificIndicators = [
     {id:7, labels:[{value:"0.0", label: "not adopted"}, {value:"1.0", label: "adopted"}]}
 ];
 
+var incomeGroupsLabels = {
+  "9993": "Low income",
+  "9992": "Lower middle income",
+  "9999": "Upper middle income",
+  "9996": "High income"
+}
+
 // get indicators table
 // GLOBAL VAR : $store.DBClassifIndicators - $store.DBIndicators - $store.DBIndicatorsObj
 async function getAPIIndicators ($store) {
@@ -420,5 +427,6 @@ export {
   getLastKeyFromObj,
   getAPIIndicatorItemData,
   getGeoGroups,
-  getIndicatorsMethodo
+  getIndicatorsMethodo,
+  incomeGroupsLabels
 }
