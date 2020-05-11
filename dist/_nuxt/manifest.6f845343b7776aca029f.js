@@ -91,7 +91,7 @@
 /******/ 		if (__webpack_require__.nc) {
 /******/ 			script.setAttribute("nonce", __webpack_require__.nc);
 /******/ 		}
-/******/ 		script.src = __webpack_require__.p + "" + ({"0":"pages/indicator/_","1":"pages/index","2":"pages/country/_","3":"pages/report/index","4":"pages/about/index","5":"layouts/default"}[chunkId]||chunkId) + "." + {"0":"104c5428b602a0f42bf3","1":"a0608df354cdc5ec08a8","2":"9c64782a85350fb2318c","3":"816d16e25350fb8c60c9","4":"c7461bcd75edc935c28f","5":"e413e0b84cea115baed6"}[chunkId] + ".js";
+/******/ 		script.src = __webpack_require__.p + "" + ({"0":"pages/indicator/_","1":"pages/index","2":"pages/country/_","3":"pages/report/index","4":"pages/about/index","5":"layouts/default"}[chunkId]||chunkId) + "." + {"0":"52050e9145873bf5bd0d","1":"627a774bf28f822fc9d4","2":"19da955a4b0e87fdbad8","3":"8034336e8f87e3c2c98b","4":"22e40cd5ec6ad461c56c","5":"e413e0b84cea115baed6"}[chunkId] + ".js";
 /******/ 		var timeout = setTimeout(onScriptComplete, 120000);
 /******/ 		script.onerror = script.onload = onScriptComplete;
 /******/ 		function onScriptComplete() {

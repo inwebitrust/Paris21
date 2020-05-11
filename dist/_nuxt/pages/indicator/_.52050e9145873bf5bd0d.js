@@ -251,7 +251,7 @@ var render = function() {
                 _vm.methodoInfos.data !== ""
                   ? _c("div", { staticClass: "content_block" }, [
                       _c("div", { staticClass: "block_title" }, [
-                        _vm._v("Data")
+                        _vm._v("Limitations")
                       ]),
                       _c("div", {
                         staticClass: "block_text",
@@ -31453,8 +31453,6 @@ var _this = this;
                         self.indicatorMethodoObj = __WEBPACK_IMPORTED_MODULE_3_underscore__["_"].find(this.$store.DBIndicatorsMethodo, function (ind) {
                             return ind.indicator_id == self.selectedIndicatorObj.id;
                         });
-                        console.log("self.selectedIndicatorObj", self.selectedIndicatorObj);
-                        console.log("indicatorMethodoObj", self.indicatorMethodoObj);
                     }
 
                     var tmpSelectedGeographies = [];
@@ -31549,19 +31547,16 @@ var _this = this;
                         if (geoData.years[self.indicatorLastYear] !== 'Not Available') {
                             if (self.selectedIndicatorObj.dataviz_type == 'binary') {
                                 geoValue = geoData.years[self.indicatorLastYear];
-                                console.log("geoValue", geoValue, geoData.years);
                                 if (geoValue == 'Yes' || geoValue == '1' || geoValue == 1) {
-                                    console.log("c est egal à 1");
                                     geoColor = '#F7CC3D';
                                 } else geoColor = '#EC9A3A';
                             } else if (self.selectedIndicatorObj.dataviz_type == 'text') {
-                                var foundSpecificIndicator = __WEBPACK_IMPORTED_MODULE_3_underscore__["_"].find(__WEBPACK_IMPORTED_MODULE_2__commons_utils_index_js__["i" /* specificIndicators */], function (indic) {
+                                var foundSpecificIndicator = __WEBPACK_IMPORTED_MODULE_3_underscore__["_"].find(__WEBPACK_IMPORTED_MODULE_2__commons_utils_index_js__["j" /* specificIndicators */], function (indic) {
                                     return self.selectedIndicatorObj.id == indic.id;
                                 });
-
                                 geoValue = geoData.years[self.indicatorLastYear];
                                 var findObj = __WEBPACK_IMPORTED_MODULE_3_underscore__["_"].find(foundSpecificIndicator.labels, function (lbl) {
-                                    return geoValue == lbl.label;
+                                    return geoValue == lbl.value;
                                 });
                                 geoColor = self.mapColors[findObj.inc];
                             } else {
@@ -31613,7 +31608,7 @@ var _this = this;
 
             this.categoriesData = [];
 
-            var foundSpecificIndicator = __WEBPACK_IMPORTED_MODULE_3_underscore__["_"].find(__WEBPACK_IMPORTED_MODULE_2__commons_utils_index_js__["i" /* specificIndicators */], function (indic) {
+            var foundSpecificIndicator = __WEBPACK_IMPORTED_MODULE_3_underscore__["_"].find(__WEBPACK_IMPORTED_MODULE_2__commons_utils_index_js__["j" /* specificIndicators */], function (indic) {
                 return self.selectedIndicatorObj.id == indic.id;
             });
 
@@ -31712,11 +31707,14 @@ var _this = this;
                     return geoData.m49 == geoM49;
                 });
 
+                console.log("geoData", geoData);
+
                 if (geoData !== undefined) {
                     var nbYearsWithData = 0;
                     __WEBPACK_IMPORTED_MODULE_3_underscore__["_"].each(self.timeseriesCategories, function (xYearCategory) {
                         if (geoData.years[xYearCategory] !== undefined) {
                             var yearValue = parseFloat(geoData.years[xYearCategory]);
+                            console.log("yearValue", yearValue);
                             if (self.selectedIndicatorObj.dataviz_type == 'binary') {
                                 yearValue = Math.round(yearValue * 100);
                             } else if (self.selectedIndicatorObj.dataviz_type == 'ordinal') {
@@ -31928,10 +31926,12 @@ var _this = this;
                         tab_text += '<tr><td>'+self.$store.DBIndicatorsObj[self.selectedIndicator].name+'</td><td>'+self.$store.DBGeographyObj[countryObj.m49].name+'</td><td>'+self.indicatorLastYear+'</td><td>'+countryObj.value+'</td></tr>'
                     }*/
 
-                    if (self.timeseriesDisplayed) {
+                    if (self.timeseriesDisplayed && contentType == "chart") {
                         __WEBPACK_IMPORTED_MODULE_3_underscore__["_"].each(self.timeseriesCategories, function (categYear, indexYear) {
                             __WEBPACK_IMPORTED_MODULE_3_underscore__["_"].each(self.timeseriesGeographiesData, function (geoObj) {
+                                console.log("geoObj", geoObj);
                                 var countryValue = geoObj.data[indexYear];
+                                console.log("countryValue", countryValue);
                                 if (isNaN(countryValue)) countryValue = "no data";
 
                                 if (self.selectedIndicatorObj.dataviz_type == "ordinal") {
@@ -32017,7 +32017,7 @@ var _this = this;
                     var labelizedObj = {};
                     __WEBPACK_IMPORTED_MODULE_3_underscore__["_"].each(JSONYearData, function (objData) {
                         var countryValue = parseFloat(objData.value).toFixed(1);
-                        var foundSpecificIndicator = __WEBPACK_IMPORTED_MODULE_3_underscore__["_"].find(__WEBPACK_IMPORTED_MODULE_2__commons_utils_index_js__["i" /* specificIndicators */], function (indic) {
+                        var foundSpecificIndicator = __WEBPACK_IMPORTED_MODULE_3_underscore__["_"].find(__WEBPACK_IMPORTED_MODULE_2__commons_utils_index_js__["j" /* specificIndicators */], function (indic) {
                             return self.selectedIndicatorObj.id == indic.id;
                         });
                         if (foundSpecificIndicator !== undefined) {
@@ -32088,7 +32088,7 @@ var _this = this;
                     var labelizedObj = {};
                     __WEBPACK_IMPORTED_MODULE_3_underscore__["_"].each(JSONYearData, function (objData) {
                         var countryValue = parseFloat(objData.value).toFixed(1);
-                        var foundSpecificIndicator = __WEBPACK_IMPORTED_MODULE_3_underscore__["_"].find(__WEBPACK_IMPORTED_MODULE_2__commons_utils_index_js__["i" /* specificIndicators */], function (indic) {
+                        var foundSpecificIndicator = __WEBPACK_IMPORTED_MODULE_3_underscore__["_"].find(__WEBPACK_IMPORTED_MODULE_2__commons_utils_index_js__["j" /* specificIndicators */], function (indic) {
                             return self.selectedIndicatorObj.id == indic.id;
                         });
                         if (foundSpecificIndicator !== undefined) {
@@ -32490,7 +32490,7 @@ module.exports = __webpack_require__.p + "img/logo-wedodata.a24baa6.svg";
   mounted: function mounted() {
     var self = this;
 
-    this.foundSpecificIndicator = __WEBPACK_IMPORTED_MODULE_1_underscore__["_"].find(__WEBPACK_IMPORTED_MODULE_2__commons_utils_index_js__["i" /* specificIndicators */], function (indic) {
+    this.foundSpecificIndicator = __WEBPACK_IMPORTED_MODULE_1_underscore__["_"].find(__WEBPACK_IMPORTED_MODULE_2__commons_utils_index_js__["j" /* specificIndicators */], function (indic) {
       return self.indicatorID == indic.id;
     });
     console.log("foundSpecificIndicator", this.foundSpecificIndicator);
@@ -35106,7 +35106,7 @@ if (false) {(function () {
 "use strict";
 /* unused harmony export countryISOMapping2To3 */
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return countryISOMapping3To2; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "i", function() { return specificIndicators; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "j", function() { return specificIndicators; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return getAPIIndicators; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return getAPIGeography; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return getAPIGeoItemData; });
@@ -35115,6 +35115,7 @@ if (false) {(function () {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return getAPIIndicatorItemData; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "f", function() { return getGeoGroups; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "g", function() { return getIndicatorsMethodo; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "i", function() { return incomeGroupsLabels; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__("Xxa5");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_asyncToGenerator__ = __webpack_require__("exGp");
@@ -35127,8 +35128,6 @@ if (false) {(function () {
 
 
 
-// get indicators table
-// GLOBAL VAR : $store.DBClassifIndicators - $store.DBIndicators - $store.DBIndicatorsObj
 var getAPIIndicators = function () {
   var _ref = __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_asyncToGenerator___default()( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee($store) {
     var config, randNb;
@@ -35175,7 +35174,7 @@ var getAPIIndicators = function () {
                 if (classifKey == 'Production') classifAlpha = 2;else if (classifKey == 'Dissemination') classifAlpha = 3;else if (classifKey == 'Use') classifAlpha = 4;else if (classifKey == 'Investment') classifAlpha = 5;else if (classifKey == 'Planning') classifAlpha = 1;
 
                 classifItems = __WEBPACK_IMPORTED_MODULE_4_underscore__["_"].filter(classifItems, function (indic) {
-                  return indic.id !== "94" && indic.id !== "35";
+                  return indic.id !== "94" && indic.id !== "35" || indic.id !== "77";
                 });
 
                 var classif = {
@@ -35224,7 +35223,17 @@ var countryISOMapping3To2 = { AFG: "AF", ALA: "AX", ALB: "AL", DZA: "DZ", ASM: "
 
 var countryISOMapping2To3 = { AF: 'AFG', AX: 'ALA', AL: 'ALB', DZ: 'DZA', AS: 'ASM', AD: 'AND', AO: 'AGO', AI: 'AIA', AQ: 'ATA', AG: 'ATG', AR: 'ARG', AM: 'ARM', AW: 'ABW', AU: 'AUS', AT: 'AUT', AZ: 'AZE', BS: 'BHS', BH: 'BHR', BD: 'BGD', BB: 'BRB', BY: 'BLR', BE: 'BEL', BZ: 'BLZ', BJ: 'BEN', BM: 'BMU', BT: 'BTN', BO: 'BOL', BA: 'BIH', BW: 'BWA', BV: 'BVT', BR: 'BRA', VG: 'VGB', IO: 'IOT', BN: 'BRN', BG: 'BGR', BF: 'BFA', BI: 'BDI', KH: 'KHM', CM: 'CMR', CA: 'CAN', CV: 'CPV', KY: 'CYM', CF: 'CAF', TD: 'TCD', CL: 'CHL', CN: 'CHN', HK: 'HKG', MO: 'MAC', CX: 'CXR', CC: 'CCK', CO: 'COL', KM: 'COM', CG: 'COG', CD: 'COD', CK: 'COK', CR: 'CRI', CI: 'CIV', HR: 'HRV', CU: 'CUB', CY: 'CYP', CZ: 'CZE', DK: 'DNK', DJ: 'DJI', DM: 'DMA', DO: 'DOM', EC: 'ECU', EG: 'EGY', SV: 'SLV', GQ: 'GNQ', ER: 'ERI', EE: 'EST', ET: 'ETH', FK: 'FLK', FO: 'FRO', FJ: 'FJI', FI: 'FIN', FR: 'FRA', GF: 'GUF', PF: 'PYF', TF: 'ATF', GA: 'GAB', GM: 'GMB', GE: 'GEO', DE: 'DEU', GH: 'GHA', GI: 'GIB', GR: 'GRC', GL: 'GRL', GD: 'GRD', GP: 'GLP', GU: 'GUM', GT: 'GTM', GG: 'GGY', GN: 'GIN', GW: 'GNB', GY: 'GUY', HT: 'HTI', HM: 'HMD', VA: 'VAT', HN: 'HND', HU: 'HUN', IS: 'ISL', IN: 'IND', ID: 'IDN', IR: 'IRN', IQ: 'IRQ', IE: 'IRL', IM: 'IMN', IL: 'ISR', IT: 'ITA', JM: 'JAM', JP: 'JPN', JE: 'JEY', JO: 'JOR', KZ: 'KAZ', KE: 'KEN', KI: 'KIR', KP: 'PRK', KR: 'KOR', KW: 'KWT', KG: 'KGZ', LA: 'LAO', LV: 'LVA', LB: 'LBN', LS: 'LSO', LR: 'LBR', LY: 'LBY', LI: 'LIE', LT: 'LTU', LU: 'LUX', MK: 'MKD', MG: 'MDG', MW: 'MWI', MY: 'MYS', MV: 'MDV', ML: 'MLI', MT: 'MLT', MH: 'MHL', MQ: 'MTQ', MR: 'MRT', MU: 'MUS', YT: 'MYT', MX: 'MEX', FM: 'FSM', MD: 'MDA', MC: 'MCO', MN: 'MNG', ME: 'MNE', MS: 'MSR', MA: 'MAR', MZ: 'MOZ', MM: 'MMR', NA: 'NAM', NR: 'NRU', NP: 'NPL', NL: 'NLD', AN: 'ANT', NC: 'NCL', NZ: 'NZL', NI: 'NIC', NE: 'NER', NG: 'NGA', NU: 'NIU', NF: 'NFK', MP: 'MNP', NO: 'NOR', OM: 'OMN', PK: 'PAK', PW: 'PLW', PS: 'PSE', PA: 'PAN', PG: 'PNG', PY: 'PRY', PE: 'PER', PH: 'PHL', PN: 'PCN', PL: 'POL', PT: 'PRT', PR: 'PRI', QA: 'QAT', RE: 'REU', RO: 'ROU', RU: 'RUS', RW: 'RWA', BL: 'BLM', SH: 'SHN', KN: 'KNA', LC: 'LCA', MF: 'MAF', PM: 'SPM', VC: 'VCT', WS: 'WSM', SM: 'SMR', ST: 'STP', SA: 'SAU', SN: 'SEN', RS: 'SRB', SC: 'SYC', SL: 'SLE', SG: 'SGP', SK: 'SVK', SI: 'SVN', SB: 'SLB', SO: 'SOM', ZA: 'ZAF', GS: 'SGS', SS: 'SSD', ES: 'ESP', LK: 'LKA', SD: 'SDN', SR: 'SUR', SJ: 'SJM', SZ: 'SWZ', SE: 'SWE', CH: 'CHE', SY: 'SYR', TW: 'TWN', TJ: 'TJK', TZ: 'TZA', TH: 'THA', TL: 'TLS', TG: 'TGO', TK: 'TKL', TO: 'TON', TT: 'TTO', TN: 'TUN', TR: 'TUR', TM: 'TKM', TC: 'TCA', TV: 'TUV', UG: 'UGA', UA: 'UKR', AE: 'ARE', GB: 'GBR', US: 'USA', UM: 'UMI', UY: 'URY', UZ: 'UZB', VU: 'VUT', VE: 'VEN', VN: 'VNM', VI: 'VIR', WF: 'WLF', EH: 'ESH', YE: 'YEM', ZM: 'ZMB', ZW: 'ZWE' };
 
-var specificIndicators = [{ id: 1, labels: [{ value: "0.0", label: "no data" }, { value: "0.5", label: "once in last 6 years" }, { value: "1.0", label: "twice in last 6 years" }] }, { id: 96, labels: [{ value: "0.0", label: "no" }, { value: "0.5", label: "last 10 years" }, { value: "1.0", label: "within last 5 years" }] }, { id: 10, labels: [{ value: "0.0", label: "never" }, { value: "0.3", label: "once" }, { value: "0.7", label: "at least 6 times" }, { value: "1.0", label: "annually" }] }, { id: 36, labels: [{ value: "0.0", label: "never" }, { value: "0.3", label: "once" }, { value: "0.7", label: "at least 6 times" }, { value: "1.0", label: "annually" }] }, { id: 40, labels: [{ value: "0.0", label: "no" }, { value: "0.5", label: "last 10 years" }, { value: "1.0", label: "within last 5 years" }] }, { id: 46, labels: [{ value: "0.0", label: "never" }, { value: "0.3", label: "once" }, { value: "0.7", label: "at least 6 times" }, { value: "1.0", label: "annually" }] }, { id: 57, labels: [{ value: "0.0", label: "never" }, { value: "0.3", label: "once" }, { value: "0.7", label: "at least 6 times" }, { value: "1.0", label: "annually" }] }, { id: 92, labels: [{ value: "0.0", label: "never" }, { value: "0.3", label: "once" }, { value: "0.7", label: "at least 6 times" }, { value: "1.0", label: "annually" }] }, { id: 99, labels: [{ value: "0.0", label: "never" }, { value: "0.3", label: "once" }, { value: "0.7", label: "at least 6 times" }, { value: "1.0", label: "annually" }] }, { id: 150, labels: [{ value: "Low income", label: "Low income", inc: 0 }, { value: "Lower middle income", label: "Lower middle income", inc: 1 }, { value: "Upper middle income", label: "Upper middle income", inc: 2 }, { value: "High income", label: "High income", inc: 3 }] }, { id: 7, labels: [{ value: "0.0", label: "not adopted" }, { value: "1.0", label: "adopted" }] }];function getAPIGeography($store) {
+var specificIndicators = [{ id: 1, labels: [{ value: "0.0", label: "no data" }, { value: "0.5", label: "once in last 6 years" }, { value: "1.0", label: "twice in last 6 years" }] }, { id: 96, labels: [{ value: "0.0", label: "no" }, { value: "0.5", label: "last 10 years" }, { value: "1.0", label: "within last 5 years" }] }, { id: 10, labels: [{ value: "0.0", label: "never" }, { value: "0.3", label: "once" }, { value: "0.7", label: "at least 6 times" }, { value: "1.0", label: "annually" }] }, { id: 36, labels: [{ value: "0.0", label: "never" }, { value: "0.3", label: "once" }, { value: "0.7", label: "at least 6 times" }, { value: "1.0", label: "annually" }] }, { id: 40, labels: [{ value: "0.0", label: "no" }, { value: "0.5", label: "last 10 years" }, { value: "1.0", label: "within last 5 years" }] }, { id: 46, labels: [{ value: "0.0", label: "never" }, { value: "0.3", label: "once" }, { value: "0.7", label: "at least 6 times" }, { value: "1.0", label: "annually" }] }, { id: 57, labels: [{ value: "0.0", label: "never" }, { value: "0.3", label: "once" }, { value: "0.7", label: "at least 6 times" }, { value: "1.0", label: "annually" }] }, { id: 92, labels: [{ value: "0.0", label: "never" }, { value: "0.3", label: "once" }, { value: "0.7", label: "at least 6 times" }, { value: "1.0", label: "annually" }] }, { id: 99, labels: [{ value: "0.0", label: "never" }, { value: "0.3", label: "once" }, { value: "0.7", label: "at least 6 times" }, { value: "1.0", label: "annually" }] }, { id: 150, labels: [{ value: "9993", label: "Low income", inc: 0 }, { value: "9992", label: "Lower middle income", inc: 1 }, { value: "9999", label: "Upper middle income", inc: 2 }, { value: "9996", label: "High income", inc: 3 }] }, { id: 7, labels: [{ value: "0.0", label: "not adopted" }, { value: "1.0", label: "adopted" }] }];
+
+var incomeGroupsLabels = {
+  "9993": "Low income",
+  "9992": "Lower middle income",
+  "9999": "Upper middle income",
+  "9996": "High income"
+
+  // get indicators table
+  // GLOBAL VAR : $store.DBClassifIndicators - $store.DBIndicators - $store.DBIndicatorsObj
+};function getAPIGeography($store) {
   // console.log('domains.auth.getUserInfos')
   var config = {
     headers: {
@@ -35599,16 +35608,18 @@ var parseBorder = exports.parseBorder = function parseBorder(style) {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__("mtWM");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_axios__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_underscore__ = __webpack_require__("rdLu");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_underscore___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_underscore__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__commons_utils_index_js__ = __webpack_require__("ZBxL");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_axios__ = __webpack_require__("mtWM");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_axios__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_underscore__ = __webpack_require__("rdLu");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_underscore___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_underscore__);
 //
 //
 //
 //
 //
 //
+
 
 
 
@@ -35695,8 +35706,8 @@ var parseBorder = exports.parseBorder = function parseBorder(style) {
       var isShared = true;
 
       var barchartSeriesData = [];
-      __WEBPACK_IMPORTED_MODULE_1_underscore__["_"].each(this.timeseriesData, function (geoData, index) {
-        var geoValue = __WEBPACK_IMPORTED_MODULE_1_underscore__["_"].values(geoData.data)[geoData.data.length - 1];
+      __WEBPACK_IMPORTED_MODULE_2_underscore__["_"].each(this.timeseriesData, function (geoData, index) {
+        var geoValue = __WEBPACK_IMPORTED_MODULE_2_underscore__["_"].values(geoData.data)[geoData.data.length - 1];
         if (geoValue === undefined) geoValue = 0.00001;
         barchartSeriesData.push({
           name: geoData.name,
@@ -35770,7 +35781,7 @@ var parseBorder = exports.parseBorder = function parseBorder(style) {
                 } else {
                   var outOfString = '';
                   var regionM49 = this.point.m49;
-                  var foundGeoGroup = __WEBPACK_IMPORTED_MODULE_1_underscore__["_"].find(self.geoGroups, function (geoData) {
+                  var foundGeoGroup = __WEBPACK_IMPORTED_MODULE_2_underscore__["_"].find(self.geoGroups, function (geoData) {
                     return geoData["1"] == regionM49;
                   });
 
@@ -35797,7 +35808,7 @@ var parseBorder = exports.parseBorder = function parseBorder(style) {
       var geoItem = this.regionItems[inc];
 
       if (geoItem !== undefined) {
-        __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get({"api_url":"https://ocde.wedodata.fr/paris21_api/","datafile_url":"https://ocde.wedodata.fr/paris21_admin/API/file.csv"}.api_url + 'getAvailableData.php?indicatorID=' + self.indicatorID + '&year=' + self.indicatorLastYear + '&geoType=' + geoItem.geoType + '&geoID=' + geoItem.m49).then(function (response) {
+        __WEBPACK_IMPORTED_MODULE_1_axios___default.a.get({"api_url":"https://ocde.wedodata.fr/paris21_api/","datafile_url":"https://ocde.wedodata.fr/paris21_admin/API/file.csv"}.api_url + 'getAvailableData.php?indicatorID=' + self.indicatorID + '&year=' + self.indicatorLastYear + '&geoType=' + geoItem.geoType + '&geoID=' + geoItem.m49).then(function (response) {
           self.availableDataForRegions[geoItem.m49] = response.data;
           self.getAvailableDataForRegion(inc + 1);
         });
@@ -35809,7 +35820,7 @@ var parseBorder = exports.parseBorder = function parseBorder(style) {
   watch: {
     timeseriesData: function timeseriesData(obj) {
       var self = this;
-      this.regionItems = __WEBPACK_IMPORTED_MODULE_1_underscore__["_"].filter(this.timeseriesData, function (geoItem) {
+      this.regionItems = __WEBPACK_IMPORTED_MODULE_2_underscore__["_"].filter(this.timeseriesData, function (geoItem) {
         return geoItem.geoType !== "country";
       });
 
@@ -37584,7 +37595,7 @@ __WEBPACK_IMPORTED_MODULE_1_vue__["default"].use(__WEBPACK_IMPORTED_MODULE_4_vue
             this.modalSelectedIndicators = this.selectedIndicators;
             this.DBIndicators = this.$store.DBIndicators;
             this.DBIndicators = __WEBPACK_IMPORTED_MODULE_3_underscore__["_"].filter(this.DBIndicators, function (indic) {
-                return indic.id !== "94" && indic.id !== "35";
+                return indic.id !== "94" && indic.id !== "35" && indic.id !== "77";
             });
             this.DBKeyIndicators = this.$store.DBKeyIndicators;
             this.DBClassifIndicators = this.$store.DBClassifIndicators;
@@ -37616,22 +37627,21 @@ __WEBPACK_IMPORTED_MODULE_1_vue__["default"].use(__WEBPACK_IMPORTED_MODULE_4_vue
 
             if (this.searchedIndicatorTerm != '') {
                 this.isSearching = true;
+                __WEBPACK_IMPORTED_MODULE_3_underscore__["_"].each(this.DBIndicators, function (indicator) {
+                    var indicatorText = indicator.text.toLowerCase();
+
+                    if (indicatorText.split(self.searchedIndicatorTerm).length > 1) {
+                        self.searchedIndicatorsArray.push(indicator);
+                        var foundClassif = __WEBPACK_IMPORTED_MODULE_3_underscore__["_"].find(self.displayedClassifIndicators, function (classif) {
+                            return classif.key == indicator.classif;
+                        });
+                        foundClassif.items.push(indicator);
+                    }
+                });
             } else {
                 this.isSearching = false;
                 this.reinitDisplayedClassifIndicators();
             }
-
-            __WEBPACK_IMPORTED_MODULE_3_underscore__["_"].each(this.DBIndicators, function (indicator) {
-                var indicatorText = indicator.text.toLowerCase();
-
-                if (indicatorText.split(self.searchedIndicatorTerm).length > 1) {
-                    self.searchedIndicatorsArray.push(indicator);
-                    var foundClassif = __WEBPACK_IMPORTED_MODULE_3_underscore__["_"].find(self.displayedClassifIndicators, function (classif) {
-                        return classif.key == indicator.classif;
-                    });
-                    foundClassif.items.push(indicator);
-                }
-            });
         },
 
         highlightSearchedTerm: function highlightSearchedTerm(term) {
@@ -37658,9 +37668,12 @@ __WEBPACK_IMPORTED_MODULE_1_vue__["default"].use(__WEBPACK_IMPORTED_MODULE_4_vue
             var self = this;
             this.displayedClassifIndicators = [];
             __WEBPACK_IMPORTED_MODULE_3_underscore__["_"].each(this.DBClassifIndicators, function (indicator) {
+                var goodIndicators = __WEBPACK_IMPORTED_MODULE_3_underscore__["_"].filter(indicator.items, function (item) {
+                    return item.id !== "77";
+                });
                 self.displayedClassifIndicators.push({
                     key: indicator.key,
-                    items: indicator.items
+                    items: goodIndicators
                 });
             });
         },
@@ -38593,8 +38606,19 @@ module.exports = "data:image/svg+xml;base64,PHN2ZyBpZD0iaWNvbi1idG5fcmVzZXQiIHht
                 if (pointValue == '1' || pointValue == 1) pointValue = 'Yes';else pointValue = 'No';
               } else if (self.indicatorType == 'text') {
                 pointValue = this.point.value;
+                var foundSpecificIndicator = __WEBPACK_IMPORTED_MODULE_2_underscore__["_"].find(__WEBPACK_IMPORTED_MODULE_3__commons_utils_index_js__["j" /* specificIndicators */], function (indic) {
+                  return self.indicatorID == indic.id;
+                });
+                if (foundSpecificIndicator !== undefined) {
+                  var foundValue = __WEBPACK_IMPORTED_MODULE_2_underscore__["_"].find(foundSpecificIndicator.labels, function (lb) {
+                    return lb.value == that.point.value;
+                  });
+                  if (foundValue !== undefined) {
+                    pointValue = foundValue.label;
+                  }
+                }
               } else {
-                var foundSpecificIndicator = __WEBPACK_IMPORTED_MODULE_2_underscore__["_"].find(__WEBPACK_IMPORTED_MODULE_3__commons_utils_index_js__["i" /* specificIndicators */], function (indic) {
+                var foundSpecificIndicator = __WEBPACK_IMPORTED_MODULE_2_underscore__["_"].find(__WEBPACK_IMPORTED_MODULE_3__commons_utils_index_js__["j" /* specificIndicators */], function (indic) {
                   return self.indicatorID == indic.id;
                 });
                 if (foundSpecificIndicator !== undefined) {
@@ -40030,7 +40054,7 @@ module.exports = function slugify(str) {
   mounted: function mounted() {
     var self = this;
 
-    this.foundSpecificIndicator = __WEBPACK_IMPORTED_MODULE_1_underscore__["_"].find(__WEBPACK_IMPORTED_MODULE_2__commons_utils_index_js__["i" /* specificIndicators */], function (indic) {
+    this.foundSpecificIndicator = __WEBPACK_IMPORTED_MODULE_1_underscore__["_"].find(__WEBPACK_IMPORTED_MODULE_2__commons_utils_index_js__["j" /* specificIndicators */], function (indic) {
       return self.indicatorID == indic.id;
     });
     if (this.foundSpecificIndicator !== undefined) {

@@ -1,4 +1,4 @@
-webpackJsonp([4],{
+webpackJsonp([3],{
 
 /***/ "/9xw":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -182,7 +182,7 @@ var render = function() {
                 _vm.methodoInfos.data !== ""
                   ? _c("div", { staticClass: "content_block" }, [
                       _c("div", { staticClass: "block_title" }, [
-                        _vm._v("Data")
+                        _vm._v("Limitations")
                       ]),
                       _c("div", {
                         staticClass: "block_text",
@@ -458,161 +458,71 @@ exports.push([module.i, "@font-face{font-family:montserratbold;src:url(" + escap
 
 /***/ }),
 
-/***/ "2LCr":
+/***/ "334W":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_paris21Header_vue__ = __webpack_require__("mvsm");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_paris21Footer_vue__ = __webpack_require__("3wr8");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_paris21Modal_vue__ = __webpack_require__("cU99");
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-
-
-
-
-
-/* harmony default export */ __webpack_exports__["a"] = ({
-  components: {
-    'paris21Header': __WEBPACK_IMPORTED_MODULE_0__components_paris21Header_vue__["a" /* default */],
-    'paris21Footer': __WEBPACK_IMPORTED_MODULE_1__components_paris21Footer_vue__["a" /* default */],
-    'paris21Modal': __WEBPACK_IMPORTED_MODULE_2__components_paris21Modal_vue__["a" /* default */]
-  },
-  head: function head() {
-    return {
-      title: 'Statistical Capacity Monito',
-      meta: [{ hid: 'description', name: 'description', content: 'Find and explore indicators on statistical capacity' }, { hid: 'og:image', name: 'og:image', content: 'http://statisticalcapacitymonitor.org/images/share-img.png' }]
-    };
-  },
-
-  data: function data() {
-    return {
-      selectorExpanded: '',
-      displayDownloadModal: false,
-      displayPrivacyModal: false
-    };
-  },
-  mounted: function mounted() {},
-  methods: {}
-});
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    { staticClass: "page", attrs: { id: "Flagship", "data-page": "flagship" } },
+    [
+      _c("paris21Header", { attrs: { page: "report" } }),
+      _vm._m(0),
+      _c("paris21Modal", {
+        attrs: { type: "privacy", displayed: _vm.displayPrivacyModal },
+        on: {
+          closeModal: function($event) {
+            _vm.displayPrivacyModal = false
+          }
+        }
+      }),
+      _c("paris21Footer", {
+        on: {
+          privacyModal: function($event) {
+            _vm.displayPrivacyModal = true
+          }
+        }
+      })
+    ],
+    1
+  )
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "page_main" }, [
+      _c("div", { staticClass: "main_wrapper" }, [
+        _c("div", { staticClass: "flagship_cover" }),
+        _c(
+          "a",
+          {
+            staticClass: "flagship_bt",
+            attrs: {
+              href: "/pdf/Statistical Capacity Development Outlook 2019.pdf",
+              target: "_blank"
+            }
+          },
+          [_vm._v("DOWNLOAD (.PDF)")]
+        )
+      ])
+    ])
+  }
+]
+render._withStripped = true
+var esExports = { render: render, staticRenderFns: staticRenderFns }
+/* harmony default export */ __webpack_exports__["a"] = (esExports);
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-4e24a4a0", esExports)
+  }
+}
 
 /***/ }),
 
@@ -680,455 +590,6 @@ module.exports = __webpack_require__.p + "img/icon-soundcloud.e9f8b6b.svg";
 
 /***/ }),
 
-/***/ "DxZI":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    { staticClass: "page", attrs: { id: "AboutPage", "data-page": "about" } },
-    [
-      _c("paris21Header", {
-        attrs: { page: "about" },
-        on: {
-          downloadModal: function($event) {
-            _vm.displayDownloadModal = true
-          }
-        }
-      }),
-      _vm._m(0),
-      _c("paris21Modal", {
-        attrs: { type: "download", displayed: _vm.displayDownloadModal },
-        on: {
-          closeModal: function($event) {
-            _vm.displayDownloadModal = false
-          }
-        }
-      }),
-      _c("paris21Modal", {
-        attrs: { type: "privacy", displayed: _vm.displayPrivacyModal },
-        on: {
-          closeModal: function($event) {
-            _vm.displayPrivacyModal = false
-          }
-        }
-      }),
-      _c("paris21Footer", {
-        on: {
-          privacyModal: function($event) {
-            _vm.displayPrivacyModal = true
-          }
-        }
-      })
-    ],
-    1
-  )
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "page_main" }, [
-      _c("div", { staticClass: "main_wrapper" }, [
-        _c("div", { staticClass: "page_title" }, [
-          _vm._v("About Statistical Capacity Monitor")
-        ]),
-        _c("div", { staticClass: "page_content" }, [
-          _c("p", [
-            _c("span", { staticClass: "bolder" }, [
-              _vm._v("1. Why a Statistical Capacity Monitor? ")
-            ])
-          ]),
-          _c("p", [
-            _vm._v(
-              "National statistics are an essential component of policy making. They provide the evidence required to improve the lives of citizens, monitor results and hold governments accountable. Recent international agreements such as the 2030 Agenda for Sustainable Development and Agenda 2063 for Africa recognise the central role of strong statistics and place a significant emphasis on goals, indicators and national reporting. "
-            )
-          ]),
-          _c("p", [
-            _vm._v(
-              "At the same time, technological advances create a wealth of new data sources, some of which have the potential to enrich national statistical systems and enable more effective and responsive policy making. Although some countries have seen improvements in statistical capacity in recent decades, the results have not been universal. Today, a third of national statistical offices feel that statistical capacity development programmes are not meeting their needs."
-            )
-          ]),
-          _c("p", [
-            _vm._v(
-              "There is an urgent need to empower countries to track their progress towards more advanced statistical capacities, and to enable donors to invest in more and better data for development. Moreover, countries should use common benchmarks to evaluate their past, ongoing or planned NSDS processes, and thus improve their data planning processes."
-            )
-          ]),
-          _c("p", [
-            _vm._v(
-              "PARIS21’s Statistical Capacity Monitor was launched in April 2019 to describe global, regional and national statistical capacity trends. The Monitor features around 100 indicators on statistical capacity, and an intuitive interactive interface makes geographic and sectoral comparison, benchmarking and analysis quick and simple."
-            )
-          ]),
-          _c("p", [_vm._v("The value-added of the platform is threefold:")]),
-          _c("ul", [
-            _c("li", [
-              _c("span", { staticClass: "bolder" }, [_vm._v("Analysis:")]),
-              _vm._v(
-                " Quick understanding of regional and periodic trends in capacity development"
-              )
-            ]),
-            _c("li", [
-              _c("span", { staticClass: "bolder" }, [_vm._v("Transparency:")]),
-              _vm._v(
-                " Comprehensive overview over a variety of statistical capacity measurements "
-              )
-            ]),
-            _c("li", [
-              _c("span", { staticClass: "bolder" }, [_vm._v("Coordination:")]),
-              _vm._v(
-                "  Effective allocation of funds based on scientifically validated indicators"
-              )
-            ])
-          ]),
-          _c("br"),
-          _c("p", [
-            _c("span", { staticClass: "bolder" }, [_vm._v("2. How it works")])
-          ]),
-          _c("p", [
-            _vm._v(
-              "Considering the breadth, depth, and relation of the indicators in the Statistical Capacity Monitor, the data is classified according to five families:"
-            )
-          ]),
-          _c("ul", [
-            _c("li", [
-              _c("span", { staticClass: "bolder" }, [_vm._v("Planning:")]),
-              _vm._v(
-                " the process of making arrangements for statistical production"
-              )
-            ]),
-            _c("li", [
-              _c("span", { staticClass: "bolder" }, [_vm._v("Production:")]),
-              _vm._v(" the process of constructing statistics")
-            ]),
-            _c("li", [
-              _c("span", { staticClass: "bolder" }, [_vm._v("Dissemination:")]),
-              _vm._v(" the action of spreading statistical information widely")
-            ]),
-            _c("li", [
-              _c("span", { staticClass: "bolder" }, [_vm._v("Use:")]),
-              _vm._v(" statistical literacy, use and esteem of statistics")
-            ]),
-            _c("li", [
-              _c("span", { staticClass: "bolder" }, [_vm._v("Investment:")]),
-              _vm._v(" devotion of resources to the statistical system")
-            ])
-          ]),
-          _c("p", [
-            _vm._v(
-              "Most of the indicators have an annual periodicity. Users can visualise the data and cross-tabulate different types of indicators."
-            )
-          ]),
-          _c("br"),
-          _c("p", [
-            _c("span", { staticClass: "bolder" }, [_vm._v("3. Who is it for?")])
-          ]),
-          _c("p", [
-            _vm._v(
-              "Anybody interested in understanding and analysing how statistical capacity changes over time, and why. "
-            )
-          ]),
-          _c("p", [_vm._v("Specific user groups include:")]),
-          _c(
-            "table",
-            {
-              staticClass: "about_table",
-              attrs: { cellpadding: "0", cellspacing: "0" }
-            },
-            [
-              _c("tr", [
-                _c("td", [
-                  _c("span", { staticClass: "bigger" }, [
-                    _vm._v("National Statistical Offices")
-                  ]),
-                  _c("br"),
-                  _vm._v(
-                    "\n              Statistical Authorities\n            "
-                  )
-                ]),
-                _c("td", [
-                  _c("span", { staticClass: "bigger" }, [
-                    _vm._v("Government (agencies)")
-                  ]),
-                  _c("br"),
-                  _vm._v("\n              Ministries of Planning"),
-                  _c("br"),
-                  _vm._v("\n              Ministries of Finance"),
-                  _c("br"),
-                  _vm._v(
-                    "\n              Line ministries or public agencies\n            "
-                  )
-                ]),
-                _c("td", [
-                  _c("span", { staticClass: "bigger" }, [_vm._v("Academia")]),
-                  _c("br"),
-                  _vm._v("\n              Universities"),
-                  _c("br"),
-                  _vm._v("\n              Research institutes"),
-                  _c("br"),
-                  _vm._v(
-                    "\n              Statistical training institutes\n            "
-                  )
-                ])
-              ]),
-              _c("tr", [
-                _c("td", [
-                  _c("span", { staticClass: "bigger" }, [
-                    _vm._v("Donor community")
-                  ]),
-                  _c("br"),
-                  _vm._v("\n              Multilateral organisations"),
-                  _c("br"),
-                  _vm._v("\n              Regional banks"),
-                  _c("br"),
-                  _vm._v(
-                    "\n              National Development cooperation agencies"
-                  ),
-                  _c("br"),
-                  _vm._v("\n              Private foundations\n            ")
-                ]),
-                _c("td", [
-                  _c("span", { staticClass: "bigger" }, [
-                    _vm._v("Civil Society")
-                  ]),
-                  _vm._v("\n              NGOs"),
-                  _c("br"),
-                  _vm._v("\n              Think Tanks"),
-                  _c("br"),
-                  _vm._v(
-                    "\n              Civil Society Organisations\n            "
-                  )
-                ]),
-                _c("td", [
-                  _c("span", { staticClass: "bigger" }, [_vm._v("Media")]),
-                  _c("br"),
-                  _vm._v("\n              Journalists\n            ")
-                ])
-              ]),
-              _c("tr", [
-                _c("td", { staticClass: "centered", attrs: { colspan: "3" } }, [
-                  _c("span", { staticClass: "bigger" }, [_vm._v("Citizens")])
-                ])
-              ])
-            ]
-          ),
-          _c("br"),
-          _c("p", [
-            _c("span", { staticClass: "bolder" }, [
-              _vm._v("4. Links to other platforms ")
-            ])
-          ]),
-          _c("ul", [
-            _c("li", [
-              _c(
-                "a",
-                { attrs: { href: "https://data.oecd.org/", target: "_blank" } },
-                [_vm._v("OECD Data")]
-              )
-            ]),
-            _c("li", [
-              _c(
-                "a",
-                {
-                  attrs: {
-                    href: "www.fao.org/faostat/en/#home",
-                    target: "_blank"
-                  }
-                },
-                [_vm._v("FAOSTAT")]
-              )
-            ]),
-            _c("li", [
-              _c(
-                "a",
-                {
-                  attrs: {
-                    href: "http://www.fao.org/food-agriculture-microdata/en/",
-                    target: "_blank"
-                  }
-                },
-                [_vm._v("Food and Agriculture Microdata Catalogue")]
-              )
-            ]),
-            _c("li", [
-              _c(
-                "a",
-                {
-                  attrs: {
-                    href: "https://mo.ibrahim.foundation",
-                    target: "_blank"
-                  }
-                },
-                [_vm._v("Ibrahim Index of African Governance")]
-              )
-            ]),
-            _c("li", [
-              _c(
-                "a",
-                {
-                  attrs: {
-                    href: "https://sdmxcentral.imf.org/overview.html",
-                    target: "_blank"
-                  }
-                },
-                [_vm._v("IMF SDMX Central")]
-              )
-            ]),
-            _c("li", [
-              _c(
-                "a",
-                {
-                  attrs: {
-                    href: "https://unstats.un.org/home/nso_sites/",
-                    target: "_blank"
-                  }
-                },
-                [_vm._v("NSO websites")]
-              )
-            ]),
-            _c("li", [
-              _c(
-                "a",
-                {
-                  attrs: {
-                    href: "https://opendatawatch.com/monitoring/",
-                    target: "_blank"
-                  }
-                },
-                [_vm._v("Open Data Inventory (ODIN)")]
-              )
-            ]),
-            _c("li", [
-              _c(
-                "a",
-                {
-                  attrs: {
-                    href: "https://unstats.un.org/sdgs/indicators/database/",
-                    target: "_blank"
-                  }
-                },
-                [_vm._v("SDG Global Database")]
-              )
-            ]),
-            _c("li", [
-              _c(
-                "a",
-                {
-                  attrs: {
-                    href:
-                      "https://datatopics.worldbank.org/statisticalcapacity/SCIdashboard.aspx",
-                    target: "_blank"
-                  }
-                },
-                [_vm._v("World Bank Statistical Capacity Dashboard")]
-              )
-            ]),
-            _c("li", [
-              _c(
-                "a",
-                {
-                  attrs: {
-                    href:
-                      "https://datatopics.worldbank.org/world-development-indicators/",
-                    target: "_blank"
-                  }
-                },
-                [_vm._v("World Bank Development Indicators")]
-              )
-            ]),
-            _c("li", [
-              _c(
-                "a",
-                {
-                  attrs: {
-                    href: "https://info.worldbank.org/governance/wgi/",
-                    target: "_blank"
-                  }
-                },
-                [_vm._v("Worldwide Governance Indicators")]
-              )
-            ])
-          ]),
-          _c("br"),
-          _c("p", [_c("span", { staticClass: "bolder" }, [_vm._v("Updates")])]),
-          _c("p", [
-            _vm._v(
-              "New indicators will be added and existing ones updated on an annual basis. For a detailed dissemination calendar, please click "
-            ),
-            _c(
-              "a",
-              {
-                attrs: {
-                  href: "/pdf/DisseminationCalendar.pdf",
-                  target: "_blank"
-                }
-              },
-              [_vm._v("here")]
-            ),
-            _vm._v(".")
-          ]),
-          _c("p", [
-            _c("span", { staticClass: "bolder" }, [
-              _vm._v("Proposals of new indicators")
-            ])
-          ]),
-          _c("p", [
-            _vm._v(
-              "PARIS21 welcomes proposals of new indicators throughout the year. The proposals can be submitted via "
-            ),
-            _c(
-              "a",
-              {
-                attrs: {
-                  href: "mailto:contact@statisticalcapacitymonitor.org",
-                  target: "_blank"
-                }
-              },
-              [_vm._v("contact@statisticalcapacitymonitor.org")]
-            ),
-            _vm._v(
-              ". Submitted indicators will be reviewed and validated every month by the PARIS21 team. In case of approval, you will be contacted for further information. To be included in the Statistical Capacity Monitor, the indicator will need to pass a validation process by our team and relevant experts."
-            )
-          ]),
-          _c("p", [
-            _c("span", { staticClass: "bolder" }, [
-              _vm._v("Content support/ Data requests")
-            ])
-          ]),
-          _c("p", [
-            _vm._v(
-              "For any request regarding specific indicators, statistical capacity trends or content-related enquiries, please contact:"
-            ),
-            _c("br"),
-            _c(
-              "a",
-              {
-                attrs: { href: "mailto:contact@statisticalcapacitymonitor.org" }
-              },
-              [_vm._v("contact@statisticalcapacitymonitor.org")]
-            )
-          ])
-        ])
-      ])
-    ])
-  }
-]
-render._withStripped = true
-var esExports = { render: render, staticRenderFns: staticRenderFns }
-/* harmony default export */ __webpack_exports__["a"] = (esExports);
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-5357e832", esExports)
-  }
-}
-
-/***/ }),
-
 /***/ "MDBb":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1136,23 +597,23 @@ module.exports = __webpack_require__.p + "img/logo-wedodata.a24baa6.svg";
 
 /***/ }),
 
-/***/ "Nlsq":
+/***/ "PW3F":
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__("PZhA");
+var content = __webpack_require__("gAP1");
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__("rjj0")("44a3a6e0", content, false, {"sourceMap":false});
+var update = __webpack_require__("rjj0")("e4079478", content, false, {"sourceMap":false});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
  if(!content.locals) {
-   module.hot.accept("!!../../node_modules/css-loader/index.js?{\"sourceMap\":false,\"minimize\":true,\"importLoaders\":1,\"alias\":{\"/assets\":\"/Applications/MAMP/htdocs/OCDE_Paris21/assets\",\"/static\":\"/Applications/MAMP/htdocs/OCDE_Paris21/static\"}}!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-5357e832\",\"scoped\":false,\"hasInlineConfig\":true}!../../node_modules/sass-loader/lib/loader.js?{\"sourceMap\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue", function() {
-     var newContent = require("!!../../node_modules/css-loader/index.js?{\"sourceMap\":false,\"minimize\":true,\"importLoaders\":1,\"alias\":{\"/assets\":\"/Applications/MAMP/htdocs/OCDE_Paris21/assets\",\"/static\":\"/Applications/MAMP/htdocs/OCDE_Paris21/static\"}}!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-5357e832\",\"scoped\":false,\"hasInlineConfig\":true}!../../node_modules/sass-loader/lib/loader.js?{\"sourceMap\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue");
+   module.hot.accept("!!../../node_modules/css-loader/index.js?{\"sourceMap\":false,\"minimize\":true,\"importLoaders\":1,\"alias\":{\"/assets\":\"/Applications/MAMP/htdocs/OCDE_Paris21/assets\",\"/static\":\"/Applications/MAMP/htdocs/OCDE_Paris21/static\"}}!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-4e24a4a0\",\"scoped\":false,\"hasInlineConfig\":true}!../../node_modules/sass-loader/lib/loader.js?{\"sourceMap\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue", function() {
+     var newContent = require("!!../../node_modules/css-loader/index.js?{\"sourceMap\":false,\"minimize\":true,\"importLoaders\":1,\"alias\":{\"/assets\":\"/Applications/MAMP/htdocs/OCDE_Paris21/assets\",\"/static\":\"/Applications/MAMP/htdocs/OCDE_Paris21/static\"}}!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-4e24a4a0\",\"scoped\":false,\"hasInlineConfig\":true}!../../node_modules/sass-loader/lib/loader.js?{\"sourceMap\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue");
      if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
      update(newContent);
    });
@@ -1160,22 +621,6 @@ if(false) {
  // When the module is disposed, remove the <style> tags
  module.hot.dispose(function() { update(); });
 }
-
-/***/ }),
-
-/***/ "PZhA":
-/***/ (function(module, exports, __webpack_require__) {
-
-var escape = __webpack_require__("kxFB");
-exports = module.exports = __webpack_require__("FZ+f")(false);
-// imports
-
-
-// module
-exports.push([module.i, "@font-face{font-family:montserratbold;src:url(" + escape(__webpack_require__("KoCO")) + ") format(\"woff2\"),url(" + escape(__webpack_require__("cqiT")) + ") format(\"woff\");font-weight:400;font-style:normal}@font-face{font-family:montserratitalic;src:url(" + escape(__webpack_require__("hPgA")) + ") format(\"woff2\"),url(" + escape(__webpack_require__("hnDx")) + ") format(\"woff\");font-weight:400;font-style:normal}@font-face{font-family:montserratregular;src:url(" + escape(__webpack_require__("UBI+")) + ") format(\"woff2\"),url(" + escape(__webpack_require__("dL9s")) + ") format(\"woff\");font-weight:400;font-style:normal}@font-face{font-family:roboto_condensedbold;src:url(" + escape(__webpack_require__("CCFM")) + ") format(\"woff2\"),url(" + escape(__webpack_require__("CCFM")) + ") format(\"woff\");font-weight:400;font-style:normal}#AboutPage .page_main{background:#fff;margin-bottom:60px}.page_title{color:#ea6550;font-size:22px;margin-top:40px;border-bottom:2px solid #ea6550;padding:0 50px 10px;position:relative}.page_content{color:#2f2f2f;margin:20px 50px;padding-right:10px;overflow:auto;font-family:montserratregular;font-size:14px;text-align:left;line-height:20px;text-align:center}.page_content a{color:#ea6550;text-decoration:none;font-family:montserratbold;display:inline-block;border-bottom:2px solid #ea6550;line-height:16px}.page_content p{margin:20px 0;text-align:left}.page_content ul{text-align:left}.page_content .content_image{background:url(" + escape(__webpack_require__("uv/c")) + ") no-repeat 0 0;background-size:100% 100%;width:350px;height:350px;display:inline-block}.page_content .bolder{font-family:montserratbold}.about_table,.about_table td{border:1px solid;text-align:left;border-collapse:collapse}.about_table td{padding:10px}.about_table td.centered{text-align:center}.about_table .bigger{font-weight:700;font-size:14px}", ""]);
-
-// exports
-
 
 /***/ }),
 
@@ -1884,10 +1329,81 @@ module.exports = __webpack_require__.p + "img/logo-wedodata-black.3907ced.svg";
 
 /***/ }),
 
+/***/ "gAP1":
+/***/ (function(module, exports, __webpack_require__) {
+
+var escape = __webpack_require__("kxFB");
+exports = module.exports = __webpack_require__("FZ+f")(false);
+// imports
+
+
+// module
+exports.push([module.i, "@font-face{font-family:montserratbold;src:url(" + escape(__webpack_require__("KoCO")) + ") format(\"woff2\"),url(" + escape(__webpack_require__("cqiT")) + ") format(\"woff\");font-weight:400;font-style:normal}@font-face{font-family:montserratitalic;src:url(" + escape(__webpack_require__("hPgA")) + ") format(\"woff2\"),url(" + escape(__webpack_require__("hnDx")) + ") format(\"woff\");font-weight:400;font-style:normal}@font-face{font-family:montserratregular;src:url(" + escape(__webpack_require__("UBI+")) + ") format(\"woff2\"),url(" + escape(__webpack_require__("dL9s")) + ") format(\"woff\");font-weight:400;font-style:normal}@font-face{font-family:roboto_condensedbold;src:url(" + escape(__webpack_require__("CCFM")) + ") format(\"woff2\"),url(" + escape(__webpack_require__("CCFM")) + ") format(\"woff\");font-weight:400;font-style:normal}#Flagship{background:#ededed;background:-webkit-gradient(linear,left top,left bottom,from(#ededed),to(#dedede));background:linear-gradient(180deg,#ededed 0,#dedede);filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=\"#ededed\",endColorstr=\"#dedede\",GradientType=0)}#Flagship .page_main{min-height:400px}#Flagship .page_main .main_wrapper{display:inline-block;vertical-align:top;width:300px;margin:60px 0}#Flagship .flagship_cover{background:url(" + escape(__webpack_require__("pMKF")) + ") no-repeat 0 0;background-size:100% 100%;width:300px;height:429px;cursor:pointer;display:inline-block;-webkit-box-shadow:0 0 100px 0 #8c8c8c;box-shadow:0 0 100px 0 #8c8c8c}#Flagship .flagship_disclaimer{color:#2f2f2f;margin:14px 0}#Flagship .flagship_bt{background:#ea6550;text-transform:uppercase;color:#fff;border-radius:20px;display:inline-block;padding:10px 20px;cursor:pointer;font-family:roboto_condensedbold;text-decoration:none;margin-top:14px}#Flagship .flagship_bt:hover{background:#2f2f2f}", ""]);
+
+// exports
+
+
+/***/ }),
+
 /***/ "gNV7":
 /***/ (function(module, exports) {
 
 module.exports = "data:image/svg+xml;base64,PHN2ZyBpZD0iaWNvbi1mYWNlYm9vayIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB2aWV3Qm94PSIwIDAgMzAgMzAiPgogIDx0aXRsZT5pY29uLWZhY2Vib29rPC90aXRsZT4KICA8cGF0aCBkPSJNMTUuNTc4LDIxLjk3VjE1LjEyNzRoMi4yOTY3bC4zNDM4LTIuNjY2NUgxNS41NzhWMTAuNzU4NGMwLS43NzIuMjE0NC0xLjI5ODIsMS4zMjE1LTEuMjk4MmwxLjQxMi0uMDAwNlY3LjA3NDdBMTguODkzMiwxOC44OTMyLDAsMCwwLDE2LjI1MzksNi45N2EzLjIxMjksMy4yMTI5LDAsMCwwLTMuNDMsMy41MjQ4djEuOTY2NUgxMC41MjE4djIuNjY2NWgyLjMwMjVWMjEuOTdaIiBmaWxsPSIjZmZmIi8+Cjwvc3ZnPgo="
+
+/***/ }),
+
+/***/ "jx3d":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_paris21Header_vue__ = __webpack_require__("mvsm");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_paris21Footer_vue__ = __webpack_require__("3wr8");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_paris21Modal_vue__ = __webpack_require__("cU99");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+
+
+
+/* harmony default export */ __webpack_exports__["a"] = ({
+  components: {
+    'paris21Header': __WEBPACK_IMPORTED_MODULE_0__components_paris21Header_vue__["a" /* default */],
+    'paris21Footer': __WEBPACK_IMPORTED_MODULE_1__components_paris21Footer_vue__["a" /* default */],
+    'paris21Modal': __WEBPACK_IMPORTED_MODULE_2__components_paris21Modal_vue__["a" /* default */]
+  },
+  head: function head() {
+    return {
+      title: 'Statistical Capacity Monito',
+      meta: [{ hid: 'description', name: 'description', content: 'Find and explore indicators on statistical capacity' }, { hid: 'og:image', name: 'og:image', content: 'http://statisticalcapacitymonitor.org/images/share-img.png' }]
+    };
+  },
+
+  data: function data() {
+    return {
+      selectorExpanded: '',
+      displayPrivacyModal: false
+    };
+  },
+  mounted: function mounted() {},
+  methods: {}
+});
 
 /***/ }),
 
@@ -2031,10 +1547,75 @@ if (false) {(function () {
 
 /***/ }),
 
+/***/ "np6M":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_babelrc_false_cacheDirectory_false_presets_env_modules_false_targets_browsers_1_last_2_versions_not_ie_8_stage_2_plugins_transform_vue_jsx_transform_runtime_node_modules_vue_loader_lib_selector_type_script_index_0_index_vue__ = __webpack_require__("jx3d");
+/* empty harmony namespace reexport */
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_4e24a4a0_hasScoped_false_transformToRequire_video_src_source_src_object_src_embed_src_preserveWhitespace_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_index_vue__ = __webpack_require__("334W");
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__("PW3F")
+}
+var normalizeComponent = __webpack_require__("VU/8")
+/* script */
+
+
+/* template */
+
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __WEBPACK_IMPORTED_MODULE_0__babel_loader_babelrc_false_cacheDirectory_false_presets_env_modules_false_targets_browsers_1_last_2_versions_not_ie_8_stage_2_plugins_transform_vue_jsx_transform_runtime_node_modules_vue_loader_lib_selector_type_script_index_0_index_vue__["a" /* default */],
+  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_4e24a4a0_hasScoped_false_transformToRequire_video_src_source_src_object_src_embed_src_preserveWhitespace_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_index_vue__["a" /* default */],
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "pages/report/index.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-4e24a4a0", Component.options)
+  } else {
+    hotAPI.reload("data-v-4e24a4a0", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+/* harmony default export */ __webpack_exports__["default"] = (Component.exports);
+
+
+/***/ }),
+
 /***/ "oYva":
 /***/ (function(module, exports) {
 
 module.exports = "data:image/svg+xml;base64,PHN2ZyBpZD0iZHJvcGRvd24tYXJyb3ciIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgdmlld0JveD0iMCAwIDEwIDUiPgogIDx0aXRsZT5kcm9wZG93bi1hcnJvdzwvdGl0bGU+CiAgPHBvbHlnb24gcG9pbnRzPSIwIDAgNSA1IDEwIDAgMCAwIiBmaWxsPSIjZmZmIi8+Cjwvc3ZnPgo="
+
+/***/ }),
+
+/***/ "pMKF":
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__.p + "img/flagship_report-cover2@2x.1daf645.png";
 
 /***/ }),
 
@@ -2065,64 +1646,6 @@ module.exports = __webpack_require__.p + "img/schema-virtuous_data_cycle-2@2x.98
 /***/ (function(module, exports) {
 
 module.exports = "data:image/svg+xml;base64,PHN2ZyBpZD0iaWNvbi12aW1lbyIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB2aWV3Qm94PSIwIDAgMzAgMzAiPgogIDx0aXRsZT5pY29uLXZpbWVvPC90aXRsZT4KICA8cGF0aCBkPSJNNy45MTM1LDEyLjM1MzhsLjU1ODYuNzMyNHMxLjE1MTktLjkwNzgsMS41MzU5LS40NTQyLDEuODUsNS45MzYsMi4zMzkzLDYuOTQ3MWMuNDI3MS44ODY5LDEuNjA1MiwyLjA2LDIuODk3MywxLjIyMjJzNS41ODQ5LTQuNTAzMSw2LjM1MzYtOC44MzI0Yy43Njc5LTQuMzI3Ny01LjE2NzEtMy40MjExLTUuNzk1OC4zNDkyLDEuNTcxMi0uOTQzMSwyLjQxLjM4MzIsMS42MDU4LDEuODg1My0uODAyNSwxLjUtMS41MzU5LDIuNDc5Mi0xLjkyLDIuNDc5MnMtLjY3ODMtMS4wMDM5LTEuMTE3NS0yLjc1OTJjLS40NTM5LTEuODE0OS0uNDUxLTUuMDgzMS0yLjMzODQtNC43MTI1QzEwLjI1MjgsOS41Niw3LjkxMzUsMTIuMzUzOCw3LjkxMzUsMTIuMzUzOFoiIGZpbGw9IiNmZmYiLz4KPC9zdmc+Cg=="
-
-/***/ }),
-
-/***/ "yPeL":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_babelrc_false_cacheDirectory_false_presets_env_modules_false_targets_browsers_1_last_2_versions_not_ie_8_stage_2_plugins_transform_vue_jsx_transform_runtime_node_modules_vue_loader_lib_selector_type_script_index_0_index_vue__ = __webpack_require__("2LCr");
-/* empty harmony namespace reexport */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_5357e832_hasScoped_false_transformToRequire_video_src_source_src_object_src_embed_src_preserveWhitespace_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_index_vue__ = __webpack_require__("DxZI");
-var disposed = false
-function injectStyle (ssrContext) {
-  if (disposed) return
-  __webpack_require__("Nlsq")
-}
-var normalizeComponent = __webpack_require__("VU/8")
-/* script */
-
-
-/* template */
-
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = injectStyle
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __WEBPACK_IMPORTED_MODULE_0__babel_loader_babelrc_false_cacheDirectory_false_presets_env_modules_false_targets_browsers_1_last_2_versions_not_ie_8_stage_2_plugins_transform_vue_jsx_transform_runtime_node_modules_vue_loader_lib_selector_type_script_index_0_index_vue__["a" /* default */],
-  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_5357e832_hasScoped_false_transformToRequire_video_src_source_src_object_src_embed_src_preserveWhitespace_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_index_vue__["a" /* default */],
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "pages/about/index.vue"
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-5357e832", Component.options)
-  } else {
-    hotAPI.reload("data-v-5357e832", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-/* harmony default export */ __webpack_exports__["default"] = (Component.exports);
-
 
 /***/ }),
 
