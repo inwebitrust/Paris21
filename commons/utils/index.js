@@ -20,7 +20,8 @@ var specificIndicators = [
     {id:92, labels:[{value:"0.0", label: "never"}, {value:"0.3", label: "once"}, {value:"0.7", label: "at least 6 times"}, {value:"1.0", label:"annually"}]},
     {id:99, labels:[{value:"0.0", label: "never"}, {value:"0.3", label: "once"}, {value:"0.7", label: "at least 6 times"}, {value:"1.0", label:"annually"}]},
     {id:150, labels:[{value:"9993", label: "Low income", inc:0}, {value:"9992", label: "Lower middle income", inc:1}, {value:"9999", label: "Upper middle income", inc:2}, {value:"9996", label:"High income", inc:3}]},
-    {id:7, labels:[{value:"0.0", label: "not adopted"}, {value:"1.0", label: "adopted"}]}
+    {id:7, labels:[{value:"0.0", label: "not adopted"}, {value:"1.0", label: "adopted"}]},
+    {id:165, labels:[{value:"0.0", label: "expired or absent and not planning"}, {value:"1.0", label: "expired or absent but planning"}, {value:"2.0", label: "designing or adopting"}, {value:"3.0", label: "implementing"}]}
 ];
 
 var incomeGroupsLabels = {
@@ -416,6 +417,13 @@ function getLastKeyFromObj(obj, param, returnType){
   return undefined
 }
 
+function s2ab(s) { 
+  var buf = new ArrayBuffer(s.length); //convert s to arrayBuffer
+  var view = new Uint8Array(buf);  //create uint8array as viewer
+  for (var i=0; i<s.length; i++) view[i] = s.charCodeAt(i) & 0xFF; //convert to octet
+  return buf;    
+}
+
 export {
   countryISOMapping2To3,
   countryISOMapping3To2,
@@ -428,5 +436,6 @@ export {
   getAPIIndicatorItemData,
   getGeoGroups,
   getIndicatorsMethodo,
-  incomeGroupsLabels
+  incomeGroupsLabels,
+  s2ab
 }

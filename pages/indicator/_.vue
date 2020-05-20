@@ -240,10 +240,13 @@
 </template>
 
 <script>
+import Vue from 'vue'
 import * as UTILS from '~/commons/utils/index.js'
 import {_} from 'underscore'
 import * as jsPDF from 'jspdf'
 import html2canvas from 'html2canvas'
+import VueXlsx from 'vue-js-xlsx'
+Vue.use(VueXlsx)
 
 import paris21Header from '~/components/paris21Header.vue'
 import paris21Footer from '~/components/paris21Footer.vue'
@@ -401,7 +404,6 @@ export default {
             if(this.$store.csvDataPromiseIndicatorItemData === undefined || this.$store.DBIndicatorItems == undefined) {
                 this.$store.csvDataPromiseIndicatorItemData = UTILS.getAPIIndicatorItemData(this.$store, indicatorID)
                 this.$store.csvDataPromiseIndicatorItemData.then( function(promiseCallback) {
-                    //console.log('in store loaded', self.$store.DBGeography)
                     self.$store.csvDataPromiseIndicatorItemData = undefined
                     if(modaled !== undefined && modaled){
                         //self.updateComparisonGeos()
@@ -420,8 +422,6 @@ export default {
 
         updatePage: function () {
             var self = this
-
-            console.log("DBIndicatorsMethodo", this.$store.DBIndicatorsMethodo)
 
             _.each(self.defaultGeographiesPool, function (poolData, poolIndex){
                 var filteredCountries = _.filter(self.$store.DBGeography, function (co){
@@ -696,14 +696,11 @@ export default {
                     return geoData.m49 == geoM49
                 });
 
-                console.log("geoData", geoData)
-
                 if(geoData !== undefined) {
                     var nbYearsWithData = 0
                     _.each(self.timeseriesCategories, function (xYearCategory) {
                         if(geoData.years[xYearCategory] !== undefined) {
                             var yearValue = parseFloat(geoData.years[xYearCategory])
-                            console.log("yearValue", yearValue);
                             if(self.selectedIndicatorObj.dataviz_type == 'binary'){
                               yearValue = Math.round(yearValue*100)  
                             } 
@@ -883,20 +880,9 @@ export default {
         downloadAllCountryData: function (contentType) {
             var self = this;
 
-            var tab_text = ''
-            var data_type = 'data:application/vnd.ms-excel'
-
-            tab_text = '<html xmlns:x="urn:schemas-microsoft-com:office:excel">'
-            tab_text += '<head><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet>'
-
-            tab_text += '<x:Name>Data</x:Name>'
-
-            tab_text += '<x:WorksheetOptions><x:Panes></x:Panes></x:WorksheetOptions></x:ExcelWorksheet>'
-            tab_text += '</x:ExcelWorksheets></x:ExcelWorkbook></xml></head><body>'
-
-            tab_text += "<table border='1px'>"
-
-            tab_text += '<tr><th>Indicator</th><th>Country</th><th>Year</th><th>Data Value</th></tr>'
+            var tableArray = [
+                ["Indicator", "Country", "Year", "Data Value"]
+            ];
 
             var lastYear = self.timeseriesCategories[self.timeseriesCategories.length-1]
             //var tmpDatas = this.allAreasData.slice(150, 500);
@@ -922,9 +908,7 @@ export default {
                     if(self.timeseriesDisplayed && contentType == "chart") {
                         _.each(self.timeseriesCategories, function(categYear, indexYear){
                             _.each(self.timeseriesGeographiesData, function(geoObj){
-                                console.log("geoObj", geoObj)
                                 var countryValue = geoObj.data[indexYear]
-                                console.log("countryValue", countryValue);
                                 if(isNaN(countryValue)) countryValue = "no data";
 
                                 if(self.selectedIndicatorObj.dataviz_type == "ordinal") {
@@ -933,7 +917,7 @@ export default {
                                     else if(countryValue=="1.0") countryValue = "1";
                                 }
 
-                                tab_text += '<tr><td>'+self.$store.DBIndicatorsObj[self.selectedIndicator].name+'</td><td>'+geoObj.name+'</td><td>'+categYear+'</td><td>'+countryValue+'</td></tr>'
+                                tableArray.push([self.$store.DBIndicatorsObj[self.selectedIndicator].name, geoObj.name, categYear, countryValue]);
                             })
                         })
                     } else {
@@ -945,73 +929,29 @@ export default {
                                 countryValue = (parseFloat(countryValue)).toFixed(1)
                                 if(countryValue=="0.0") countryValue = "0";
                                 else if(countryValue=="1.0") countryValue = "1";
-                                /*
-                                var foundSpecificIndicator = _.find(UTILS.specificIndicators, function (indic) {
-                                  return self.selectedIndicatorObj.id == indic.id;
-                                })
-                                if(foundSpecificIndicator !== undefined) {
-                                    var specificLabelsObj = {}
-                                    _.each(foundSpecificIndicator.labels, function(indicLabel){
-                                        specificLabelsObj[indicLabel.value] = indicLabel;
-                                    })
-                                    countryValue = specificLabelsObj[countryValue].label
-                                }
-                                */
                             }
                         }
-                        tab_text += '<tr><td>'+self.$store.DBIndicatorsObj[self.selectedIndicator].name+'</td><td>'+self.$store.DBGeographyObj[countryObj.m49].name+'</td><td>'+self.indicatorLastYear+'</td><td>'+countryValue+'</td></tr>'
+                        tableArray.push([self.$store.DBIndicatorsObj[self.selectedIndicator].name, self.$store.DBGeographyObj[countryObj.m49].name, self.indicatorLastYear, countryValue])
                     }
                 }
             })
+            
+            tableArray.push(['','','','']);
+            tableArray.push(['','','','']);
 
-            tab_text += '<tr></tr><tr></tr><tr></tr>';
-            tab_text += '<tr><td>PARIS21 Statistical Capacity Monitor based on ' + this.selectedIndicatorObj.source + '</td></tr>';
-            tab_text += '<tr><td>' + this.selectedIndicatorObj.definition + '</td></tr>';
-            tab_text = tab_text + '</table></body></html>';
+            tableArray.push(['PARIS21 Statistical Capacity Monitor based on ' + this.selectedIndicatorObj.source, '', '', '']);
+            tableArray.push([this.selectedIndicatorObj.definition, '', '', '']);
 
-            tab_text = tab_text.replace(/[é]/g,"&eacute;")
-                                .replace(/[É]/g,"&Eacute;")
-                                .replace(/[à]/g,"&agrave;")
-                                .replace(/[è]/g,"&egrave;")
-                                .replace(/[â]/g,"&acirc;")
-                                .replace(/[Â]/g,"&Acirc;");
+            generateXLS(tableArray);
 
-
-            var ua = window.navigator.userAgent;
-            var msie = ua.indexOf("MSIE ");
-
-            this.xlsLinkAttr = data_type + ', ' + encodeURIComponent(tab_text)
-
-            if (msie > 0 || !!navigator.userAgent.match(/Trident.*rv\:11\./)) {
-                if (window.navigator.msSaveBlob) {
-                    var blob = new Blob([tab_text], {
-                        type: "application/csv;charset=utf-8;"
-                    });
-                    navigator.msSaveBlob(blob, 'Statistical Capacity Monitor data download.xls');
-                }
-            } else {
-                document.querySelector('#HeadLinkFake').setAttribute('href', this.xlsLinkAttr)
-                document.querySelector('#HeadLinkFake').click()
-            }
         },
 
         downloadOrdinalSoloData: function () {
             var self = this;
             
-            var tab_text = ''
-            var data_type = 'data:application/vnd.ms-excel'
-
-            tab_text = '<html xmlns:x="urn:schemas-microsoft-com:office:excel">'
-            tab_text += '<head><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet>'
-
-            tab_text += '<x:Name>Data</x:Name>'
-
-            tab_text += '<x:WorksheetOptions><x:Panes></x:Panes></x:WorksheetOptions></x:ExcelWorksheet>'
-            tab_text += '</x:ExcelWorksheets></x:ExcelWorkbook></xml></head><body>'
-
-            tab_text += "<table border='1px'>"
-
-            tab_text += '<tr><th>Indicator</th><th>Country</th><th>Year</th><th>Data Value</th><th>Data Aggregate</th></tr>'
+            var tableArray = [
+                ["Indicator", "Country", "Year", "Data Value", "Data Aggregate"]
+            ];
 
             _.each(this.ordinalRegionSoloData, function (ordinalObj) {
                 _.each(ordinalObj.years, function (yearData, yearID){
@@ -1035,59 +975,27 @@ export default {
                     });
 
                     _.each(labelizedObj, function (objData, objIndex){
-                        tab_text += '<tr><td>'+self.$store.DBIndicatorsObj[self.selectedIndicator].name+'</td><td>'+self.$store.DBGeographyObj[ordinalObj.m49].name+'</td><td>'+yearID+'</td><td>'+objIndex+'</td><td>'+objData.nb+'</td></tr>'
+                        tableArray.push([self.$store.DBIndicatorsObj[self.selectedIndicator].name, self.$store.DBGeographyObj[ordinalObj.m49].name, yearID, objIndex, objData.nb]);
                     })
                     
                 })
             });
 
-            tab_text += '<tr></tr><tr></tr><tr></tr>';
-            tab_text += '<tr><td>PARIS21 Statistical Capacity Monitor based on ' + this.selectedIndicatorObj.source + '</td></tr>';
-            tab_text += '<tr><td>' + this.selectedIndicatorObj.definition + '</td></tr>';
-            tab_text = tab_text + '</table></body></html>';
+            tableArray.push(['','','','','']);
+            tableArray.push(['','','','','']);
+            tableArray.push(['','','','','']);
+            tableArray.push(['PARIS21 Statistical Capacity Monitor based on ' + this.selectedIndicatorObj.source,'','','','']);
+            tableArray.push([this.selectedIndicatorObj.definition,'','','','']);
 
-            tab_text = tab_text.replace(/[é]/g,"&eacute;")
-                                .replace(/[É]/g,"&Eacute;")
-                                .replace(/[à]/g,"&agrave;")
-                                .replace(/[è]/g,"&egrave;")
-                                .replace(/[â]/g,"&acirc;")
-                                .replace(/[Â]/g,"&Acirc;");
-
-            var ua = window.navigator.userAgent;
-            var msie = ua.indexOf("MSIE ");
-
-            this.xlsLinkAttr = data_type + ', ' + encodeURIComponent(tab_text)
-
-            if (msie > 0 || !!navigator.userAgent.match(/Trident.*rv\:11\./)) {
-                if (window.navigator.msSaveBlob) {
-                    var blob = new Blob([tab_text], {
-                        type: "application/csv;charset=utf-8;"
-                    });
-                    navigator.msSaveBlob(blob, 'Statistical Capacity Monitor data download.xls');
-                }
-            } else {
-                document.querySelector('#HeadLinkFake').setAttribute('href', this.xlsLinkAttr)
-                document.querySelector('#HeadLinkFake').click()
-            }
+            generateXLS(tableArray);
         },
 
         downloadOrdinalData: function () {
             var self = this;
-            
-            var tab_text = ''
-            var data_type = 'data:application/vnd.ms-excel'
 
-            tab_text = '<html xmlns:x="urn:schemas-microsoft-com:office:excel">'
-            tab_text += '<head><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet>'
-
-            tab_text += '<x:Name>Data</x:Name>'
-
-            tab_text += '<x:WorksheetOptions><x:Panes></x:Panes></x:WorksheetOptions></x:ExcelWorksheet>'
-            tab_text += '</x:ExcelWorksheets></x:ExcelWorkbook></xml></head><body>'
-
-            tab_text += "<table border='1px'>"
-
-            tab_text += '<tr><th>Indicator</th><th>Country</th><th>Year</th><th>Data Value</th><th>Data Aggregate</th></tr>'
+            var tableArray = [
+                ["Indicator", "Country", "Year", "Data Value", "Data Aggregate"]
+            ];
 
             _.each(this.ordinalRegionsData, function (ordinalObj) {
                 _.each(ordinalObj.years, function (yearData, yearID){
@@ -1112,39 +1020,16 @@ export default {
                     });
 
                     _.each(labelizedObj, function (objData, objIndex){
-                        tab_text += '<tr><td>'+self.$store.DBIndicatorsObj[self.selectedIndicator].name+'</td><td>'+self.$store.DBGeographyObj[ordinalObj.m49].name+'</td><td>'+yearID+'</td><td>'+objIndex+'</td><td>'+objData.nb+'</td></tr>'
+                        tableArray.push([self.$store.DBIndicatorsObj[self.selectedIndicator].name, self.$store.DBGeographyObj[ordinalObj.m49].name, yearID, objIndex, objData.nb])
                     })
                 })
             });
 
-            tab_text += '<tr></tr><tr></tr><tr></tr>';
-            tab_text += '<tr><td>PARIS21 Statistical Capacity Monitor based on ' + this.selectedIndicatorObj.source + '</td></tr>';
-            tab_text += '<tr><td>' + this.selectedIndicatorObj.definition + '</td></tr>';
-            tab_text = tab_text + '</table></body></html>';
-
-            tab_text = tab_text.replace(/[é]/g,"&eacute;")
-                                .replace(/[É]/g,"&Eacute;")
-                                .replace(/[à]/g,"&agrave;")
-                                .replace(/[è]/g,"&egrave;")
-                                .replace(/[â]/g,"&acirc;")
-                                .replace(/[Â]/g,"&Acirc;");
-
-            var ua = window.navigator.userAgent;
-            var msie = ua.indexOf("MSIE ");
-
-            this.xlsLinkAttr = data_type + ', ' + encodeURIComponent(tab_text)
-
-            if (msie > 0 || !!navigator.userAgent.match(/Trident.*rv\:11\./)) {
-                if (window.navigator.msSaveBlob) {
-                    var blob = new Blob([tab_text], {
-                        type: "application/csv;charset=utf-8;"
-                    });
-                    navigator.msSaveBlob(blob, 'Statistical Capacity Monitor data download.xls');
-                }
-            } else {
-                document.querySelector('#HeadLinkFake').setAttribute('href', this.xlsLinkAttr)
-                document.querySelector('#HeadLinkFake').click()
-            }
+            tableArray.push(['','','','','']);
+            tableArray.push(['','','','','']);
+            tableArray.push(['','','','','']);
+            tableArray.push(['PARIS21 Statistical Capacity Monitor based on ' + this.selectedIndicatorObj.source,'','','','']);
+            tableArray.push([this.selectedIndicatorObj.definition, '','','',''])
         },
 
         replaceLinksSO: function(text) {

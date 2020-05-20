@@ -236,8 +236,10 @@ export default {
         dataValue = this.indicatorData.years[this.computedRefYear]
         if(dataValue !== 'Not Available'){
           if (this.dataType == 'binary' && this.geoType == 'country') {
-            if (dataValue == '1') return 'yes'
-            else return 'no'
+            if (dataValue == '1' || dataValue == 1){
+              return 'yes';
+            }
+            else { return 'no'; }
           } else if(this.dataType == 'ordinal' && this.geoType != 'country') {
             //waiting for available data
             

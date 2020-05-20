@@ -737,7 +737,11 @@ var numberFormat = __webpack_require__("UeOF");
         dataValue = this.indicatorData.years[this.computedRefYear];
         if (dataValue !== 'Not Available') {
           if (this.dataType == 'binary' && this.geoType == 'country') {
-            if (dataValue == '1') return 'yes';else return 'no';
+            if (dataValue == '1' || dataValue == 1) {
+              return 'yes';
+            } else {
+              return 'no';
+            }
           } else if (this.dataType == 'ordinal' && this.geoType != 'country') {
             //waiting for available data
 
@@ -30656,6 +30660,7 @@ var numberFormat = __webpack_require__("UeOF");
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "f", function() { return getGeoGroups; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "g", function() { return getIndicatorsMethodo; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "i", function() { return incomeGroupsLabels; });
+/* unused harmony export s2ab */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__("Xxa5");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_asyncToGenerator__ = __webpack_require__("exGp");
@@ -30763,7 +30768,7 @@ var countryISOMapping3To2 = { AFG: "AF", ALA: "AX", ALB: "AL", DZA: "DZ", ASM: "
 
 var countryISOMapping2To3 = { AF: 'AFG', AX: 'ALA', AL: 'ALB', DZ: 'DZA', AS: 'ASM', AD: 'AND', AO: 'AGO', AI: 'AIA', AQ: 'ATA', AG: 'ATG', AR: 'ARG', AM: 'ARM', AW: 'ABW', AU: 'AUS', AT: 'AUT', AZ: 'AZE', BS: 'BHS', BH: 'BHR', BD: 'BGD', BB: 'BRB', BY: 'BLR', BE: 'BEL', BZ: 'BLZ', BJ: 'BEN', BM: 'BMU', BT: 'BTN', BO: 'BOL', BA: 'BIH', BW: 'BWA', BV: 'BVT', BR: 'BRA', VG: 'VGB', IO: 'IOT', BN: 'BRN', BG: 'BGR', BF: 'BFA', BI: 'BDI', KH: 'KHM', CM: 'CMR', CA: 'CAN', CV: 'CPV', KY: 'CYM', CF: 'CAF', TD: 'TCD', CL: 'CHL', CN: 'CHN', HK: 'HKG', MO: 'MAC', CX: 'CXR', CC: 'CCK', CO: 'COL', KM: 'COM', CG: 'COG', CD: 'COD', CK: 'COK', CR: 'CRI', CI: 'CIV', HR: 'HRV', CU: 'CUB', CY: 'CYP', CZ: 'CZE', DK: 'DNK', DJ: 'DJI', DM: 'DMA', DO: 'DOM', EC: 'ECU', EG: 'EGY', SV: 'SLV', GQ: 'GNQ', ER: 'ERI', EE: 'EST', ET: 'ETH', FK: 'FLK', FO: 'FRO', FJ: 'FJI', FI: 'FIN', FR: 'FRA', GF: 'GUF', PF: 'PYF', TF: 'ATF', GA: 'GAB', GM: 'GMB', GE: 'GEO', DE: 'DEU', GH: 'GHA', GI: 'GIB', GR: 'GRC', GL: 'GRL', GD: 'GRD', GP: 'GLP', GU: 'GUM', GT: 'GTM', GG: 'GGY', GN: 'GIN', GW: 'GNB', GY: 'GUY', HT: 'HTI', HM: 'HMD', VA: 'VAT', HN: 'HND', HU: 'HUN', IS: 'ISL', IN: 'IND', ID: 'IDN', IR: 'IRN', IQ: 'IRQ', IE: 'IRL', IM: 'IMN', IL: 'ISR', IT: 'ITA', JM: 'JAM', JP: 'JPN', JE: 'JEY', JO: 'JOR', KZ: 'KAZ', KE: 'KEN', KI: 'KIR', KP: 'PRK', KR: 'KOR', KW: 'KWT', KG: 'KGZ', LA: 'LAO', LV: 'LVA', LB: 'LBN', LS: 'LSO', LR: 'LBR', LY: 'LBY', LI: 'LIE', LT: 'LTU', LU: 'LUX', MK: 'MKD', MG: 'MDG', MW: 'MWI', MY: 'MYS', MV: 'MDV', ML: 'MLI', MT: 'MLT', MH: 'MHL', MQ: 'MTQ', MR: 'MRT', MU: 'MUS', YT: 'MYT', MX: 'MEX', FM: 'FSM', MD: 'MDA', MC: 'MCO', MN: 'MNG', ME: 'MNE', MS: 'MSR', MA: 'MAR', MZ: 'MOZ', MM: 'MMR', NA: 'NAM', NR: 'NRU', NP: 'NPL', NL: 'NLD', AN: 'ANT', NC: 'NCL', NZ: 'NZL', NI: 'NIC', NE: 'NER', NG: 'NGA', NU: 'NIU', NF: 'NFK', MP: 'MNP', NO: 'NOR', OM: 'OMN', PK: 'PAK', PW: 'PLW', PS: 'PSE', PA: 'PAN', PG: 'PNG', PY: 'PRY', PE: 'PER', PH: 'PHL', PN: 'PCN', PL: 'POL', PT: 'PRT', PR: 'PRI', QA: 'QAT', RE: 'REU', RO: 'ROU', RU: 'RUS', RW: 'RWA', BL: 'BLM', SH: 'SHN', KN: 'KNA', LC: 'LCA', MF: 'MAF', PM: 'SPM', VC: 'VCT', WS: 'WSM', SM: 'SMR', ST: 'STP', SA: 'SAU', SN: 'SEN', RS: 'SRB', SC: 'SYC', SL: 'SLE', SG: 'SGP', SK: 'SVK', SI: 'SVN', SB: 'SLB', SO: 'SOM', ZA: 'ZAF', GS: 'SGS', SS: 'SSD', ES: 'ESP', LK: 'LKA', SD: 'SDN', SR: 'SUR', SJ: 'SJM', SZ: 'SWZ', SE: 'SWE', CH: 'CHE', SY: 'SYR', TW: 'TWN', TJ: 'TJK', TZ: 'TZA', TH: 'THA', TL: 'TLS', TG: 'TGO', TK: 'TKL', TO: 'TON', TT: 'TTO', TN: 'TUN', TR: 'TUR', TM: 'TKM', TC: 'TCA', TV: 'TUV', UG: 'UGA', UA: 'UKR', AE: 'ARE', GB: 'GBR', US: 'USA', UM: 'UMI', UY: 'URY', UZ: 'UZB', VU: 'VUT', VE: 'VEN', VN: 'VNM', VI: 'VIR', WF: 'WLF', EH: 'ESH', YE: 'YEM', ZM: 'ZMB', ZW: 'ZWE' };
 
-var specificIndicators = [{ id: 1, labels: [{ value: "0.0", label: "no data" }, { value: "0.5", label: "once in last 6 years" }, { value: "1.0", label: "twice in last 6 years" }] }, { id: 96, labels: [{ value: "0.0", label: "no" }, { value: "0.5", label: "last 10 years" }, { value: "1.0", label: "within last 5 years" }] }, { id: 10, labels: [{ value: "0.0", label: "never" }, { value: "0.3", label: "once" }, { value: "0.7", label: "at least 6 times" }, { value: "1.0", label: "annually" }] }, { id: 36, labels: [{ value: "0.0", label: "never" }, { value: "0.3", label: "once" }, { value: "0.7", label: "at least 6 times" }, { value: "1.0", label: "annually" }] }, { id: 40, labels: [{ value: "0.0", label: "no" }, { value: "0.5", label: "last 10 years" }, { value: "1.0", label: "within last 5 years" }] }, { id: 46, labels: [{ value: "0.0", label: "never" }, { value: "0.3", label: "once" }, { value: "0.7", label: "at least 6 times" }, { value: "1.0", label: "annually" }] }, { id: 57, labels: [{ value: "0.0", label: "never" }, { value: "0.3", label: "once" }, { value: "0.7", label: "at least 6 times" }, { value: "1.0", label: "annually" }] }, { id: 92, labels: [{ value: "0.0", label: "never" }, { value: "0.3", label: "once" }, { value: "0.7", label: "at least 6 times" }, { value: "1.0", label: "annually" }] }, { id: 99, labels: [{ value: "0.0", label: "never" }, { value: "0.3", label: "once" }, { value: "0.7", label: "at least 6 times" }, { value: "1.0", label: "annually" }] }, { id: 150, labels: [{ value: "9993", label: "Low income", inc: 0 }, { value: "9992", label: "Lower middle income", inc: 1 }, { value: "9999", label: "Upper middle income", inc: 2 }, { value: "9996", label: "High income", inc: 3 }] }, { id: 7, labels: [{ value: "0.0", label: "not adopted" }, { value: "1.0", label: "adopted" }] }];
+var specificIndicators = [{ id: 1, labels: [{ value: "0.0", label: "no data" }, { value: "0.5", label: "once in last 6 years" }, { value: "1.0", label: "twice in last 6 years" }] }, { id: 96, labels: [{ value: "0.0", label: "no" }, { value: "0.5", label: "last 10 years" }, { value: "1.0", label: "within last 5 years" }] }, { id: 10, labels: [{ value: "0.0", label: "never" }, { value: "0.3", label: "once" }, { value: "0.7", label: "at least 6 times" }, { value: "1.0", label: "annually" }] }, { id: 36, labels: [{ value: "0.0", label: "never" }, { value: "0.3", label: "once" }, { value: "0.7", label: "at least 6 times" }, { value: "1.0", label: "annually" }] }, { id: 40, labels: [{ value: "0.0", label: "no" }, { value: "0.5", label: "last 10 years" }, { value: "1.0", label: "within last 5 years" }] }, { id: 46, labels: [{ value: "0.0", label: "never" }, { value: "0.3", label: "once" }, { value: "0.7", label: "at least 6 times" }, { value: "1.0", label: "annually" }] }, { id: 57, labels: [{ value: "0.0", label: "never" }, { value: "0.3", label: "once" }, { value: "0.7", label: "at least 6 times" }, { value: "1.0", label: "annually" }] }, { id: 92, labels: [{ value: "0.0", label: "never" }, { value: "0.3", label: "once" }, { value: "0.7", label: "at least 6 times" }, { value: "1.0", label: "annually" }] }, { id: 99, labels: [{ value: "0.0", label: "never" }, { value: "0.3", label: "once" }, { value: "0.7", label: "at least 6 times" }, { value: "1.0", label: "annually" }] }, { id: 150, labels: [{ value: "9993", label: "Low income", inc: 0 }, { value: "9992", label: "Lower middle income", inc: 1 }, { value: "9999", label: "Upper middle income", inc: 2 }, { value: "9996", label: "High income", inc: 3 }] }, { id: 7, labels: [{ value: "0.0", label: "not adopted" }, { value: "1.0", label: "adopted" }] }, { id: 165, labels: [{ value: "0.0", label: "expired or absent and not planning" }, { value: "1.0", label: "expired or absent but planning" }, { value: "2.0", label: "designing or adopting" }, { value: "3.0", label: "implementing" }] }];
 
 var incomeGroupsLabels = {
   "9993": "Low income",
@@ -31068,6 +31073,15 @@ function getLastKeyFromObj(obj, param, returnType) {
     return dataValue;
   }
   return undefined;
+}
+
+function s2ab(s) {
+  var buf = new ArrayBuffer(s.length); //convert s to arrayBuffer
+  var view = new Uint8Array(buf); //create uint8array as viewer
+  for (var i = 0; i < s.length; i++) {
+    view[i] = s.charCodeAt(i) & 0xFF;
+  } //convert to octet
+  return buf;
 }
 
 
