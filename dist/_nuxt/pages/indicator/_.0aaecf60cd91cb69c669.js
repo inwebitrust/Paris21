@@ -32029,6 +32029,8 @@ __WEBPACK_IMPORTED_MODULE_2_vue__["default"].use(__WEBPACK_IMPORTED_MODULE_7_vue
             tableArray.push(['', '', '', '', '']);
             tableArray.push(['PARIS21 Statistical Capacity Monitor based on ' + this.selectedIndicatorObj.source, '', '', '', '']);
             tableArray.push([this.selectedIndicatorObj.definition, '', '', '', '']);
+
+            generateXLS(tableArray);
         },
 
         replaceLinksSO: function replaceLinksSO(text) {

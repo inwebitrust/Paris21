@@ -1029,7 +1029,9 @@ export default {
             tableArray.push(['','','','','']);
             tableArray.push(['','','','','']);
             tableArray.push(['PARIS21 Statistical Capacity Monitor based on ' + this.selectedIndicatorObj.source,'','','','']);
-            tableArray.push([this.selectedIndicatorObj.definition, '','','',''])
+            tableArray.push([this.selectedIndicatorObj.definition, '','','','']);
+
+            generateXLS(tableArray);
         },
 
         replaceLinksSO: function(text) {
