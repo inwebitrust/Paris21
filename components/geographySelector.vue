@@ -6,6 +6,7 @@
             <div class="homecontent_title">
                 Statistics on your <span class="bolder">region, country or subregion</span>
             </div>
+            
             <button class="homecontent_expandbt isdesktop">FIND</button>
             <nuxt-link to="/country/" class="homecontent_expandbt ismobile" >FIND</nuxt-link>
             <!--
