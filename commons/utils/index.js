@@ -21,7 +21,8 @@ var specificIndicators = [
     {id:99, labels:[{value:"0.0", label: "never"}, {value:"0.3", label: "once"}, {value:"0.7", label: "at least 6 times"}, {value:"1.0", label:"annually"}]},
     {id:150, labels:[{value:"9993", label: "Low income", inc:0}, {value:"9992", label: "Lower middle income", inc:1}, {value:"9999", label: "Upper middle income", inc:2}, {value:"9996", label:"High income", inc:3}]},
     {id:7, labels:[{value:"0.0", label: "not adopted"}, {value:"1.0", label: "adopted"}]},
-    {id:165, labels:[{value:"0.0", label: "expired or absent and not planning"}, {value:"1.0", label: "expired or absent but planning"}, {value:"2.0", label: "designing or adopting"}, {value:"3.0", label: "implementing"}]}
+    {id:165, labels:[{value:"0.0", label: "expired or absent and not planning"}, {value:"1.0", label: "expired or absent but planning"}, {value:"2.0", label: "designing or adopting"}, {value:"3.0", label: "implementing"}]},
+    {id:166, labels:[{value:"0.0", label: "0"}, {value:"25.0", label: "25"}, {value:"50.0", label: "50"}, {value:"75.0", label: "75"}, {value:"100.0", label: "100"}]}
 ];
 
 var incomeGroupsLabels = {
